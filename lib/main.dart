@@ -4,8 +4,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:calc_triangle/pages/home_page.dart';
-import 'package:calc_triangle/pages/widget/image_widget.dart';
+import 'package:calc_triangle/pages/r_triangle_page.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +19,10 @@ Future<void> main() async {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
 
-  runApp(MyApp());
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +34,7 @@ class MyApp extends StatelessWidget {
         designSize: Size(1080, 2400),
         builder: () {
           return MaterialApp(
-            home: ImageWidget(),
+            home: RighTriangelePage(),
             theme: ThemeData(
               brightness: Brightness.light,
               /* light theme settings */

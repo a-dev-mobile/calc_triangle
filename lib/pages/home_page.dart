@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'widget/image_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class HomePage extends StatelessWidget {
             BuildCard(
               pathImage: 'assets/image/triangle/4.webp',
             ),
-            ImageWidget()
+        
           ],
         ),
       ),
