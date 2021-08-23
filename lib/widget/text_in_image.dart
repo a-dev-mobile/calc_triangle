@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../const.dart';
+
 class TextInImage extends StatelessWidget {
   const TextInImage({
     Key? key,
@@ -11,20 +13,30 @@ class TextInImage extends StatelessWidget {
     required this.angle,
     required this.text,
     required this.fontSize,
-    required this.colorBgBtn,
+    this.isActive = false,
   }) : super(key: key);
-
+  final bool isActive;
   final double minSize;
   final double posX;
   final double posY;
   final double angle;
   final String text;
   final double fontSize;
-  final Color colorBgBtn;
+
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(
-        fontSize: fontSize, backgroundColor: colorBgBtn, color: Colors.white);
+    TextStyle textStyle;
+    if (!isActive) {
+      textStyle = TextStyle(
+          fontSize: fontSize,
+          backgroundColor: ConstColors.scaffoldBackground,
+          color: Colors.white);
+    } else {
+      textStyle = TextStyle(
+          fontSize: fontSize,
+          backgroundColor: ConstColors.scaffoldBackground,
+          color: Colors.red);
+    }
 
     return Transform.translate(
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),

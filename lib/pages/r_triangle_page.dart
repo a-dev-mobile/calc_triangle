@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:calc_triangle/utils/key_symbol.dart';
-import 'package:calc_triangle/widget/btn_image.dart';
+import 'package:calc_triangle/widget/text_in_image.dart';
 import 'package:calc_triangle/widget/calculator_key.dart';
 import 'package:calc_triangle/widget/formulas_web_view.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +48,6 @@ class RighTriangelePage extends StatelessWidget {
                   minSize: minSize,
                   text: '123.123',
                   angle: -67.66,
-                  colorBgBtn: Color.fromRGBO(72, 72, 72, 1),
                   fontSize: 40.sp,
                   posX: -5.396,
                   posY: 19.117,
@@ -57,7 +56,6 @@ class RighTriangelePage extends StatelessWidget {
                   minSize: minSize,
                   text: '222.222',
                   angle: -22.96,
-                  colorBgBtn: Color.fromRGBO(72, 72, 72, 1),
                   fontSize: 40.sp,
                   posX: -18.073,
                   posY: 7.915,
@@ -66,7 +64,6 @@ class RighTriangelePage extends StatelessWidget {
                   minSize: minSize,
                   text: '233.333',
                   angle: 45,
-                  colorBgBtn: Color.fromRGBO(72, 72, 72, 1),
                   fontSize: 60.sp,
                   posX: 4.166,
                   posY: -4.166,
@@ -75,16 +72,15 @@ class RighTriangelePage extends StatelessWidget {
                   minSize: minSize,
                   text: '4444.4444',
                   angle: 0,
-                  colorBgBtn: Color.fromRGBO(72, 72, 72, 1),
                   fontSize: 60.sp,
                   posX: 0,
                   posY: 43.345,
+                  isActive: true,
                 ),
                 TextInImage(
                   minSize: minSize,
                   text: '111.111',
                   angle: -90,
-                  colorBgBtn: Color.fromRGBO(72, 72, 72, 1),
                   fontSize: 60.sp,
                   posX: -42.845,
                   posY: 0,
@@ -131,7 +127,7 @@ class NumPad extends StatelessWidget {
         ),
         Expanded(
           child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               CalculatorKey(symbol: Keys.four),
               CalculatorKey(symbol: Keys.five),
@@ -142,18 +138,18 @@ class NumPad extends StatelessWidget {
         ),
         Expanded(
           child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               CalculatorKey(symbol: Keys.one),
               CalculatorKey(symbol: Keys.two),
               CalculatorKey(symbol: Keys.three),
-               CalculatorKey(symbol: Keys.backspase),
+              CalculatorKey(symbol: Keys.backspase),
             ],
           ),
         ),
         Expanded(
           child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               CalculatorKey(symbol: Keys.clear),
               CalculatorKey(symbol: Keys.zero),

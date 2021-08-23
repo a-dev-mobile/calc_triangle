@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 abstract class AssetsPathTriangle {
   static const String _pathAssetsImage = 'assets/image/triangle/';
 
@@ -22,3 +24,9 @@ enum Triangle {
 }
 
 enum BtnTypeCalc { integer, function, operator }
+
+
+abstract class ConstColors{
+   static const scaffoldBackground = Color.fromRGBO(72, 72, 72, 1);
+
+}
