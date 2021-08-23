@@ -37,10 +37,12 @@ class MyApp extends StatelessWidget {
             home: RighTriangelePage(),
             theme: ThemeData(
               brightness: Brightness.light,
+            
               /* light theme settings */
             ),
             darkTheme: ThemeData(
               brightness: Brightness.dark,
+  scaffoldBackgroundColor: Color.fromRGBO(72, 72, 72, 1)
               /* dark theme settings */
             ),
             themeMode: ThemeMode.dark,

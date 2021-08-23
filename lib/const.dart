@@ -20,3 +20,5 @@ enum Triangle {
   equilateral,
   right,
 }
+
+enum BtnTypeCalc { integer, function, operator }
