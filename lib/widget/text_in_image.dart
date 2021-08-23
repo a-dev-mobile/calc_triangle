@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:calc_triangle/controllers/r_triangle_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../const.dart';
 
@@ -39,13 +41,13 @@ class TextInImage extends StatelessWidget {
     }
 
     return Transform.translate(
-      offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
-      child: Transform.rotate(
+        offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
+        child: Transform.rotate(
           angle: angle * pi / 180,
-          child: Text(
-            text,
-            style: textStyle,
-          )),
-    );
+          child: Obx(() => Text(
+                "${RtriangleController.to.inputSymbols}",
+                style: textStyle,
+              )),
+        ));
   }
 }

@@ -3,20 +3,26 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:calc_triangle/controllers/r_triangle_controller.dart';
 import 'package:calc_triangle/utils/key_symbol.dart';
 import 'package:calc_triangle/widget/text_in_image.dart';
-import 'package:calc_triangle/widget/calculator_key.dart';
+import 'package:calc_triangle/utils/calculator_key.dart';
 import 'package:calc_triangle/widget/formulas_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../const.dart';
+
+const List height = [0.4, 0.2];
 
 class RighTriangelePage extends StatelessWidget {
   const RighTriangelePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final c = Get.put(RtriangleController());
+
     var size = MediaQuery.of(context).size;
     var w = size.width;
     var h = size.height;
@@ -32,16 +38,20 @@ class RighTriangelePage extends StatelessWidget {
             var wStack = constraints.maxWidth;
             var hStack = constraints.maxHeight;
             var minSize = min(wStack, hStack);
+            c.minSize.value = minSize;
             print('1wStack $wStack hStack $hStack');
             print('1minSize $minSize');
 
             return Stack(
               alignment: Alignment.center,
               children: [
-                SizedBox.expand(
-                  child: Image(
-                    fit: BoxFit.contain,
-                    image: AssetImage('assets/image/triangle/4_6.png'),
+                Transform.rotate(
+                  angle: 0,
+                  child: SizedBox.expand(
+                    child: Image(
+                      fit: BoxFit.contain,
+                      image: AssetImage('assets/image/triangle/4_6.png'),
+                    ),
                   ),
                 ),
                 TextInImage(
@@ -199,6 +209,7 @@ class CalculatorKey extends StatelessWidget {
       child: TextButton(
         onPressed: () {
           print(symbol.value);
+          RtriangleController.to.addKey(symbol);
         },
         child: Text(symbol.value, style: textStyle),
       ),

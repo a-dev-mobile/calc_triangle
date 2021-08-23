@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unused_field, avoid_print
 
-
 import 'dart:io';
 
 import 'package:calc_triangle/const.dart';
+import 'package:calc_triangle/controllers/r_triangle_controller.dart';
 
 import 'package:calc_triangle/pages/r_triangle_page.dart';
 
@@ -23,6 +23,7 @@ Future<void> main() async {
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    Get.put(RtriangleController());
     runApp(MyApp());
   });
 }

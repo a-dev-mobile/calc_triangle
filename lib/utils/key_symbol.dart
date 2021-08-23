@@ -1,4 +1,4 @@
-import 'package:calc_triangle/widget/calculator_key.dart';
+import 'package:calc_triangle/utils/calculator_key.dart';
 
 enum KeyType { function, operator, integer }
 
