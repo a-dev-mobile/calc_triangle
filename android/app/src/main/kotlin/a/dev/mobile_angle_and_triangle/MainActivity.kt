@@ -1,4 +1,4 @@
-package a.dev.mobile.calc_triangle
+package a.dev.mobile_angle_and_triangle
 
 import io.flutter.embedding.android.FlutterActivity
 
