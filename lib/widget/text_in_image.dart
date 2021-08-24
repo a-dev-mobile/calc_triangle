@@ -16,6 +16,7 @@ class TextInImage extends StatelessWidget {
     required this.text,
     required this.fontSize,
     this.isActive = false,
+    required this.rightTriangelInput,
   }) : super(key: key);
   final bool isActive;
   final double minSize;
@@ -24,6 +25,7 @@ class TextInImage extends StatelessWidget {
   final double angle;
   final String text;
   final double fontSize;
+  final RightTriangel rightTriangelInput;
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +46,15 @@ class TextInImage extends StatelessWidget {
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Transform.rotate(
           angle: angle * pi / 180,
-          child: Obx(() => Text(
-                "${RtriangleController.to.inputSymbols}",
-                style: textStyle,
-              )),
+          child: Obx(() {
+
+
+
+            return Text(
+              "${RtriangleController.to.inputSymbols}",
+              style: textStyle,
+            );
+          }),
         ));
   }
 }

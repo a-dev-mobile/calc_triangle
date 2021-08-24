@@ -56,43 +56,48 @@ class RighTriangelePage extends StatelessWidget {
                 ),
                 TextInImage(
                   minSize: minSize,
-                  text: '123.123',
+                  text: '0',
                   angle: -67.66,
                   fontSize: 40.sp,
                   posX: -5.396,
                   posY: 19.117,
+                  rightTriangelInput: RightTriangel.aAngle,
                 ),
                 TextInImage(
                   minSize: minSize,
-                  text: '222.222',
+                  text: '0',
                   angle: -22.96,
                   fontSize: 40.sp,
                   posX: -18.073,
                   posY: 7.915,
+                  rightTriangelInput: RightTriangel.bAngle,
                 ),
                 TextInImage(
                   minSize: minSize,
-                  text: '233.333',
+                  text: '0',
                   angle: 45,
                   fontSize: 60.sp,
                   posX: 4.166,
                   posY: -4.166,
+                  rightTriangelInput: RightTriangel.cHypotenuse,
                 ),
                 TextInImage(
                   minSize: minSize,
-                  text: '4444.4444',
+                  text: '0',
                   angle: 0,
                   fontSize: 60.sp,
                   posX: 0,
                   posY: 43.345,
+                  rightTriangelInput: RightTriangel.aCathet,
                   isActive: true,
                 ),
                 TextInImage(
                   minSize: minSize,
-                  text: '111.111',
+                  text: '0',
                   angle: -90,
                   fontSize: 60.sp,
                   posX: -42.845,
+                  rightTriangelInput: RightTriangel.bCathet,
                   posY: 0,
                 ),
               ],
@@ -209,6 +214,8 @@ class CalculatorKey extends StatelessWidget {
       child: TextButton(
         onPressed: () {
           print(symbol.value);
+
+          print(symbol.isFunction);
           RtriangleController.to.addKey(symbol);
         },
         child: Text(symbol.value, style: textStyle),

@@ -6,6 +6,7 @@ import 'package:calc_triangle/const.dart';
 import 'package:calc_triangle/controllers/r_triangle_controller.dart';
 
 import 'package:calc_triangle/pages/r_triangle_page.dart';
+import 'package:calc_triangle/pages/test_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
         designSize: Size(1080, 2400),
         builder: () {
           return GetMaterialApp(
-            home: RighTriangelePage(),
+            // home: RighTriangelePage(),
+            home: ChangeListPage(),
             theme: ThemeData(
               brightness: Brightness.light,
 
