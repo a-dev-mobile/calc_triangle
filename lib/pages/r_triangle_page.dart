@@ -1,32 +1,98 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:calc_triangle/controllers/r_triangle_controller.dart';
 import 'package:calc_triangle/utils/key_symbol.dart';
-import 'package:calc_triangle/widget/text_in_image.dart';
+import 'package:calc_triangle/widget/text_widget.dart';
 import 'package:calc_triangle/utils/calculator_key.dart';
-import 'package:calc_triangle/widget/formulas_web_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'package:get_storage/get_storage.dart';
+
 import '../../const.dart';
 
-const List height = [0.4, 0.2];
+enum RightTriangelElement {
+  aCathet,
+  bCathet,
+  cHypotenuse,
+  aAngle,
+  bAngle,
+}
 
-class RighTriangelePage extends StatelessWidget {
-  const RighTriangelePage({Key? key}) : super(key: key);
+class TextSupport {
+  const TextSupport({
+    required this.posX,
+    required this.posY,
+    required this.elementFigure,
+    required this.angle,
+  });
+
+  final double angle;
+  final Enum elementFigure;
+  final double posX;
+  final double posY;
+}
+
+class RighTrianglePage extends StatelessWidget {
+  const RighTrianglePage({Key? key}) : super(key: key);
+
+  static const maxSelected = 2;
+  static const startElement = RightTriangelElement.aCathet;
+  static const startValue = '000';
+  static List<TextSupport> textSupportList = const [
+    TextSupport(
+      posX: -5.396,
+      posY: 19.117,
+      elementFigure: RightTriangelElement.aAngle,
+      angle: -67.66,
+    ),
+    TextSupport(
+      posX: -18.073,
+      posY: 7.915,
+      elementFigure: RightTriangelElement.bAngle,
+      angle: -22.96,
+    ),
+    TextSupport(
+      posX: 4.166,
+      posY: -4.166,
+      elementFigure: RightTriangelElement.cHypotenuse,
+      angle: 45,
+    ),
+    TextSupport(
+      posX: 0,
+      posY: 43.345,
+      elementFigure: RightTriangelElement.aCathet,
+      angle: 0,
+    ),
+    TextSupport(
+      posX: -42.845,
+      posY: 0,
+      elementFigure: RightTriangelElement.bCathet,
+      angle: -90,
+    )
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.put(RtriangleController());
+    print('build stack');
 
     var size = MediaQuery.of(context).size;
     var w = size.width;
     var h = size.height;
     print('w $w h $h');
+
+    final List<Widget> widgetList = textSupportList
+        .map((e) => TextWidget(
+              posX: e.posX,
+              posY: e.posY,
+              angle: e.angle,
+              elementFigure: e.elementFigure,
+            ))
+        .toList();
 
     return Scaffold(
         body: Column(
@@ -38,68 +104,23 @@ class RighTriangelePage extends StatelessWidget {
             var wStack = constraints.maxWidth;
             var hStack = constraints.maxHeight;
             var minSize = min(wStack, hStack);
-            c.minSize.value = minSize;
+
+            GetStorage().write(ConstGet.minSize, minSize);
+
             print('1wStack $wStack hStack $hStack');
             print('1minSize $minSize');
 
             return Stack(
               alignment: Alignment.center,
               children: [
-                Transform.rotate(
-                  angle: 0,
-                  child: SizedBox.expand(
-                    child: Image(
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/image/triangle/4_6.png'),
-                    ),
+                SizedBox.expand(
+                  child: Image(
+                    fit: BoxFit.contain,
+                    image: AssetImage('assets/image/triangle/4_6.png'),
                   ),
                 ),
-                TextInImage(
-                  minSize: minSize,
-                  text: '0',
-                  angle: -67.66,
-                  fontSize: 40.sp,
-                  posX: -5.396,
-                  posY: 19.117,
-                  rightTriangelInput: RightTriangel.aAngle,
-                ),
-                TextInImage(
-                  minSize: minSize,
-                  text: '0',
-                  angle: -22.96,
-                  fontSize: 40.sp,
-                  posX: -18.073,
-                  posY: 7.915,
-                  rightTriangelInput: RightTriangel.bAngle,
-                ),
-                TextInImage(
-                  minSize: minSize,
-                  text: '0',
-                  angle: 45,
-                  fontSize: 60.sp,
-                  posX: 4.166,
-                  posY: -4.166,
-                  rightTriangelInput: RightTriangel.cHypotenuse,
-                ),
-                TextInImage(
-                  minSize: minSize,
-                  text: '0',
-                  angle: 0,
-                  fontSize: 60.sp,
-                  posX: 0,
-                  posY: 43.345,
-                  rightTriangelInput: RightTriangel.aCathet,
-                  isActive: true,
-                ),
-                TextInImage(
-                  minSize: minSize,
-                  text: '0',
-                  angle: -90,
-                  fontSize: 60.sp,
-                  posX: -42.845,
-                  rightTriangelInput: RightTriangel.bCathet,
-                  posY: 0,
-                ),
+                //all widget text in image
+                for (var item in widgetList) item,
               ],
             );
           }),
@@ -112,11 +133,6 @@ class RighTriangelePage extends StatelessWidget {
         Expanded(
           child: NumPad(),
         ),
-        // SizedBox(
-        //   width: 1.sw,
-        //   height: 0.2.sh,
-        //   child: FormulasWebView(),
-        // ),
       ],
     ));
   }
@@ -185,6 +201,7 @@ class CalculatorKey extends StatelessWidget {
   }) : super(key: key);
 
   final KeySymbol symbol;
+
   TextStyle get textStyle {
     switch (symbol.type) {
       case KeyType.function:
@@ -208,15 +225,30 @@ class CalculatorKey extends StatelessWidget {
     }
   }
 
+  void clickNext() {}
+
+  void clickPrev() {}
+
   @override
   Widget build(BuildContext context) {
+    RtriangleController c = Get.find();
+
     return Expanded(
       child: TextButton(
         onPressed: () {
           print(symbol.value);
 
-          print(symbol.isFunction);
-          RtriangleController.to.addKey(symbol);
+          if (symbol == Keys.next) {
+            print('1next');
+            c.nextElement();
+            print('2next');
+          } else if (symbol == Keys.prev) {
+            print('1prev');
+            clickPrev();
+            print('2prev');
+          } else {
+            c.addKey(symbol);
+          }
         },
         child: Text(symbol.value, style: textStyle),
       ),

@@ -23,16 +23,11 @@ enum Triangle {
   right,
 }
 
-enum RightTriangel {
-  aCathet,
-  bCathet,
-  cHypotenuse,
-  aAngle,
-  bAngle,
-}
-
 enum BtnTypeCalc { integer, function, operator }
 
 abstract class ConstColors {
   static const scaffoldBackground = Color.fromRGBO(72, 72, 72, 1);
+}
+abstract class ConstGet {
+  static const String minSize = 'minSize';
 }

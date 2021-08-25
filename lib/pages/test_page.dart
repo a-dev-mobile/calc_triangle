@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 const int startIndex = 0;
 int selectedIndex = startIndex;
-const int maxSelected = 3;
+const int maxSelected = 2;
 
 List<int> selectedIndexList = [];
 
