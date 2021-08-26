@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:math';
 
 import 'package:calc_triangle/const.dart';
@@ -8,12 +10,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ChypotenuseWidget extends StatelessWidget {
-  const ChypotenuseWidget({Key? key}) : super(key: key);
+  const ChypotenuseWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
 
-  static const double posX = 4.166;
-  static const double posY = -4.166;
-  static const double angle = 45;
-
+  final double posX;
+  final double posY;
+  final double angle;
   @override
   Widget build(BuildContext context) {
     RtriangleController c = Get.find();

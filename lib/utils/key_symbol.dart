@@ -9,11 +9,10 @@ class KeySymbol {
 
   static final List<KeySymbol> _functions = [
     Keys.clear,
-
-    Keys.backspase
+    Keys.backspase,
+    Keys.toggleImage,
   ];
   static final List<KeySymbol> _operators = [
-    Keys.equals,
     Keys.next,
     Keys.prev,
   ];

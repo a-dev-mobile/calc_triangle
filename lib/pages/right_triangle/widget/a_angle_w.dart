@@ -10,11 +10,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class AangleWidget extends StatelessWidget {
-  const AangleWidget({Key? key}) : super(key: key);
+  const AangleWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
 
-  static const double posX = -5.396;
-  static const double posY = 19.117;
-  static const double angle = -67.66;
+
+  final double posX;
+  final double posY;
+  final double angle;
 
   @override
   Widget build(BuildContext context) {

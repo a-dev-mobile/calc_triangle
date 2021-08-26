@@ -8,12 +8,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class BangleWidget extends StatelessWidget {
-  const BangleWidget({Key? key}) : super(key: key);
+  const BangleWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
 
-  static const double posX = -18.073;
-  static const double posY =  7.915;
-  static const double angle =-22.96;
-
+  final double posX;
+  final double posY;
+  final double angle;
   @override
   Widget build(BuildContext context) {
     RtriangleController c = Get.find();

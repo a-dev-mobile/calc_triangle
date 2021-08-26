@@ -8,12 +8,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class AcathetWidget extends StatelessWidget {
-  const AcathetWidget({Key? key}) : super(key: key);
+ const AcathetWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
 
-  static const double posX = 0;
-  static const double posY = 43.345;
-  static const double angle = 0;
 
+  final double posX;
+  final double posY;
+  final double angle;
   @override
   Widget build(BuildContext context) {
     RtriangleController c = Get.find();
@@ -22,7 +22,6 @@ class AcathetWidget extends StatelessWidget {
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Obx(() {
-
           Color colorText;
           if (c.isAcathet.value) {
             colorText = Colors.red;

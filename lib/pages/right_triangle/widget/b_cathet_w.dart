@@ -8,12 +8,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class BcathetWidget extends StatelessWidget {
-  const BcathetWidget({Key? key}) : super(key: key);
+  const BcathetWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
 
-  static const double posX = -42.845;
-  static const double posY = 0;
-  static const double angle =-90;
+
  
+  final double posX;
+  final double posY;
+  final double angle;
   @override
   Widget build(BuildContext context) {
     RtriangleController c = Get.find();
