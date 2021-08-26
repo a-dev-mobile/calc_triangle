@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:calc_triangle/const.dart';
-import 'package:calc_triangle/controllers/r_triangle_controller.dart';
+import 'package:calc_triangle/controllers/r_triangle_c.dart';
 
 
 
@@ -15,7 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'pages/r_triangle_page.dart';
+import 'pages/right_triangle/right_triangle_p.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

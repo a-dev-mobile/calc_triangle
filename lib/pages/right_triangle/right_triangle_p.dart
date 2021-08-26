@@ -2,9 +2,14 @@
 
 import 'dart:math';
 
-import 'package:calc_triangle/controllers/r_triangle_controller.dart';
+import 'package:calc_triangle/controllers/r_triangle_c.dart';
+import 'package:calc_triangle/pages/right_triangle/widget/a_angle_w.dart';
+import 'package:calc_triangle/pages/right_triangle/widget/a_cathet_w.dart';
+import 'package:calc_triangle/pages/right_triangle/widget/b_angle.dart';
+import 'package:calc_triangle/pages/right_triangle/widget/b_cathet_w.dart';
+import 'package:calc_triangle/pages/right_triangle/widget/c_hypotenusea_w.dart';
 import 'package:calc_triangle/utils/key_symbol.dart';
-import 'package:calc_triangle/widget/text_widget.dart';
+
 import 'package:calc_triangle/utils/calculator_key.dart';
 
 import 'package:flutter/material.dart';
@@ -13,7 +18,7 @@ import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
 
-import '../../const.dart';
+import '../../../const.dart';
 
 enum RightTriangelElement {
   aCathet,
@@ -23,58 +28,14 @@ enum RightTriangelElement {
   bAngle,
 }
 
-class TextSupport {
-  const TextSupport({
-    required this.posX,
-    required this.posY,
-    required this.elementFigure,
-    required this.angle,
-  });
-
-  final double angle;
-  final Enum elementFigure;
-  final double posX;
-  final double posY;
-}
-
 class RighTrianglePage extends StatelessWidget {
   const RighTrianglePage({Key? key}) : super(key: key);
 
   static const maxSelected = 2;
+  static const maxValue = 5;
+
   static const startElement = RightTriangelElement.aCathet;
   static const startValue = '000';
-  static List<TextSupport> textSupportList = const [
-    TextSupport(
-      posX: -5.396,
-      posY: 19.117,
-      elementFigure: RightTriangelElement.aAngle,
-      angle: -67.66,
-    ),
-    TextSupport(
-      posX: -18.073,
-      posY: 7.915,
-      elementFigure: RightTriangelElement.bAngle,
-      angle: -22.96,
-    ),
-    TextSupport(
-      posX: 4.166,
-      posY: -4.166,
-      elementFigure: RightTriangelElement.cHypotenuse,
-      angle: 45,
-    ),
-    TextSupport(
-      posX: 0,
-      posY: 43.345,
-      elementFigure: RightTriangelElement.aCathet,
-      angle: 0,
-    ),
-    TextSupport(
-      posX: -42.845,
-      posY: 0,
-      elementFigure: RightTriangelElement.bCathet,
-      angle: -90,
-    )
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -85,15 +46,6 @@ class RighTrianglePage extends StatelessWidget {
     var h = size.height;
     print('w $w h $h');
 
-    final List<Widget> widgetList = textSupportList
-        .map((e) => TextWidget(
-              posX: e.posX,
-              posY: e.posY,
-              angle: e.angle,
-              elementFigure: e.elementFigure,
-            ))
-        .toList();
-
     return Scaffold(
         body: Column(
       children: [
@@ -101,14 +53,8 @@ class RighTrianglePage extends StatelessWidget {
           height: 0.4.sh,
           width: 1.sw,
           child: LayoutBuilder(builder: (context, constraints) {
-            var wStack = constraints.maxWidth;
-            var hStack = constraints.maxHeight;
-            var minSize = min(wStack, hStack);
-
+            var minSize = min(constraints.maxWidth, constraints.maxHeight);
             GetStorage().write(ConstGet.minSize, minSize);
-
-            print('1wStack $wStack hStack $hStack');
-            print('1minSize $minSize');
 
             return Stack(
               alignment: Alignment.center,
@@ -120,7 +66,11 @@ class RighTrianglePage extends StatelessWidget {
                   ),
                 ),
                 //all widget text in image
-                for (var item in widgetList) item,
+                AcathetWidget(),
+                BcathetWidget(),
+                AangleWidget(),
+                BangleWidget(),
+                ChypotenuseWidget(),
               ],
             );
           }),
@@ -152,7 +102,7 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.seven),
               CalculatorKey(symbol: Keys.eight),
               CalculatorKey(symbol: Keys.nine),
-              CalculatorKey(symbol: Keys.next),
+              CalculatorKey(symbol: Keys.backspase),
             ],
           ),
         ),
@@ -163,7 +113,7 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.four),
               CalculatorKey(symbol: Keys.five),
               CalculatorKey(symbol: Keys.six),
-              CalculatorKey(symbol: Keys.prev),
+              CalculatorKey(symbol: Keys.next),
             ],
           ),
         ),
@@ -174,7 +124,7 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.one),
               CalculatorKey(symbol: Keys.two),
               CalculatorKey(symbol: Keys.three),
-              CalculatorKey(symbol: Keys.backspase),
+              CalculatorKey(symbol: Keys.prev),
             ],
           ),
         ),
@@ -206,7 +156,7 @@ class CalculatorKey extends StatelessWidget {
     switch (symbol.type) {
       case KeyType.function:
         return TextStyle(
-          color: Color.fromARGB(255, 96, 96, 96),
+          color: Colors.green,
           fontSize: 60.sp,
         );
 
@@ -225,10 +175,6 @@ class CalculatorKey extends StatelessWidget {
     }
   }
 
-  void clickNext() {}
-
-  void clickPrev() {}
-
   @override
   Widget build(BuildContext context) {
     RtriangleController c = Get.find();
@@ -239,13 +185,13 @@ class CalculatorKey extends StatelessWidget {
           print(symbol.value);
 
           if (symbol == Keys.next) {
-            print('1next');
             c.nextElement();
-            print('2next');
           } else if (symbol == Keys.prev) {
-            print('1prev');
-            clickPrev();
-            print('2prev');
+            c.prevElement();
+          } else if (symbol == Keys.clear) {
+            c.clear();
+          } else if (symbol == Keys.backspase) {
+            c.backspase();
           } else {
             c.addKey(symbol);
           }
