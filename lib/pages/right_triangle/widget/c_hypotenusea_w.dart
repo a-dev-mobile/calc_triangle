@@ -37,7 +37,7 @@ class ChypotenuseWidget extends StatelessWidget {
               c.cHypotenuse.toString(),
               style: TextStyle(
                   backgroundColor: ConstColors.scaffoldBackground,
-                  fontSize: 50.sp,
+                  fontSize: 80.sp,
                   color:  colorText),
             );
           }),

@@ -36,7 +36,7 @@ class BangleWidget extends StatelessWidget {
               c.bAngle.toString(),
               style: TextStyle(
                   backgroundColor: ConstColors.scaffoldBackground,
-                  fontSize: 50.sp,
+                  fontSize: 60.sp,
                   color:  colorText),
             );
           }),

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 abstract class AssetsPathTriangle {
   static const String _pathAssetsImage = 'assets/image/triangle/';
 
@@ -26,8 +28,21 @@ enum Triangle {
 enum BtnTypeCalc { integer, function, operator }
 
 abstract class ConstColors {
-  static const scaffoldBackground = Color.fromRGBO(72, 72, 72, 1);
+  static const scaffoldBackground = Color(0xFF2E2F38);
+
+
+  static const colorImage = Colors.white;
+  static const numpadBg = Color(0xff262626);
+
+
+
+  static const bgGradient = LinearGradient(
+    colors: [Color(0xFF2E2F38), Colors.black],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }
+
 abstract class ConstGet {
   static const String minSize = 'minSize';
 }

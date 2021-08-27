@@ -5,8 +5,6 @@ import 'dart:io';
 import 'package:calc_triangle/const.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,10 +21,10 @@ Future<void> main() async {
   if (Platform.isAndroid) {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
-  
+
   Get.put(RtriangleController());
   await GetStorage.init();
-  
+
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(MyApp());
@@ -47,18 +45,13 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               brightness: Brightness.light,
 
-              /* light theme settings */
             ),
             darkTheme: ThemeData(
-                brightness: Brightness.dark,
-                scaffoldBackgroundColor: ConstColors.scaffoldBackground
-                /* dark theme settings */
-                ),
+              brightness: Brightness.dark,
+        
+            ),
             themeMode: ThemeMode.dark,
-            /* ThemeMode.system to follow system theme, 
-         ThemeMode.light for light theme, 
-         ThemeMode.dark for dark theme
-      */
+     
             debugShowCheckedModeBanner: false,
           );
         });

@@ -33,6 +33,7 @@ class ImageInfoWidget extends StatelessWidget {
             const SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
+                color: ConstColors.colorImage,
                 image: AssetImage('assets/image/triangle/r_triangle_info.png'),
               ),
             ),

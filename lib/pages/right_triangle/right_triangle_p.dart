@@ -22,6 +22,7 @@ import 'package:get_storage/get_storage.dart';
 
 import '../../../const.dart';
 import 'widget/image_input_w.dart';
+import 'widget/numpad_w.dart';
 
 enum RightTriangelElement {
   aCathet,
@@ -52,82 +53,32 @@ class RighTrianglePage extends StatelessWidget {
 
     return Scaffold(
         body: SafeArea(
-      child: Column(
-        children: [
-          Obx(() {
-            if (c.isInputImage.value) {
-              return ImageInputWidget();
-            } else {
-              return ImageInfoWidget();
-            }
-          }),
-          Placeholder(
-            fallbackWidth: 1.sw,
-            fallbackHeight: 0.2.sh,
-            color: Colors.amber,
-          ),
-          Expanded(
-            child: NumPad(),
-          ),
-        ],
+      child: Container(
+        width: 1.sw,
+        height: 1.sh,
+        decoration: BoxDecoration(
+            gradient: ConstColors.bgGradient),
+        child: Column(
+          children: [
+            Obx(() {
+              if (c.isInputImage.value) {
+                return ImageInputWidget();
+              } else {
+                return ImageInfoWidget();
+              }
+            }),
+            Placeholder(
+              fallbackWidth: 1.sw,
+              fallbackHeight: 0.2.sh,
+              color: Colors.amber,
+            ),
+            Expanded(
+              child: Container(child: NumPad(),color: ConstColors.numpadBg,),
+            ),
+          ],
+        ),
       ),
     ));
-  }
-}
-
-class NumPad extends StatelessWidget {
-  const NumPad({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CalculatorKey(symbol: Keys.seven),
-              CalculatorKey(symbol: Keys.eight),
-              CalculatorKey(symbol: Keys.nine),
-              CalculatorKey(symbol: Keys.backspase),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CalculatorKey(symbol: Keys.four),
-              CalculatorKey(symbol: Keys.five),
-              CalculatorKey(symbol: Keys.six),
-              CalculatorKey(symbol: Keys.next),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CalculatorKey(symbol: Keys.one),
-              CalculatorKey(symbol: Keys.two),
-              CalculatorKey(symbol: Keys.three),
-              CalculatorKey(symbol: Keys.prev),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CalculatorKey(symbol: Keys.clear),
-              CalculatorKey(symbol: Keys.zero),
-              CalculatorKey(symbol: Keys.decimal),
-              CalculatorKey(symbol: Keys.toggleImage),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }
 

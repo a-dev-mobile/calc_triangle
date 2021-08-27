@@ -39,7 +39,7 @@ class AangleWidget extends StatelessWidget {
               c.aAngle.toString(),
               style: TextStyle(
                   backgroundColor: ConstColors.scaffoldBackground,
-                  fontSize: 50.sp,
+                  fontSize: 60.sp,
                   color: colorText),
             );
           }),

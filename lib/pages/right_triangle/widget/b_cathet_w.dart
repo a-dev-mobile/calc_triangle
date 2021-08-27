@@ -39,7 +39,7 @@ class BcathetWidget extends StatelessWidget {
               c.bCathet.toString(),
               style: TextStyle(
                   backgroundColor: ConstColors.scaffoldBackground,
-                  fontSize: 50.sp,
+                  fontSize: 80.sp,
                   color: colorText),
             );
           }),
