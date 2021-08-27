@@ -80,7 +80,7 @@ class TextInfo extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              backgroundColor: ConstColors.scaffoldBackground,
+            backgroundColor: ConstColors.numpadBg,
               fontSize: 60.sp,
             ),
           )),

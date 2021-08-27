@@ -56,88 +56,48 @@ class RighTrianglePage extends StatelessWidget {
       child: Container(
         width: 1.sw,
         height: 1.sh,
-        decoration: BoxDecoration(
-            gradient: ConstColors.bgGradient),
+        decoration: BoxDecoration(gradient: ConstColors.bgGradient),
         child: Column(
           children: [
             Obx(() {
               if (c.isInputImage.value) {
-                return ImageInputWidget();
+                return Container(
+                  child: ImageInputWidget(),
+                  margin: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: ConstColors.numpadBg,
+                      borderRadius: BorderRadius.all(Radius.circular(32))),
+                );
               } else {
-                return ImageInfoWidget();
+            return Container(
+                  child: ImageInfoWidget(),
+                  margin: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: ConstColors.numpadBg,
+                      borderRadius: BorderRadius.all(Radius.circular(32))),
+                );
               }
             }),
-            Placeholder(
-              fallbackWidth: 1.sw,
-              fallbackHeight: 0.2.sh,
-              color: Colors.amber,
+            Container(
+              margin: EdgeInsets.all(8),
+              width: 1.sw,
+              height: 0.2.sh,
+              decoration: BoxDecoration(
+                  color: ConstColors.numpadBg,
+                  borderRadius: BorderRadius.all(Radius.circular(32))),
             ),
             Expanded(
-              child: Container(child: NumPad(),color: ConstColors.numpadBg,),
+              child: Container(
+                margin: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    color: ConstColors.numpadBg,
+                    borderRadius: BorderRadius.all(Radius.circular(32))),
+                child: NumPad(),
+              ),
             ),
           ],
         ),
       ),
     ));
-  }
-}
-
-class CalculatorKey extends StatelessWidget {
-  const CalculatorKey({
-    Key? key,
-    required this.symbol,
-  }) : super(key: key);
-
-  final KeySymbol symbol;
-
-  TextStyle get textStyle {
-    switch (symbol.type) {
-      case KeyType.function:
-        return TextStyle(
-          color: Colors.green,
-          fontSize: 100.sp,
-        );
-
-      case KeyType.operator:
-        return TextStyle(
-          color: Colors.amber,
-          fontSize: 110.sp,
-        );
-
-      case KeyType.integer:
-      default:
-        return TextStyle(
-          color: Colors.white,
-          fontSize: 90.sp,
-        );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    RtriangleController c = Get.find();
-
-    return Expanded(
-      child: TextButton(
-        onPressed: () {
-          print(symbol.value);
-
-          if (symbol == Keys.next) {
-            c.nextElement();
-          } else if (symbol == Keys.prev) {
-            c.prevElement();
-          } else if (symbol == Keys.clear) {
-            c.clear();
-          } else if (symbol == Keys.backspase) {
-            c.backspase();
-          } else if (symbol == Keys.toggleImage) {
-            c.isInputImage.value = !c.isInputImage.value;
-          } else {
-            c.addKey(symbol);
-          }
-        },
-        child: Text(symbol.value, style: textStyle),
-      ),
-    );
   }
 }

@@ -38,7 +38,7 @@ class AangleWidget extends StatelessWidget {
             return Text(
               c.aAngle.toString(),
               style: TextStyle(
-                  backgroundColor: ConstColors.scaffoldBackground,
+                  backgroundColor: ConstColors.numpadBg,
                   fontSize: 60.sp,
                   color: colorText),
             );

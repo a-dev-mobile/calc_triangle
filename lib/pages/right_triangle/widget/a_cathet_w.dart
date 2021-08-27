@@ -33,7 +33,7 @@ class AcathetWidget extends StatelessWidget {
           return Text(
             c.aCathet.toString(),
             style: TextStyle(
-                backgroundColor: ConstColors.scaffoldBackground,
+            backgroundColor: ConstColors.numpadBg,
                 fontSize: 80.sp,
                 color: colorText),
           );
