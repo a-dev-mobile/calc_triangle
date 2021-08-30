@@ -1,3 +1,4 @@
+import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:calc_triangle/utils/calculator_key.dart';
 import 'package:calc_triangle/utils/key_symbol.dart';
@@ -75,23 +76,14 @@ class CalculatorKey extends StatelessWidget {
   TextStyle get textStyle {
     switch (symbol.type) {
       case KeyType.function:
-        return TextStyle(
-          color: Color(0x80A94963),
-          fontSize: 80.sp,
-        );
+        return StyleNumpad.function;
 
       case KeyType.operator:
-        return TextStyle(
-          color: const Color(0x8083BFFF),
-          fontSize: 150.sp,
-        );
+        return StyleNumpad.operator;
 
       case KeyType.integer:
       default:
-        return TextStyle(
-          color: Colors.white,
-          fontSize: 90.sp,
-        );
+        return StyleNumpad.integer;
     }
   }
 

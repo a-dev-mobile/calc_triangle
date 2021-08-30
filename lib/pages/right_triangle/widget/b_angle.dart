@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:calc_triangle/const.dart';
+import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,16 +26,16 @@ class BangleWidget extends StatelessWidget {
 
         Color colorText;
       if (c.isBangle.value) {
-            colorText = Colors.red;
-          } else {
-            colorText = Colors.white;
-          }
+              colorText = kActivTextColor;
+            } else {
+              colorText = kInActivTextColor;
+            }
 
                   print('obx bAngle');
             return Text(
               c.bAngle.toString(),
               style: TextStyle(
-            backgroundColor: ConstColors.numpadBg,
+                 backgroundColor: kBgColorContent,
                   fontSize: 60.sp,
                   color:  colorText),
             );

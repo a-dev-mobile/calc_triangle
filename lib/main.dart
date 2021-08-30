@@ -2,8 +2,9 @@
 
 import 'dart:io';
 
-import 'package:calc_triangle/const.dart';
+import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,16 +43,8 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
             home: RighTrianglePage(),
             // home: ChangeListPage(),
-            theme: ThemeData(
-              brightness: Brightness.light,
+            theme: ThemeData.dark(),
 
-            ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-        
-            ),
-            themeMode: ThemeMode.dark,
-     
             debugShowCheckedModeBanner: false,
           );
         });

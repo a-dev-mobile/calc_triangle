@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:calc_triangle/const.dart';
+import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,17 +23,17 @@ class AcathetWidget extends StatelessWidget {
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Obx(() {
           Color colorText;
-          if (c.isAcathet.value) {
-            colorText = Colors.red;
-          } else {
-            colorText = Colors.white;
-          }
+           if (c.isAcathet.value) {
+              colorText = kActivTextColor;
+            } else {
+              colorText = kInActivTextColor;
+            }
 
           print('obx aCathet');
           return Text(
             c.aCathet.toString(),
             style: TextStyle(
-            backgroundColor: ConstColors.numpadBg,
+                backgroundColor: kBgColorContent,
                 fontSize: 80.sp,
                 color: colorText),
           );

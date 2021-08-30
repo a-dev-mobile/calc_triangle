@@ -2,7 +2,7 @@
 
 import 'dart:math';
 
-import 'package:calc_triangle/const.dart';
+import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,17 +26,17 @@ class ChypotenuseWidget extends StatelessWidget {
           angle: angle * pi / 180,
           child: Obx(() {
             Color colorText;
-            if (c.isChypotenuse.value) {
-              colorText = Colors.red;
+             if (c.isChypotenuse.value) {
+              colorText = kActivTextColor;
             } else {
-              colorText = Colors.white;
+              colorText = kInActivTextColor;
             }
 
             print('obx cHypotenuse');
             return Text(
               c.cHypotenuse.toString(),
               style: TextStyle(
-                  backgroundColor: ConstColors.numpadBg,
+                   backgroundColor: kBgColorContent,
                   fontSize: 80.sp,
                   color:  colorText),
             );

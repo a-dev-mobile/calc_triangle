@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../const.dart';
+import '../../../constants.dart';
 import 'a_angle_w.dart';
 import 'a_cathet_w.dart';
 import 'b_angle.dart';
@@ -33,9 +33,8 @@ class ImageInputWidget extends StatelessWidget {
             const SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
-                color: ConstColors.colorImage,
-                image:
-                    AssetImage('assets/image/triangle/r_triangle_input.png'),
+                color: kColorImage,
+                image: AssetImage('assets/image/triangle/r_triangle_input.png'),
               ),
             ),
             //all widget text in image
@@ -45,6 +44,15 @@ class ImageInputWidget extends StatelessWidget {
             const AangleWidget(angle: -67.66, posX: -5.396, posY: 19.117),
             const BangleWidget(angle: -22.96, posX: -18.073, posY: 7.915),
             const ChypotenuseWidget(angle: 45, posX: 4.166, posY: -4.166),
+            const Positioned(
+              top: 0,
+              right: 0,
+              left: 0,
+              child: Icon(
+                Icons.update,
+                color: kPrimaryColor,
+              ),
+            )
           ],
         );
       }),

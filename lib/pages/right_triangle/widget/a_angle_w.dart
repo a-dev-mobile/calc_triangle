@@ -2,7 +2,7 @@
 
 import 'dart:math';
 
-import 'package:calc_triangle/const.dart';
+import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,8 +10,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class AangleWidget extends StatelessWidget {
-  const AangleWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
-
+  const AangleWidget(
+      {Key? key, required this.posX, required this.posY, required this.angle})
+      : super(key: key);
 
   final double posX;
   final double posY;
@@ -29,16 +30,17 @@ class AangleWidget extends StatelessWidget {
           child: Obx(() {
             Color colorText;
             if (c.isAangle.value) {
-              colorText = Colors.red;
+              colorText = kActivTextColor;
             } else {
-              colorText = Colors.white;
+              colorText = kInActivTextColor;
             }
+
 
             print('obx aAngle');
             return Text(
               c.aAngle.toString(),
               style: TextStyle(
-                  backgroundColor: ConstColors.numpadBg,
+                  backgroundColor: kBgColorContent,
                   fontSize: 60.sp,
                   color: colorText),
             );

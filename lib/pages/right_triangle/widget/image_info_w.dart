@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../const.dart';
+import '../../../constants.dart';
 import 'a_angle_w.dart';
 import 'a_cathet_w.dart';
 import 'b_angle.dart';
@@ -33,7 +33,7 @@ class ImageInfoWidget extends StatelessWidget {
             const SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
-                color: ConstColors.colorImage,
+                color: kColorImage,
                 image: AssetImage('assets/image/triangle/r_triangle_info.png'),
               ),
             ),
@@ -80,7 +80,7 @@ class TextInfo extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-            backgroundColor: ConstColors.numpadBg,
+              backgroundColor: kBgColorContent,
               fontSize: 60.sp,
             ),
           )),

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:calc_triangle/const.dart';
+import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,16 +29,16 @@ class BcathetWidget extends StatelessWidget {
 
         Color colorText;
           if (c.isBcathet.value) {
-            colorText = Colors.red;
-          } else {
-            colorText = Colors.white;
-          }
+              colorText = kActivTextColor;
+            } else {
+              colorText = kInActivTextColor;
+            }
 
                   print('obx bCathet');
             return Text(
               c.bCathet.toString(),
               style: TextStyle(
-                backgroundColor: ConstColors.numpadBg,
+           backgroundColor: kBgColorContent,
                   fontSize: 80.sp,
                   color: colorText),
             );
