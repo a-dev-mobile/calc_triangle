@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
+import 'package:calc_triangle/localization/translate_helper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -74,11 +75,13 @@ class RighTrianglePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Прямоугольный треугольник',
+                  TranslateHelper.rightTriangle,
                   style: TextStyle(fontSize: 60.sp),
                 ),
-                Divider(color: kActivTextColor,),
-                Text('Введите известные любые 2 параметра'),
+                Divider(
+                  color: kActivTextColor,
+                ),
+                Text(TranslateHelper.enterTwoParameters),
               ],
             ),
           ),
