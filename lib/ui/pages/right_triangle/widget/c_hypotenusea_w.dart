@@ -9,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../../styles.dart';
+
 class ChypotenuseWidget extends StatelessWidget {
   const ChypotenuseWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
 
@@ -25,20 +27,17 @@ class ChypotenuseWidget extends StatelessWidget {
         child: Transform.rotate(
           angle: angle * pi / 180,
           child: Obx(() {
-            Color colorText;
-             if (c.isChypotenuse.value) {
-              colorText = kActivTextColor;
+            TextStyle styleText;
+            if (c.isChypotenuse.value) {
+              styleText = StyleTextImage.active;
             } else {
-              colorText = kInActivTextColor;
+              styleText = StyleTextImage.inActive;
             }
 
             print('obx cHypotenuse');
             return Text(
               c.cHypotenuse.toString(),
-              style: TextStyle(
-                   backgroundColor: kBgColorContent,
-                  fontSize: 80.sp,
-                  color:  colorText),
+              style: styleText,
             );
           }),
         ));

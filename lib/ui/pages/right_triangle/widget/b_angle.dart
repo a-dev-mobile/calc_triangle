@@ -7,8 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../../styles.dart';
+
 class BangleWidget extends StatelessWidget {
-  const BangleWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
+  const BangleWidget(
+      {Key? key, required this.posX, required this.posY, required this.angle})
+      : super(key: key);
 
   final double posX;
   final double posY;
@@ -23,21 +27,16 @@ class BangleWidget extends StatelessWidget {
         child: Transform.rotate(
           angle: angle * pi / 180,
           child: Obx(() {
-
-        Color colorText;
-      if (c.isBangle.value) {
-              colorText = kActivTextColor;
+            TextStyle styleText;
+            if (c.isBangle.value) {
+              styleText = StyleTextImage.active;
             } else {
-              colorText = kInActivTextColor;
+              styleText = StyleTextImage.inActive;
             }
-
-                  print('obx bAngle');
+            print('obx bAngle');
             return Text(
               c.bAngle.toString(),
-              style: TextStyle(
-                 backgroundColor: kBgColorContent,
-                  fontSize: 60.sp,
-                  color:  colorText),
+              style: styleText,
             );
           }),
         ));

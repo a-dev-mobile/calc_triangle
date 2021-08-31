@@ -2,6 +2,7 @@
 
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:calc_triangle/localization/translate_helper.dart';
+import 'package:calc_triangle/styles.dart';
 import 'package:calc_triangle/ui/widgets/drawer_w.dart';
 
 import 'package:flutter/material.dart';
@@ -84,12 +85,12 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
                       children: [
                         Text(
                           TranslateHelper.rightTriangle,
-                          style: TextStyle(fontSize: 60.sp),
+                          style: StyleTextInfo.mainText,
                         ),
                         Divider(
-                          color: kActivTextColor,
+                          color: Colors.white,
                         ),
-                        Text(TranslateHelper.enterTwoParameters),
+                        Text(TranslateHelper.enterTwoParameters,style: StyleTextInfo.subText,),
                       ],
                     ),
                   ),

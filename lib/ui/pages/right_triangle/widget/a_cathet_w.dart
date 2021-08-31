@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../../styles.dart';
+
 class AcathetWidget extends StatelessWidget {
  const AcathetWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
 
@@ -22,20 +24,17 @@ class AcathetWidget extends StatelessWidget {
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Obx(() {
-          Color colorText;
-           if (c.isAcathet.value) {
-              colorText = kActivTextColor;
+          TextStyle styleText;
+            if (c.isAcathet.value) {
+              styleText = StyleTextImage.active;
             } else {
-              colorText = kInActivTextColor;
+              styleText = StyleTextImage.inActive;
             }
 
           print('obx aCathet');
           return Text(
             c.aCathet.toString(),
-            style: TextStyle(
-                backgroundColor: kBgColorContent,
-                fontSize: 80.sp,
-                color: colorText),
+            style: styleText,
           );
         }));
   }

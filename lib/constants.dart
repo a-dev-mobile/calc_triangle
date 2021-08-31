@@ -8,9 +8,6 @@ const kBgColorMain = Color(0xFF191919);
 
 const kColorImage = Color(0xffffffff);
 
-const kActivTextColor = Color(0xFFF50021);
-const kInActivTextColor = Color(0xffffffff);
-
 const kBgColorContent = Color(0xFF1D1D35);
 
 const kBgDrawerColor = Color(0xFFFFFFFF);

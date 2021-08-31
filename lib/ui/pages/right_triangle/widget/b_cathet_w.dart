@@ -2,16 +2,17 @@ import 'dart:math';
 
 import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
+import 'package:calc_triangle/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class BcathetWidget extends StatelessWidget {
-  const BcathetWidget({Key? key, required this.posX, required this.posY, required this.angle}) : super(key: key);
+  const BcathetWidget(
+      {Key? key, required this.posX, required this.posY, required this.angle})
+      : super(key: key);
 
-
- 
   final double posX;
   final double posY;
   final double angle;
@@ -25,22 +26,17 @@ class BcathetWidget extends StatelessWidget {
         child: Transform.rotate(
           angle: angle * pi / 180,
           child: Obx(() {
-
-
-        Color colorText;
-          if (c.isBcathet.value) {
-              colorText = kActivTextColor;
+            TextStyle styleText;
+            if (c.isBcathet.value) {
+              styleText = StyleTextImage.active;
             } else {
-              colorText = kInActivTextColor;
+              styleText = StyleTextImage.inActive;
             }
 
-                  print('obx bCathet');
+            print('obx bCathet');
             return Text(
               c.bCathet.toString(),
-              style: TextStyle(
-           backgroundColor: kBgColorContent,
-                  fontSize: 80.sp,
-                  color: colorText),
+              style: styleText,
             );
           }),
         ));

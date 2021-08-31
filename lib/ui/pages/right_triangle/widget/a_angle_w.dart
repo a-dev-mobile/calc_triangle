@@ -9,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../../styles.dart';
+
 class AangleWidget extends StatelessWidget {
   const AangleWidget(
       {Key? key, required this.posX, required this.posY, required this.angle})
@@ -28,21 +30,17 @@ class AangleWidget extends StatelessWidget {
         child: Transform.rotate(
           angle: angle * pi / 180,
           child: Obx(() {
-            Color colorText;
+            TextStyle styleText;
             if (c.isAangle.value) {
-              colorText = kActivTextColor;
+              styleText = StyleTextImage.active;
             } else {
-              colorText = kInActivTextColor;
+              styleText = StyleTextImage.inActive;
             }
-
 
             print('obx aAngle');
             return Text(
               c.aAngle.toString(),
-              style: TextStyle(
-                  backgroundColor: kBgColorContent,
-                  fontSize: 60.sp,
-                  color: colorText),
+              style: styleText,
             );
           }),
         ));
