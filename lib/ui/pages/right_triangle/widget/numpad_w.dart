@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 
+import '../../../../styles.dart';
 import '../right_triangle_p.dart';
 
 class NumPad extends StatelessWidget {

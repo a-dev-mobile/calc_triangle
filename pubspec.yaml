@@ -39,6 +39,7 @@ dependencies:
   flutter_inappwebview: ^5.3.2
   get: 
   get_storage: 
+  google_fonts: ^2.1.0
   
 
 dev_dependencies:

@@ -1,11 +1,12 @@
-// ignore_for_file: avoid_print
 
-import 'package:calc_triangle/pages/right_triangle/right_triangle_p.dart';
-import 'package:calc_triangle/utils/calculator_key.dart';
+
+
+import 'package:calc_triangle/ui/pages/right_triangle/right_triangle_p.dart';
+
 import 'package:calc_triangle/utils/key_symbol.dart';
 import 'package:calc_triangle/utils/string_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 import 'package:get/get.dart';
 

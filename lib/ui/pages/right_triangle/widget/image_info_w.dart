@@ -4,12 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../constants.dart';
-import 'a_angle_w.dart';
-import 'a_cathet_w.dart';
-import 'b_angle.dart';
-import 'b_cathet_w.dart';
-import 'c_hypotenusea_w.dart';
+import '../../../../constants.dart';
 
 class ImageInfoWidget extends StatelessWidget {
   const ImageInfoWidget({
@@ -23,7 +18,7 @@ class ImageInfoWidget extends StatelessWidget {
       width: 1.sw,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(ConstGet.minSize, minSize);
+        GetStorage().write(kGetStorageMinSize, minSize);
 
         return Stack(
           alignment: Alignment.center,
@@ -34,7 +29,7 @@ class ImageInfoWidget extends StatelessWidget {
               child: Image(
                 fit: BoxFit.contain,
                 color: kColorImage,
-                image: AssetImage('assets/image/triangle/r_triangle_info.png'),
+                image: AssetImage(PathFigure.righTriangleInfo),
               ),
             ),
             //all widget text in image
@@ -71,7 +66,7 @@ class TextInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double minSize = GetStorage().read(ConstGet.minSize);
+    double minSize = GetStorage().read(kGetStorageMinSize);
     print('obx build text info image');
     return Transform.translate(
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),

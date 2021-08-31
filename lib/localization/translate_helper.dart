@@ -10,4 +10,8 @@ class TranslateHelper {
 
   static String get rightTriangle => 'right_triangle'.tr;
   static String get enterTwoParameters => 'enter_2_parameters'.tr;
+  static String get appName => 'app_name'.tr;
+  static String get appNameSub => 'app_name_sub'.tr;
+  static String get about => 'about'.tr;
+  
 }

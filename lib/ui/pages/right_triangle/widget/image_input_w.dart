@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../constants.dart';
+
+import '../../../../constants.dart';
 import 'a_angle_w.dart';
 import 'a_cathet_w.dart';
 import 'b_angle.dart';
@@ -23,7 +24,7 @@ class ImageInputWidget extends StatelessWidget {
       width: 1.sw,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(ConstGet.minSize, minSize);
+        GetStorage().write(kGetStorageMinSize, minSize);
 
         return Stack(
           alignment: Alignment.center,
@@ -34,7 +35,7 @@ class ImageInputWidget extends StatelessWidget {
               child: Image(
                 fit: BoxFit.contain,
                 color: kColorImage,
-                image: AssetImage('assets/image/triangle/r_triangle_input.png'),
+                image: AssetImage(PathFigure.righTriangleInput),
               ),
             ),
             //all widget text in image

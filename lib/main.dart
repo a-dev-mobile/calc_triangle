@@ -6,7 +6,8 @@ import 'package:get_storage/get_storage.dart';
 
 import 'controllers/r_triangle_c.dart';
 import 'localization/localization.dart';
-import 'pages/right_triangle/right_triangle_p.dart';
+
+import 'ui/pages/right_triangle/right_triangle_p.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(1080, 2400),
         builder: () {
           return GetMaterialApp(
-            home: const RighTrianglePage(),
+            home:  const RighTrianglePage(),
             // home: ChangeListPage(),
             theme: ThemeData.dark(),
             translations: Localization(),
