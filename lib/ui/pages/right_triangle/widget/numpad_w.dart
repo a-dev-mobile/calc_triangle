@@ -1,4 +1,3 @@
-import 'package:calc_triangle/constants.dart';
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:calc_triangle/utils/calculator_key.dart';
 import 'package:calc_triangle/utils/key_symbol.dart';

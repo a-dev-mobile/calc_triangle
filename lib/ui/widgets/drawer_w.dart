@@ -1,6 +1,7 @@
-import 'package:calc_triangle/constants.dart';
+
 import 'package:calc_triangle/localization/translate_helper.dart';
 import 'package:calc_triangle/styles.dart';
+import 'package:calc_triangle/theme/app_color_codes.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -10,14 +11,20 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
+
     var size = MediaQuery.of(context).size;
     var w = size.width;
     var h = size.height;
     return Drawer(
       child: Container(
-        decoration: const BoxDecoration(
-            color: kColorDrawer,
-            borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+            color: isDark == true
+                ? kContentColorDarkTheme
+                : kContentColorLightTheme,
+            borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(kDefaultRadius * 2),
                 topRight: Radius.circular(kDefaultRadius * 2))),
         width: w,

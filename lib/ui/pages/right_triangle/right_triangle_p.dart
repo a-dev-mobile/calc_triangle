@@ -3,6 +3,7 @@
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
 import 'package:calc_triangle/localization/translate_helper.dart';
 import 'package:calc_triangle/styles.dart';
+import 'package:calc_triangle/theme/app_color_codes.dart';
 import 'package:calc_triangle/ui/widgets/drawer_w.dart';
 
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../constants.dart';
+
 
 import 'widget/image_info_w.dart';
 import 'widget/image_input_w.dart';
@@ -42,6 +43,10 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
   Widget build(BuildContext context) {
     RtriangleController c = Get.find();
     print('build stack');
+
+
+
+
 
     var size = MediaQuery.of(context).size;
     var w = size.width;

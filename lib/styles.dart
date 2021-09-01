@@ -1,4 +1,4 @@
-import 'package:calc_triangle/constants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,12 +34,12 @@ abstract class StyleTextInfo {
 
 abstract class StyleTextImage {
   static TextStyle active = TextStyle(
-      backgroundColor: kColorContent,
+      // backgroundColor: kColorContent,
       fontSize: 85.sp,
       color: const Color(0xFFF50021));
 
   static TextStyle inActive = TextStyle(
-      backgroundColor: kColorContent,
+      // backgroundColor: kColorContent,
       fontSize: 75.sp,
       color: const Color(0xffffffff));
 }

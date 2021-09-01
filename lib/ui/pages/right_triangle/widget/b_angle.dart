@@ -1,7 +1,8 @@
 import 'dart:math';
 
-import 'package:calc_triangle/constants.dart';
+
 import 'package:calc_triangle/controllers/r_triangle_c.dart';
+import 'package:calc_triangle/theme/app_color_codes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

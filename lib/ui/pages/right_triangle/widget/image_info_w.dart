@@ -1,10 +1,12 @@
 import 'dart:math';
 
+import 'package:calc_triangle/constant/assets_const.dart';
+import 'package:calc_triangle/theme/app_color_codes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../../constants.dart';
+
 
 class ImageInfoWidget extends StatelessWidget {
   const ImageInfoWidget({
@@ -13,6 +15,10 @@ class ImageInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightnessValue =
+        MediaQuery.of(context).platformBrightness;
+    bool isDark = brightnessValue == Brightness.dark;
+
     return SizedBox(
       height: 0.4.sh,
       width: 1.sw,
@@ -25,11 +31,13 @@ class ImageInfoWidget extends StatelessWidget {
 
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            const SizedBox.expand(
+            SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
-                color: kColorImage,
-                image: AssetImage(PathFigure.righTriangleInfo),
+                color: isDark == true
+                    ? kContentColorDarkTheme
+                    : kContentColorLightTheme,
+                image: const AssetImage(AssetsConst.righTriangleInfo),
               ),
             ),
             //all widget text in image

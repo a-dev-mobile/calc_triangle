@@ -1,4 +1,4 @@
-import 'package:calc_triangle/constants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +8,9 @@ import 'package:get_storage/get_storage.dart';
 import 'controllers/r_triangle_c.dart';
 import 'localization/localization.dart';
 
+import 'theme/light_dark_theme.dart';
 import 'ui/pages/right_triangle/right_triangle_p.dart';
+import 'ui/pages/welcome/welcome_p.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,20 +36,14 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(1080, 2400),
         builder: () {
-          final ThemeData theme = ThemeData();
+
           return GetMaterialApp(
-            home: const RighTrianglePage(),
+            home:  WelcomePage(),
             // home: ChangeListPage(),
-            
-            theme: theme.copyWith(
-              brightness: Brightness.dark,
-              
-              textTheme: Theme.of(context).textTheme.apply(fontFamily: 'montserrat' ),
-              primaryColor: kPrimaryColor,
-              scaffoldBackgroundColor: kScaffoldBg,
-              colorScheme: theme.colorScheme.copyWith(secondary: kSecondaryColor),
-              
-            ),
+
+            theme: lightThemeData(context),
+            darkTheme: darkThemeData(context),
+
             translations: Localization(),
             locale: Get.locale ?? const Locale('en'),
             debugShowCheckedModeBanner: false,

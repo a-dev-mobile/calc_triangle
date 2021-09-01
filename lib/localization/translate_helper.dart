@@ -13,5 +13,7 @@ class TranslateHelper {
   static String get appName => 'app_name'.tr;
   static String get appNameSub => 'app_name_sub'.tr;
   static String get about => 'about'.tr;
+  static String get chooseTheme => 'choose_theme'.tr;
+  static String get selectTheme => 'select_theme'.tr;
   
 }
