@@ -66,7 +66,7 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
                       child: imageFigure,
                       margin: EdgeInsets.all(kDefaultMargin),
                       decoration: BoxDecoration(
-                          color: kBgColorContent,
+                          color: kColorContent,
                           borderRadius: BorderRadius.all(
                               Radius.circular(kDefaultRadius))),
                     );
@@ -76,7 +76,7 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
                     width: 1.sw,
                     height: 0.1.sh,
                     decoration: BoxDecoration(
-                        color: kBgColorContent,
+                        color: kColorContent,
                         borderRadius:
                             BorderRadius.all(Radius.circular(kDefaultRadius))),
                     child: Column(
@@ -98,7 +98,7 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
                     child: Container(
                       margin: EdgeInsets.all(kDefaultMargin),
                       decoration: BoxDecoration(
-                          color: kBgColorContent,
+                          color: kColorContent,
                           borderRadius: BorderRadius.all(
                               Radius.circular(kDefaultRadius))),
                       child: NumPad(),

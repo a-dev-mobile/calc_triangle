@@ -16,7 +16,7 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       child: Container(
         decoration: const BoxDecoration(
-            color: kBgDrawerColor,
+            color: kColorDrawer,
             borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(kDefaultRadius * 2),
                 topRight: Radius.circular(kDefaultRadius * 2))),

@@ -18,7 +18,7 @@ class ImageInfoWidget extends StatelessWidget {
       width: 1.sw,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(kGetStorageMinSize, minSize);
+        GetStorage().write(kKeyMinSize, minSize);
 
         return Stack(
           alignment: Alignment.center,
@@ -66,7 +66,7 @@ class TextInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double minSize = GetStorage().read(kGetStorageMinSize);
+    double minSize = GetStorage().read(kKeyMinSize);
     print('obx build text info image');
     return Transform.translate(
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
@@ -75,7 +75,7 @@ class TextInfo extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              backgroundColor: kBgColorContent,
+              backgroundColor: kColorContent,
               fontSize: 60.sp,
             ),
           )),

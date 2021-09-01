@@ -24,7 +24,7 @@ class ImageInputWidget extends StatelessWidget {
       width: 1.sw,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(kGetStorageMinSize, minSize);
+        GetStorage().write(kKeyMinSize, minSize);
 
         return Stack(
           alignment: Alignment.center,

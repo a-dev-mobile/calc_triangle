@@ -1,3 +1,4 @@
+import 'package:calc_triangle/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,12 +34,22 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(1080, 2400),
         builder: () {
+          final ThemeData theme = ThemeData();
           return GetMaterialApp(
-            home:  const RighTrianglePage(),
+            home: const RighTrianglePage(),
             // home: ChangeListPage(),
-            theme: ThemeData.dark(),
+            
+            theme: theme.copyWith(
+              brightness: Brightness.dark,
+              
+              textTheme: Theme.of(context).textTheme.apply(fontFamily: 'montserrat' ),
+              primaryColor: kPrimaryColor,
+              scaffoldBackgroundColor: kScaffoldBg,
+              colorScheme: theme.colorScheme.copyWith(secondary: kSecondaryColor),
+              
+            ),
             translations: Localization(),
-            locale: Get.locale??const Locale('en'),
+            locale: Get.locale ?? const Locale('en'),
             debugShowCheckedModeBanner: false,
           );
         });
