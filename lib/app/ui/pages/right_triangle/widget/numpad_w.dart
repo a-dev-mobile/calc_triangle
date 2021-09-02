@@ -1,4 +1,5 @@
-import 'package:calc_triangle/app/controller/r_triangle/r_triangle_c.dart';
+
+import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
 import 'package:calc_triangle/app/utils/calculator_key.dart';
 import 'package:calc_triangle/app/utils/key_symbol.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class CalculatorKey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RtriangleController c = Get.find();
+RightTriangleController c = Get.find();
 
     return Expanded(
       child: TextButton(

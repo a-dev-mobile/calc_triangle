@@ -28,15 +28,13 @@ class WelcomeController extends GetxController {
     _saveThemeToBox();
   }
 
+  void updateTheme() {
+ 
 
-void updateTheme(){
 
 
-    isDarkTheme.value
-        ? Get.changeThemeMode(ThemeMode.dark)
-        : Get.changeThemeMode(ThemeMode.light);
-
-}
+ 
+  }
 
   @override
   void onInit() {

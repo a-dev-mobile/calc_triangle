@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:calc_triangle/app/constant/string_const.dart';
-import 'package:calc_triangle/app/controller/r_triangle/r_triangle_c.dart';
+
+import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,7 @@ class BangleWidget extends StatelessWidget {
   final double angle;
   @override
   Widget build(BuildContext context) {
-    RtriangleController c = Get.find();
+RightTriangleController c = Get.find();
     double minSize = GetStorage().read(StringConst.keyMinSize);
 
     return Transform.translate(

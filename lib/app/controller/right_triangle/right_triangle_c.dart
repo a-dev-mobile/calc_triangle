@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class RtriangleController extends GetxController {
+class RightTriangleController extends GetxController {
   var selectedElement = RighTrianglePage.startElement.obs;
 
   var aCathet = _startLengthValue.obs;

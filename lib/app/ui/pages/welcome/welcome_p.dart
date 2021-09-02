@@ -5,6 +5,7 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/right_triangle/widget/r_triangle_image_info_w.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
+import 'package:calc_triangle/app/ui/theme/light_dark_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -93,17 +94,13 @@ class WelcomePage extends GetView<WelcomeController> {
                   },
                   child: Text(text));
             }),
-            ElevatedButton(
-                onPressed: () {
-                  GetStorage().write(StringConst.keyPrimaryColor, 'purple');
-                  c.updateTheme();
-                },
-                child: Text('purple')),
+           
+
             const Spacer(
               flex: 5,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 1),
               child: SizedBox(
                 width: size.width * 0.9,
                 height: size.height * 0.08,

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
-import 'package:calc_triangle/app/controller/r_triangle/r_triangle_c.dart';
+
+import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer_w.dart';
@@ -22,23 +23,17 @@ enum RightTriangelElement {
   bAngle,
 }
 
-class RighTrianglePage extends StatefulWidget {
-  const RighTrianglePage({Key? key}) : super(key: key);
+class RighTrianglePage extends GetView<RightTriangleController> {
+   RighTrianglePage({Key? key}) : super(key: key);
   static const maxSelected = 2;
   static const maxValue = 5;
 
   static const startElement = RightTriangelElement.aCathet;
-
-  @override
-  State<RighTrianglePage> createState() => _RighTrianglePageState();
-}
-
-class _RighTrianglePageState extends State<RighTrianglePage> {
   final GlobalKey<ScaffoldState> _globalkey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    RtriangleController c = Get.find();
+    var c = controller;
     print('build stack');
 
     var size = MediaQuery.of(context).size;

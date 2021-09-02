@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-Color kPrimaryColor =
-    GetStorage().read(StringConst.keyPrimaryColor) == 'purple'
-        ? Color(0xFF6a0080)
-        : Color(0xFF1a746b);
+Color kPrimaryColor = Colors.teal;
+
 Color kMedColor = const Color(0xFF26a69a);
 Color kSecondaryColor = const Color(0xFF51b7ae);
 //текст цвет если  color: Theme.of(context).textTheme.bodyText1!.color,
@@ -19,6 +17,7 @@ Color kErrorColor = const Color(0xFFF03738);
 const double kDefaultPadding = 20.0;
 const double kDefaultMargin = 5.0;
 const double kDefaultRadius = 32.0;
+
 
 abstract class ColorsApp {
   static Color content(BuildContext context) {
