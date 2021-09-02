@@ -1,35 +1,40 @@
-import 'package:calc_triangle/app/constant/assets_const.dart';
+import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/pages/color_change/color_change_p.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_codes.dart';
+import 'package:calc_triangle/app/ui/pages/right_triangle/widget/r_triangle_image_info_w.dart';
+
+import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Brightness brightnessValue = MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
+    var c = controller;
 
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            Spacer(),
-            Image.asset(AssetsConst.welcomeImage),
+            const Spacer(),
+            Text(
+              TranslateHelper.settingFirstLaunch,
+              style: TextStyle(color: ColorsApp.text(context)),
+            ),
+            const RTriangleImageInfoWidget(),
+          
             Text(
               TranslateHelper.appName,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText1!.color,
+                color: ColorsApp.text(context),
                 letterSpacing: 2.0,
-                fontSize: 38.0,
+                fontSize: SizeApp.headline4(context),
                 fontWeight: FontWeight.bold,
-                shadows: isDark == true
+                shadows: Get.isDarkMode == true
                     //тень взависимости от темы
                     ? <Shadow>[
                         const Shadow(
@@ -67,11 +72,7 @@ class WelcomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     letterSpacing: 1.5,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .color!
-                        .withOpacity(0.8)),
+                    color: ColorsApp.text(context).withOpacity(0.8)),
               ),
             ),
             const Divider(
@@ -80,37 +81,36 @@ class WelcomePage extends StatelessWidget {
               indent: 50,
               endIndent: 50,
             ),
+              Obx(() {
+              String text = c.isDarkTheme.value
+                  ? TranslateHelper.darkTheme
+                  : TranslateHelper.lightTheme;
+
+              return ElevatedButton(
+                  onPressed: () {
+                    c.swithTheme();
+                  },
+                  child: Text(text));
+            }),
             const Spacer(
               flex: 5,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              child: RawMaterialButton(
-                onPressed: () => Get.toNamed(Routes.CHANGE_COLOR),
-                child: Text(
-                  TranslateHelper.chooseTheme,
-                  style: isDark == true
-                      ? const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          letterSpacing: 4,
-                          fontWeight: FontWeight.bold,
-                        )
-                      : const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          letterSpacing: 4,
-                          fontWeight: FontWeight.bold,
-                        ),
+              child: SizedBox(
+                width: size.width * 0.9,
+                height: size.height * 0.08,
+                child: ElevatedButton(
+                  onPressed: () => Get.toNamed(Routes.SELECT_SHAPE),
+                  child: Text(
+                    TranslateHelper.launch,
+                    style: TextStyle(
+                      fontSize: SizeApp.headline5(context),
+                      letterSpacing: 8,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                elevation: 5.0,
-                constraints:
-                    BoxConstraints(minWidth: size.width * 0.9, minHeight: 42.0),
-                padding: const EdgeInsets.all(kDefaultPadding),
-                shape: const RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(kDefaultRadius / 2))),
-                fillColor: Theme.of(context).textTheme.bodyText1!.color,
               ),
             )
           ],

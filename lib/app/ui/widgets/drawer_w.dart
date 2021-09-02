@@ -1,5 +1,5 @@
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_codes.dart';
+import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:calc_triangle/styles.dart';
 
 import 'package:flutter/material.dart';
@@ -22,8 +22,8 @@ class DrawerWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: isDark == true
-                ? kContentColorDarkTheme
-                : kContentColorLightTheme,
+                ? kScaffoldColorDarkTheme
+                : kScaffoldColorLightTheme,
             borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(kDefaultRadius * 2),
                 topRight: Radius.circular(kDefaultRadius * 2))),

@@ -15,5 +15,9 @@ class TranslateHelper {
   static String get about => 'about'.tr;
   static String get chooseTheme => 'choose_theme'.tr;
   static String get selectTheme => 'select_theme'.tr;
+  static String get launch => 'launch'.tr;
+  static String get settingFirstLaunch => 'setting_first_launch'.tr;
+  static String get darkTheme => 'dark_theme'.tr;
+  static String get lightTheme => 'light_theme'.tr;
   
 }

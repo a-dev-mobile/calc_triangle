@@ -2,7 +2,7 @@
 
 import 'package:calc_triangle/app/controller/r_triangle/r_triangle_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_codes.dart';
+import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer_w.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,8 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../styles.dart';
-import 'widget/image_info_w.dart';
-import 'widget/image_input_w.dart';
+import 'widget/r_triangle_image_info_w.dart';
+import 'widget/r_triangle_image_input_w.dart';
 import 'widget/numpad_w.dart';
 
 enum RightTriangelElement {
@@ -57,14 +57,14 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
                   Obx(() {
                     // рисунок фигуры
                     c.isInputImage.value
-                        ? imageFigure = ImageInputWidget()
-                        : imageFigure = ImageInfoWidget();
+                        ? imageFigure = RTriangleImageInputWidget()
+                        : imageFigure = RTriangleImageInfoWidget();
 
                     return Container(
                       child: imageFigure,
                       margin: EdgeInsets.all(kDefaultMargin),
                       decoration: BoxDecoration(
-                          color: kColorContent,
+                          color: ColorsApp.content(context),
                           borderRadius: BorderRadius.all(
                               Radius.circular(kDefaultRadius))),
                     );
@@ -74,7 +74,7 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
                     width: 1.sw,
                     height: 0.1.sh,
                     decoration: BoxDecoration(
-                        color: kColorContent,
+                        color: ColorsApp.content(context),
                         borderRadius:
                             BorderRadius.all(Radius.circular(kDefaultRadius))),
                     child: Column(
@@ -99,7 +99,7 @@ class _RighTrianglePageState extends State<RighTrianglePage> {
                     child: Container(
                       margin: EdgeInsets.all(kDefaultMargin),
                       decoration: BoxDecoration(
-                          color: kColorContent,
+                          color: ColorsApp.content(context),
                           borderRadius: BorderRadius.all(
                               Radius.circular(kDefaultRadius))),
                       child: NumPad(),

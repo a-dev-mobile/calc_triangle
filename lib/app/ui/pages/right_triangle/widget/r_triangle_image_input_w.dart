@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/constant/assets_const.dart';
 import 'package:calc_triangle/app/constant/string_const.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_codes.dart';
+import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,8 +13,8 @@ import 'b_angle.dart';
 import 'b_cathet_w.dart';
 import 'c_hypotenusea_w.dart';
 
-class ImageInputWidget extends StatelessWidget {
-  const ImageInputWidget({
+class RTriangleImageInputWidget extends StatelessWidget {
+  const RTriangleImageInputWidget({
     Key? key,
   }) : super(key: key);
 
@@ -34,14 +34,14 @@ class ImageInputWidget extends StatelessWidget {
         return Stack(
           alignment: Alignment.center,
 
-          // ignore: prefer_const_literals_to_create_immutables
+
           children: [
             SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
                 color: isDark == true
-                    ? kContentColorDarkTheme
-                    : kContentColorLightTheme,
+                    ? kScaffoldColorDarkTheme
+                    : kScaffoldColorLightTheme,
                 image: const AssetImage(AssetsConst.righTriangleInput),
               ),
             ),

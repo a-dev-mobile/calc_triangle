@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'app_color_codes.dart';
+import 'app_color_style.dart';
 
 ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
       primaryColor: kPrimaryColor,
-      scaffoldBackgroundColor: kContentColorDarkTheme,
+      scaffoldBackgroundColor: kScaffoldColorLightTheme,
       appBarTheme: appBarTheme,
       textTheme: Theme.of(context)
           .textTheme
-          .apply(fontFamily: 'montserrat', bodyColor: kContentColorLightTheme),
+          .apply(fontFamily: 'montserrat', bodyColor: kScaffoldColorDarkTheme),
       colorScheme: ColorScheme.light(
         primary: kPrimaryColor,
         secondary: kSecondaryColor,
@@ -20,12 +20,12 @@ ThemeData lightThemeData(BuildContext context) {
 ThemeData darkThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
       primaryColor: kPrimaryColor,
-      scaffoldBackgroundColor: kContentColorLightTheme,
+      scaffoldBackgroundColor: kScaffoldColorDarkTheme,
       appBarTheme: appBarTheme,
       textTheme: Theme.of(context)
           .textTheme
-          .apply(fontFamily: 'montserrat', bodyColor: kContentColorDarkTheme),
-      colorScheme: const ColorScheme.dark().copyWith(
+          .apply(fontFamily: 'montserrat', bodyColor: kScaffoldColorLightTheme),
+      colorScheme:  const ColorScheme.dark().copyWith(
         primary: kPrimaryColor,
         secondary: kSecondaryColor,
         error: kErrorColor,

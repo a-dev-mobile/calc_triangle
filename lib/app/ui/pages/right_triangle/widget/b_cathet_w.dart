@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/constant/string_const.dart';
 import 'package:calc_triangle/app/controller/r_triangle/r_triangle_c.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_codes.dart';
+import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:calc_triangle/styles.dart';
 
 import 'package:flutter/material.dart';

@@ -2,22 +2,18 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/constant/assets_const.dart';
 import 'package:calc_triangle/app/constant/string_const.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_codes.dart';
+import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
-class ImageInfoWidget extends StatelessWidget {
-  const ImageInfoWidget({
+class RTriangleImageInfoWidget extends StatelessWidget {
+  const RTriangleImageInfoWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Brightness brightnessValue =
-        MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
-
     return SizedBox(
       height: 0.4.sh,
       width: 1.sw,
@@ -27,15 +23,12 @@ class ImageInfoWidget extends StatelessWidget {
 
         return Stack(
           alignment: Alignment.center,
-
-          // ignore: prefer_const_literals_to_create_immutables
           children: [
             SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
-                color: isDark == true
-                    ? kContentColorDarkTheme
-                    : kContentColorLightTheme,
+                // color: Theme.of(context).scaffoldBackgroundColor,
+                color: ColorsApp.text(context),
                 image: const AssetImage(AssetsConst.righTriangleInfo),
               ),
             ),
@@ -58,13 +51,13 @@ class ImageInfoWidget extends StatelessWidget {
 }
 
 class TextInfo extends StatelessWidget {
-  const TextInfo(
-      {Key? key,
-      required this.posX,
-      required this.posY,
-      required this.angle,
-      required this.text})
-      : super(key: key);
+  const TextInfo({
+    Key? key,
+    required this.posX,
+    required this.posY,
+    required this.angle,
+    required this.text,
+  }) : super(key: key);
 
   final double posX;
   final double posY;
@@ -74,7 +67,7 @@ class TextInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double minSize = GetStorage().read(StringConst.kKeyMinSize);
-    print('obx build text info image');
+
     return Transform.translate(
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
       child: Transform.rotate(
@@ -82,7 +75,8 @@ class TextInfo extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              backgroundColor: kColorContent,
+               color: ColorsApp.contentReverse(context),
+              backgroundColor:  ColorsApp.content(context),
               fontSize: 60.sp,
             ),
           )),
