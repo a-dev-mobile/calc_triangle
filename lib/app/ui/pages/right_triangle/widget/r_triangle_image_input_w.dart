@@ -28,7 +28,7 @@ class RTriangleImageInputWidget extends StatelessWidget {
       width: 1.sw,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(StringConst.kKeyMinSize, minSize);
+        GetStorage().write(StringConst.keyMinSize, minSize);
         
 
         return Stack(

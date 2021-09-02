@@ -23,7 +23,7 @@ class ChypotenuseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RtriangleController c = Get.find();
-    double minSize = GetStorage().read(StringConst.kKeyMinSize);
+    double minSize = GetStorage().read(StringConst.keyMinSize);
 
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),

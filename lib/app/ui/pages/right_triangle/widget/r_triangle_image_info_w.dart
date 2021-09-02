@@ -19,7 +19,7 @@ class RTriangleImageInfoWidget extends StatelessWidget {
       width: 1.sw,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(StringConst.kKeyMinSize, minSize);
+        GetStorage().write(StringConst.keyMinSize, minSize);
 
         return Stack(
           alignment: Alignment.center,
@@ -66,7 +66,7 @@ class TextInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double minSize = GetStorage().read(StringConst.kKeyMinSize);
+    double minSize = GetStorage().read(StringConst.keyMinSize);
 
     return Transform.translate(
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),

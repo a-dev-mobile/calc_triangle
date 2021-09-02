@@ -1,3 +1,4 @@
+import 'package:calc_triangle/app/constant/string_const.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -6,6 +7,7 @@ import 'package:calc_triangle/app/ui/pages/right_triangle/widget/r_triangle_imag
 import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({Key? key}) : super(key: key);
@@ -25,7 +27,6 @@ class WelcomePage extends GetView<WelcomeController> {
               style: TextStyle(color: ColorsApp.text(context)),
             ),
             const RTriangleImageInfoWidget(),
-          
             Text(
               TranslateHelper.appName,
               textAlign: TextAlign.center,
@@ -81,7 +82,7 @@ class WelcomePage extends GetView<WelcomeController> {
               indent: 50,
               endIndent: 50,
             ),
-              Obx(() {
+            Obx(() {
               String text = c.isDarkTheme.value
                   ? TranslateHelper.darkTheme
                   : TranslateHelper.lightTheme;
@@ -92,6 +93,12 @@ class WelcomePage extends GetView<WelcomeController> {
                   },
                   child: Text(text));
             }),
+            ElevatedButton(
+                onPressed: () {
+                  GetStorage().write(StringConst.keyPrimaryColor, 'purple');
+                  c.updateTheme();
+                },
+                child: Text('purple')),
             const Spacer(
               flex: 5,
             ),

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(1080, 2400),
         builder: () {
-          var isDarkTheme = GetStorage().read(StringConst.kKeyIsDarkTheme)??false;
+          var isDarkTheme = GetStorage().read(StringConst.keyIsDarkTheme)??false;
          
           return GetMaterialApp(
             initialRoute: Routes.INITIAL,

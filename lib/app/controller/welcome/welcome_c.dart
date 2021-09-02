@@ -9,15 +9,15 @@ class WelcomeController extends GetxController {
   final _box = GetStorage();
 
   void _readFromBox() {
-    isDarkTheme.value = _box.read(StringConst.kKeyIsDarkTheme) ?? false;
+    isDarkTheme.value = _box.read(StringConst.keyIsDarkTheme) ?? false;
   }
 
   _saveThemeToBox() {
     print('is dark save ${isDarkTheme.value}');
-    _box.write(StringConst.kKeyIsDarkTheme, isDarkTheme.value);
+    _box.write(StringConst.keyIsDarkTheme, isDarkTheme.value);
   }
 
-  saveFirstStartToBox() => _box.write(StringConst.kKeyIsFirstStart, true);
+  saveFirstStartToBox() => _box.write(StringConst.keyIsFirstStart, true);
 
   void swithTheme() {
     isDarkTheme.value = !isDarkTheme.value;
@@ -27,6 +27,16 @@ class WelcomeController extends GetxController {
 
     _saveThemeToBox();
   }
+
+
+void updateTheme(){
+
+
+    isDarkTheme.value
+        ? Get.changeThemeMode(ThemeMode.dark)
+        : Get.changeThemeMode(ThemeMode.light);
+
+}
 
   @override
   void onInit() {

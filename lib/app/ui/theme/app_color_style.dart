@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-Color kPrimaryColor = const Color(0xFF1a746b);
+Color kPrimaryColor =
+    GetStorage().read(StringConst.keyPrimaryColor) == 'purple'
+        ? Color(0xFF6a0080)
+        : Color(0xFF1a746b);
 Color kMedColor = const Color(0xFF26a69a);
 Color kSecondaryColor = const Color(0xFF51b7ae);
 //текст цвет если  color: Theme.of(context).textTheme.bodyText1!.color,
@@ -29,7 +32,7 @@ abstract class ColorsApp {
   }
 
   static Color contentReverse(BuildContext context) {
-    Color color = GetStorage().read(StringConst.kKeyIsDarkTheme) == false
+    Color color = GetStorage().read(StringConst.keyIsDarkTheme) == false
         ? kScaffoldColorDarkTheme
         : kScaffoldColorLightTheme;
     return color;
@@ -51,8 +54,9 @@ abstract class SizeApp {
 
   static double headline4(BuildContext context) {
     return Theme.of(context).textTheme.headline4?.fontSize ?? 16.0;
-  } 
-   static double headline3(BuildContext context) {
+  }
+
+  static double headline3(BuildContext context) {
     return Theme.of(context).textTheme.headline3?.fontSize ?? 16.0;
   }
 }
