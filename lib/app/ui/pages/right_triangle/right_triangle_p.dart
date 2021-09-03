@@ -1,16 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
-
+import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
-import 'package:calc_triangle/app/ui/widgets/drawer_w.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
+import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../styles.dart';
 import 'widget/r_triangle_image_info_w.dart';
 import 'widget/r_triangle_image_input_w.dart';
 import 'widget/numpad_w.dart';
@@ -24,7 +26,7 @@ enum RightTriangelElement {
 }
 
 class RighTrianglePage extends GetView<RightTriangleController> {
-   RighTrianglePage({Key? key}) : super(key: key);
+  RighTrianglePage({Key? key}) : super(key: key);
   static const maxSelected = 2;
   static const maxValue = 5;
 
@@ -34,12 +36,7 @@ class RighTrianglePage extends GetView<RightTriangleController> {
   @override
   Widget build(BuildContext context) {
     var c = controller;
-    print('build stack');
 
-    var size = MediaQuery.of(context).size;
-    var w = size.width;
-    var h = size.height;
-    print('w $w h $h');
     Widget imageFigure;
     return Scaffold(
         key: _globalkey,
@@ -52,51 +49,51 @@ class RighTrianglePage extends GetView<RightTriangleController> {
                   Obx(() {
                     // рисунок фигуры
                     c.isInputImage.value
-                        ? imageFigure = RTriangleImageInputWidget()
-                        : imageFigure = RTriangleImageInfoWidget();
+                        ? imageFigure = RightTriangleImageInputWidget()
+                        : imageFigure = RightTriangleImageInfoWidget();
 
                     return Container(
                       child: imageFigure,
-                      margin: EdgeInsets.all(kDefaultMargin),
+                      margin: EdgeInsets.all(ConstDefaultDouble.margin),
                       decoration: BoxDecoration(
-                          color: ColorsApp.content(context),
+                          color: AppColors.content(context),
                           borderRadius: BorderRadius.all(
-                              Radius.circular(kDefaultRadius))),
+                              Radius.circular(ConstDefaultDouble.radius))),
                     );
                   }),
                   Container(
-                    margin: EdgeInsets.all(kDefaultMargin),
+                    margin: EdgeInsets.all(ConstDefaultDouble.margin),
                     width: 1.sw,
                     height: 0.1.sh,
                     decoration: BoxDecoration(
-                        color: ColorsApp.content(context),
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(kDefaultRadius))),
+                        color: AppColors.content(context),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(ConstDefaultDouble.radius))),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           TranslateHelper.rightTriangle,
-                          style: StyleTextInfo.mainText,
+                          style: AppStyleTextInfo.mainText,
                         ),
                         Divider(
                           color: Colors.white,
                         ),
                         Text(
                           TranslateHelper.enterTwoParameters,
-                          style: StyleTextInfo.subText,
+                          style: AppStyleTextInfo.subText,
                         ),
                       ],
                     ),
                   ),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.all(kDefaultMargin),
+                      margin: EdgeInsets.all(ConstDefaultDouble.margin),
                       decoration: BoxDecoration(
-                          color: ColorsApp.content(context),
+                          color: AppColors.content(context),
                           borderRadius: BorderRadius.all(
-                              Radius.circular(kDefaultRadius))),
+                              Radius.circular(ConstDefaultDouble.radius))),
                       child: NumPad(),
                     ),
                   ),
@@ -107,14 +104,7 @@ class RighTrianglePage extends GetView<RightTriangleController> {
                   )
                 ],
               ),
-              IconButton(
-                  onPressed: () {
-                    _globalkey.currentState?.openDrawer();
-                  },
-                  icon: Icon(
-                    Icons.menu,
-                    color: kPrimaryColor,
-                  )),
+              DrawerIconWidget(globalkey: _globalkey)
             ],
           ),
         ));

@@ -1,11 +1,13 @@
 import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_p.dart';
-import 'package:calc_triangle/app/utils/key_symbol.dart';
-import 'package:calc_triangle/app/utils/string_utils.dart';
+import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
+
+import 'package:calc_triangle/app/utils/utils_string.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 class RightTriangleController extends GetxController {
+      
   var selectedElement = RighTrianglePage.startElement.obs;
 
   var aCathet = _startLengthValue.obs;
@@ -34,48 +36,48 @@ class RightTriangleController extends GetxController {
       oldInput = aCathet.value;
 
       // если две точки возврат
-      if (StringUtils.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
 
       // при вводе удаляю стартовый символ
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
 
       sumInput = oldInput + newInput;
-      sumInput = StringUtils.addZeroIsFirstDecimal(sumInput);
+      sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
 
       aCathet.value = sumInput;
     } else if (isBcathet.value) {
       oldInput = bCathet.value;
 
-      if (StringUtils.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
 
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
-      sumInput = StringUtils.addZeroIsFirstDecimal(sumInput);
+      sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
       bCathet.value = sumInput;
     } else if (isChypotenuse.value) {
       oldInput = cHypotenuse.value;
 
-      if (StringUtils.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
 
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
-      sumInput = StringUtils.addZeroIsFirstDecimal(sumInput);
+      sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
       cHypotenuse.value = sumInput;
     } else if (isAangle.value) {
       oldInput = aAngle.value;
 
-      if (StringUtils.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
 
       // удаляю знак угла
-      oldInput = StringUtils.removeLastCharacter(oldInput);
+      oldInput = UtilsString.removeLastCharacter(oldInput);
 
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       // если начинается ввод с точки
-      sumInput = StringUtils.addZeroIsFirstDecimal(sumInput);
+      sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
 
       if (isAngleLess90(sumInput, 'Угол α должен быть меньше 90°')) return;
 
@@ -84,15 +86,15 @@ class RightTriangleController extends GetxController {
       oldInput = bAngle.value;
 
 // если две точки возврат
-      if (StringUtils.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
 
 // удаляю знак угла
-      oldInput = StringUtils.removeLastCharacter(oldInput);
+      oldInput = UtilsString.removeLastCharacter(oldInput);
       //удаляю начальное значение при вводе
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
-      sumInput = StringUtils.addZeroIsFirstDecimal(sumInput);
+      sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
 
       if (isAngleLess90(sumInput, 'Угол β должен быть меньше 90°')) return;
 
@@ -126,11 +128,11 @@ class RightTriangleController extends GetxController {
   }
 
   void _printElements() {
-    print('aCathet ${aCathet.value}');
-    print('bCathet ${bCathet.value}');
-    print('cHypotenuse ${cHypotenuse.value}');
-    print('aAngle ${aAngle.value}');
-    print('bAngle ${bAngle.value}');
+    //   log.info('aCathet ${aCathet.value}');
+    //  log.info('bCathet ${bCathet.value}');
+    //   log.info('cHypotenuse ${cHypotenuse.value}');
+    //   log.info('aAngle ${aAngle.value}');
+    //   log.info('bAngle ${bAngle.value}');
   }
 
   void nextElement() {
@@ -152,7 +154,7 @@ class RightTriangleController extends GetxController {
 // взависимости от активного ввода
     if (isAcathet.value) {
       oldInput = aCathet.value;
-      newInput = StringUtils.removeLastCharacter(oldInput);
+      newInput = UtilsString.removeLastCharacter(oldInput);
       //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
         newInput = _startLengthValue;
@@ -160,7 +162,7 @@ class RightTriangleController extends GetxController {
       aCathet.value = newInput;
     } else if (isBcathet.value) {
       oldInput = bCathet.value;
-      newInput = StringUtils.removeLastCharacter(oldInput);
+      newInput = UtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
         newInput = _startLengthValue;
@@ -168,7 +170,7 @@ class RightTriangleController extends GetxController {
       bCathet.value = newInput;
     } else if (isChypotenuse.value) {
       oldInput = cHypotenuse.value;
-      newInput = StringUtils.removeLastCharacter(oldInput);
+      newInput = UtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
         newInput = _startLengthValue;
@@ -177,10 +179,10 @@ class RightTriangleController extends GetxController {
     } else if (isAangle.value) {
       oldInput = aAngle.value;
 
-      if (StringUtils.getLastCharacter(oldInput) == '°') {
-        oldInput = StringUtils.removeLastCharacter(oldInput);
+      if (UtilsString.getLastCharacter(oldInput) == '°') {
+        oldInput = UtilsString.removeLastCharacter(oldInput);
       }
-      newInput = StringUtils.removeLastCharacter(oldInput);
+      newInput = UtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
         newInput = _startLengthValue;
@@ -189,10 +191,10 @@ class RightTriangleController extends GetxController {
     } else if (isBangle.value) {
       oldInput = bAngle.value;
 
-      if (StringUtils.getLastCharacter(oldInput) == '°') {
-        oldInput = StringUtils.removeLastCharacter(oldInput);
+      if (UtilsString.getLastCharacter(oldInput) == '°') {
+        oldInput = UtilsString.removeLastCharacter(oldInput);
       }
-      newInput = StringUtils.removeLastCharacter(oldInput);
+      newInput = UtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
         newInput = _startLengthValue;

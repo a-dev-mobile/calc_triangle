@@ -1,6 +1,8 @@
+import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
-import 'package:calc_triangle/styles.dart';
+
+import 'package:calc_triangle/app/ui/theme/app_style.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -22,11 +24,11 @@ class DrawerWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: isDark == true
-                ? kScaffoldColorDarkTheme
-                : kScaffoldColorLightTheme,
-            borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(kDefaultRadius * 2),
-                topRight: Radius.circular(kDefaultRadius * 2))),
+                ? ConstColor.scaffoldDarkTheme 
+                : ConstColor.scaffoldLightTheme,
+            borderRadius:  const BorderRadius.only(
+                bottomRight: Radius.circular(ConstDefaultDouble.radius * 2),
+                topRight: Radius.circular(ConstDefaultDouble.radius * 2))),
         width: w,
         height: h,
         child: Column(
@@ -40,9 +42,9 @@ class DrawerWidget extends StatelessWidget {
                     width: w,
                     height: 0.2 * h,
                   ),
-                  Text(TranslateHelper.appName, style: StyleDrawer.textAppName),
+                  Text(TranslateHelper.appName, style: AppStyleDrawer.textAppName),
                   Text(TranslateHelper.appNameSub,
-                      style: StyleDrawer.textAppNameSub),
+                      style:AppStyleDrawer.textAppNameSub),
                 ],
               ),
             ),
@@ -52,23 +54,17 @@ class DrawerWidget extends StatelessWidget {
                   DrawerItem(
                     icon: Icons.info_outline,
                     text: TranslateHelper.about,
-                    onPressed: () {
-                      print('1');
-                    },
+                    onPressed: () {},
                   ),
                   DrawerItem(
                     icon: Icons.info_outline,
                     text: TranslateHelper.about,
-                    onPressed: () {
-                      print('2');
-                    },
+                    onPressed: () {},
                   ),
                   DrawerItem(
                     icon: Icons.info_outline,
                     text: TranslateHelper.about,
-                    onPressed: () {
-                      print('3');
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -78,9 +74,7 @@ class DrawerWidget extends StatelessWidget {
               child: DrawerItem(
                 icon: Icons.exit_to_app,
                 text: 'Exit the app',
-                onPressed: () {
-                  print('4');
-                },
+                onPressed: () {},
               ),
             ),
           ],
@@ -107,12 +101,12 @@ class DrawerItem extends StatelessWidget {
       onTap: onPressed,
       leading: Icon(
         icon,
-        size: StyleDrawer.sizeIcon,
-        color: StyleDrawer.colorIcon,
+        size: AppStyleDrawer.sizeIcon,
+        color:AppStyleDrawer.colorIcon,
       ),
       title: Text(
         text,
-        style: StyleDrawer.textItem,
+        style: AppStyleDrawer.textItem,
       ),
     );
   }

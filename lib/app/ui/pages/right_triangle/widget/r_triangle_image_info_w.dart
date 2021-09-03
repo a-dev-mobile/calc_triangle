@@ -1,25 +1,30 @@
 import 'dart:math';
 
-import 'package:calc_triangle/app/constant/assets_const.dart';
-import 'package:calc_triangle/app/constant/string_const.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
+import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
-class RTriangleImageInfoWidget extends StatelessWidget {
-  const RTriangleImageInfoWidget({
+class RightTriangleImageInfoWidget extends StatelessWidget {
+  const RightTriangleImageInfoWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 0.4.sh,
-      width: 1.sw,
+      height: size.height*ConstDefaultDouble.ratioFigureImage,
+      width: size.width,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(StringConst.keyMinSize, minSize);
+
+        GetStorage().write(ConstString.keyMinSize, minSize);
+
+        printt.i(
+            'RightTriangleImageInfoWidget GetStorage().write(minSize) $minSize');
 
         return Stack(
           alignment: Alignment.center,
@@ -27,9 +32,8 @@ class RTriangleImageInfoWidget extends StatelessWidget {
             SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
-                // color: Theme.of(context).scaffoldBackgroundColor,
-                color: ColorsApp.text(context),
-                image: const AssetImage(AssetsConst.righTriangleInfo),
+                color: AppColors.text(context),
+                image: const AssetImage(ConstAssets.righTriangleInfo),
               ),
             ),
             //all widget text in image
@@ -66,7 +70,7 @@ class TextInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double minSize = GetStorage().read(StringConst.keyMinSize);
+    double minSize = AppSize.imageMinSize();
 
     return Transform.translate(
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
@@ -75,8 +79,8 @@ class TextInfo extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-               color: ColorsApp.contentReverse(context),
-              backgroundColor:  ColorsApp.content(context),
+              color: AppColors.contentReverse(context),
+              backgroundColor: AppColors.content(context),
               fontSize: 60.sp,
             ),
           )),

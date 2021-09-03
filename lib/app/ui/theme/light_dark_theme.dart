@@ -1,36 +1,37 @@
+import 'package:calc_triangle/app/constant/const.dart';
 import 'package:flutter/material.dart';
 
-import 'app_color_style.dart';
+
 
 ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
-      primaryColor: kPrimaryColor,
-      scaffoldBackgroundColor: kScaffoldColorLightTheme,
+      primaryColor: ConstColor.primary,
+      scaffoldBackgroundColor: ConstColor.scaffoldLightTheme,
       appBarTheme: appBarTheme,
       textTheme: Theme.of(context)
           .textTheme
-          .apply(fontFamily: 'montserrat', bodyColor: kScaffoldColorDarkTheme),
-      colorScheme: ColorScheme.light(
-        primary: kPrimaryColor,
-        secondary: kSecondaryColor,
-        error: kErrorColor,
+          .apply(fontFamily: 'montserrat', bodyColor: ConstColor.scaffoldDarkTheme),
+      colorScheme: const ColorScheme.light(
+        primary: ConstColor.primary,
+        secondary: ConstColor.secondary,
+        error: ConstColor.error,
       ));
 }
 
 ThemeData darkThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
-      primaryColor: kPrimaryColor,
-      scaffoldBackgroundColor: kScaffoldColorDarkTheme,
+      primaryColor:ConstColor.primary,
+      scaffoldBackgroundColor:  ConstColor.scaffoldDarkTheme,
       appBarTheme: appBarTheme,
       textTheme: Theme.of(context)
           .textTheme
-          .apply(fontFamily: 'montserrat', bodyColor: kScaffoldColorLightTheme),
+          .apply(fontFamily: 'montserrat', bodyColor:ConstColor.scaffoldLightTheme,),
       colorScheme:  const ColorScheme.dark().copyWith(
-        primary: kPrimaryColor,
-        secondary: kSecondaryColor,
-        error: kErrorColor,
+        primary: ConstColor.primary,
+        secondary:  ConstColor.secondary,
+        error: ConstColor.error
       ));
 }
 
-final appBarTheme =
-    AppBarTheme(color: kPrimaryColor, centerTitle: false, elevation: 0);
+const appBarTheme =
+    AppBarTheme(color: ConstColor.primary, centerTitle: false, elevation: 0);

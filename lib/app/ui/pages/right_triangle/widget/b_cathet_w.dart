@@ -1,15 +1,15 @@
 import 'dart:math';
 
-import 'package:calc_triangle/app/constant/string_const.dart';
 
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
-import 'package:calc_triangle/styles.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_style.dart';
+
+
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class BcathetWidget extends StatelessWidget {
   const BcathetWidget(
@@ -22,7 +22,8 @@ class BcathetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 RightTriangleController c = Get.find();
-    double minSize = GetStorage().read(StringConst.keyMinSize);
+
+    double minSize = AppSize.imageMinSize();
 
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
@@ -31,12 +32,12 @@ RightTriangleController c = Get.find();
           child: Obx(() {
             TextStyle styleText;
             if (c.isBcathet.value) {
-              styleText = StyleTextImage.active;
+              styleText = AppStyleTextImage.active;
             } else {
-              styleText = StyleTextImage.inActive;
+              styleText = AppStyleTextImage.inActive;
             }
 
-            print('obx bCathet');
+            
             return Text(
               c.bCathet.toString(),
               style: styleText,

@@ -1,15 +1,17 @@
 // ignore_for_file: avoid_print
 
-import 'package:calc_triangle/app/constant/string_const.dart';
+
 
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_style.dart';
 
-import '../../../../../styles.dart';
+import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+
+
+
 
 class AcathetWidget extends StatelessWidget {
   const AcathetWidget(
@@ -21,17 +23,18 @@ class AcathetWidget extends StatelessWidget {
   final double angle;
   @override
   Widget build(BuildContext context) {
-RightTriangleController c = Get.find();
-    double minSize = GetStorage().read(StringConst.keyMinSize);
+    RightTriangleController c = Get.find();
+
+    double minSize = AppSize.imageMinSize();
 
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Obx(() {
           TextStyle styleText;
           if (c.isAcathet.value) {
-            styleText = StyleTextImage.active;
+            styleText = AppStyleTextImage.active;
           } else {
-            styleText = StyleTextImage.inActive;
+            styleText = AppStyleTextImage.inActive;
           }
 
           print('obx aCathet');

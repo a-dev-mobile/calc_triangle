@@ -1,11 +1,12 @@
-
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:get/get.dart';
+
+import '../../../main.dart';
 
 class WelcomeBinding implements Bindings {
   @override
   void dependencies() {
-    print('binding WelcomeBinding');
+    printt.v("WelcomeBinding");
     Get.lazyPut(() => WelcomeController());
   }
 }

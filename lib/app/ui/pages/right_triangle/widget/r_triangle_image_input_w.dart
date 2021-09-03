@@ -1,10 +1,9 @@
 import 'dart:math';
 
-import 'package:calc_triangle/app/constant/assets_const.dart';
-import 'package:calc_triangle/app/constant/string_const.dart';
-import 'package:calc_triangle/app/ui/theme/app_color_style.dart';
+import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'a_angle_w.dart';
@@ -13,36 +12,31 @@ import 'b_angle.dart';
 import 'b_cathet_w.dart';
 import 'c_hypotenusea_w.dart';
 
-class RTriangleImageInputWidget extends StatelessWidget {
-  const RTriangleImageInputWidget({
+class RightTriangleImageInputWidget extends StatelessWidget {
+  const RightTriangleImageInputWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Brightness brightnessValue =
-        MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
+    var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 0.4.sh,
-      width: 1.sw,
+      height: size.height*ConstDefaultDouble.ratioFigureImage,
+      width: size.width,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(StringConst.keyMinSize, minSize);
-        
+        GetStorage().write(ConstString.keyMinSize, minSize);
+
+        printt.i('RTriangleImageInputWidget GetStorage().write(minSize) $minSize');
 
         return Stack(
           alignment: Alignment.center,
-
-
           children: [
             SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
-                color: isDark == true
-                    ? kScaffoldColorDarkTheme
-                    : kScaffoldColorLightTheme,
-                image: const AssetImage(AssetsConst.righTriangleInput),
+                color: AppColors.contentReverse(context),
+                image: const AssetImage(ConstAssets.righTriangleInput),
               ),
             ),
             //all widget text in image

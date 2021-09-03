@@ -1,11 +1,11 @@
-abstract class StringUtils {
+abstract class UtilsString {
   static String removeLastCharacter(String str) {
     String result = '';
     if ((str != '') && (str.isNotEmpty)) {
       result = str.substring(0, str.length - 1);
     }
 
-    print('old $str new $result');
+    // print('old $str new $result');
 
     return result;
   }
@@ -38,7 +38,7 @@ abstract class StringUtils {
   }
 
   static String addZeroIsFirstDecimal(String text) {
-    if (StringUtils.getFirstCharacter(text) == '.') {
+    if (UtilsString.getFirstCharacter(text) == '.') {
       return text = '0' + text;
     } else {
       return text;

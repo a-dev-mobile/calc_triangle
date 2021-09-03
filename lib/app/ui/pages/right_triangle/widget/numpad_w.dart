@@ -1,13 +1,15 @@
-
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
-import 'package:calc_triangle/app/utils/calculator_key.dart';
-import 'package:calc_triangle/app/utils/key_symbol.dart';
+import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
+
+import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
+import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 
-import '../../../../../styles.dart';
+
 
 class NumPad extends StatelessWidget {
   const NumPad({Key? key}) : super(key: key);
@@ -76,25 +78,25 @@ class CalculatorKey extends StatelessWidget {
   TextStyle get textStyle {
     switch (symbol.type) {
       case KeyType.function:
-        return StyleNumpad.function;
+        return AppStyleNumpad.function;
 
       case KeyType.operator:
-        return StyleNumpad.operator;
+        return AppStyleNumpad.operator;
 
       case KeyType.integer:
       default:
-        return StyleNumpad.integer;
+        return AppStyleNumpad.integer;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-RightTriangleController c = Get.find();
+    RightTriangleController c = Get.find();
 
     return Expanded(
       child: TextButton(
         onPressed: () {
-          print(symbol.value);
+          printt.i(symbol.value);
 
           if (symbol == Keys.next) {
             c.nextElement();
