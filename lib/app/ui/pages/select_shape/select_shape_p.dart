@@ -36,7 +36,7 @@ class SelectShapePage extends GetView<SelectShapeController> {
                 CardShapeWidget(
                   onTap: () {
                     
-                    Get.toNamed(Routes.RIGHT_TRIANGLE);
+                    Get.toNamed(Routes.RIGHT_TRIANGLE_INPUT);
                   },
                   shape: const RightTriangleImageInfoWidget(),
                   title: TranslateHelper.rightTriangle,

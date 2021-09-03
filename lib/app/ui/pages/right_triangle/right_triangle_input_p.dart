@@ -25,8 +25,8 @@ enum RightTriangelElement {
   bAngle,
 }
 
-class RighTrianglePage extends GetView<RightTriangleController> {
-  RighTrianglePage({Key? key}) : super(key: key);
+class RighTrianglePageInput extends GetView<RightTriangleController> {
+  RighTrianglePageInput({Key? key}) : super(key: key);
   static const maxSelected = 2;
   static const maxValue = 5;
 
@@ -75,14 +75,14 @@ class RighTrianglePage extends GetView<RightTriangleController> {
                       children: [
                         Text(
                           TranslateHelper.rightTriangle,
-                          style: AppStyleTextInfo.mainText,
+                          style: AppStyleTextInfo.mainText(context),
                         ),
                         Divider(
-                          color: Colors.white,
+                          color: AppColors.contentReverse(context),
                         ),
                         Text(
                           TranslateHelper.enterTwoParameters,
-                          style: AppStyleTextInfo.subText,
+                          style: AppStyleTextInfo.subText(context),
                         ),
                       ],
                     ),

@@ -1,4 +1,4 @@
-import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_p.dart';
+import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_input_p.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 
 import 'package:calc_triangle/app/utils/utils_string.dart';
@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class RightTriangleController extends GetxController {
       
-  var selectedElement = RighTrianglePage.startElement.obs;
+  var selectedElement = RighTrianglePageInput.startElement.obs;
 
   var aCathet = _startLengthValue.obs;
   var bCathet = _startLengthValue.obs;

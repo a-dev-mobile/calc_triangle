@@ -6,6 +6,7 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/right_triangle/widget/r_triangle_image_info_w.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_size.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

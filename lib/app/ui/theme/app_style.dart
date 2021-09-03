@@ -1,14 +1,24 @@
+import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'app_size.dart';
+
 abstract class AppStyleNumpad {
-  static TextStyle function =
-      TextStyle(color: const Color(0x80F50021), fontSize: 80.sp);
+  static TextStyle function(BuildContext context) {
+    return TextStyle(color: const Color(0xffF50021), fontSize: 80.sp);
+  }
+
   static TextStyle operator =
-      TextStyle(color: const Color(0x8083BFFF), fontSize: 150.sp);
-  static TextStyle integer =
-      TextStyle(color: const Color(0xffffffff), fontSize: 90.sp);
+      TextStyle(color: ConstColor.primary, fontSize: 150.sp);
+
+  static TextStyle integer(BuildContext context) {
+    return TextStyle(
+        color: AppColors.text(context),
+        fontSize: AppSize.fontSizeHeadline6(context));
+  }
 }
 
 abstract class AppStyleDrawer {
@@ -25,21 +35,31 @@ abstract class AppStyleDrawer {
 }
 
 abstract class AppStyleTextInfo {
-  static TextStyle mainText =
-      TextStyle(color: const Color(0xffffffff), fontSize: 60.sp);
+  static TextStyle mainText(BuildContext context) {
+    return TextStyle(
+        color: AppColors.text(context),
+        fontSize: AppSize.fontSizeHeadline6(context));
+  }
 
-  static TextStyle subText =
-      TextStyle(color: const Color(0xffffffff), fontSize: 40.sp);
+  static TextStyle subText(BuildContext context) {
+    return TextStyle(
+        color: AppColors.text(context),
+        fontSize: AppSize.fontSizeButton(context));
+  }
 }
 
 abstract class AppStyleTextImage {
-  static TextStyle active = TextStyle(
-      // backgroundColor: kColorContent,
-      fontSize: 85.sp,
-      color: const Color(0xFFF50021));
+  static TextStyle active(BuildContext context) {
+    return TextStyle(
+        color: Colors.red,
+        backgroundColor: AppColors.content(context),
+        fontSize: AppSize.fontSizeHeadline6(context));
+  }
 
-  static TextStyle inActive = TextStyle(
-      // backgroundColor: kColorContent,
-      fontSize: 75.sp,
-      color: const Color(0xffffffff));
+  static TextStyle inActive(BuildContext context) {
+    return TextStyle(
+        color: AppColors.text(context),
+        backgroundColor: AppColors.content(context),
+        fontSize: AppSize.fontSizeButton(context));
+  }
 }

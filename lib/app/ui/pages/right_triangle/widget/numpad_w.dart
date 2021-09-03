@@ -1,5 +1,7 @@
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
@@ -8,8 +10,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-
-
 
 class NumPad extends StatelessWidget {
   const NumPad({Key? key}) : super(key: key);
@@ -75,23 +75,22 @@ class CalculatorKey extends StatelessWidget {
 
   final KeySymbol symbol;
 
-  TextStyle get textStyle {
-    switch (symbol.type) {
-      case KeyType.function:
-        return AppStyleNumpad.function;
-
-      case KeyType.operator:
-        return AppStyleNumpad.operator;
-
-      case KeyType.integer:
-      default:
-        return AppStyleNumpad.integer;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
+
+    TextStyle textStyle;
+    switch (symbol.type) {
+      case KeyType.function:
+        textStyle = AppStyleNumpad.function(context);
+        break;
+      case KeyType.operator:
+        textStyle = AppStyleNumpad.operator;
+        break;
+      case KeyType.integer:
+      default:
+        textStyle = AppStyleNumpad.integer(context);
+    }
 
     return Expanded(
       child: TextButton(

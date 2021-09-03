@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 
 
@@ -34,9 +35,9 @@ RightTriangleController c = Get.find();
           child: Obx(() {
             TextStyle styleText;
             if (c.isChypotenuse.value) {
-              styleText = AppStyleTextImage.active;
+              styleText = AppStyleTextImage.active(context);
             } else {
-              styleText = AppStyleTextImage.inActive;
+              styleText = AppStyleTextImage.inActive(context);
             }
 
             print('obx cHypotenuse');
