@@ -7,8 +7,6 @@ import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,8 +15,6 @@ class SelectShapePage extends GetView<SelectShapeController> {
 
   @override
   Widget build(BuildContext context) {
-    
-    
     final GlobalKey<ScaffoldState> _globalkey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _globalkey,
@@ -29,29 +25,24 @@ class SelectShapePage extends GetView<SelectShapeController> {
             GridView.count(
               crossAxisCount: 1,
               // crossAxisSpacing: kDefaultMargin * 2,
-              padding:
-                 const EdgeInsets.symmetric(vertical: ConstDefaultDouble.padding),
+              padding: const EdgeInsets.symmetric(
+                  vertical: ConstDefaultDouble.padding),
               mainAxisSpacing: ConstDefaultDouble.margin * 2,
               children: [
                 CardShapeWidget(
                   onTap: () {
-                    
-                    Get.toNamed(Routes.RIGHT_TRIANGLE_INPUT);
+                    Get.toNamed(Routes.RIGHT_TRIANGLE);
                   },
                   shape: const RightTriangleImageInfoWidget(),
                   title: TranslateHelper.rightTriangle,
                 ),
                 CardShapeWidget(
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   shape: const RightTriangleImageInfoWidget(),
                   title: TranslateHelper.rightTriangle,
                 ),
                 CardShapeWidget(
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   shape: const RightTriangleImageInfoWidget(),
                   title: TranslateHelper.rightTriangle,
                 ),
@@ -64,7 +55,6 @@ class SelectShapePage extends GetView<SelectShapeController> {
     );
   }
 }
-
 
 class CardShapeWidget extends StatelessWidget {
   const CardShapeWidget({
@@ -84,7 +74,8 @@ class CardShapeWidget extends StatelessWidget {
     return SizedBox(
       height: size.height * 0.4,
       child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: ConstDefaultDouble.margin * 2),
+        margin: const EdgeInsets.symmetric(
+            horizontal: ConstDefaultDouble.margin * 2),
         color: AppColors.content(context),
         elevation: 5,
         shadowColor: AppColors.contentReverse(context),

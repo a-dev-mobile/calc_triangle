@@ -2,9 +2,8 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/main.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 
 import 'a_angle_w.dart';
 import 'a_cathet_w.dart';
@@ -21,13 +20,12 @@ class RightTriangleImageInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height*ConstDefaultDouble.ratioFigureImage,
+      height: size.height * ConstDefaultDouble.ratioFigureImage,
       width: size.width,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-        GetStorage().write(ConstString.keyMinSize, minSize);
 
-        printt.i('RTriangleImageInputWidget GetStorage().write(minSize) $minSize');
+        AppUtils.setImageMinSize(minSize);
 
         return Stack(
           alignment: Alignment.center,
@@ -35,7 +33,7 @@ class RightTriangleImageInputWidget extends StatelessWidget {
             SizedBox.expand(
               child: Image(
                 fit: BoxFit.contain,
-                color: AppColors.contentReverse(context),
+                color: AppColors.text(context),
                 image: const AssetImage(ConstAssets.righTriangleInput),
               ),
             ),

@@ -1,8 +1,7 @@
 import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
+import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
-
-import 'package:get_storage/get_storage.dart';
-
 
 abstract class AppColors {
   static Color content(BuildContext context) {
@@ -15,14 +14,11 @@ abstract class AppColors {
   }
 
   static Color contentReverse(BuildContext context) {
-    Color color = GetStorage().read(ConstString.keyIsDarkTheme) == false
+    printt.v('contentReverse isDark${AppUtils.isDark}');
+
+    Color color = AppUtils.isDark == false
         ? ConstColor.scaffoldDarkTheme
         : ConstColor.scaffoldLightTheme;
     return color;
   }
 }
-
-
-
-
-

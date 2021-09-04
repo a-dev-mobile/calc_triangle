@@ -1,12 +1,8 @@
 import 'dart:math';
 
-
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-
-
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
 import 'package:flutter/material.dart';
 
@@ -22,9 +18,9 @@ class BcathetWidget extends StatelessWidget {
   final double angle;
   @override
   Widget build(BuildContext context) {
-RightTriangleController c = Get.find();
+    RightTriangleController c = Get.find();
 
-    double minSize = AppSize.imageMinSize();
+    double minSize = AppUtils.getImageMinSize();
 
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
@@ -38,7 +34,6 @@ RightTriangleController c = Get.find();
               styleText = AppStyleTextImage.inActive(context);
             }
 
-            
             return Text(
               c.bCathet.toString(),
               style: styleText,

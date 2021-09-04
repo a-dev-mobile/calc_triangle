@@ -1,4 +1,3 @@
-
 import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
@@ -10,7 +9,6 @@ import 'package:calc_triangle/app/ui/theme/app_size.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({Key? key}) : super(key: key);
@@ -88,21 +86,20 @@ class WelcomePage extends GetView<WelcomeController> {
             Obx(() {
               String text = c.isDarkTheme.value
                   ? TranslateHelper.darkTheme
-                  : TranslateHelper.lightTheme;  
+                  : TranslateHelper.lightTheme;
 
               return ElevatedButton(
                   onPressed: () {
-                    c.swithTheme();
+                    c.switchTheme();
                   },
                   child: Text(text));
             }),
-           
-
             const Spacer(
               flex: 5,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: ConstDefaultDouble.padding),
+              padding: const EdgeInsets.symmetric(
+                  vertical: ConstDefaultDouble.padding),
               child: SizedBox(
                 width: size.width * 0.9,
                 height: size.height * 0.08,

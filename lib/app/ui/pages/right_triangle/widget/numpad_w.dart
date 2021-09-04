@@ -1,7 +1,5 @@
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
@@ -95,7 +93,7 @@ class CalculatorKey extends StatelessWidget {
     return Expanded(
       child: TextButton(
         onPressed: () {
-          printt.i(symbol.value);
+          printt.v(symbol.value);
 
           if (symbol == Keys.next) {
             c.nextElement();

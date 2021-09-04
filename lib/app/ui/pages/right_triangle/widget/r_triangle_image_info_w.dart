@@ -2,11 +2,9 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_size.dart';
-import 'package:calc_triangle/main.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
 
 class RightTriangleImageInfoWidget extends StatelessWidget {
   const RightTriangleImageInfoWidget({
@@ -17,15 +15,12 @@ class RightTriangleImageInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height*ConstDefaultDouble.ratioFigureImage,
+      height: size.height * ConstDefaultDouble.ratioFigureImage,
       width: size.width,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
 
-        GetStorage().write(ConstString.keyMinSize, minSize);
-
-        printt.i(
-            'RightTriangleImageInfoWidget GetStorage().write(minSize) $minSize');
+        AppUtils.setImageMinSize(minSize);
 
         return Stack(
           alignment: Alignment.center,
@@ -71,7 +66,7 @@ class TextInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double minSize = AppSize.imageMinSize();
+    double minSize = AppUtils.getImageMinSize();
 
     return Transform.translate(
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
@@ -80,7 +75,7 @@ class TextInfo extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              color: AppColors.contentReverse(context),
+              color: AppColors.text(context),
               backgroundColor: AppColors.content(context),
               fontSize: 60.sp,
             ),

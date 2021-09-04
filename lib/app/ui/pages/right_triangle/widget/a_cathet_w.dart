@@ -1,18 +1,12 @@
 // ignore_for_file: avoid_print
 
-
-
 import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
-
-
 
 class AcathetWidget extends StatelessWidget {
   const AcathetWidget(
@@ -26,7 +20,7 @@ class AcathetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
 
-    double minSize = AppSize.imageMinSize();
+    double minSize = AppUtils.getImageMinSize();
 
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),

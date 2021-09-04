@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class FormulasWebView extends StatefulWidget {
-  const FormulasWebView({Key? key}) : super(key: key);
+class WebInfoWidget extends StatefulWidget {
+  const WebInfoWidget({Key? key}) : super(key: key);
 
   @override
-  _FormulasWebViewState createState() => _FormulasWebViewState();
+  _WebInfoWidgetState createState() => _WebInfoWidgetState();
 }
 
-class _FormulasWebViewState extends State<FormulasWebView> {
+class _WebInfoWidgetState extends State<WebInfoWidget> {
   @override
   Widget build(BuildContext context) {
     return InAppWebView(
@@ -18,9 +17,6 @@ class _FormulasWebViewState extends State<FormulasWebView> {
         crossPlatform: InAppWebViewOptions(
           // supportZoom: false,
           javaScriptEnabled: true,
-          
-          
-
         ),
       ),
     );

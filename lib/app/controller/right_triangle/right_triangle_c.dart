@@ -1,15 +1,13 @@
-import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_input_p.dart';
+import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_input_w.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 
 import 'package:calc_triangle/app/utils/utils_string.dart';
+import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 class RightTriangleController extends GetxController {
-      
-  var selectedElement = RighTrianglePageInput.startElement.obs;
-
   var aCathet = _startLengthValue.obs;
   var bCathet = _startLengthValue.obs;
   var cHypotenuse = _startLengthValue.obs;
@@ -128,11 +126,8 @@ class RightTriangleController extends GetxController {
   }
 
   void _printElements() {
-    //   log.info('aCathet ${aCathet.value}');
-    //  log.info('bCathet ${bCathet.value}');
-    //   log.info('cHypotenuse ${cHypotenuse.value}');
-    //   log.info('aAngle ${aAngle.value}');
-    //   log.info('bAngle ${bAngle.value}');
+    printt.i(
+        'aCathet ${aCathet.value} bCathet ${bCathet.value} cHypotenuse ${cHypotenuse.value} aAngle ${aAngle.value} bAngle ${bAngle.value}');
   }
 
   void nextElement() {

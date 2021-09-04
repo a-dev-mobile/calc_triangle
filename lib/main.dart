@@ -1,7 +1,6 @@
-import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/routes/app_page.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
-
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,8 +40,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(1080, 2400),
         builder: () {
-          var isDarkTheme =
-              GetStorage().read(ConstString.keyIsDarkTheme) ?? false;
+          var isDarkTheme = AppUtils.isDark;
 
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,

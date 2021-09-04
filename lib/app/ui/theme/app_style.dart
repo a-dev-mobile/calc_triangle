@@ -15,9 +15,8 @@ abstract class AppStyleNumpad {
       TextStyle(color: ConstColor.primary, fontSize: 150.sp);
 
   static TextStyle integer(BuildContext context) {
-    return TextStyle(
-        color: AppColors.text(context),
-        fontSize: AppSize.fontSizeHeadline6(context));
+    return TextStyle(color: AppColors.text(context), fontSize: 120.sp);
+    // fontSize: AppSize.fontSizeHeadline5(context));
   }
 }
 
@@ -53,13 +52,13 @@ abstract class AppStyleTextImage {
     return TextStyle(
         color: Colors.red,
         backgroundColor: AppColors.content(context),
-        fontSize: AppSize.fontSizeHeadline6(context));
+        fontSize: 80.sp);
   }
 
   static TextStyle inActive(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context),
         backgroundColor: AppColors.content(context),
-        fontSize: AppSize.fontSizeButton(context));
+        fontSize: 70.sp);
   }
 }
