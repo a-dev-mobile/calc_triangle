@@ -37,7 +37,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                   style: AppStyleTextInfo.mainText(context),
                 ),
                 Divider(
-                  color: AppColors.contentReverse(context),
+                  color: AppColors.text(context),
                 ),
                 Text(
                   TranslateHelper.enterTwoParameters,

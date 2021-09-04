@@ -13,12 +13,7 @@ abstract class AppColors {
     return color;
   }
 
-  static Color contentReverse(BuildContext context) {
-    printt.v('contentReverse isDark${AppUtils.isDark}');
-
-    Color color = AppUtils.isDark == false
-        ? ConstColor.scaffoldDarkTheme
-        : ConstColor.scaffoldLightTheme;
-    return color;
-  }
+  // static Color contentReverse = AppUtils.isDark
+  //     ? ConstColor.scaffoldDarkTheme
+  //     : ConstColor.scaffoldLightTheme;
 }

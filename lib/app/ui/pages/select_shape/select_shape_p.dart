@@ -78,7 +78,7 @@ class CardShapeWidget extends StatelessWidget {
             horizontal: ConstDefaultDouble.margin * 2),
         color: AppColors.content(context),
         elevation: 5,
-        shadowColor: AppColors.contentReverse(context),
+        shadowColor: AppColors.text(context),
         child: GestureDetector(
           onTap: onTap,
           child: Column(

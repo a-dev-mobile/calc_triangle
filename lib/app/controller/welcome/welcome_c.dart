@@ -1,6 +1,8 @@
+import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../main.dart';
 
@@ -25,7 +27,6 @@ class WelcomeController extends GetxController {
 
   @override
   void onInit() {
-    AppUtils.setIsDarkTheme(isDarkTheme.value);
     super.onInit();
   }
 }
