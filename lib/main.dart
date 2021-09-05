@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logger/logger.dart';
 
 import 'app/constant/const.dart';
@@ -24,6 +25,7 @@ var printt = Logger(
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
 
   await GetStorage.init();
   GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
@@ -36,6 +38,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   static GlobalKey<NavigatorState> materialKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
