@@ -23,6 +23,8 @@ class _RightTrianglePageState extends State<RightTrianglePage> {
           children: [
             DrawerIconWidget(globalkey: _globalkey),
             PageView(
+              // physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
               children: [RightTriangleInputWidget(), RightTriangleInfoWidget()],
             )
           ],

@@ -9,24 +9,23 @@ import '../../../main.dart';
 class WelcomeController extends GetxController {
   final isDarkTheme = false.obs;
 
-  _saveThemeToBox() {
-    printt.i('is dark save ${isDarkTheme.value}');
-    AppUtils.setIsDarkTheme(isDarkTheme.value);
-  }
-
   // saveFirstStartToBox() => _box.write(ConstString.keyIsFirstStart, true);
 
   void switchTheme() {
     isDarkTheme.value = !isDarkTheme.value;
     isDarkTheme.value
+        // ? Get.changeTheme(ThemeData.dark())
+        //     : Get.changeTheme(ThemeData.light());
         ? Get.changeThemeMode(ThemeMode.dark)
         : Get.changeThemeMode(ThemeMode.light);
 
-    _saveThemeToBox();
+    AppUtils.setIsDarkTheme(isDarkTheme.value);
   }
 
   @override
   void onInit() {
+    //инициализация перед запуском и правильное отображение  isDarkTheme.value
+    isDarkTheme.value = AppUtils.isDark();
     super.onInit();
   }
 }

@@ -14,7 +14,7 @@ import 'app/translations/app_translations.dart';
 
 import 'app/ui/theme/light_dark_theme.dart';
 
-var logger = Logger(
+var log = Logger(
   printer: PrettyPrinter(methodCount: 2),
 );
 
@@ -41,7 +41,9 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(1080, 2400),
         builder: () {
-          var isDarkTheme = AppUtils.isDark;
+          var isDarkTheme = AppUtils.isDark();
+
+          printt.v('main AppUtils.isDark()  ${AppUtils.isDark()}');
 
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,
