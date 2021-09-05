@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,14 +73,7 @@ class TextInfo extends StatelessWidget {
       offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
       child: Transform.rotate(
           angle: angle * pi / 180,
-          child: Text(
-            text,
-            style: TextStyle(
-              color: AppColors.text(context),
-              backgroundColor: AppColors.content(context),
-              fontSize: 60.sp,
-            ),
-          )),
+          child: Text(text, style: AppStyleTextImage.text(context))),
     );
   }
 }

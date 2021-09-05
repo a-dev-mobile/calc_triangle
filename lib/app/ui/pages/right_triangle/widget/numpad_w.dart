@@ -83,7 +83,7 @@ class CalculatorKey extends StatelessWidget {
         textStyle = AppStyleNumpad.function(context);
         break;
       case KeyType.operator:
-        textStyle = AppStyleNumpad.operator;
+        textStyle = AppStyleNumpad.operator(context);
         break;
       case KeyType.integer:
       default:

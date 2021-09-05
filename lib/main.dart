@@ -39,11 +39,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(1080, 2400),
+        designSize: const Size(360, 800),
         builder: () {
           var isDarkTheme = AppUtils.isDark();
-
-          printt.v('main AppUtils.isDark()  ${AppUtils.isDark()}');
 
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,

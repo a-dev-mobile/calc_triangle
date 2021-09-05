@@ -23,7 +23,6 @@ class RightTriangleInputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerWidget(),
       body: SafeArea(
         child: Stack(
           children: [
@@ -53,11 +52,6 @@ class RightTriangleInputWidget extends StatelessWidget {
                     child: NumPad(),
                   ),
                 ),
-                Container(
-                  width: 1.sw,
-                  color: Colors.amber,
-                  height: 0.08.sh,
-                )
               ],
             ),
           ],
