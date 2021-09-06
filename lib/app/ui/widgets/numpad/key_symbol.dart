@@ -1,6 +1,6 @@
 import 'calculator_key.dart';
 
-enum KeyType { function, operator, integer }
+enum KeyType { function, choice, integer, convert }
 
 class KeySymbol {
   final String value;
@@ -10,20 +10,26 @@ class KeySymbol {
   static final List<KeySymbol> _functions = [
     Keys.clear,
     Keys.backspase,
-    Keys.angles,
   ];
-  static final List<KeySymbol> _operators = [
+  static final List<KeySymbol> _choice = [
     Keys.next,
     Keys.prev,
+  ];
+  static final List<KeySymbol> _convert = [
+    Keys.convert,
   ];
   @override
   String toString() => value;
 
-  bool get isOperator => _operators.contains(this);
+  bool get isChoice => _choice.contains(this);
   bool get isFunction => _functions.contains(this);
-  bool get isInteger => !isOperator && !isFunction;
+  bool get isConvert => _convert.contains(this);
+
+  bool get isInteger => !isChoice && !isFunction && !isConvert;
 
   KeyType get type => isFunction
       ? KeyType.function
-      : (isOperator ? KeyType.operator : KeyType.integer);
+      : (isChoice
+          ? KeyType.choice
+          : (isConvert ? KeyType.convert : KeyType.integer));
 }

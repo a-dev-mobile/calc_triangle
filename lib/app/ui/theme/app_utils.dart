@@ -14,6 +14,18 @@ abstract class AppUtils {
     await GetStorage().write(ConstString.keyIsDarkTheme, isDark);
     printt.v('AppUtils setIsDarkTheme  ${AppUtils.isDark()}');
   }
+//==============================================
+  static Future<void> setAciveShape(int index) async {
+    await GetStorage().write(ConstString.keyActiveShape, index);
+    printt.v('AppUtils setAciveShape  $index');
+  }
+
+  static int activeShapeIndex() {
+    int index = GetStorage().read(ConstString.keyActiveShape) ?? 0;
+    printt.v('AppUtils GetStorage activeShapeIndex $index');
+    return index;
+  }
+//==============================================
 
   static double getImageMinSize() {
     double minSize = GetStorage().read(ConstString.keyMinSize) ?? 0;

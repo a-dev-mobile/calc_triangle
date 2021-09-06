@@ -1,6 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'dart:math';
 
-import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
@@ -8,8 +10,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class BcathetWidget extends StatelessWidget {
-  const BcathetWidget(
+class ChypotenuseWidget extends StatelessWidget {
+  const ChypotenuseWidget(
       {Key? key, required this.posX, required this.posY, required this.angle})
       : super(key: key);
 
@@ -18,7 +20,7 @@ class BcathetWidget extends StatelessWidget {
   final double angle;
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
+    CalculateController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
 
@@ -28,14 +30,15 @@ class BcathetWidget extends StatelessWidget {
           angle: angle * pi / 180,
           child: Obx(() {
             TextStyle styleText;
-            if (c.isBcathet.value) {
+            if (c.isChypotenuse.value) {
               styleText = AppStyleTextImage.active(context);
             } else {
               styleText = AppStyleTextImage.inActive(context);
             }
 
+            print('obx cHypotenuse');
             return Text(
-              c.bCathet.toString(),
+              c.cHypotenuse.toString(),
               style: styleText,
             );
           }),

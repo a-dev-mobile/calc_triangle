@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class RightTriangleController extends GetxController {
+class CalculateController extends GetxController {
   var aCathet = _startLengthValue.obs;
   var bCathet = _startLengthValue.obs;
   var cHypotenuse = _startLengthValue.obs;

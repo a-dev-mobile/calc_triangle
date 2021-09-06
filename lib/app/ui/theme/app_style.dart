@@ -19,6 +19,11 @@ abstract class AppStyleNumpad {
     return TextStyle(color: AppColors.text(context), fontSize: 40.sp);
     // fontSize: AppSize.fontSizeHeadline5(context));
   }
+  
+   static TextStyle convert(BuildContext context) {
+    return TextStyle(color: AppColors.text(context), fontSize: 30.sp);
+    // fontSize: AppSize.fontSizeHeadline5(context));
+  }
 }
 
 abstract class AppStyleDrawer {

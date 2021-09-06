@@ -1,6 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'dart:math';
 
-import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
@@ -8,17 +10,19 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class BangleWidget extends StatelessWidget {
-  const BangleWidget(
+class AangleWidget extends StatelessWidget {
+  const AangleWidget(
       {Key? key, required this.posX, required this.posY, required this.angle})
       : super(key: key);
 
   final double posX;
   final double posY;
   final double angle;
+
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
+    CalculateController c = Get.find();
+
     double minSize = AppUtils.getImageMinSize();
 
     return Transform.translate(
@@ -27,14 +31,14 @@ class BangleWidget extends StatelessWidget {
           angle: angle * pi / 180,
           child: Obx(() {
             TextStyle styleText;
-            if (c.isBangle.value) {
+            if (c.isAangle.value) {
               styleText = AppStyleTextImage.active(context);
             } else {
               styleText = AppStyleTextImage.inActive(context);
             }
 
             return Text(
-              c.bAngle.toString(),
+              c.aAngle.toString(),
               style: styleText,
             );
           }),

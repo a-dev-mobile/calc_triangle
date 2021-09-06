@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
@@ -18,7 +18,7 @@ class AcathetWidget extends StatelessWidget {
   final double angle;
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
+    CalculateController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
 

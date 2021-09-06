@@ -1,4 +1,4 @@
-import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
 
@@ -56,7 +56,7 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.clear),
               CalculatorKey(symbol: Keys.zero),
               CalculatorKey(symbol: Keys.decimal),
-              CalculatorKey(symbol: Keys.angles),
+              CalculatorKey(symbol: Keys.convert),
             ],
           ),
         ),
@@ -75,15 +75,18 @@ class CalculatorKey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
-
+    CalculateController c = Get.find();
+    // printt.i(symbol.value,symbol.type);
     TextStyle textStyle;
     switch (symbol.type) {
       case KeyType.function:
         textStyle = AppStyleNumpad.function(context);
         break;
-      case KeyType.operator:
+      case KeyType.choice:
         textStyle = AppStyleNumpad.operator(context);
+        break;
+      case KeyType.convert:
+        textStyle = AppStyleNumpad.convert(context);
         break;
       case KeyType.integer:
       default:
@@ -108,8 +111,7 @@ class CalculatorKey extends StatelessWidget {
             c.clear();
           } else if (symbol == Keys.backspase) {
             c.backspace();
-          } else if (symbol == Keys.angles) {
-          
+          } else if (symbol == Keys.convert) {
           } else {
             c.addKey(symbol);
           }

@@ -1,20 +1,23 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
-import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
-import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_info_w.dart';
+import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
+import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
+import 'package:calc_triangle/app/ui/widgets/right_triangle/right_triangle_input_w.dart';
+import 'package:calc_triangle/app/ui/widgets/scalene_triangle/scalene_triangle_w.dart';
+import 'package:calc_triangle/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'right_triangle_input_w.dart';
-
-class RightTrianglePage extends StatefulWidget {
-  const RightTrianglePage({Key? key}) : super(key: key);
+class CalculatePage extends StatefulWidget {
+  const CalculatePage({Key? key}) : super(key: key);
 
   @override
-  _RightTrianglePageState createState() => _RightTrianglePageState();
+  _CalculatePageState createState() => _CalculatePageState();
 }
 
-class _RightTrianglePageState extends State<RightTrianglePage> {
+class _CalculatePageState extends State<CalculatePage> {
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
 
@@ -51,7 +54,20 @@ class _RightTrianglePageState extends State<RightTrianglePage> {
 
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
+    CalculateController c = Get.find();
+    Widget showCalculation;
+    Shapes selectedFigure = Shapes.values[AppUtils.activeShapeIndex()];
+
+    printt.i('selectedFigure $selectedFigure');
+
+    if (selectedFigure == Shapes.rightTriangle) {
+      showCalculation = RightTriangleInputWidget();
+    } else if (selectedFigure == Shapes.scaleneTriangle) {
+      showCalculation = ScaleneTrianglePage();
+    } else {
+      showCalculation = ScaleneTrianglePage();
+    }
+
     return Scaffold(
       bottomNavigationBar: _isBottomBannerAdLoaded
           ? SizedBox(
@@ -60,11 +76,7 @@ class _RightTrianglePageState extends State<RightTrianglePage> {
               child: AdWidget(ad: _bottomBannerAd),
             )
           : null,
-      body: SafeArea(child: Obx(() {
-        return c.isActiveInputImage.value
-            ? const RightTriangleInputWidget()
-            : const RightTriangleInfoWidget();
-      })),
+      body: SafeArea(child: showCalculation),
     );
   }
 }
