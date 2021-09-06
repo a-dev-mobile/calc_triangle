@@ -56,7 +56,7 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.clear),
               CalculatorKey(symbol: Keys.zero),
               CalculatorKey(symbol: Keys.decimal),
-              CalculatorKey(symbol: Keys.toggleImage),
+              CalculatorKey(symbol: Keys.angles),
             ],
           ),
         ),
@@ -92,6 +92,11 @@ class CalculatorKey extends StatelessWidget {
 
     return Expanded(
       child: TextButton(
+        onLongPress: () {
+          if (symbol == Keys.backspase) {
+            c.longBackspace();
+          }
+        },
         onPressed: () {
           printt.v(symbol.value);
 
@@ -102,9 +107,9 @@ class CalculatorKey extends StatelessWidget {
           } else if (symbol == Keys.clear) {
             c.clear();
           } else if (symbol == Keys.backspase) {
-            c.backspase();
-          } else if (symbol == Keys.toggleImage) {
-            c.isInputImage.value = !c.isInputImage.value;
+            c.backspace();
+          } else if (symbol == Keys.angles) {
+          
           } else {
             c.addKey(symbol);
           }

@@ -10,7 +10,7 @@ class KeySymbol {
   static final List<KeySymbol> _functions = [
     Keys.clear,
     Keys.backspase,
-    Keys.toggleImage,
+    Keys.angles,
   ];
   static final List<KeySymbol> _operators = [
     Keys.next,

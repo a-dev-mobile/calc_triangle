@@ -7,7 +7,7 @@ abstract class Keys {
 
   static KeySymbol next = const KeySymbol('>');
   static KeySymbol prev = const KeySymbol('<');
-  static KeySymbol toggleImage = const KeySymbol('⟳');
+  static KeySymbol angles = const KeySymbol('[°′″]');
   static KeySymbol decimal = const KeySymbol('.');
 
   static KeySymbol zero = const KeySymbol('0');

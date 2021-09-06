@@ -4,6 +4,7 @@ import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/right_triangle/widget/r_triangle_image_info_w.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 
@@ -38,7 +39,7 @@ class SelectShapePage extends GetView<SelectShapeController> {
                 ),
                 CardShapeWidget(
                   onTap: () {},
-                  shape: const RightTriangleImageInfoWidget(),
+                  shape: Image.asset(ConstAssets.scaleneTriangleInfo,fit: BoxFit.contain,color: AppColors.contentRevers(context),),
                   title: TranslateHelper.rightTriangle,
                 ),
                 CardShapeWidget(

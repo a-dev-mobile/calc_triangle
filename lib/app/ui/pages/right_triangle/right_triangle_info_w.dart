@@ -16,7 +16,7 @@ class _RightTriangleInfoWidgetState extends State<RightTriangleInfoWidget> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [
+          children: const [
             Expanded(child: RightTriangleImageInfoWidget()),
             Expanded(child: WebInfoWidget()),
           ],

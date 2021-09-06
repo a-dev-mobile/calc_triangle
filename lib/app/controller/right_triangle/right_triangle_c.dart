@@ -1,4 +1,3 @@
-import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_input_w.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 
 import 'package:calc_triangle/app/utils/utils_string.dart';
@@ -13,7 +12,8 @@ class RightTriangleController extends GetxController {
   var cHypotenuse = _startLengthValue.obs;
   var aAngle = _startAngleValue.obs;
   var bAngle = _startAngleValue.obs;
-  var isInputImage = true.obs;
+
+  var isActiveInputImage = true.obs;
 
   static const _startLengthValue = '0';
   static const _startAngleValue = '0°';
@@ -131,7 +131,7 @@ class RightTriangleController extends GetxController {
   }
 
   void nextElement() {
-    // переключение вперед между widgets
+    // переключение вперед между widgetsbackspace
     _isNext(true);
   }
 
@@ -140,7 +140,22 @@ class RightTriangleController extends GetxController {
     _isNext(false);
   }
 
-  void backspase() {
+  void longBackspace() {
+// взависимости от активного ввода
+    if (isAcathet.value) {
+      aCathet.value = _startLengthValue;
+    } else if (isBcathet.value) {
+      bCathet.value = _startLengthValue;
+    } else if (isChypotenuse.value) {
+      cHypotenuse.value = _startLengthValue;
+    } else if (isAangle.value) {
+      aAngle.value = _startAngleValue;
+    } else if (isBangle.value) {
+      bAngle.value = _startAngleValue;
+    }
+  }
+
+  void backspace() {
     _printElements();
 
     String oldInput;

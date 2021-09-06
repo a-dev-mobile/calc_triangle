@@ -1,6 +1,3 @@
-import 'package:calc_triangle/app/constant/const.dart';
-import 'package:calc_triangle/app/ui/theme/app_utils.dart';
-import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppColors {

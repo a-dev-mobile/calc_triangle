@@ -1,10 +1,10 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
-import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
+import 'package:calc_triangle/app/controller/right_triangle/right_triangle_c.dart';
+import 'package:calc_triangle/app/ui/pages/right_triangle/right_triangle_info_w.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'right_triangle_info_w.dart';
 import 'right_triangle_input_w.dart';
 
 class RightTrianglePage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _RightTrianglePageState extends State<RightTrianglePage> {
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {
@@ -51,15 +51,20 @@ class _RightTrianglePageState extends State<RightTrianglePage> {
 
   @override
   Widget build(BuildContext context) {
+    RightTriangleController c = Get.find();
     return Scaffold(
       bottomNavigationBar: _isBottomBannerAdLoaded
-          ? Container(
+          ? SizedBox(
               height: _bottomBannerAd.size.height.toDouble(),
               width: _bottomBannerAd.size.width.toDouble(),
               child: AdWidget(ad: _bottomBannerAd),
             )
           : null,
-      body: SafeArea(child: Expanded(child: RightTriangleInputWidget())),
+      body: SafeArea(child: Obx(() {
+        return c.isActiveInputImage.value
+            ? const RightTriangleInputWidget()
+            : const RightTriangleInfoWidget();
+      })),
     );
   }
 }

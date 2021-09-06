@@ -1,4 +1,3 @@
-import 'package:calc_triangle/app/constant/const.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -20,7 +19,6 @@ class WelcomePage extends GetView<WelcomeController> {
 
   @override
   Widget build(BuildContext context) {
-    var c = controller;
 
     return Scaffold(
       body: SafeArea(
@@ -34,8 +32,8 @@ class WelcomePage extends GetView<WelcomeController> {
               height: 0.80.sh,
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    const RightTriangleImageInfoWidget(),
+                  children: const [
+                    RightTriangleImageInfoWidget(),
                     WelcomeAppTitle(),
                     ChangeThemeWidget(),
                     ChangeColorWidget(),
@@ -43,9 +41,9 @@ class WelcomePage extends GetView<WelcomeController> {
                 ),
               ),
             ),
-            Spacer(),
-            SizedBox(width: 0.8.sw, height: 0.08.sh, child: WelcomeBtnStart()),
-            Spacer()
+            const Spacer(),
+            SizedBox(width: 0.8.sw, height: 0.08.sh, child: const WelcomeBtnStart()),
+            const Spacer()
           ],
         ),
       ),

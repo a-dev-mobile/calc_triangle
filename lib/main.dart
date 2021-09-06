@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,
             initialRoute: Routes.INITIAL,
-            defaultTransition: Transition.downToUp,
+            // defaultTransition: Transition.downToUp,
             getPages: AppPage.pages,
             themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
             theme: lightThemeData(context),

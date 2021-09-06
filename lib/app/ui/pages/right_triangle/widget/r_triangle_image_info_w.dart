@@ -5,7 +5,6 @@ import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RightTriangleImageInfoWidget extends StatelessWidget {
   const RightTriangleImageInfoWidget({
