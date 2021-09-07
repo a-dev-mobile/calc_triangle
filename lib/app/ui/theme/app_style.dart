@@ -1,4 +1,5 @@
-import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/constant/const_color.dart';
+import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 
 import 'package:flutter/material.dart';
@@ -19,24 +20,30 @@ abstract class AppStyleNumpad {
     return TextStyle(color: AppColors.text(context), fontSize: 40.sp);
     // fontSize: AppSize.fontSizeHeadline5(context));
   }
-  
-   static TextStyle convert(BuildContext context) {
+
+  static TextStyle convert(BuildContext context) {
     return TextStyle(color: AppColors.text(context), fontSize: 30.sp);
     // fontSize: AppSize.fontSizeHeadline5(context));
   }
 }
 
 abstract class AppStyleDrawer {
-  static TextStyle textAppName =
-      TextStyle(color: const Color(0xff000000), fontSize: 30.sp);
-  static TextStyle textAppNameSub =
-      TextStyle(color: const Color(0xe6000000), fontSize: 20.sp);
+  static TextStyle textAppName(BuildContext context) {
+    return TextStyle(color: AppColors.content(context), fontSize: 30.sp);
+  }
 
-  static TextStyle textItem =
-      TextStyle(color: const Color(0xe6000000), fontSize: 20.sp);
+  static TextStyle textAppNameSub(BuildContext context) {
+    return TextStyle(color: AppColors.content(context), fontSize: 20.sp);
+  }
 
-  static const colorIcon = Color(0xffA0A0A0);
-  static double sizeIcon = 20.sp;
+  static TextStyle textItem(BuildContext context) {
+    return TextStyle(color: AppColors.content(context), fontSize: 30.sp);
+  }
+
+  static double iconSize = 30.sp;
+  static Color iconColor(BuildContext context) {
+    return AppColors.content(context);
+  }
 }
 
 abstract class AppStyleTextInfo {

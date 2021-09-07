@@ -1,4 +1,5 @@
-import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/constant/const_color.dart';
+import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightThemeData(BuildContext context) {

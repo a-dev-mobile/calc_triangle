@@ -1,4 +1,4 @@
-import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -47,11 +47,11 @@ class RightTriangleInputWidget extends StatelessWidget {
                 
                 Expanded(
                   child: Container(
-                    margin: const EdgeInsets.all(ConstDefaultDouble.margin),
+                    margin: const EdgeInsets.all(ConstNumber.defaultMargin),
                     decoration: BoxDecoration(
                         color: AppColors.content(context),
                         borderRadius: const BorderRadius.all(
-                            Radius.circular(ConstDefaultDouble.radius))),
+                            Radius.circular(ConstNumber.defaultRadius))),
                     child: const NumPad(),
                   ),
                 ),

@@ -1,17 +1,18 @@
+import 'package:calc_triangle/app/constant/const_assets.dart';
+import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
-
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_triangle_image_info_w.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 
 import 'widgets/change_theme_w.dart';
 
@@ -20,7 +21,6 @@ class WelcomePage extends GetView<WelcomeController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -33,17 +33,35 @@ class WelcomePage extends GetView<WelcomeController> {
               height: 0.80.sh,
               child: SingleChildScrollView(
                 child: Column(
-                  children: const [
-                    RightTriangleImageInfoWidget(),
+                  children: [
+                    SizedBox(
+                      height: 0.5.sh,
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        children: [
+                          Image.asset(
+                            ConstAssets.righTriangleInfo,
+                            fit: BoxFit.contain,
+                            color: AppColors.contentRevers(context),
+                          ),
+                          Image.asset(
+                            ConstAssets.scaleneTriangleInfo,
+                            fit: BoxFit.contain,
+                            color: AppColors.contentRevers(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // RightTriangleImageInfoWidget(),
                     WelcomeAppTitle(),
                     ChangeThemeWidget(),
-       
                   ],
                 ),
               ),
             ),
             const Spacer(),
-            SizedBox(width: 0.8.sw, height: 0.08.sh, child: const WelcomeBtnStart()),
+            SizedBox(
+                width: 0.8.sw, height: 0.08.sh, child: const WelcomeBtnStart()),
             const Spacer()
           ],
         ),
@@ -124,12 +142,7 @@ class WelcomeAppTitle extends StatelessWidget {
                 color: AppColors.text(context).withOpacity(0.8)),
           ),
         ),
-        const Divider(
-          color: Colors.grey,
-          height: 30,
-          indent: 50,
-          endIndent: 50,
-        ),
+        AppWidget.dividerWelcome(),
       ],
     );
   }

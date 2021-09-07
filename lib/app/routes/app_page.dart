@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/ui/pages/calculate/calculate_p.dart';
 
 
 import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
+import 'package:calc_triangle/app/ui/pages/setting/setting_p.dart';
 
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
 import 'package:get/get.dart';
@@ -30,5 +31,11 @@ class AppPage {
         transition: Transition.rightToLeft,
         page: () => const CalculatePage(),
         binding: CalculateBinding()),
+  
+      GetPage(
+        name: Routes.SETTING,
+        transition: Transition.native,
+        page: () => const SettingPage(),
+        ),
   ];
 }

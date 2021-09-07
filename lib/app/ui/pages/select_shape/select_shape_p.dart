@@ -1,4 +1,5 @@
-import 'package:calc_triangle/app/constant/const.dart';
+import 'package:calc_triangle/app/constant/const_assets.dart';
+import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -21,7 +22,7 @@ class SelectShapePage extends StatelessWidget {
     final GlobalKey<ScaffoldState> _globalkey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _globalkey,
-      drawer: const DrawerWidget(),
+      drawer:  DrawerWidget(),
       body: SafeArea(
         child: Stack(
           children: [
@@ -29,14 +30,19 @@ class SelectShapePage extends StatelessWidget {
               crossAxisCount: 1,
               // crossAxisSpacing: kDefaultMargin * 2,
               padding: const EdgeInsets.symmetric(
-                  vertical: ConstDefaultDouble.padding),
-              mainAxisSpacing: ConstDefaultDouble.margin * 2,
+                  vertical: ConstNumber.defaultPadding),
+              mainAxisSpacing: ConstNumber.defaultMargin * 2,
               children: [
                 CardShapeWidget(
                   onTap: () {
                     c.click(Shapes.rightTriangle);
                   },
-                  shape: const RightTriangleImageInfoWidget(),
+                  shape: Image.asset(
+                    ConstAssets.righTriangleInfo,
+                    fit: BoxFit.contain,
+                    color: AppColors.contentRevers(context),
+                  ),
+                  // shape: const RightTriangleImageInfoWidget(),
                   title: TranslateHelper.rightTriangle,
                 ),
                 CardShapeWidget(
@@ -84,7 +90,7 @@ class CardShapeWidget extends StatelessWidget {
       height: size.height * 0.4,
       child: Card(
         margin: const EdgeInsets.symmetric(
-            horizontal: ConstDefaultDouble.margin * 2),
+            horizontal: ConstNumber.defaultMargin * 2),
         color: AppColors.content(context),
         elevation: 5,
         shadowColor: AppColors.text(context),

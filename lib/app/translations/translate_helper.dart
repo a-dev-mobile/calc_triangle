@@ -19,5 +19,10 @@ class TranslateHelper {
   static String get settingFirstLaunch => 'setting_first_launch'.tr;
   static String get darkTheme => 'dark_theme'.tr;
   static String get lightTheme => 'light_theme'.tr;
+  static String get setting => 'setting'.tr;
+  static String get home => 'home'.tr;
+  static String get shareApp => 'share_app'.tr;
+  static String get shareDetails => 'share_details'.tr;
+  static String get exit => 'exit'.tr;
   
 }

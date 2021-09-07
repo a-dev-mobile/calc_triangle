@@ -10,5 +10,11 @@ Map<String, String> en = {
   'setting_first_launch': 'Setting up for the first launch',
   'dark_theme': 'Dark theme',  
   'light_theme': 'Light theme',
+  'setting': 'Setting',
+  'home': 'Home',
+  'share_app': 'Share App',
+  'share_details': 'See the application of the calculation of triangles',
+  'exit': 'Exit',
+
 
 };

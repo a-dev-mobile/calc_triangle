@@ -22,6 +22,7 @@ class KeySymbol {
   String toString() => value;
 
   bool get isChoice => _choice.contains(this);
+
   bool get isFunction => _functions.contains(this);
   bool get isConvert => _convert.contains(this);
 

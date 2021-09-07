@@ -4,4 +4,5 @@ abstract class Routes {
   static const INITIAL = '/';
   static const SELECT_SHAPE = '/select_shape';
   static const CALCULATE = '/calculate';
+  static const SETTING = '/setting';
 }
