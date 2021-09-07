@@ -15,6 +15,11 @@ Map<String, String> en = {
   'share_app': 'Share App',
   'share_details': 'See the application of the calculation of triangles',
   'exit': 'Exit',
+  'exit_warning': 'Are you sure you want to exit this app?',
+  'warning': 'Warning!',
+  'yes': 'Yes',
+  'no': 'No',
+  
 
 
 };

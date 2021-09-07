@@ -1,4 +1,8 @@
+import 'package:calc_triangle/app/translations/translate_helper.dart';
+import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppWidget {
@@ -18,5 +22,39 @@ abstract class AppWidget {
       indent: 20.w,
       endIndent: 20.w,
     );
+  }
+
+  static viewDialogExit(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            backgroundColor: AppColors.content(context),
+            content: Text(
+              TranslateHelper.exitWarning,
+              style: TextStyle(color: AppColors.text(context)),
+            ),
+            title: Text(
+              TranslateHelper.warning,
+              style: TextStyle(
+                  fontSize: AppSize.fontSizeHeadline6(context),
+                  fontWeight: FontWeight.bold),
+            ),
+            actions: [
+              TextButton(
+                child: Text(TranslateHelper.yes),
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+              ),
+              TextButton(
+                child: Text(TranslateHelper.no),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
   }
 }

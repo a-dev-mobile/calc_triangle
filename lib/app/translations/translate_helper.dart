@@ -24,5 +24,9 @@ class TranslateHelper {
   static String get shareApp => 'share_app'.tr;
   static String get shareDetails => 'share_details'.tr;
   static String get exit => 'exit'.tr;
+  static String get exitWarning => 'exit_warning'.tr;
+  static String get warning => 'warning'.tr;
+  static String get yes => 'yes'.tr;
+  static String get no => 'no'.tr;
   
 }

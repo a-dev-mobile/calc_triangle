@@ -29,18 +29,18 @@ abstract class AppStyleNumpad {
 
 abstract class AppStyleDrawer {
   static TextStyle textAppName(BuildContext context) {
-    return TextStyle(color: AppColors.content(context), fontSize: 30.sp);
+    return TextStyle(color: AppColors.text(context), fontSize: 25.sp);
   }
 
   static TextStyle textAppNameSub(BuildContext context) {
-    return TextStyle(color: AppColors.content(context), fontSize: 20.sp);
+    return TextStyle(color: AppColors.text(context), fontSize: 15.sp);
   }
 
   static TextStyle textItem(BuildContext context) {
-    return TextStyle(color: AppColors.content(context), fontSize: 30.sp);
+    return TextStyle(color: AppColors.text(context), fontSize: 20.sp);
   }
 
-  static double iconSize = 30.sp;
+  static double iconSize = 20.sp;
   static Color iconColor(BuildContext context) {
     return AppColors.content(context);
   }

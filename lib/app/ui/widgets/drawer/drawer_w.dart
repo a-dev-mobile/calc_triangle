@@ -33,7 +33,7 @@ class DrawerWidget extends StatelessWidget {
       child: Drawer(
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.contentRevers(_context),
+            color: AppColors.content(_context),
             // boxShadow: [BoxShadow(color: AppColors.content(_context))]),
           ),
           child: SafeArea(
@@ -87,7 +87,9 @@ class DrawerWidget extends StatelessWidget {
                   // Spacer(),
                   AppWidget.dividerDrawer(),
                   DrawerRow(
-                      onTap: () {},
+                      onTap: () {
+                        AppWidget.viewDialogExit(_context);
+                      },
                       icon: Icons.exit_to_app,
                       msg: TranslateHelper.exit),
                 ],
