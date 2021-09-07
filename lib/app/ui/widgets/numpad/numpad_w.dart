@@ -1,4 +1,4 @@
-import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
+import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
 
@@ -75,7 +75,7 @@ class CalculatorKey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CalculateController c = Get.find();
+    RightTriangleController c = Get.find();
     // printt.i(symbol.value,symbol.type);
     TextStyle textStyle;
     switch (symbol.type) {
@@ -101,7 +101,7 @@ class CalculatorKey extends StatelessWidget {
           }
         },
         onPressed: () {
-          printt.v(symbol.value);
+          // printt.v(symbol.value);
 
           if (symbol == Keys.next) {
             c.nextElement();

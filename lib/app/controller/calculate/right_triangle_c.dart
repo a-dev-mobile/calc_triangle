@@ -6,24 +6,58 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class CalculateController extends GetxController {
+enum RightTriangle {
+  aCathet,
+  bCathet,
+  cHypotenuse,
+  aAngle,
+  bAngle,
+}
+
+class RightTriangleController extends GetxController {
   var aCathet = _startLengthValue.obs;
   var bCathet = _startLengthValue.obs;
   var cHypotenuse = _startLengthValue.obs;
   var aAngle = _startAngleValue.obs;
   var bAngle = _startAngleValue.obs;
 
-  var isActiveInputImage = true.obs;
-
   static const _startLengthValue = '0';
   static const _startAngleValue = '0°';
 
 //начальное значение при запуске
   var isAcathet = true.obs;
+  //сразу записываем
+  var knownParam = <int, RightTriangle>{
+    1: RightTriangle.aCathet,
+  }.obs;
+
   var isBcathet = false.obs;
   var isChypotenuse = false.obs;
   var isAangle = false.obs;
   var isBangle = false.obs;
+
+  void setknownParam(RightTriangle param) {
+    printt.i("----knownParam----");
+    printt.i("knownParam[1] ${knownParam[1]}");
+    printt.i("knownParam[2] ${knownParam[2]}");
+    printt.i("knownParam[3] ${knownParam[3]}");
+
+
+    if (knownParam[1] == null) {
+      knownParam[1] = param;
+     
+    }
+    if (knownParam[2] == null) {
+      knownParam[2] = param;
+    
+    }
+
+    knownParam[3] = param;
+    knownParam[1] = knownParam[2]!;
+    knownParam[2] = knownParam[3]!;
+    if (knownParam[2] == knownParam[1]) return;
+
+  }
 
   void addKey(KeySymbol keySymbol) {
     String newInput = keySymbol.value;
@@ -31,6 +65,7 @@ class CalculateController extends GetxController {
     String sumInput;
 
     if (isAcathet.value) {
+      setknownParam(RightTriangle.aCathet);
       oldInput = aCathet.value;
 
       // если две точки возврат
@@ -44,6 +79,7 @@ class CalculateController extends GetxController {
 
       aCathet.value = sumInput;
     } else if (isBcathet.value) {
+      setknownParam(RightTriangle.bCathet);
       oldInput = bCathet.value;
 
       if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
@@ -54,6 +90,7 @@ class CalculateController extends GetxController {
       sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
       bCathet.value = sumInput;
     } else if (isChypotenuse.value) {
+      setknownParam(RightTriangle.cHypotenuse);
       oldInput = cHypotenuse.value;
 
       if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
@@ -64,6 +101,7 @@ class CalculateController extends GetxController {
       sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
       cHypotenuse.value = sumInput;
     } else if (isAangle.value) {
+      setknownParam(RightTriangle.aAngle);
       oldInput = aAngle.value;
 
       if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
@@ -81,6 +119,7 @@ class CalculateController extends GetxController {
 
       aAngle.value = sumInput + "°";
     } else if (isBangle.value) {
+      setknownParam(RightTriangle.bAngle);
       oldInput = bAngle.value;
 
 // если две точки возврат
@@ -128,6 +167,8 @@ class CalculateController extends GetxController {
   void _printElements() {
     printt.i(
         'aCathet ${aCathet.value} bCathet ${bCathet.value} cHypotenuse ${cHypotenuse.value} aAngle ${aAngle.value} bAngle ${bAngle.value}');
+    printt.i(
+        'aCathet ${isAcathet.value} \nbCathet ${isBcathet.value} \ncHypotenuse ${isChypotenuse.value} \naAngle ${isAangle.value} \nbAngle ${isBangle.value}');
   }
 
   void nextElement() {

@@ -1,5 +1,5 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
+import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
@@ -16,12 +16,12 @@ import 'widget/r_triangle_image_input_w.dart';
 
 class RightTriangleInputWidget extends StatelessWidget {
   const RightTriangleInputWidget({Key? key}) : super(key: key);
-  static const maxSelected = 2;
-  static const maxValue = 5;
+
+
 
   @override
   Widget build(BuildContext context) {
-    CalculateController c = Get.find();
+    RightTriangleController c = Get.find();
     return Scaffold(
       body: SafeArea(
         child: Stack(

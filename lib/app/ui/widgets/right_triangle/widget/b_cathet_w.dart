@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
+import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
@@ -18,7 +18,7 @@ class BcathetWidget extends StatelessWidget {
   final double angle;
   @override
   Widget build(BuildContext context) {
-    CalculateController c = Get.find();
+    RightTriangleController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
 

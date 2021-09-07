@@ -2,7 +2,7 @@
 
 import 'dart:math';
 
-import 'package:calc_triangle/app/controller/calculate/calculate_c.dart';
+import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 
@@ -21,7 +21,7 @@ class AangleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CalculateController c = Get.find();
+    RightTriangleController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
 
