@@ -18,7 +18,7 @@ class AppPage {
   static final pages = [
     GetPage(
         name: Routes.INITIAL,
-        page: () => const WelcomePage(),
+        page: () =>  WelcomePage(),
         transition: Transition.fade,
         binding: WelcomeBinding()),
     GetPage(

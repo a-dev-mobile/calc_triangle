@@ -5,6 +5,7 @@ abstract class ConstString {
   static const String keySecondaryColor = 'secondary_color';
 
   static const String keyIsDarkTheme = 'is_dark_theme';
+  static const String keyPrecisionResult = 'precision_result';
   static const String keyActiveShape = 'active_shape';
   static const String keyIsFirstStart = 'is_first_start';
   static var playStoreUrl =

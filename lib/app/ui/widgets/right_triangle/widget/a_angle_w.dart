@@ -31,7 +31,7 @@ class AangleWidget extends StatelessWidget {
           angle: angle * pi / 180,
           child: Obx(() {
             TextStyle styleText;
-            if (c.isAangle.value) {
+            if (c.isaAngle.value) {
               styleText = AppStyleTextImage.active(context);
             } else {
               styleText = AppStyleTextImage.inActive(context);

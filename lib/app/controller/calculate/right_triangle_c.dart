@@ -1,9 +1,11 @@
+import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/ui/theme/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 
 import 'package:calc_triangle/app/utils/utils_string.dart';
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:math';
 import 'package:get/get.dart';
 
 enum RightTriangle {
@@ -24,39 +26,113 @@ class RightTriangleController extends GetxController {
   static const _startLengthValue = '0';
   static const _startAngleValue = '0°';
 
+  int numberDigitsAfterPoint = AppUtils.getPrecisionResults();
+
 //начальное значение при запуске
-  var isAcathet = true.obs;
+  var isaCathet = true.obs;
   //сразу записываем
-  var knownParam = <int, RightTriangle>{
+  var activeParam = <int, RightTriangle>{
     1: RightTriangle.aCathet,
+    2: RightTriangle.aCathet,
   }.obs;
 
-  var isBcathet = false.obs;
-  var isChypotenuse = false.obs;
-  var isAangle = false.obs;
-  var isBangle = false.obs;
+  var isbCathet = false.obs;
+  var iscHypotenuse = false.obs;
+  var isaAngle = false.obs;
+  var isbAngle = false.obs;
 
-  void setknownParam(RightTriangle param) {
-    printt.i("----knownParam----");
-    printt.i("knownParam[1] ${knownParam[1]}");
-    printt.i("knownParam[2] ${knownParam[2]}");
-    printt.i("knownParam[3] ${knownParam[3]}");
+  void calculate() {
+    RightTriangle first = activeParam[1]!;
+    RightTriangle second = activeParam[2]!;
 
+    String aCathetS = aCathet.value;
+    String bCathetS = bCathet.value;
+    String bAngleS = bAngle.value;
+    String cHypotenuseS = cHypotenuse.value;
+    String aAngleS = aAngle.value;
 
-    if (knownParam[1] == null) {
-      knownParam[1] = param;
-     
+    double aCathetD = double.parse(aCathetS);
+    double bCathetD = double.parse(bCathetS);
+    double cHypotenuseD = double.parse(cHypotenuseS);
+    double bAngleD = double.parse(AppUtilsString.removeLastCharacter(bAngleS));
+    double aAngleD = double.parse(AppUtilsString.removeLastCharacter(aAngleS));
+    printt.i(
+        'aCathetD $aCathetD bCathetD $bCathetD cHypotenuseD $cHypotenuseD aAngleD $aAngleD bAngleD $bAngleD');
+    // if (first == second) return;
+    double calc;
+
+    if (first == RightTriangle.aAngle || second == RightTriangle.aAngle) {
+      calc = 90 - aAngleD;
+      bAngle.value =
+          AppUtilsString.getFormatNumber(calc, numberDigitsAfterPoint);
     }
-    if (knownParam[2] == null) {
-      knownParam[2] = param;
-    
+  }
+
+  void setActiveParam() {
+    RightTriangle param = RightTriangle.aCathet;
+
+    if (isaCathet.value) {
+      param = RightTriangle.aCathet;
+    } else if (isbCathet.value) {
+      param = RightTriangle.bCathet;
+    } else if (iscHypotenuse.value) {
+      param = RightTriangle.cHypotenuse;
+    } else if (isaAngle.value) {
+      param = RightTriangle.aAngle;
+    } else if (isbAngle.value) {
+      param = RightTriangle.bAngle;
     }
 
-    knownParam[3] = param;
-    knownParam[1] = knownParam[2]!;
-    knownParam[2] = knownParam[3]!;
-    if (knownParam[2] == knownParam[1]) return;
+    activeParam[3] = param;
 
+    if (activeParam[1] == activeParam[2] || activeParam[2] != activeParam[3]) {
+      activeParam[1] = activeParam[2]!;
+      activeParam[2] = activeParam[3]!;
+    }
+  }
+
+  bool _isMaxNumberAfterPoint(String value) {
+    return AppUtilsString.isMoreAccuracy(
+        value, ConstNumber.maxNumberAfterPoint);
+  }
+
+  bool _isMaxNumberInput(String value) {
+    double number = double.parse(value);
+    if (number > ConstNumber.maxValueInput) {
+      return true;
+    }
+    return false;
+  }
+
+  void checkMaxNumberAndNumberAfterPoint() {
+    String value;
+
+    if (isaCathet.value) {
+      value = aCathet.value;
+      if (_isMaxNumberInput(value) || _isMaxNumberAfterPoint(value)) {
+        aCathet.value = AppUtilsString.removeLastCharacter(value);
+      }
+    } else if (isbCathet.value) {
+      value = bCathet.value;
+      if (_isMaxNumberInput(value) || _isMaxNumberAfterPoint(value)) {
+        bCathet.value = AppUtilsString.removeLastCharacter(value);
+      }
+    } else if (iscHypotenuse.value) {
+      value = cHypotenuse.value;
+      if (_isMaxNumberInput(value) || _isMaxNumberAfterPoint(value)) {
+        cHypotenuse.value = AppUtilsString.removeLastCharacter(value);
+      }
+    } else if (isaAngle.value) {
+      value = AppUtilsString.removeLastCharacter(aAngle.value);
+      if (_isMaxNumberInput(value) || _isMaxNumberAfterPoint(value)) {
+        aAngle.value = AppUtilsString.removeLastCharacter(value) + "°";
+      }
+    } else if (isbAngle.value) {
+      value = AppUtilsString.removeLastCharacter(bAngle.value);
+      if (_isMaxNumberInput(value) || _isMaxNumberAfterPoint(value)) {
+        bAngle.value = AppUtilsString.removeLastCharacter(value) + "°";
+      }
+    }
   }
 
   void addKey(KeySymbol keySymbol) {
@@ -64,12 +140,11 @@ class RightTriangleController extends GetxController {
     String oldInput;
     String sumInput;
 
-    if (isAcathet.value) {
-      setknownParam(RightTriangle.aCathet);
+    if (isaCathet.value) {
       oldInput = aCathet.value;
 
       // если две точки возврат
-      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
       // при вводе удаляю стартовый символ
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
@@ -78,33 +153,30 @@ class RightTriangleController extends GetxController {
       sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
 
       aCathet.value = sumInput;
-    } else if (isBcathet.value) {
-      setknownParam(RightTriangle.bCathet);
+    } else if (isbCathet.value) {
       oldInput = bCathet.value;
 
-      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
       bCathet.value = sumInput;
-    } else if (isChypotenuse.value) {
-      setknownParam(RightTriangle.cHypotenuse);
+    } else if (iscHypotenuse.value) {
       oldInput = cHypotenuse.value;
 
-      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
       oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       sumInput = UtilsString.addZeroIsFirstDecimal(sumInput);
       cHypotenuse.value = sumInput;
-    } else if (isAangle.value) {
-      setknownParam(RightTriangle.aAngle);
+    } else if (isaAngle.value) {
       oldInput = aAngle.value;
 
-      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
       // удаляю знак угла
       oldInput = UtilsString.removeLastCharacter(oldInput);
@@ -118,12 +190,11 @@ class RightTriangleController extends GetxController {
       if (isAngleLess90(sumInput, 'Угол α должен быть меньше 90°')) return;
 
       aAngle.value = sumInput + "°";
-    } else if (isBangle.value) {
-      setknownParam(RightTriangle.bAngle);
+    } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
 // если две точки возврат
-      if (UtilsString.isTwoDecimal(oldInput + newInput)) return;
+      if (UtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
 // удаляю знак угла
       oldInput = UtilsString.removeLastCharacter(oldInput);
@@ -137,7 +208,9 @@ class RightTriangleController extends GetxController {
 
       bAngle.value = sumInput + "°";
     }
-
+    checkMaxNumberAndNumberAfterPoint();
+    setActiveParam();
+    calculate();
     _printElements();
   }
 
@@ -168,7 +241,8 @@ class RightTriangleController extends GetxController {
     printt.i(
         'aCathet ${aCathet.value} bCathet ${bCathet.value} cHypotenuse ${cHypotenuse.value} aAngle ${aAngle.value} bAngle ${bAngle.value}');
     printt.i(
-        'aCathet ${isAcathet.value} \nbCathet ${isBcathet.value} \ncHypotenuse ${isChypotenuse.value} \naAngle ${isAangle.value} \nbAngle ${isBangle.value}');
+        'aCathet ${isaCathet.value} \nbCathet ${isbCathet.value} \ncHypotenuse ${iscHypotenuse.value} \naAngle ${isaAngle.value} \nbAngle ${isbAngle.value}');
+    printt.i("activeParam [1] ${activeParam[1]} [1] ${activeParam[2]}");
   }
 
   void nextElement() {
@@ -183,15 +257,15 @@ class RightTriangleController extends GetxController {
 
   void longBackspace() {
 // взависимости от активного ввода
-    if (isAcathet.value) {
+    if (isaCathet.value) {
       aCathet.value = _startLengthValue;
-    } else if (isBcathet.value) {
+    } else if (isbCathet.value) {
       bCathet.value = _startLengthValue;
-    } else if (isChypotenuse.value) {
+    } else if (iscHypotenuse.value) {
       cHypotenuse.value = _startLengthValue;
-    } else if (isAangle.value) {
+    } else if (isaAngle.value) {
       aAngle.value = _startAngleValue;
-    } else if (isBangle.value) {
+    } else if (isbAngle.value) {
       bAngle.value = _startAngleValue;
     }
   }
@@ -203,7 +277,7 @@ class RightTriangleController extends GetxController {
     String newInput;
 
 // взависимости от активного ввода
-    if (isAcathet.value) {
+    if (isaCathet.value) {
       oldInput = aCathet.value;
       newInput = UtilsString.removeLastCharacter(oldInput);
       //если пусто устанавливаем стартовое значение
@@ -211,7 +285,7 @@ class RightTriangleController extends GetxController {
         newInput = _startLengthValue;
       }
       aCathet.value = newInput;
-    } else if (isBcathet.value) {
+    } else if (isbCathet.value) {
       oldInput = bCathet.value;
       newInput = UtilsString.removeLastCharacter(oldInput);
 
@@ -219,7 +293,7 @@ class RightTriangleController extends GetxController {
         newInput = _startLengthValue;
       }
       bCathet.value = newInput;
-    } else if (isChypotenuse.value) {
+    } else if (iscHypotenuse.value) {
       oldInput = cHypotenuse.value;
       newInput = UtilsString.removeLastCharacter(oldInput);
 
@@ -227,7 +301,7 @@ class RightTriangleController extends GetxController {
         newInput = _startLengthValue;
       }
       cHypotenuse.value = newInput;
-    } else if (isAangle.value) {
+    } else if (isaAngle.value) {
       oldInput = aAngle.value;
 
       if (UtilsString.getLastCharacter(oldInput) == '°') {
@@ -239,7 +313,7 @@ class RightTriangleController extends GetxController {
         newInput = _startLengthValue;
       }
       aAngle.value = newInput + '°';
-    } else if (isBangle.value) {
+    } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
       if (UtilsString.getLastCharacter(oldInput) == '°') {
@@ -252,6 +326,9 @@ class RightTriangleController extends GetxController {
       }
       bAngle.value = newInput + '°';
     }
+    //обновляем измененные параметры
+    setActiveParam();
+    calculate();
   }
 
   void clear() {
@@ -265,38 +342,38 @@ class RightTriangleController extends GetxController {
 
   void _isNext(bool isNext) {
     if (isNext) {
-      if (isAcathet.value) {
-        isBcathet.value = true;
-        isAcathet.value = false;
-      } else if (isBcathet.value) {
-        isChypotenuse.value = true;
-        isBcathet.value = false;
-      } else if (isChypotenuse.value) {
-        isAangle.value = true;
-        isChypotenuse.value = false;
-      } else if (isAangle.value) {
-        isBangle.value = true;
-        isAangle.value = false;
-      } else if (isBangle.value) {
-        isAcathet.value = true;
-        isBangle.value = false;
+      if (isaCathet.value) {
+        isbCathet.value = true;
+        isaCathet.value = false;
+      } else if (isbCathet.value) {
+        iscHypotenuse.value = true;
+        isbCathet.value = false;
+      } else if (iscHypotenuse.value) {
+        isaAngle.value = true;
+        iscHypotenuse.value = false;
+      } else if (isaAngle.value) {
+        isbAngle.value = true;
+        isaAngle.value = false;
+      } else if (isbAngle.value) {
+        isaCathet.value = true;
+        isbAngle.value = false;
       }
     } else {
-      if (isAcathet.value) {
-        isBangle.value = true;
-        isAcathet.value = false;
-      } else if (isBangle.value) {
-        isAangle.value = true;
-        isBangle.value = false;
-      } else if (isAangle.value) {
-        isChypotenuse.value = true;
-        isAangle.value = false;
-      } else if (isChypotenuse.value) {
-        isBcathet.value = true;
-        isChypotenuse.value = false;
-      } else if (isBcathet.value) {
-        isAcathet.value = true;
-        isBcathet.value = false;
+      if (isaCathet.value) {
+        isbAngle.value = true;
+        isaCathet.value = false;
+      } else if (isbAngle.value) {
+        isaAngle.value = true;
+        isbAngle.value = false;
+      } else if (isaAngle.value) {
+        iscHypotenuse.value = true;
+        isaAngle.value = false;
+      } else if (iscHypotenuse.value) {
+        isbCathet.value = true;
+        iscHypotenuse.value = false;
+      } else if (isbCathet.value) {
+        isaCathet.value = true;
+        isbCathet.value = false;
       }
     }
   }

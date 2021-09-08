@@ -28,7 +28,7 @@ class BcathetWidget extends StatelessWidget {
           angle: angle * pi / 180,
           child: Obx(() {
             TextStyle styleText;
-            if (c.isBcathet.value) {
+            if (c.isbCathet.value) {
               styleText = AppStyleTextImage.active(context);
             } else {
               styleText = AppStyleTextImage.inActive(context);

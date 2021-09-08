@@ -5,7 +5,6 @@ Map<String, String> en = {
   'right_triangle': 'Right Triangle',
   'enter_2_parameters': 'Enter any 2 parameters',
   'choose_theme': 'Choose your theme',
-  'select_theme': 'Select the theme of app',
   'launch': 'Start',
   'setting_first_launch': 'Setting up for the first launch',
   'dark_theme': 'Dark theme',  
@@ -19,6 +18,12 @@ Map<String, String> en = {
   'warning': 'Warning!',
   'yes': 'Yes',
   'no': 'No',
+
+  //Setting
+  'select_theme': 'Select the theme of app',
+  'select_theme_light': 'Selected app theme: Light theme',
+  'select_theme_dark': 'Selected app theme: Dark theme',
+  'selected_precision_result': 'Selected precision of results: ',
   
 
 

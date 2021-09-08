@@ -13,10 +13,12 @@ import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_triangle_im
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
+import 'package:calc_triangle/main.dart';
 import 'widgets/change_theme_w.dart';
 
-class WelcomePage extends GetView<WelcomeController> {
+late WelcomeController c = Get.find();
+
+class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
   @override
@@ -25,9 +27,13 @@ class WelcomePage extends GetView<WelcomeController> {
       body: SafeArea(
         child: Column(
           children: [
-            Text(
-              TranslateHelper.settingFirstLaunch,
-              style: TextStyle(color: AppColors.text(context)),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: ConstNumber.defaultPadding),
+              child: Text(
+                TranslateHelper.settingFirstLaunch,
+                style: AppStyleText.titleText(context),
+              ),
             ),
             SizedBox(
               height: 0.80.sh,
@@ -35,37 +41,100 @@ class WelcomePage extends GetView<WelcomeController> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 0.5.sh,
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        children: [
-                          Image.asset(
-                            ConstAssets.righTriangleInfo,
-                            fit: BoxFit.contain,
-                            color: AppColors.contentRevers(context),
-                          ),
-                          Image.asset(
-                            ConstAssets.scaleneTriangleInfo,
-                            fit: BoxFit.contain,
-                            color: AppColors.contentRevers(context),
-                          ),
-                        ],
-                      ),
+                      height: 0.4.sh,
+                      child: const ImageAppWidget(),
                     ),
                     // RightTriangleImageInfoWidget(),
-                    WelcomeAppTitle(),
-                    ChangeThemeWidget(),
+                    const WelcomeAppTitle(),
+                    AppWidget.dividerWelcome(),
+                    const ChangeThemeWidget(),
+                    AppWidget.dividerWelcome(),
+                    SliderPrecisionResultWidget(),
                   ],
                 ),
               ),
             ),
-            const Spacer(),
             SizedBox(
                 width: 0.8.sw, height: 0.08.sh, child: const WelcomeBtnStart()),
-            const Spacer()
           ],
         ),
       ),
+    );
+  }
+}
+
+class SliderPrecisionResultWidget extends StatelessWidget {
+  const SliderPrecisionResultWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    String precision;
+    String title = TranslateHelper.selectedPrecisionResult;
+    return Obx(() {
+      int precisionResult = c.precisionResult.value;
+      switch (precisionResult) {
+        case 1:
+          precision = '0.0';
+          break;
+        case 2:
+          precision = '0.00';
+          break;
+        case 3:
+          precision = '0.000';
+          break;
+        case 4:
+          precision = '0.0000';
+          break;
+        case 5:
+          precision = '0.00000';
+          break;
+        case 0:
+
+        default:
+          precision = '0';
+      }
+
+      return Column(
+        children: [
+          Text(
+            "$title $precision",
+            style: AppStyleText.subText(context),
+          ),
+          Slider(
+
+              // label: precision,
+              value: c.precisionResult.value.toDouble(),
+              min: 0,
+              divisions: 5,
+              max: 5,
+              onChanged: (double value) {
+                c.setPrecisionResult(value.toInt());
+              }),
+        ],
+      );
+    });
+  }
+}
+
+class ImageAppWidget extends StatelessWidget {
+  const ImageAppWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      ConstAssets.righTriangleInfo,
+      fit: BoxFit.contain,
+      color: AppColors.contentRevers(context),
+
+      // Image.asset(
+      //   ConstAssets.scaleneTriangleInfo,
+      //   fit: BoxFit.contain,
+      //   color: AppColors.contentRevers(context),
+      // ),
     );
   }
 }
@@ -142,7 +211,6 @@ class WelcomeAppTitle extends StatelessWidget {
                 color: AppColors.text(context).withOpacity(0.8)),
           ),
         ),
-        AppWidget.dividerWelcome(),
       ],
     );
   }

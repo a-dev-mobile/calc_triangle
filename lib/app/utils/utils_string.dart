@@ -1,3 +1,5 @@
+import 'package:calc_triangle/main.dart';
+
 abstract class UtilsString {
   static String removeLastCharacter(String str) {
     String result = '';
@@ -28,7 +30,7 @@ abstract class UtilsString {
     return result;
   }
 
-  static bool isTwoDecimal(String text) {
+  static bool isTwoDecimalPoint(String text) {
     var i = text.split('.').length;
     if (i > 2) {
       return true;
@@ -43,5 +45,13 @@ abstract class UtilsString {
     } else {
       return text;
     }
+  }
+
+  static bool isMoreAccuracy(String value, int declaredAccuracy) {
+    int i = value.length - (value.toString().indexOf('.') + 1);
+
+    printt.i('accuracy $i');
+
+    return false;
   }
 }

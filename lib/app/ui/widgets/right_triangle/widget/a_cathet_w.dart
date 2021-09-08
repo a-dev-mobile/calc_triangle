@@ -26,7 +26,7 @@ class AcathetWidget extends StatelessWidget {
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Obx(() {
           TextStyle styleText;
-          if (c.isAcathet.value) {
+          if (c.isaCathet.value) {
             styleText = AppStyleTextImage.active(context);
           } else {
             styleText = AppStyleTextImage.inActive(context);

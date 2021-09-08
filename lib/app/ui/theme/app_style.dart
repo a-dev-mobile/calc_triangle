@@ -46,17 +46,17 @@ abstract class AppStyleDrawer {
   }
 }
 
-abstract class AppStyleTextInfo {
-  static TextStyle mainText(BuildContext context) {
+abstract class AppStyleText {
+  static TextStyle titleText(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context),
-        fontSize: AppSize.fontSizeHeadline6(context));
+        fontSize: 20.sp);
   }
 
   static TextStyle subText(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context),
-        fontSize: AppSize.fontSizeButton(context));
+        fontSize: 15.sp);
   }
 }
 

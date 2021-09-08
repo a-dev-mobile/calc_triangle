@@ -1,54 +1,56 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
+import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+late WelcomeController controller = Get.find();
+
 class ChangeThemeWidget extends StatelessWidget {
   const ChangeThemeWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    WelcomeController controller = Get.find();
-    return Column(
-      children: [
+    return Obx(() {
+      bool isDark = controller.isDarkTheme.value;
+      String label = isDark
+          ? TranslateHelper.selectThemeDark
+          : TranslateHelper.selectThemeLight;
+
+      return Column(children: [
         SizedBox(height: 20.h),
-        const Text(
-          ' Select the theme of app ',
+        Text(
+          label,
+          style: AppStyleText.subText(context),
         ),
         SizedBox(height: 20.h),
-        Obx(
-          () {
-            bool isDark = controller.isDarkTheme.value;
-
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CircleButton(
-                    onTap: () {
-                      controller.setDarkTheme();
-                    },
-                    color: ConstColor.scaffoldDarkTheme,
-                    icon: isDark
-                        ? AppStyleButton.iconActiveTheme(context)
-                        : AppStyleButton.iconNotActiveTheme(context)),
-                CircleButton(
-                    onTap: () {
-                      controller.setLightTheme();
-                    },
-                    color: ConstColor.scaffoldLightTheme,
-                    icon: !isDark
-                        ? AppStyleButton.iconActiveTheme(context)
-                        : AppStyleButton.iconNotActiveTheme(context)),
-              ],
-            );
-          },
-        )
-      ],
-    );
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            CircleButton(
+                onTap: () {
+                  controller.setDarkTheme();
+                },
+                color: ConstColor.scaffoldDarkTheme,
+                icon: isDark
+                    ? AppStyleButton.iconActiveTheme(context)
+                    : AppStyleButton.iconNotActiveTheme(context)),
+            CircleButton(
+                onTap: () {
+                  controller.setLightTheme();
+                },
+                color: ConstColor.scaffoldLightTheme,
+                icon: !isDark
+                    ? AppStyleButton.iconActiveTheme(context)
+                    : AppStyleButton.iconNotActiveTheme(context)),
+          ],
+        ),
+      ]);
+    });
   }
 }
 

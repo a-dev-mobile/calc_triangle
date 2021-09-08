@@ -14,7 +14,6 @@ class TranslateHelper {
   static String get appNameSub => 'app_name_sub'.tr;
   static String get about => 'about'.tr;
   static String get chooseTheme => 'choose_theme'.tr;
-  static String get selectTheme => 'select_theme'.tr;
   static String get launch => 'launch'.tr;
   static String get settingFirstLaunch => 'setting_first_launch'.tr;
   static String get darkTheme => 'dark_theme'.tr;
@@ -28,5 +27,13 @@ class TranslateHelper {
   static String get warning => 'warning'.tr;
   static String get yes => 'yes'.tr;
   static String get no => 'no'.tr;
+
+
+  static String get selectTheme => 'select_theme'.tr;
+  static String get selectThemeLight => 'select_theme_light'.tr;
+  static String get selectThemeDark => 'select_theme_dark'.tr;
+  static String get selectedPrecisionResult => 'selected_precision_result'.tr;
+
+
   
 }

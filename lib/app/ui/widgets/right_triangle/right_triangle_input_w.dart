@@ -33,7 +33,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                 const RightTriangleImageInputWidget(),
                 Text(
                   TranslateHelper.rightTriangle,
-                  style: AppStyleTextInfo.mainText(context),
+                  style: AppStyleText.titleText(context),
                 ),
                 Divider(
                   indent: 50.w,
@@ -42,7 +42,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                 ),
                 Text(
                   TranslateHelper.enterTwoParameters,
-                  style: AppStyleTextInfo.subText(context),
+                  style: AppStyleText.subText(context),
                 ),
                 
                 Expanded(
