@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/main.dart';
@@ -184,5 +186,15 @@ print( s1[i]);
     if (i > declaredAccuracy) return true;
 
     return false;
+  }
+}
+
+abstract class AppUtilsNumber {
+  static double toRadian(double degree) {
+    return degree * (pi / 180);
+  }
+
+  static double toDegree(double radian) {
+    return radian * (180 / pi);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:calc_triangle/app/routes/app_page.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
-import 'package:calc_triangle/app/ui/theme/app_utils.dart';
+import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

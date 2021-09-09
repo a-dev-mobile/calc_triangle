@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_utils.dart';
+import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 
 import 'a_angle_w.dart';

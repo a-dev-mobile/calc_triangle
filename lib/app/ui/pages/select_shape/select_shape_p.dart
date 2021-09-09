@@ -5,7 +5,7 @@ import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_utils.dart';
+import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_triangle_image_info_w.dart';
@@ -22,7 +22,7 @@ class SelectShapePage extends StatelessWidget {
     final GlobalKey<ScaffoldState> _globalkey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _globalkey,
-      drawer:  DrawerWidget(),
+      drawer: DrawerWidget(),
       body: SafeArea(
         child: Stack(
           children: [

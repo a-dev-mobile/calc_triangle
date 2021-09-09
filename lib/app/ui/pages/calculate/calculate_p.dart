@@ -1,7 +1,7 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
-import 'package:calc_triangle/app/ui/theme/app_utils.dart';
+import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/right_triangle_input_w.dart';
 import 'package:calc_triangle/app/ui/widgets/scalene_triangle/scalene_triangle_w.dart';
 import 'package:calc_triangle/main.dart';
