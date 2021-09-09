@@ -39,6 +39,7 @@ abstract class AppUtils {
     printt.w('AppUtils GetStorage activeShapeIndex $index');
     return index;
   }
+
 //==============================================
 
   static double getImageMinSize() {
@@ -50,8 +51,6 @@ abstract class AppUtils {
   static Future<void> setImageMinSize(double size) async {
     GetStorage().write(ConstString.keyMinSize, size);
   }
-
-  static BuildContext contex2 = MyApp.materialKey.currentContext!;
 }
 
 abstract class AppUtilsString {
@@ -59,16 +58,37 @@ abstract class AppUtilsString {
     return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 1);
   }
 
-  static String getFormatNumber(double value, int numberDigitsAfterPoint) {
-    String s = value.toStringAsFixed(numberDigitsAfterPoint);
-    RegExp regex = RegExp(r"([.]*0)(?!.*\d)");
+  static String getFormatNumber(double num, int numberDigitsAfterPoint) {
+// округляем, но нет удаления конечных нулей
+    String num2 = num.toStringAsFixed(numberDigitsAfterPoint);
+    // если нет точки возвращаем
+    if (!num2.contains('.')) return num2;
 
-    String s1 = '2.2121001';
- for(int i=0; i<s1.length; i++) {
-print( s[i]);
-}
+    var s = num2.split('.');
+    String mainResult = num2;
+    // проверяем есть ли последние нули
+    if (getLastCharacter(s[1]) == '0') {
+      String oldString = "";
+      String newString = "";
+      oldString = s[1];
 
-    return s.replaceAll(regex, "");
+      for (int i = 0; i < s[1].length; i++) {
+        if (getLastCharacter(oldString) == '0') {
+          newString = removeLastCharacter(oldString);
+        } else {
+          break;
+        }
+        oldString = newString;
+      }
+// действия, если после ни чего ни осталось оставляем split 0
+      if (newString.isEmpty) {
+        mainResult = s[0];
+      } else {
+        mainResult = s[0] + "." + newString;
+      }
+    }
+
+    return mainResult;
   }
 
   static String removeLastCharacter(String str) {

@@ -61,10 +61,16 @@ class RightTriangleController extends GetxController {
     // if (first == second) return;
     double calc;
 
-    if (first == RightTriangle.aAngle || second == RightTriangle.aAngle) {
+    if (second == RightTriangle.aAngle) {
       calc = 90 - aAngleD;
       bAngle.value =
-          AppUtilsString.getFormatNumber(calc, numberDigitsAfterPoint);
+          AppUtilsString.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
+    }
+
+    if (second == RightTriangle.bAngle) {
+      calc = 90 - bAngleD;
+      aAngle.value =
+          AppUtilsString.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
     }
   }
 
@@ -268,6 +274,7 @@ class RightTriangleController extends GetxController {
     } else if (isbAngle.value) {
       bAngle.value = _startAngleValue;
     }
+    calculate();
   }
 
   void backspace() {

@@ -55,7 +55,7 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
             SizedBox(
-                width: 0.8.sw, height: 0.08.sh, child: const WelcomeBtnStart()),
+                width: 0.8.sw, height: 0.07.sh, child: const WelcomeBtnStart()),
           ],
         ),
       ),
