@@ -8,12 +8,10 @@ import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
-import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_triangle_image_info_w.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:calc_triangle/main.dart';
 import 'widgets/change_theme_w.dart';
 
 late WelcomeController c = Get.find();
@@ -49,7 +47,7 @@ class WelcomePage extends StatelessWidget {
                     AppWidget.dividerWelcome(),
                     const ChangeThemeWidget(),
                     AppWidget.dividerWelcome(),
-                    SliderPrecisionResultWidget(),
+                    const SliderPrecisionResultWidget(),
                   ],
                 ),
               ),
@@ -147,7 +145,7 @@ class WelcomeBtnStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Get.toNamed(Routes.SELECT_SHAPE),
+      onPressed: () => Get.toNamed(Routes.CALCULATE),
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );
   }

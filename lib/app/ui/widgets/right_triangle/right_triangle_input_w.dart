@@ -3,10 +3,12 @@ import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
+import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/snackbar/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
+import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
-import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -16,48 +18,53 @@ import 'package:get/get.dart';
 import 'widget/r_triangle_image_input_w.dart';
 
 class RightTriangleInputWidget extends StatelessWidget {
-  const RightTriangleInputWidget({Key? key}) : super(key: key);
-
+  RightTriangleInputWidget({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
     return Scaffold(
+      drawer: DrawerWidget(),
       body: SafeArea(
         child: Stack(
           children: [
-            Obx(() {
-              // показ если что то не то))
-              return Visibility(
-                visible: c.isActiveSnackBar.value,
-                child: CustomSnackBar(message: c.messageSnackBar.value),
-              );
-            }),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const RightTriangleImageInputWidget(),
-                Divider(
-                  indent: 50.w,
-                  endIndent: 50.w,
-                  color: AppColors.text(context),
-                ),
-                Text(
-                  TranslateHelper.rightTriangle,
-                  style: AppStyleText.titleText(context),
-                ),
+                Obx(() {
+                  return Visibility(
+                    visible: !c.isActiveSnackBar.value,
+                    child: SizedBox(
+                      width: AppUtils.getWidth(context),
+                      height: AppUtils.getHeight(context) * 0.05,
+                      child: Align(
+                        child: AppWidget.dividerWelcome(),
+                        alignment: Alignment.center,
+                      ),
+                    ),
+                  );
+                }),
+                Obx(() {
+                  // показ если что то не то))
+                  return Visibility(
+                    visible: c.isActiveSnackBar.value,
+                    child: CustomSnackBar(message: c.messageSnackBar.value),
+                  );
+                }),
                 Expanded(
                   child: Container(
-                    margin: const EdgeInsets.all(ConstNumber.defaultMargin),
+                    // margin: const EdgeInsets.all(ConstNumber.defaultMargin),
                     decoration: BoxDecoration(
-                        color: AppColors.content(context),
-                        borderRadius: const BorderRadius.all(
-                            Radius.circular(ConstNumber.defaultRadius))),
+                      color: AppColors.content(context),
+                    ),
                     child: const NumPad(),
                   ),
                 ),
               ],
             ),
+            DrawerIconWidget(globalkey: _globalKey),
           ],
         ),
       ),

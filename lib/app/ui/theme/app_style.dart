@@ -1,11 +1,8 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
-import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'app_size.dart';
 
 abstract class AppStyleNumpad {
   static TextStyle function(BuildContext context) {

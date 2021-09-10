@@ -1,15 +1,12 @@
-import 'package:calc_triangle/app/admob/ad_helper.dart';
-import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class ScaleneTrianglePage extends StatelessWidget {
+  const ScaleneTrianglePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const SafeArea(
+    return const Scaffold(
+      body: SafeArea(
         child: Placeholder(),
       ),
     );

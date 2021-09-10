@@ -3,7 +3,6 @@ import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
-import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get_core/src/get_main.dart';
@@ -23,7 +22,7 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.seven),
               CalculatorKey(symbol: Keys.eight),
               CalculatorKey(symbol: Keys.nine),
-              CalculatorKey(symbol: Keys.backspase),
+              CalculatorKey(symbol: Keys.backspace),
             ],
           ),
         ),
@@ -96,7 +95,7 @@ class CalculatorKey extends StatelessWidget {
     return Expanded(
       child: TextButton(
         onLongPress: () {
-          if (symbol == Keys.backspase) {
+          if (symbol == Keys.backspace) {
             c.longBackspace();
           }
         },
@@ -109,7 +108,7 @@ class CalculatorKey extends StatelessWidget {
             c.prevElement();
           } else if (symbol == Keys.clear) {
             c.clearAll();
-          } else if (symbol == Keys.backspase) {
+          } else if (symbol == Keys.backspace) {
             c.backspace();
           } else if (symbol == Keys.convert) {
           } else {

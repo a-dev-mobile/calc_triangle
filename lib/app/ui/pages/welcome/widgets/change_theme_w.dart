@@ -1,5 +1,4 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
-import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';

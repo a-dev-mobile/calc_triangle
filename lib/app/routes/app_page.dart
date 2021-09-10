@@ -2,9 +2,7 @@ import 'package:calc_triangle/app/bindings/calculate/calculate_b.dart';
 
 import 'package:calc_triangle/app/bindings/select_shape/select_shape_b.dart';
 import 'package:calc_triangle/app/bindings/welcome/welcom_b.dart';
-import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/pages/calculate/calculate_p.dart';
-
 
 import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
 import 'package:calc_triangle/app/ui/pages/setting/setting_p.dart';
@@ -18,7 +16,7 @@ class AppPage {
   static final pages = [
     GetPage(
         name: Routes.INITIAL,
-        page: () =>  WelcomePage(),
+        page: () => const WelcomePage(),
         transition: Transition.fade,
         binding: WelcomeBinding()),
     GetPage(
@@ -31,11 +29,10 @@ class AppPage {
         transition: Transition.rightToLeft,
         page: () => const CalculatePage(),
         binding: CalculateBinding()),
-  
-      GetPage(
-        name: Routes.SETTING,
-        transition: Transition.native,
-        page: () => const SettingPage(),
-        ),
+    GetPage(
+      name: Routes.SETTING,
+      transition: Transition.native,
+      page: () => const SettingPage(),
+    ),
   ];
 }

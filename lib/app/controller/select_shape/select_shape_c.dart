@@ -1,6 +1,5 @@
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
-import 'package:calc_triangle/main.dart';
 import 'package:get/get.dart';
 
 enum Shapes {

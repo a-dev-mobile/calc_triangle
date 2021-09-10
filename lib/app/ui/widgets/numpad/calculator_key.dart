@@ -3,11 +3,11 @@ import 'key_symbol.dart';
 abstract class Keys {
   static KeySymbol empty = const KeySymbol('');
   static KeySymbol clear = const KeySymbol('C');
-  static KeySymbol backspase = const KeySymbol('⌫');
+  static KeySymbol backspace = const KeySymbol('←');
 
   static KeySymbol next = const KeySymbol('>');
   static KeySymbol prev = const KeySymbol('<');
-  static KeySymbol convert = const KeySymbol('<°>');
+  static KeySymbol convert = const KeySymbol('°');
   static KeySymbol decimal = const KeySymbol('.');
 
   static KeySymbol zero = const KeySymbol('0');

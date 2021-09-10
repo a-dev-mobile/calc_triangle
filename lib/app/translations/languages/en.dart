@@ -1,7 +1,7 @@
 Map<String, String> en = {
   'about': 'About Us',
-  'app_name': 'Triangle',
-  'app_name_sub': 'Calculations & Formulas',
+  'app_name': 'Right Triangle',
+  'app_name_sub': 'Calculations',
   'right_triangle': 'Right Triangle',
   'enter_2_parameters': 'Enter any 2 parameters',
   'choose_theme': 'Choose your theme',

@@ -10,7 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logger/logger.dart';
 
-import 'app/constant/const_number.dart';
 import 'app/constant/const_string.dart';
 import 'app/translations/app_translations.dart';
 

@@ -9,9 +9,9 @@ class CustomSnackBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: AppUtils.getWidth(context),
-      color: AppColors.contentRevers(context).withOpacity(0.5),
+      // color: AppColors.contentRevers(context).withOpacity(0.5),
       child: Align(
           alignment: Alignment.center,
           child: Text(

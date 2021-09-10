@@ -4,7 +4,6 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 
 import 'package:calc_triangle/main.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:get/get.dart';
 
@@ -58,7 +57,6 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
-    RightTriangle activeParm1 = activeParamMap[1]!;
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
     bool conditionTwo = false;
@@ -183,6 +181,7 @@ class RightTriangleController extends GetxController {
     conditionOne = activeParamMap.containsValue(RightTriangle.aCathet);
     conditionTwo = activeParamMap.containsValue(RightTriangle.bCathet);
     if (conditionOne && conditionTwo) {
+      printt.v('//знаем а катет и в катет --');
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
@@ -263,7 +262,7 @@ class RightTriangleController extends GetxController {
         [aCathetD, bCathetD, cHypotenuseD, bAngleD, aAngleD])) {
       printt.i('clear');
       _resetValue();
-      _resetActiveParam();
+      // _resetActiveParam();
     }
   }
 
@@ -307,6 +306,10 @@ class RightTriangleController extends GetxController {
     } else {
       endSnack();
     }
+
+    printt.v('activeParamMap');
+    printt.v(activeParamMap[1]);
+    printt.v(activeParamMap[2]);
   }
 
   bool _isMaxNumberAfterPoint(String value) {

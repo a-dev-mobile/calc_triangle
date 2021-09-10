@@ -1,5 +1,3 @@
-import 'package:calc_triangle/app/constant/const_assets.dart';
-import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -7,7 +5,6 @@ import 'package:calc_triangle/app/ui/theme/app_color.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
-import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +35,7 @@ class DrawerWidget extends StatelessWidget {
           ),
           child: SafeArea(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Container(
@@ -176,4 +173,3 @@ class OvalRightBorderClipper extends CustomClipper<Path> {
 //       ),
 //     );
 //   }
-

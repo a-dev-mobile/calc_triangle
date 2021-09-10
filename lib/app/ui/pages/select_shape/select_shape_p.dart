@@ -1,11 +1,9 @@
 import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
-import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_triangle_image_info_w.dart';

@@ -9,7 +9,7 @@ class KeySymbol {
 
   static final List<KeySymbol> _functions = [
     Keys.clear,
-    Keys.backspase,
+    Keys.backspace,
   ];
   static final List<KeySymbol> _choice = [
     Keys.next,

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
