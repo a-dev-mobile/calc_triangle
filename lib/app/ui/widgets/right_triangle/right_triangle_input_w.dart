@@ -3,7 +3,9 @@ import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/ui/widgets/drawer/snackbar/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
+import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
@@ -13,11 +15,8 @@ import 'package:get/get.dart';
 
 import 'widget/r_triangle_image_input_w.dart';
 
-
 class RightTriangleInputWidget extends StatelessWidget {
   const RightTriangleInputWidget({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +25,27 @@ class RightTriangleInputWidget extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
+            Obx(() {
+              // показ если что то не то))
+              return Visibility(
+                visible: c.isActiveSnackBar.value,
+                child: CustomSnackBar(message: c.messageSnackBar.value),
+              );
+            }),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const RightTriangleImageInputWidget(),
-                Text(
-                  TranslateHelper.rightTriangle,
-                  style: AppStyleText.titleText(context),
-                ),
                 Divider(
                   indent: 50.w,
                   endIndent: 50.w,
                   color: AppColors.text(context),
                 ),
                 Text(
-                  TranslateHelper.enterTwoParameters,
-                  style: AppStyleText.subText(context),
+                  TranslateHelper.rightTriangle,
+                  style: AppStyleText.titleText(context),
                 ),
-                
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.all(ConstNumber.defaultMargin),

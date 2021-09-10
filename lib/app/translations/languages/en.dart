@@ -7,7 +7,7 @@ Map<String, String> en = {
   'choose_theme': 'Choose your theme',
   'launch': 'Start',
   'setting_first_launch': 'Setting up for the first launch',
-  'dark_theme': 'Dark theme',  
+  'dark_theme': 'Dark theme',
   'light_theme': 'Light theme',
   'setting': 'Setting',
   'home': 'Home',
@@ -23,8 +23,9 @@ Map<String, String> en = {
   'select_theme': 'Select the theme of app',
   'select_theme_light': 'Selected app theme: Light theme',
   'select_theme_dark': 'Selected app theme: Dark theme',
+  'message_angle_less_90': 'The angle must be less than 90°',
+  'enter_value_sides': 'Enter the value of one of the sides',
   'selected_precision_result': 'Selected precision of results: ',
-  
-
-
+  'message_hypotenuse_greater_cathetus':
+      'Hypotenuse must be greater than the cathetus',
 };

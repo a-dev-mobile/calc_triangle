@@ -30,6 +30,14 @@ abstract class AppUtils {
     printt.w('AppUtils setPrecisionResult  ${AppUtils.getPrecisionResults()}');
   }
 
+  static double getWidth(BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
+
+  static double getHeight(BuildContext context) {
+    return MediaQuery.of(context).size.height;
+  }
+
 //==============================================
   static Future<void> setAciveShape(int index) async {
     await GetStorage().write(ConstString.keyActiveShape, index);
@@ -100,37 +108,37 @@ abstract class AppUtilsString {
     }
 
     // print('old $str new $result');
-/* 
-  
+/*
+
 double num = 123.000;
       String s;
         String s2;
         String s3;
- s = num.toStringAsFixed(2); 
-  
+ s = num.toStringAsFixed(2);
+
     RegExp regex = RegExp(r"([.]*0)(?!.*\d)");
  s= s.replaceAll(regex, "");
-  
+
  s3 = s.split('.')[1];
-    
+
   if(int.parse(s)>0){
-    
+
     print('остаток >0');
   }
-  
-  
+
+
    s2 = num.toString().replaceAll(regex, "");
 
   print (s);
     print (s2);
-  
-  
+
+
     String s1 = '2.212100';
-  
+
   s1 = s1.split('.')[1];
  for(int i=0; i<s1.length; i++) {
 print( s1[i]);
-   
+
 }
   print(s1.substring(s1.length - 1));
 }

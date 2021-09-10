@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 
@@ -22,12 +23,22 @@ class RightTriangleController extends GetxController {
   var aAngle = _startAngleValue.obs;
   var bAngle = _startAngleValue.obs;
 
+  var activeParamMap = <int, RightTriangle>{}.obs;
+
+  //начальное значение при запуске
+  var isaCathet = false.obs;
+  var isbCathet = false.obs;
+  var iscHypotenuse = false.obs;
+  var isaAngle = false.obs;
+  var isbAngle = false.obs;
+
+  var isActiveSnackBar = false.obs;
+  var messageSnackBar = ''.obs;
+
   static const _startLengthValue = '0';
   static const _startAngleValue = '0°';
 
-  int numberDigitsAfterPoint = AppUtils.getPrecisionResults();
-
-  var activeParamMap = <int, RightTriangle>{}.obs;
+  late int numberDigitsAfterPoint;
 
   //сразу записываем
   void _resetActiveParam() {
@@ -36,13 +47,6 @@ class RightTriangleController extends GetxController {
       2: RightTriangle.aCathet,
     };
   }
-
-//начальное значение при запуске
-  var isaCathet = false.obs;
-  var isbCathet = false.obs;
-  var iscHypotenuse = false.obs;
-  var isaAngle = false.obs;
-  var isbAngle = false.obs;
 
   void _resetActiveInput() {
 //начальное значение при запуске
@@ -54,11 +58,6 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
-
-
-
-
-
     RightTriangle activeParm1 = activeParamMap[1]!;
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
@@ -76,21 +75,13 @@ class RightTriangleController extends GetxController {
     double bAngleD = double.parse(AppUtilsString.removeLastCharacter(bAngleS));
     double aAngleD = double.parse(AppUtilsString.removeLastCharacter(aAngleS));
 
-
-
-
     double calc;
 
     conditionOne = activeParamMap.containsValue(RightTriangle.aAngle);
     conditionTwo = activeParamMap.containsValue(RightTriangle.bAngle);
 
     // проверка если последние введенные данные - углы
-    if (conditionOne && conditionTwo) {
-      bCathet.value = _startLengthValue;
-      aCathet.value = _startLengthValue;
-      cHypotenuse.value = _startLengthValue;
-      showSnackbar('Введите значение одной из сторон');
-    }
+    checkIfActiveParamAngles(conditionOne, conditionTwo);
 
     //find bAngle
 
@@ -217,7 +208,7 @@ class RightTriangleController extends GetxController {
     conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
     if (conditionOne && conditionTwo) {
       if (cHypotenuseD <= aCathetD) {
-        showSnackbar('Гипотенуза должна быть больше катета');
+        showSnack(TranslateHelper.messageHypotenuseGreaterCathetus);
         return;
       }
       // находим гипотенузу
@@ -241,9 +232,11 @@ class RightTriangleController extends GetxController {
     conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
     if (conditionOne && conditionTwo) {
       if (cHypotenuseD <= bCathetD) {
-        showSnackbar('Гипотенуза должна быть больше катета');
+        showSnack(TranslateHelper.messageHypotenuseGreaterCathetus);
         return;
-      }else{Get.back();}
+      } else {
+        endSnack();
+      }
 
       aCathetD = sqrt(pow(cHypotenuseD, 2) - pow(bCathetD, 2));
       aCathet.value =
@@ -265,16 +258,24 @@ class RightTriangleController extends GetxController {
     printt.i(
         'aCathetD $aCathetD bCathetD $bCathetD cHypotenuseD $cHypotenuseD aAngleD $aAngleD bAngleD $bAngleD');
 
-
-
 // проверка если цифры не числа
     if (AppUtilsNumber.isDoublesNanAndInfinity(
         [aCathetD, bCathetD, cHypotenuseD, bAngleD, aAngleD])) {
       printt.i('clear');
-      clearAll();
-
+      _resetValue();
+      _resetActiveParam();
     }
+  }
 
+  void checkIfActiveParamAngles(bool conditionOne, bool conditionTwo) {
+    if (conditionOne && conditionTwo) {
+      bCathet.value = _startLengthValue;
+      aCathet.value = _startLengthValue;
+      cHypotenuse.value = _startLengthValue;
+      showSnack(TranslateHelper.enterValueSides);
+    } else {
+      endSnack();
+    }
   }
 
   void setActiveParam() {
@@ -298,6 +299,13 @@ class RightTriangleController extends GetxController {
         activeParamMap[2] != activeParamMap[3]) {
       activeParamMap[1] = activeParamMap[2]!;
       activeParamMap[2] = activeParamMap[3]!;
+    }
+
+    // если активные параметры углы и ли параметры одинаковы показыва. snack
+    if (activeParamMap[1] == activeParamMap[2]) {
+      showSnack(TranslateHelper.enterTwoParameters);
+    } else {
+      endSnack();
     }
   }
 
@@ -397,7 +405,7 @@ class RightTriangleController extends GetxController {
       // если начинается ввод с точки
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      if (isAngleLess90(sumInput, 'Угол α должен быть меньше 90°')) return;
+      if (isAngleLess90(sumInput, TranslateHelper.messageAngleLess90)) return;
 
       aAngle.value = sumInput + "°";
     } else if (isbAngle.value) {
@@ -414,7 +422,7 @@ class RightTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      if (isAngleLess90(sumInput, 'Угол β должен быть меньше 90°')) return;
+      if (isAngleLess90(sumInput, TranslateHelper.messageAngleLess90)) return;
 
       bAngle.value = sumInput + "°";
     }
@@ -426,43 +434,57 @@ class RightTriangleController extends GetxController {
 
   bool isAngleLess90(String angle, String message) {
     var calc = double.parse(angle);
-
     if (calc >= 90) {
-      if (!Get.isSnackbarOpen!) {
-        Get.snackbar(
-          "",
-          "",
-          messageText: Center(child: Text(message)),
-          titleText: Container(),
-          snackPosition: SnackPosition.TOP,
-          icon: const Icon(Icons.info),
-          borderRadius: 20,
-          duration: const Duration(seconds: 4),
-          forwardAnimationCurve: Curves.easeOutBack,
-        );
-      }
+      showSnack(message);
       return true;
     } else {
+      endSnack();
+
       return false;
     }
+
+    //
+    // if (calc >= 90) {
+    //   if (!Get.isSnackbarOpen!) {
+    //     Get.snackbar(
+    //       "",
+    //       "",
+    //       messageText: Center(child: Text(message)),
+    //       titleText: Container(),
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       icon: const Icon(Icons.info),
+    //       borderRadius: 20,
+    //       duration: const Duration(seconds: 4),
+    //       forwardAnimationCurve: Curves.easeOutBack,
+    //     );
+    //   }
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
-  void showSnackbar(String message) {
-    if (!Get.isSnackbarOpen!) {
-      Get.snackbar(
-        "",
-        "",
-        messageText: Center(child: Text(message)),
-        titleText: Container(),
-        snackPosition: SnackPosition.TOP,
-        icon: const Icon(Icons.info),
-        borderRadius: 20,
+  void endSnack() {
+    isActiveSnackBar.value = false;
+  }
 
-        duration: const Duration(seconds: 4),
-        forwardAnimationCurve: Curves.easeOutBack,
+  void showSnack(String message) {
+    isActiveSnackBar.value = true;
+    messageSnackBar.value = message;
 
-      );
-    }
+    // if (!Get.isSnackbarOpen!) {
+    //   Get.snackbar(
+    //     "",
+    //     "",
+    //     messageText: Center(child: Text(message)),
+    //     titleText: Container(),
+    //     snackPosition: SnackPosition.TOP,
+    //     icon: const Icon(Icons.info),
+    //     borderRadius: 20,
+    //     duration: const Duration(seconds: 4),
+    //     forwardAnimationCurve: Curves.easeOutBack,
+    //   );
+    // }
   }
 
   void _printElements() {
@@ -578,6 +600,8 @@ class RightTriangleController extends GetxController {
   }
 
   void _resetValue() {
+    showSnack(TranslateHelper.enterTwoParameters);
+
     //устанавливаем начальные значения
     aCathet.value = _startLengthValue;
     bCathet.value = _startLengthValue;
@@ -626,6 +650,8 @@ class RightTriangleController extends GetxController {
 
   @override
   void onInit() {
+    showSnack(TranslateHelper.enterTwoParameters);
+    numberDigitsAfterPoint = AppUtils.getPrecisionResults();
     _resetActiveParam();
     _resetActiveInput();
     super.onInit();
