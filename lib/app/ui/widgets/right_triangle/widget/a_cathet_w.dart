@@ -21,20 +21,26 @@ class AcathetWidget extends StatelessWidget {
     RightTriangleController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
-
+    TextStyle styleText;
+    bool isActiveInput;
+    bool isActiveParam;
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Obx(() {
-          TextStyle styleText;
-          if (c.isaCathet.value) {
-            styleText = AppStyleTextImage.active(context);
-          } else {
-            styleText = AppStyleTextImage.inActive(context);
-          }
+            isActiveInput = c.isaCathet.value;
+            isActiveParam =
+                c.activeParamMap.value.containsValue(RightTriangle.aCathet);
+            if (isActiveInput) {
+              styleText = AppStyleTextImage.activeInput(context);
+            } else if (isActiveParam) {
+              styleText = AppStyleTextImage.activeParam(context);
+            } else {
+              styleText = AppStyleTextImage.inActive(context);
+            }
 
-          print('obx aCathet');
+
           return Text(
-            c.aCathet.toString(),
+            c.aCathet.value,
             style: styleText,
           );
         }));

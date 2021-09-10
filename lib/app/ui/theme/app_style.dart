@@ -48,15 +48,11 @@ abstract class AppStyleDrawer {
 
 abstract class AppStyleText {
   static TextStyle titleText(BuildContext context) {
-    return TextStyle(
-        color: AppColors.text(context),
-        fontSize: 20.sp);
+    return TextStyle(color: AppColors.text(context), fontSize: 20.sp);
   }
 
   static TextStyle subText(BuildContext context) {
-    return TextStyle(
-        color: AppColors.text(context),
-        fontSize: 15.sp);
+    return TextStyle(color: AppColors.text(context), fontSize: 15.sp);
   }
 }
 
@@ -70,11 +66,19 @@ abstract class AppStyleTextImage {
         fontSize: 20.sp);
   }
 
-  static TextStyle active(BuildContext context) {
+  static TextStyle activeInput(BuildContext context) {
     return TextStyle(
         color: Colors.red,
         backgroundColor: AppColors.content(context),
         fontSize: 25.sp);
+  }
+
+  static TextStyle activeParam(BuildContext context) {
+    return TextStyle(
+        color: AppColors.text(context),
+        fontWeight: FontWeight.bold,
+        backgroundColor: AppColors.content(context),
+        fontSize: 20.sp);
   }
 
   static TextStyle inActive(BuildContext context) {

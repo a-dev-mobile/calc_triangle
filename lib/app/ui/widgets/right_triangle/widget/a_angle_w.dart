@@ -24,21 +24,28 @@ class AangleWidget extends StatelessWidget {
     RightTriangleController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
-
+    TextStyle styleText;
+    bool isActiveInput;
+    bool isActiveParam;
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Transform.rotate(
           angle: angle * pi / 180,
           child: Obx(() {
-            TextStyle styleText;
-            if (c.isaAngle.value) {
-              styleText = AppStyleTextImage.active(context);
+            isActiveInput = c.isaAngle.value;
+            isActiveParam =
+                c.activeParamMap.value.containsValue(RightTriangle.aAngle);
+                
+            if (isActiveInput) {
+              styleText = AppStyleTextImage.activeInput(context);
+            } else if (isActiveParam) {
+              styleText = AppStyleTextImage.activeParam(context);
             } else {
               styleText = AppStyleTextImage.inActive(context);
             }
 
             return Text(
-              c.aAngle.toString(),
+              c.aAngle.value,
               style: styleText,
             );
           }),

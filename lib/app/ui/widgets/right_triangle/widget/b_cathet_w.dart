@@ -21,21 +21,27 @@ class BcathetWidget extends StatelessWidget {
     RightTriangleController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
-
+    TextStyle styleText;
+    bool isActiveInput;
+    bool isActiveParam;
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Transform.rotate(
           angle: angle * pi / 180,
           child: Obx(() {
-            TextStyle styleText;
-            if (c.isbCathet.value) {
-              styleText = AppStyleTextImage.active(context);
+            isActiveInput = c.isbCathet.value;
+            isActiveParam =
+                c.activeParamMap.value.containsValue(RightTriangle.bCathet);
+            if (isActiveInput) {
+              styleText = AppStyleTextImage.activeInput(context);
+            } else if (isActiveParam) {
+              styleText = AppStyleTextImage.activeParam(context);
             } else {
               styleText = AppStyleTextImage.inActive(context);
             }
 
             return Text(
-              c.bCathet.toString(),
+              c.bCathet.value,
               style: styleText,
             );
           }),

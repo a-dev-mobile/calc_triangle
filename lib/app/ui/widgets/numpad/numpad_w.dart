@@ -108,7 +108,7 @@ class CalculatorKey extends StatelessWidget {
           } else if (symbol == Keys.prev) {
             c.prevElement();
           } else if (symbol == Keys.clear) {
-            c.clear();
+            c.clearAll();
           } else if (symbol == Keys.backspase) {
             c.backspace();
           } else if (symbol == Keys.convert) {

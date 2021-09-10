@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'a_angle_w.dart';
 import 'a_cathet_w.dart';
-import 'b_angle.dart';
+import 'b_angle_w.dart';
 import 'b_cathet_w.dart';
 import 'c_hypotenusea_w.dart';
 

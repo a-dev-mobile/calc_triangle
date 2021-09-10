@@ -197,4 +197,13 @@ abstract class AppUtilsNumber {
   static double toDegree(double radian) {
     return radian * (180 / pi);
   }
+
+  static bool isDoublesNanAndInfinity(List<double> listDouble) {
+    for (var item in listDouble) {
+      if (item.isNaN || item.isInfinite) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

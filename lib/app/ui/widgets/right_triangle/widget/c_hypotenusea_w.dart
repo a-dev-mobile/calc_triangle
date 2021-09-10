@@ -18,27 +18,33 @@ class ChypotenuseWidget extends StatelessWidget {
   final double posX;
   final double posY;
   final double angle;
+
   @override
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
 
     double minSize = AppUtils.getImageMinSize();
-
+    TextStyle styleText;
+    bool isActiveInput;
+    bool isActiveParam;
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Transform.rotate(
           angle: angle * pi / 180,
           child: Obx(() {
-            TextStyle styleText;
-            if (c.iscHypotenuse.value) {
-              styleText = AppStyleTextImage.active(context);
+            isActiveInput = c.iscHypotenuse.value;
+            isActiveParam =
+                c.activeParamMap.value.containsValue(RightTriangle.cHypotenuse);
+
+            if (isActiveInput) {
+              styleText = AppStyleTextImage.activeInput(context);
+            } else if (isActiveParam) {
+              styleText = AppStyleTextImage.activeParam(context);
             } else {
               styleText = AppStyleTextImage.inActive(context);
             }
-
-            print('obx cHypotenuse');
             return Text(
-              c.cHypotenuse.toString(),
+              c.cHypotenuse.value,
               style: styleText,
             );
           }),

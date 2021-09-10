@@ -27,11 +27,11 @@ class RightTriangleController extends GetxController {
 
   int numberDigitsAfterPoint = AppUtils.getPrecisionResults();
 
-  var activeParamMap = <int, RightTriangle>{};
+  var activeParamMap = <int, RightTriangle>{}.obs;
 
   //сразу записываем
   void _resetActiveParam() {
-    activeParamMap = <int, RightTriangle>{
+    activeParamMap.value = <int, RightTriangle>{
       1: RightTriangle.aCathet,
       2: RightTriangle.aCathet,
     };
@@ -54,6 +54,11 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
+
+
+
+
+
     RightTriangle activeParm1 = activeParamMap[1]!;
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
@@ -71,7 +76,9 @@ class RightTriangleController extends GetxController {
     double bAngleD = double.parse(AppUtilsString.removeLastCharacter(bAngleS));
     double aAngleD = double.parse(AppUtilsString.removeLastCharacter(aAngleS));
 
-    // if (activeParm1 == activeParm2) return;
+
+
+
     double calc;
 
     conditionOne = activeParamMap.containsValue(RightTriangle.aAngle);
@@ -210,7 +217,7 @@ class RightTriangleController extends GetxController {
     conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
     if (conditionOne && conditionTwo) {
       if (cHypotenuseD <= aCathetD) {
-        showSnackbar('Гипотенуза должна быть больше ${aCathet.value}');
+        showSnackbar('Гипотенуза должна быть больше катета');
         return;
       }
       // находим гипотенузу
@@ -234,9 +241,9 @@ class RightTriangleController extends GetxController {
     conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
     if (conditionOne && conditionTwo) {
       if (cHypotenuseD <= bCathetD) {
-        showSnackbar('Гипотенуза должна быть больше ${bCathet.value}');
+        showSnackbar('Гипотенуза должна быть больше катета');
         return;
-      }
+      }else{Get.back();}
 
       aCathetD = sqrt(pow(cHypotenuseD, 2) - pow(bCathetD, 2));
       aCathet.value =
@@ -257,6 +264,17 @@ class RightTriangleController extends GetxController {
         'aCathetS $aCathetS bCathetS $bCathetS cHypotenuseS $cHypotenuseS aAngleS $aAngleS bAngleS $bAngleS');
     printt.i(
         'aCathetD $aCathetD bCathetD $bCathetD cHypotenuseD $cHypotenuseD aAngleD $aAngleD bAngleD $bAngleD');
+
+
+
+// проверка если цифры не числа
+    if (AppUtilsNumber.isDoublesNanAndInfinity(
+        [aCathetD, bCathetD, cHypotenuseD, bAngleD, aAngleD])) {
+      printt.i('clear');
+      clearAll();
+
+    }
+
   }
 
   void setActiveParam() {
@@ -439,8 +457,10 @@ class RightTriangleController extends GetxController {
         snackPosition: SnackPosition.TOP,
         icon: const Icon(Icons.info),
         borderRadius: 20,
+
         duration: const Duration(seconds: 4),
         forwardAnimationCurve: Curves.easeOutBack,
+
       );
     }
   }
@@ -476,10 +496,12 @@ class RightTriangleController extends GetxController {
     } else if (isbAngle.value) {
       bAngle.value = _startAngleValue;
     }
+    setActiveParam();
     calculate();
-    if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
-      _resetValue();
-    }
+
+    // if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
+    //   _resetValue();
+    // }
   }
 
   void backspace() {
@@ -542,12 +564,12 @@ class RightTriangleController extends GetxController {
     setActiveParam();
     calculate();
 
-    if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
-      _resetValue();
-    }
+    // if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
+    //   _resetValue();
+    // }
   }
 
-  void clear() {
+  void clearAll() {
     //устанавливаем начальные значения
     _resetValue();
 
