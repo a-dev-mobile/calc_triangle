@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-late WelcomeController controller = Get.find();
+late WelcomeController c = Get.find();
 
 class ChangeThemeWidget extends StatelessWidget {
   const ChangeThemeWidget({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class ChangeThemeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      bool isDark = controller.isDarkTheme.value;
+      bool isDark = c.isDarkTheme.value;
       String theme =
           isDark ? TranslateHelper.darkTheme : TranslateHelper.lightTheme;
 
@@ -35,7 +35,7 @@ class ChangeThemeWidget extends StatelessWidget {
           children: [
             CircleButton(
                 onTap: () {
-                  controller.setDarkTheme();
+                  c.setDarkTheme();
                 },
                 color: ConstColor.scaffoldDarkTheme,
                 icon: isDark
@@ -43,7 +43,7 @@ class ChangeThemeWidget extends StatelessWidget {
                     : AppStyleButton.iconNotActiveTheme(context)),
             CircleButton(
                 onTap: () {
-                  controller.setLightTheme();
+                  c.setLightTheme();
                 },
                 color: ConstColor.scaffoldLightTheme,
                 icon: !isDark

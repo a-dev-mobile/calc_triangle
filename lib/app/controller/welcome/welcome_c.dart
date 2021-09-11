@@ -1,3 +1,4 @@
+import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,12 @@ class WelcomeController extends GetxController {
     precisionResult.value = precision;
 
     AppUtils.setPrecisionResult(precision);
+
+    RightTriangleController c = Get.find();
+
+    //вызов из другого контроллера для обновления точности результата расчета
+    c.numberDigitsAfterPoint = precision;
+    c.calculate();
   }
 
   void setDarkTheme() {
@@ -38,6 +45,7 @@ class WelcomeController extends GetxController {
     //инициализация перед запуском и правильное отображение
     isDarkTheme.value = AppUtils.isDark();
     precisionResult.value = AppUtils.getPrecisionResults().toInt();
+    AppUtils.setFirstStartApp(false);
     super.onInit();
   }
 }

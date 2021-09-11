@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
@@ -14,6 +15,7 @@ enum RightTriangle {
   aAngle,
   bAngle,
 }
+late WelcomeController c = Get.find();
 
 class RightTriangleController extends GetxController {
   var aCathet = _startLengthValue.obs;
@@ -37,9 +39,10 @@ class RightTriangleController extends GetxController {
   static const _startLengthValue = '0';
   static const _startAngleValue = '0°';
 
-  late int numberDigitsAfterPoint;
+  int numberDigitsAfterPoint = c.precisionResult.value;
 
   //сразу записываем
+
   void _resetActiveParam() {
     activeParamMap.value = <int, RightTriangle>{
       1: RightTriangle.aCathet,
@@ -57,6 +60,8 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
+
+
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
     bool conditionTwo = false;
@@ -654,7 +659,7 @@ class RightTriangleController extends GetxController {
   @override
   void onInit() {
     showSnack(TranslateHelper.enterTwoParameters);
-    numberDigitsAfterPoint = AppUtils.getPrecisionResults();
+
     _resetActiveParam();
     _resetActiveInput();
     super.onInit();

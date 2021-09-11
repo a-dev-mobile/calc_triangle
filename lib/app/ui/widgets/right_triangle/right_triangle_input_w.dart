@@ -1,5 +1,6 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
@@ -7,7 +8,7 @@ import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/snackbar/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
-import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
+import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
@@ -16,14 +17,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'widget/r_triangle_image_input_w.dart';
-
+  late  RightTriangleController c = Get.find();
+  
 class RightTriangleInputWidget extends StatelessWidget {
   RightTriangleInputWidget({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
+
     return Scaffold(
       key: _globalKey,
       drawer: const DrawerWidget(),
@@ -42,7 +44,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                       width: AppUtils.getWidth(context),
                       height: AppUtils.getHeight(context) * 0.05,
                       child: Align(
-                        child: AppWidget.dividerWelcome(),
+                        child: AppWidgets.dividerWelcome(),
                         alignment: Alignment.center,
                       ),
                     ),

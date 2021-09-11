@@ -1,9 +1,10 @@
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
-import 'package:calc_triangle/app/ui/pages/welcome/widgets/change_theme_w.dart';
+import 'package:calc_triangle/app/ui/widgets/other/change_theme_w.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
+import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
+import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +32,7 @@ class SettingPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             const ChangeThemeWidget(),
-            AppWidget.dividerWelcome(),
+            AppWidgets.dividerWelcome(),
 
             ListTile(
               title: Text(
@@ -48,32 +49,15 @@ class SettingPage extends StatelessWidget {
               ),
             ),
 
-            AppWidget.dividerWelcome(),
+            AppWidgets.dividerWelcome(),
 
-            Obx(() {
-              return SwitchListTile(
-                value: c.isShowLaunchScreen.value,
-                onChanged: (val) {
-                  c.changeShowLaunchScreen();
-                },
-                title: Text(
-                  TranslateHelper.showStartupScreen,
-                  style: AppStyleText.titleText(context),
-                ),
-                subtitle: Text(
-                  c.isShowLaunchScreen.value
-                      ? TranslateHelper.yes
-                      : TranslateHelper.no,
-                  style: AppStyleText.subText(context),
-                ),
-              );
-            }),
-            AppWidget.dividerWelcome(),
+            const SettingLaunchScreenWidget(),
+            AppWidgets.dividerWelcome(),
             const SliderPrecisionResultWidget(),
-            AppWidget.dividerWelcome(),
+            AppWidgets.dividerWelcome(),
             ListTile(
               onTap: () {
-                AppWidget.viewDialogExit(context);
+                AppWidgets.viewDialogExit(context);
               },
               title: Text(
                 TranslateHelper.exit,
@@ -86,3 +70,5 @@ class SettingPage extends StatelessWidget {
     );
   }
 }
+
+

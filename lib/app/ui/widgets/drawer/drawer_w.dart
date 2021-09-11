@@ -4,7 +4,7 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
+import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -66,7 +66,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       },
                       icon: Icons.home,
                       msg: TranslateHelper.home),
-                  AppWidget.dividerDrawer(),
+                  AppWidgets.dividerDrawer(),
                   DrawerRow(
                       onTap: () {
                         Navigator.of(_context).pop();
@@ -74,7 +74,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       },
                       icon: Icons.settings,
                       msg: TranslateHelper.setting),
-                  AppWidget.dividerDrawer(),
+                  AppWidgets.dividerDrawer(),
                   DrawerRow(
                       onTap: () {
                         Share.share(
@@ -82,16 +82,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       },
                       icon: Icons.share,
                       msg: TranslateHelper.shareApp),
-                  AppWidget.dividerDrawer(),
+                  AppWidgets.dividerDrawer(),
                   DrawerRow(
                       onTap: () {},
                       icon: Icons.info_outline,
                       msg: TranslateHelper.about),
                   // Spacer(),
-                  AppWidget.dividerDrawer(),
+                  AppWidgets.dividerDrawer(),
                   DrawerRow(
                       onTap: () {
-                        AppWidget.viewDialogExit(_context);
+                        AppWidgets.viewDialogExit(_context);
                       },
                       icon: Icons.exit_to_app,
                       msg: TranslateHelper.exit),

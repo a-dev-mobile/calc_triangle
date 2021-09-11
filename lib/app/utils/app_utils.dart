@@ -12,16 +12,28 @@ abstract class AppUtils {
     return isDark;
   }
 
+  static bool isFirstStartApp() {
+    bool isFirstStartApp =
+        GetStorage().read(ConstString.keyFirstStartApp) ?? true;
+    printt.w('AppUtils GetStorage isFirstStartApp $isFirstStartApp');
+    return isFirstStartApp;
+  }
+
+  static Future<void> setFirstStartApp(bool isFirstStartApp) async {
+    await GetStorage().write(ConstString.keyFirstStartApp, isFirstStartApp);
+    printt.w('AppUtils setFirstStartApp  ${AppUtils.isFirstStartApp()}');
+  }
+
   static bool isShowLaunchScreen() {
-    bool isShowFirstSetting =
-        GetStorage().read(ConstString.keyShowFirstSettingPage) ?? false;
-    printt.w('AppUtils GetStorage isShowFirstSetting $isShowFirstSetting');
-    return isShowFirstSetting;
+    bool isShowLaunchScreen =
+        GetStorage().read(ConstString.keyShowLaunchScreen) ?? false;
+    printt.w('AppUtils GetStorage isShowLaunchScreen $isShowLaunchScreen');
+    return isShowLaunchScreen;
   }
 
   static Future<void> setShowLaunchScreen(bool isShowFirstSettingPage) async {
     await GetStorage()
-        .write(ConstString.keyShowFirstSettingPage, isShowFirstSettingPage);
+        .write(ConstString.keyShowLaunchScreen, isShowFirstSettingPage);
     printt.w('AppUtils setShowFirstSetting  ${AppUtils.isShowLaunchScreen()}');
   }
 
@@ -51,16 +63,9 @@ abstract class AppUtils {
   }
 
 //==============================================
-  static Future<void> setAciveShape(int index) async {
-    await GetStorage().write(ConstString.keyActiveShape, index);
-    printt.w('AppUtils setAciveShape  $index');
-  }
 
-  static int activeShapeIndex() {
-    int index = GetStorage().read(ConstString.keyActiveShape) ?? 0;
-    printt.w('AppUtils GetStorage activeShapeIndex $index');
-    return index;
-  }
+
+
 
 //==============================================
 

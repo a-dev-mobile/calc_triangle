@@ -7,12 +7,13 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/ui/widgets/other/app_widget.dart';
+import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
+import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'widgets/change_theme_w.dart';
+import '../../widgets/other/change_theme_w.dart';
 
 late WelcomeController c = Get.find();
 
@@ -44,16 +45,19 @@ class WelcomePage extends StatelessWidget {
                     ),
                     // RightTriangleImageInfoWidget(),
                     const WelcomeAppTitle(),
-                    AppWidget.dividerWelcome(),
+                    AppWidgets.dividerWelcome(),
                     const ChangeThemeWidget(),
-                    AppWidget.dividerWelcome(),
+                    AppWidgets.dividerWelcome(),
                     const SliderPrecisionResultWidget(),
+                    const SettingLaunchScreenWidget(),
                   ],
                 ),
               ),
             ),
+            Spacer(),
             SizedBox(
-                width: 0.8.sw, height: 0.07.sh, child: const WelcomeBtnStart()),
+                width: 0.8.sw, height: 0.05.sh, child: const WelcomeBtnStart()),
+            Spacer(),
           ],
         ),
       ),
@@ -148,6 +152,7 @@ class WelcomeBtnStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      
       onPressed: () => Get.toNamed(Routes.CALCULATE),
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );

@@ -11,5 +11,7 @@ class SettingController extends GetxController {
     isShowLaunchScreen.value = !(isShowLaunchScreen.value);
 
     AppUtils.setShowLaunchScreen(isShowLaunchScreen.value);
+
+    
   }
 }

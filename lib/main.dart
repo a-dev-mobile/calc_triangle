@@ -10,7 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logger/logger.dart';
 
-import 'app/constant/const_color.dart';
 import 'app/constant/const_string.dart';
 import 'app/translations/app_translations.dart';
 
@@ -53,9 +52,13 @@ class MyApp extends StatelessWidget {
 
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,
-            initialRoute: AppUtils.isShowLaunchScreen()
+
+            //если первый запуск то запускаем в дальнейшем взависимости от настроек
+            initialRoute: AppUtils.isFirstStartApp()
                 ? Routes.INITIAL
-                : Routes.CALCULATE,
+                : AppUtils.isShowLaunchScreen()
+                    ? Routes.INITIAL
+                    : Routes.CALCULATE,
 
             // defaultTransition: Transition.downToUp,
             getPages: AppPage.pages,
