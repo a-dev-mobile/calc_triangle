@@ -38,7 +38,7 @@ abstract class AppUtils {
   }
 
   static int getPrecisionResults() {
-    var value = GetStorage().read(ConstString.keyPrecisionResult) ?? 3.0;
+    var value = GetStorage().read(ConstString.keyPrecisionResult) ?? 1.0;
     printt.w('AppUtils GetStorage getPrecisionResults $value');
 
     return value.toInt();
