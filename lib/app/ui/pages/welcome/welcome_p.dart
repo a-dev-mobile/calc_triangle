@@ -44,7 +44,7 @@ class WelcomePage extends StatelessWidget {
                       child: const ImageAppWidget(),
                     ),
                     // RightTriangleImageInfoWidget(),
-                    const WelcomeAppTitle(),
+                     WelcomeAppTitle(fontSize:  AppSize.fontSizeHeadline4(context),),
                     AppWidgets.dividerWelcome(),
                     const ChangeThemeWidget(),
                     AppWidgets.dividerWelcome(),
@@ -152,7 +152,6 @@ class WelcomeBtnStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      
       onPressed: () => Get.toNamed(Routes.CALCULATE),
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );
@@ -160,10 +159,11 @@ class WelcomeBtnStart extends StatelessWidget {
 }
 
 class WelcomeAppTitle extends StatelessWidget {
-  const WelcomeAppTitle({
-    Key? key,
+   WelcomeAppTitle({
+    Key? key, required this.fontSize,
   }) : super(key: key);
 
+  final double fontSize;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -174,7 +174,7 @@ class WelcomeAppTitle extends StatelessWidget {
           style: TextStyle(
             color: AppColors.text(context),
             letterSpacing: 2.0,
-            fontSize: AppSize.fontSizeHeadline4(context),
+            fontSize:fontSize,
             fontWeight: FontWeight.bold,
             shadows: Get.isDarkMode == true
                 //тень взависимости от темы

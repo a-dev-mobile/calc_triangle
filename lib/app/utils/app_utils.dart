@@ -17,8 +17,23 @@ abstract class AppUtils {
         GetStorage().read(ConstString.keyFirstStartApp) ?? true;
     printt.w('AppUtils GetStorage isFirstStartApp $isFirstStartApp');
     return isFirstStartApp;
-  }
 
+
+  }
+  static String getLocale() {
+    String locale =
+        GetStorage().read(ConstString.keyLocale) ?? ConstString.localeEn;
+    printt.w('AppUtils getLocale $locale');
+    return locale;}
+
+
+  static Future<void> setLocale(String locale) async {
+    await GetStorage()
+        .write(ConstString.keyLocale, locale);
+    printt.w('AppUtils setLocale  ${AppUtils.getLocale()}');
+  }
+    
+  
   static Future<void> setFirstStartApp(bool isFirstStartApp) async {
     await GetStorage().write(ConstString.keyFirstStartApp, isFirstStartApp);
     printt.w('AppUtils setFirstStartApp  ${AppUtils.isFirstStartApp()}');

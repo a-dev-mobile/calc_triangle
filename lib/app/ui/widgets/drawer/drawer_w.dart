@@ -1,6 +1,7 @@
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
+import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
@@ -42,23 +43,23 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    color: Colors.amber,
-                    height: 0.2.sh,
-                    width: 1.sw,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(TranslateHelper.appName,
-                            style: AppStyleDrawer.textAppName(_context)),
-                        Text(TranslateHelper.appNameSub,
-                            style: AppStyleDrawer.textAppNameSub(_context)),
-                      ],
+                  Padding(
+                    padding: EdgeInsets.only(top: 0.05.sh),
+                    child: SizedBox(
+                      height: 0.1.sh,
+                      width: 1.sw,
+                      child: Center(
+                        child: WelcomeAppTitle(
+                          fontSize: 20.sp,
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 30.h),
+                  AppWidgets.dividerDrawer(),
+                  // SizedBox(height: 30.h),
                   DrawerRow(
                       onTap: () {
                         // Get.toNamed(Routes.SELECT_SHAPE);
@@ -84,7 +85,39 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       msg: TranslateHelper.shareApp),
                   AppWidgets.dividerDrawer(),
                   DrawerRow(
-                      onTap: () {},
+                      onTap: () {
+                        Get.defaultDialog(
+                            title: TranslateHelper.about,
+                            backgroundColor: AppColors.content(context),
+                            content: Align(
+                              alignment: Alignment.topLeft,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'App is created using flutter',
+                                    style: AppStyleText.subText(context),
+                                  ),
+                                  AppWidgets.dividerWelcome(),
+                                  Text(
+                                    'Libraries:',
+                                    style: AppStyleText.subText(context),
+                                  ),
+                                  SizedBox(height: 20.h),
+                                  Text(
+                                    '''
+flutter_screenutil: ^5.0.0+2
+get: ^4.3.8
+get_storage: ^2.0.3
+logger: ^1.1.0
+google_mobile_ads: ^0.13.4
+share: ^2.0.4
+''',
+                                    style: AppStyleText.subText(context),
+                                  ),
+                                ],
+                              ),
+                            ));
+                      },
                       icon: Icons.info_outline,
                       msg: TranslateHelper.about),
                   // Spacer(),

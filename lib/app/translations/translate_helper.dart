@@ -5,6 +5,9 @@ class TranslateHelper {
   // он предназначен для предотвращения создания экземпляра TranslateHelper
   TranslateHelper._();
   static updateLocale(Locale locale) {
+
+
+
     Get.updateLocale(locale);
   }
 
@@ -13,7 +16,7 @@ class TranslateHelper {
   static String get appName => 'app_name'.tr;
   static String get appNameSub => 'app_name_sub'.tr;
   static String get about => 'about'.tr;
-  static String get chooseTheme => 'choose_theme'.tr;
+
   static String get launch => 'launch'.tr;
   static String get settingFirstLaunch => 'setting_first_launch'.tr;
   static String get darkTheme => 'dark_theme'.tr;
@@ -29,7 +32,8 @@ class TranslateHelper {
   static String get no => 'no'.tr;
 
   static String get showStartupScreen => 'show_startup_screen'.tr;
-  static String get languageEnglish => 'language_english'.tr;
+  static String get languageEn => 'language_en'.tr;
+  static String get languageRu => 'language_ru'.tr;
   static String get language => 'language'.tr;
   static String get selectTheme => 'select_theme'.tr;
   static String get selectThemeLight => 'select_theme_light'.tr;

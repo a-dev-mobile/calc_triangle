@@ -71,7 +71,7 @@ abstract class AppStyleTextImage {
     return TextStyle(
         color: Colors.red,
         backgroundColor: AppColors.content(context),
-        fontSize: 25.sp);
+        fontSize: 20.sp);
   }
 
   static TextStyle activeParam(BuildContext context) {
@@ -86,7 +86,7 @@ abstract class AppStyleTextImage {
     return TextStyle(
         color: AppColors.text(context),
         backgroundColor: AppColors.content(context),
-        fontSize: 20.sp);
+        fontSize: 18.sp);
   }
 }
 

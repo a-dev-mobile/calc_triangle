@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:calc_triangle/app/routes/app_page.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
@@ -29,14 +31,13 @@ Future<void> main() async {
 
   await GetStorage.init();
   GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
+
+  AppUtils.setLocale(Platform.localeName);
+
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(const MyApp());
   });
-
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   statusBarColor: ConstColor.secondary,
-  // ));
 }
 
 class MyApp extends StatelessWidget {
@@ -67,7 +68,10 @@ class MyApp extends StatelessWidget {
             // theme: isDarkTheme ? darkThemeData(context) : lightThemeData(context),
             darkTheme: darkThemeData(context),
             translations: AppTranslation(),
-            locale: Get.locale ?? const Locale('en'),
+            locale: AppUtils.getLocale() == 'ru_RU'
+                ? const Locale(ConstString.localeRu)
+                : const Locale(ConstString.localeEn),
+
             debugShowCheckedModeBanner: false,
           );
         });
