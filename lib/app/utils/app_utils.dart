@@ -12,6 +12,19 @@ abstract class AppUtils {
     return isDark;
   }
 
+  static bool isShowLaunchScreen() {
+    bool isShowFirstSetting =
+        GetStorage().read(ConstString.keyShowFirstSettingPage) ?? false;
+    printt.w('AppUtils GetStorage isShowFirstSetting $isShowFirstSetting');
+    return isShowFirstSetting;
+  }
+
+  static Future<void> setShowLaunchScreen(bool isShowFirstSettingPage) async {
+    await GetStorage()
+        .write(ConstString.keyShowFirstSettingPage, isShowFirstSettingPage);
+    printt.w('AppUtils setShowFirstSetting  ${AppUtils.isShowLaunchScreen()}');
+  }
+
   static int getPrecisionResults() {
     var value = GetStorage().read(ConstString.keyPrecisionResult) ?? 3.0;
     printt.w('AppUtils GetStorage getPrecisionResults $value');

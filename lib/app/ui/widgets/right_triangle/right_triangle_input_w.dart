@@ -20,10 +20,13 @@ import 'widget/r_triangle_image_input_w.dart';
 class RightTriangleInputWidget extends StatelessWidget {
   RightTriangleInputWidget({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
     return Scaffold(
+      key: _globalKey,
+      drawer: const DrawerWidget(),
       body: SafeArea(
         child: Stack(
           children: [
@@ -63,6 +66,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                 ),
               ],
             ),
+            DrawerIconWidget(globalkey: _globalKey),
           ],
         ),
       ),

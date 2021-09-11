@@ -96,9 +96,12 @@ class SliderPrecisionResultWidget extends StatelessWidget {
 
       return Column(
         children: [
-          Text(
-            "$title $precision",
-            style: AppStyleText.subText(context),
+          RichText(
+            text:
+                TextSpan(style: DefaultTextStyle.of(context).style, children: [
+              TextSpan(text: title, style: AppStyleText.titleText(context)),
+              TextSpan(text: precision, style: AppStyleText.subText(context))
+            ]),
           ),
           Slider(
 

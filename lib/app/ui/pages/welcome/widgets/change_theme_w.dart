@@ -16,15 +16,18 @@ class ChangeThemeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       bool isDark = controller.isDarkTheme.value;
-      String label = isDark
-          ? TranslateHelper.selectThemeDark
-          : TranslateHelper.selectThemeLight;
+      String theme =
+          isDark ? TranslateHelper.darkTheme : TranslateHelper.lightTheme;
 
       return Column(children: [
         SizedBox(height: 20.h),
-        Text(
-          label,
-          style: AppStyleText.subText(context),
+        RichText(
+          text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
+            TextSpan(
+                text: TranslateHelper.selectTheme,
+                style: AppStyleText.titleText(context)),
+            TextSpan(text: theme, style: AppStyleText.subText(context))
+          ]),
         ),
         SizedBox(height: 20.h),
         Row(

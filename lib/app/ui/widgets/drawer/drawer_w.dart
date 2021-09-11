@@ -69,6 +69,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   AppWidget.dividerDrawer(),
                   DrawerRow(
                       onTap: () {
+                        Navigator.of(_context).pop();
                         Get.toNamed(Routes.SETTING);
                       },
                       icon: Icons.settings,

@@ -28,6 +28,9 @@ class TranslateHelper {
   static String get yes => 'yes'.tr;
   static String get no => 'no'.tr;
 
+  static String get showStartupScreen => 'show_startup_screen'.tr;
+  static String get languageEnglish => 'language_english'.tr;
+  static String get language => 'language'.tr;
   static String get selectTheme => 'select_theme'.tr;
   static String get selectThemeLight => 'select_theme_light'.tr;
   static String get selectThemeDark => 'select_theme_dark'.tr;

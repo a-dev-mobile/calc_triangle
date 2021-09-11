@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logger/logger.dart';
 
+import 'app/constant/const_color.dart';
 import 'app/constant/const_string.dart';
 import 'app/translations/app_translations.dart';
 
@@ -33,6 +34,10 @@ Future<void> main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(const MyApp());
   });
+
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  //   statusBarColor: ConstColor.secondary,
+  // ));
 }
 
 class MyApp extends StatelessWidget {
@@ -48,7 +53,10 @@ class MyApp extends StatelessWidget {
 
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,
-            initialRoute: Routes.INITIAL,
+            initialRoute: AppUtils.isShowLaunchScreen()
+                ? Routes.INITIAL
+                : Routes.CALCULATE,
+
             // defaultTransition: Transition.downToUp,
             getPages: AppPage.pages,
             themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
