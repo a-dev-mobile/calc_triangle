@@ -11,12 +11,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';
 
-class DrawerWidget extends StatelessWidget {
-  late BuildContext _context;
-
-  DrawerWidget({
+class DrawerWidget extends StatefulWidget {
+  const DrawerWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  late BuildContext _context;
 
   @override
   Widget build(BuildContext context) {

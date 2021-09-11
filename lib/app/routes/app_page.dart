@@ -20,11 +20,6 @@ class AppPage {
         transition: Transition.fade,
         binding: WelcomeBinding()),
     GetPage(
-        name: Routes.SELECT_SHAPE,
-        page: () => const SelectShapePage(),
-        transition: Transition.rightToLeft,
-        binding: SelectShapeBinding()),
-    GetPage(
         name: Routes.CALCULATE,
         transition: Transition.rightToLeft,
         page: () => const CalculatePage(),

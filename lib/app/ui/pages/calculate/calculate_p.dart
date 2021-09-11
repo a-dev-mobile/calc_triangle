@@ -54,9 +54,10 @@ class _CalculatePageState extends State<CalculatePage> {
 
   @override
   Widget build(BuildContext context) {
-    Shapes selectedFigure = Shapes.values[AppUtils.activeShapeIndex()];
+    final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+    // Shapes selectedFigure = Shapes.values[AppUtils.activeShapeIndex()];
 
-    printt.i('selectedFigure $selectedFigure');
+    // printt.i('selectedFigure $selectedFigure');
 
     // if (selectedFigure == Shapes.rightTriangle) {
     //   showCalculation = const RightTriangleInputWidget();
@@ -74,7 +75,15 @@ class _CalculatePageState extends State<CalculatePage> {
               child: AdWidget(ad: _bottomBannerAd),
             )
           : null,
-      body: SafeArea(child: RightTriangleInputWidget()),
+      drawer: const DrawerWidget(),
+      key: _globalKey,
+      body: SafeArea(
+          child: Stack(
+        children: [
+          RightTriangleInputWidget(),
+          DrawerIconWidget(globalkey: _globalKey),
+        ],
+      )),
     );
   }
 }

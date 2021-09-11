@@ -24,7 +24,6 @@ class RightTriangleInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
     return Scaffold(
-      drawer: DrawerWidget(),
       body: SafeArea(
         child: Stack(
           children: [
@@ -64,7 +63,6 @@ class RightTriangleInputWidget extends StatelessWidget {
                 ),
               ],
             ),
-            DrawerIconWidget(globalkey: _globalKey),
           ],
         ),
       ),
