@@ -16,7 +16,8 @@ class KeySymbol {
     Keys.prev,
   ];
   static final List<KeySymbol> _convert = [
-    Keys.convert,
+    Keys.deg,
+    Keys.degMinSec,
   ];
   @override
   String toString() => value;

@@ -36,6 +36,7 @@ class RightTriangleController extends GetxController {
 
   var isActiveSnackBar = false.obs;
   var messageSnackBar = ''.obs;
+  var isDeg = true.obs;
 
   static const startLengthValue = '0';
   static const startAngleValue = '0°';
@@ -367,8 +368,6 @@ class RightTriangleController extends GetxController {
   }
 
   void addKey(KeySymbol keySymbol) {
-
-
     String newInput = keySymbol.value;
     String oldInput;
     String sumInput;
@@ -514,9 +513,6 @@ class RightTriangleController extends GetxController {
     // переключение вперед между widgets backspace
 
     _isNext(true);
-
-
-
   }
 
   void restartActiveParamIfZeroValue() {
@@ -576,6 +572,10 @@ class RightTriangleController extends GetxController {
     _isNext(false);
   }
 
+  void longClickConvertDeg() {
+    isDeg.value = !(isDeg.value);
+  }
+
   void longBackspace() {
 // взависимости от активного ввода
     if (isaCathet.value) {
@@ -596,7 +596,7 @@ class RightTriangleController extends GetxController {
     // if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
     //   _resetValue();
     // }
-            restartActiveParamIfZeroValue();
+    restartActiveParamIfZeroValue();
   }
 
   void backspace() {
@@ -660,7 +660,7 @@ class RightTriangleController extends GetxController {
     setActiveParam();
 
     calculate();
-        restartActiveParamIfZeroValue();
+    restartActiveParamIfZeroValue();
     // if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
     //   _resetValue();
     // }
@@ -686,10 +686,6 @@ class RightTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
-
-
-
-
     if (isNext) {
       if (isaCathet.value) {
         isbCathet.value = true;

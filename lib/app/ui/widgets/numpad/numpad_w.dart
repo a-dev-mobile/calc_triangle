@@ -3,10 +3,14 @@ import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
+import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/state_manager.dart';
+
+late RightTriangleController c = Get.find();
 
 class NumPad extends StatelessWidget {
   const NumPad({Key? key}) : super(key: key);
@@ -55,7 +59,10 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.clear),
               CalculatorKey(symbol: Keys.zero),
               CalculatorKey(symbol: Keys.decimal),
-              CalculatorKey(symbol: Keys.convert),
+              Obx(() {
+                return CalculatorKey(
+                    symbol: c.isDeg.value ? Keys.deg : Keys.degMinSec);
+              }),
             ],
           ),
         ),
@@ -74,7 +81,6 @@ class CalculatorKey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
     // printt.i(symbol.value,symbol.type);
     TextStyle textStyle;
     switch (symbol.type) {
@@ -98,6 +104,11 @@ class CalculatorKey extends StatelessWidget {
           if (symbol == Keys.backspace) {
             c.longBackspace();
           }
+
+          if (symbol == Keys.deg || symbol == Keys.degMinSec) {
+            c.longClickConvertDeg();
+            printt.v('long');
+          }
         },
         onPressed: () {
           // printt.v(symbol.value);
@@ -110,7 +121,7 @@ class CalculatorKey extends StatelessWidget {
             c.clearAll();
           } else if (symbol == Keys.backspace) {
             c.backspace();
-          } else if (symbol == Keys.convert) {
+          } else if (symbol == Keys.deg) {
           } else {
             c.addKey(symbol);
           }
