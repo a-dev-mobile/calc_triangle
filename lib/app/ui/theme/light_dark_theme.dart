@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 ThemeData lightThemeData(BuildContext context) {
+
+
   return ThemeData.light().copyWith(
       primaryColor: ConstColor.primary,
       scaffoldBackgroundColor: ConstColor.scaffoldLightTheme,
+
       appBarTheme: const AppBarTheme(
+
           iconTheme: IconThemeData(color: ConstColor.scaffoldDarkTheme),
           titleTextStyle: TextStyle(
             color: ConstColor.scaffoldDarkTheme,
@@ -26,10 +30,15 @@ ThemeData lightThemeData(BuildContext context) {
 }
 
 ThemeData darkThemeData(BuildContext context) {
+
+
+
   return ThemeData.light().copyWith(
+   
       primaryColor: ConstColor.primary,
       scaffoldBackgroundColor: ConstColor.scaffoldDarkTheme,
       appBarTheme: const AppBarTheme(
+  
           iconTheme: IconThemeData(color: ConstColor.scaffoldLightTheme),
           titleTextStyle: TextStyle(
             color: ConstColor.scaffoldLightTheme,
