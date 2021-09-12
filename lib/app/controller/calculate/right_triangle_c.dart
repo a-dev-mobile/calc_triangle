@@ -14,15 +14,16 @@ enum RightTriangle {
   cHypotenuse,
   aAngle,
   bAngle,
+  empty,
 }
 late WelcomeController c = Get.find();
 
 class RightTriangleController extends GetxController {
-  var aCathet = _startLengthValue.obs;
-  var bCathet = _startLengthValue.obs;
-  var cHypotenuse = _startLengthValue.obs;
-  var aAngle = _startAngleValue.obs;
-  var bAngle = _startAngleValue.obs;
+  var aCathet = startLengthValue.obs;
+  var bCathet = startLengthValue.obs;
+  var cHypotenuse = startLengthValue.obs;
+  var aAngle = startAngleValue.obs;
+  var bAngle = startAngleValue.obs;
 
   var activeParamMap = <int, RightTriangle>{}.obs;
 
@@ -36,17 +37,23 @@ class RightTriangleController extends GetxController {
   var isActiveSnackBar = false.obs;
   var messageSnackBar = ''.obs;
 
-  static const _startLengthValue = '0';
-  static const _startAngleValue = '0°';
+  static const startLengthValue = '0';
+  static const startAngleValue = '0°';
 
   int numberDigitsAfterPoint = c.precisionResult.value;
 
   //сразу записываем
 
+  // void _resetActiveParam() {
+  //   activeParamMap.value = <int, RightTriangle>{
+  //     1: RightTriangle.aCathet,
+  //     2: RightTriangle.aCathet,
+  //   };
+  // }
   void _resetActiveParam() {
     activeParamMap.value = <int, RightTriangle>{
-      1: RightTriangle.aCathet,
-      2: RightTriangle.aCathet,
+      1: RightTriangle.empty,
+      2: RightTriangle.empty,
     };
   }
 
@@ -60,8 +67,6 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
-
-
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
     bool conditionTwo = false;
@@ -273,9 +278,9 @@ class RightTriangleController extends GetxController {
 
   void checkIfActiveParamAngles(bool conditionOne, bool conditionTwo) {
     if (conditionOne && conditionTwo) {
-      bCathet.value = _startLengthValue;
-      aCathet.value = _startLengthValue;
-      cHypotenuse.value = _startLengthValue;
+      bCathet.value = startLengthValue;
+      aCathet.value = startLengthValue;
+      cHypotenuse.value = startLengthValue;
       showSnack(TranslateHelper.enterValueSides);
     } else {
       endSnack();
@@ -362,6 +367,8 @@ class RightTriangleController extends GetxController {
   }
 
   void addKey(KeySymbol keySymbol) {
+
+
     String newInput = keySymbol.value;
     String oldInput;
     String sumInput;
@@ -373,7 +380,7 @@ class RightTriangleController extends GetxController {
       if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
       // при вводе удаляю стартовый символ
-      oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
 
       sumInput = oldInput + newInput;
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
@@ -384,7 +391,7 @@ class RightTriangleController extends GetxController {
 
       if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
-      oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
@@ -394,7 +401,7 @@ class RightTriangleController extends GetxController {
 
       if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
-      oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
@@ -407,7 +414,7 @@ class RightTriangleController extends GetxController {
       // удаляю знак угла
       oldInput = AppUtilsString.removeLastCharacter(oldInput);
 
-      oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       // если начинается ввод с точки
@@ -425,7 +432,7 @@ class RightTriangleController extends GetxController {
 // удаляю знак угла
       oldInput = AppUtilsString.removeLastCharacter(oldInput);
       //удаляю начальное значение при вводе
-      oldInput == _startLengthValue ? oldInput = '' : oldInput = oldInput;
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
@@ -505,33 +512,91 @@ class RightTriangleController extends GetxController {
 
   void nextElement() {
     // переключение вперед между widgets backspace
+
     _isNext(true);
+
+
+
+  }
+
+  void restartActiveParamIfZeroValue() {
+    if (activeParamMap[1] == RightTriangle.aCathet &&
+        aCathet.value == startLengthValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[2] == RightTriangle.aCathet &&
+        aCathet.value == startLengthValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[1] == RightTriangle.bCathet &&
+        bCathet.value == startLengthValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[2] == RightTriangle.bCathet &&
+        bCathet.value == startLengthValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[1] == RightTriangle.cHypotenuse &&
+        cHypotenuse.value == startLengthValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[2] == RightTriangle.cHypotenuse &&
+        cHypotenuse.value == startLengthValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[1] == RightTriangle.aAngle &&
+        aAngle.value == startAngleValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[2] == RightTriangle.aAngle &&
+        aAngle.value == startAngleValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
+    if (activeParamMap[1] == RightTriangle.bAngle &&
+        bAngle.value == startAngleValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[2] == RightTriangle.bAngle &&
+        bAngle.value == startAngleValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
   }
 
   void prevElement() {
     // переключение  между widgets
+
     _isNext(false);
   }
 
   void longBackspace() {
 // взависимости от активного ввода
     if (isaCathet.value) {
-      aCathet.value = _startLengthValue;
+      aCathet.value = startLengthValue;
     } else if (isbCathet.value) {
-      bCathet.value = _startLengthValue;
+      bCathet.value = startLengthValue;
     } else if (iscHypotenuse.value) {
-      cHypotenuse.value = _startLengthValue;
+      cHypotenuse.value = startLengthValue;
     } else if (isaAngle.value) {
-      aAngle.value = _startAngleValue;
+      aAngle.value = startAngleValue;
     } else if (isbAngle.value) {
-      bAngle.value = _startAngleValue;
+      bAngle.value = startAngleValue;
     }
     setActiveParam();
+
     calculate();
 
     // if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
     //   _resetValue();
     // }
+            restartActiveParamIfZeroValue();
   }
 
   void backspace() {
@@ -546,7 +611,7 @@ class RightTriangleController extends GetxController {
       newInput = AppUtilsString.removeLastCharacter(oldInput);
       //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
-        newInput = _startLengthValue;
+        newInput = startLengthValue;
       }
       aCathet.value = newInput;
     } else if (isbCathet.value) {
@@ -554,7 +619,7 @@ class RightTriangleController extends GetxController {
       newInput = AppUtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
-        newInput = _startLengthValue;
+        newInput = startLengthValue;
       }
       bCathet.value = newInput;
     } else if (iscHypotenuse.value) {
@@ -562,7 +627,7 @@ class RightTriangleController extends GetxController {
       newInput = AppUtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
-        newInput = _startLengthValue;
+        newInput = startLengthValue;
       }
       cHypotenuse.value = newInput;
     } else if (isaAngle.value) {
@@ -574,7 +639,7 @@ class RightTriangleController extends GetxController {
       newInput = AppUtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
-        newInput = _startLengthValue;
+        newInput = startLengthValue;
       }
       aAngle.value = newInput + '°';
     } else if (isbAngle.value) {
@@ -585,15 +650,17 @@ class RightTriangleController extends GetxController {
       }
       newInput = AppUtilsString.removeLastCharacter(oldInput);
       if (newInput.isEmpty) {
-        newInput = _startLengthValue;
+        newInput = startLengthValue;
       }
       bAngle.value = newInput + '°';
     }
     //обновляем измененные параметры
 
+    // _resetActiveParam();
     setActiveParam();
-    calculate();
 
+    calculate();
+        restartActiveParamIfZeroValue();
     // if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
     //   _resetValue();
     // }
@@ -603,22 +670,26 @@ class RightTriangleController extends GetxController {
     //устанавливаем начальные значения
     _resetValue();
 
-    _resetActiveParam();
     _resetActiveInput();
+    _resetActiveParam();
   }
 
   void _resetValue() {
     showSnack(TranslateHelper.enterTwoParameters);
 
     //устанавливаем начальные значения
-    aCathet.value = _startLengthValue;
-    bCathet.value = _startLengthValue;
-    cHypotenuse.value = _startLengthValue;
-    aAngle.value = _startAngleValue;
-    bAngle.value = _startAngleValue;
+    aCathet.value = startLengthValue;
+    bCathet.value = startLengthValue;
+    cHypotenuse.value = startLengthValue;
+    aAngle.value = startAngleValue;
+    bAngle.value = startAngleValue;
   }
 
   void _isNext(bool isNext) {
+
+
+
+
     if (isNext) {
       if (isaCathet.value) {
         isbCathet.value = true;

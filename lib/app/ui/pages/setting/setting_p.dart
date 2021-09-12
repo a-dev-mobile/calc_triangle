@@ -1,5 +1,7 @@
+import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
+import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 late SettingController c = Get.find();
+late WelcomeController c2 = Get.find();
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -23,7 +26,15 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: AppUtils.isDark()?SystemUiOverlayStyle.dark.copyWith(statusBarBrightness: Brightness.dark):SystemUiOverlayStyle.dark.copyWith(statusBarBrightness: Brightness.light),
+        systemOverlayStyle: AppUtils.isDark()
+            ? SystemUiOverlayStyle.dark.copyWith(
+                statusBarBrightness: Brightness.dark,
+                statusBarIconBrightness: Brightness.light,
+                statusBarColor: ConstColor.scaffoldDarkTheme)
+            : SystemUiOverlayStyle.dark.copyWith(
+                statusBarBrightness: Brightness.light,
+                statusBarIconBrightness: Brightness.dark,
+                statusBarColor: ConstColor.scaffoldLightTheme),
         title: Text(TranslateHelper.setting),
       ),
       body: SingleChildScrollView(

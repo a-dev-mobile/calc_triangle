@@ -25,43 +25,36 @@ class WelcomeController extends GetxController {
   }
 
   void setDarkTheme() {
-
-    
-
     if (isDarkTheme.value == true) return;
 
     Get.changeThemeMode(ThemeMode.dark);
     isDarkTheme.value = true;
 
     AppUtils.setIsDarkTheme(isDarkTheme.value);
-
-
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Colors.white, // Color for Android
-        statusBarBrightness: Brightness.dark // Dark == white status bar -- for IOS.
-    ));
-
+    setThemeAppBar();
   }
 
   void setLightTheme() {
-
-    
-
-
-
     if (isDarkTheme.value == false) return;
 
     Get.changeThemeMode(ThemeMode.light);
     isDarkTheme.value = false;
 
     AppUtils.setIsDarkTheme(isDarkTheme.value);
+        setThemeAppBar();
+  }
 
+  void setThemeAppBar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Colors.black, // Color for Android
-        statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
-    ));
-
-
+        statusBarIconBrightness:
+            isDarkTheme.value ? Brightness.light : Brightness.dark,
+        statusBarColor: isDarkTheme.value
+            ? ConstColor.scaffoldDarkTheme
+            : ConstColor.scaffoldLightTheme, // Color for Android
+        statusBarBrightness: isDarkTheme.value
+            ? Brightness.light
+            : Brightness.dark // Dark == white status bar -- for IOS.
+        ));
   }
 
   @override
@@ -71,7 +64,7 @@ class WelcomeController extends GetxController {
     isDarkTheme.value = AppUtils.isDark();
     precisionResult.value = AppUtils.getPrecisionResults().toInt();
     AppUtils.setFirstStartApp(false);
-    
+
     super.onInit();
   }
 }
