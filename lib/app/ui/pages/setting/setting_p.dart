@@ -10,6 +10,7 @@ import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart'
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -22,6 +23,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: AppUtils.isDark()?SystemUiOverlayStyle.dark.copyWith(statusBarBrightness: Brightness.dark):SystemUiOverlayStyle.dark.copyWith(statusBarBrightness: Brightness.light),
         title: Text(TranslateHelper.setting),
       ),
       body: SingleChildScrollView(

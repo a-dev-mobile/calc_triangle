@@ -36,9 +36,10 @@ ThemeData darkThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
    
       primaryColor: ConstColor.primary,
+
       scaffoldBackgroundColor: ConstColor.scaffoldDarkTheme,
       appBarTheme: const AppBarTheme(
-  
+
           iconTheme: IconThemeData(color: ConstColor.scaffoldLightTheme),
           titleTextStyle: TextStyle(
             color: ConstColor.scaffoldLightTheme,

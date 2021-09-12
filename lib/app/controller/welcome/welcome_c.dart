@@ -34,14 +34,12 @@ class WelcomeController extends GetxController {
     isDarkTheme.value = true;
 
     AppUtils.setIsDarkTheme(isDarkTheme.value);
-SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        // systemNavigationBarColor: Colors.black, // navigation bar color
-        //  statusBarColor: ConstColor.scaffoldDarkTheme.withOpacity(0.5), // status bar color
-        statusBarIconBrightness: Brightness.light, // status bar icons' color
-        // systemNavigationBarIconBrightness: Brightness.light, //navigation bar icons' color
-    )); 
 
-  Get.changeThemeMode(ThemeMode.dark);
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.white, // Color for Android
+        statusBarBrightness: Brightness.dark // Dark == white status bar -- for IOS.
+    ));
 
   }
 
@@ -58,14 +56,10 @@ SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 
     AppUtils.setIsDarkTheme(isDarkTheme.value);
 
-
-SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
-        // systemNavigationBarColor: Colors.white, // navigation bar color
-        //  statusBarColor: ConstColor.scaffoldLightTheme.withOpacity(0.5), // status bar color
-        statusBarIconBrightness: Brightness.light, // status bar icons' color
-        // systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icons' color
-    )); 
-
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.black, // Color for Android
+        statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+    ));
 
 
   }
@@ -73,9 +67,8 @@ SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
   @override
   void onInit() {
     //инициализация перед запуском и правильное отображение
-// setLightTheme(); 
+
     isDarkTheme.value = AppUtils.isDark();
-// setDarkTheme(); 
     precisionResult.value = AppUtils.getPrecisionResults().toInt();
     AppUtils.setFirstStartApp(false);
     
