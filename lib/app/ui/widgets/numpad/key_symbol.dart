@@ -1,4 +1,4 @@
-import 'calculator_key.dart';
+import 'key.dart';
 
 enum KeyType { function, choice, integer, convert }
 

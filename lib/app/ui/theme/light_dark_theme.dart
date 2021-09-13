@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 ThemeData lightThemeData(BuildContext context) {
-
-
   return ThemeData.light().copyWith(
       primaryColor: ConstColor.primary,
       scaffoldBackgroundColor: ConstColor.scaffoldLightTheme,
-
-      appBarTheme: const AppBarTheme(
-
-          iconTheme: IconThemeData(color: ConstColor.scaffoldDarkTheme),
-          titleTextStyle: TextStyle(
+      appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
+              statusBarBrightness: Brightness.light,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: ConstColor.scaffoldLightTheme),
+          iconTheme: const IconThemeData(color: ConstColor.scaffoldDarkTheme),
+          titleTextStyle: const TextStyle(
             color: ConstColor.scaffoldDarkTheme,
             fontSize: 20,
           ),
@@ -30,18 +30,16 @@ ThemeData lightThemeData(BuildContext context) {
 }
 
 ThemeData darkThemeData(BuildContext context) {
-
-
-
   return ThemeData.light().copyWith(
-   
       primaryColor: ConstColor.primary,
-
       scaffoldBackgroundColor: ConstColor.scaffoldDarkTheme,
-      appBarTheme: const AppBarTheme(
-
-          iconTheme: IconThemeData(color: ConstColor.scaffoldLightTheme),
-          titleTextStyle: TextStyle(
+      appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.light,
+              statusBarColor: ConstColor.scaffoldDarkTheme),
+          iconTheme: const IconThemeData(color: ConstColor.scaffoldLightTheme),
+          titleTextStyle: const TextStyle(
             color: ConstColor.scaffoldLightTheme,
             fontSize: 20,
           ),

@@ -25,6 +25,9 @@ class RightTriangleController extends GetxController {
   var aAngle = startAngleValue.obs;
   var bAngle = startAngleValue.obs;
 
+  String aAngleOld = startAngleValue;
+  String bAngleOld = startAngleValue;
+
   var activeParamMap = <int, RightTriangle>{}.obs;
 
   //начальное значение при запуске
@@ -68,6 +71,11 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
+    // if (isDeg.value&&aAngle.value!=startAngleValue&&bAngle.value!=startAngleValue) {
+    //   aAngle.value = aAngleOld;
+    //   bAngle.value = bAngleOld;
+    // } 
+
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
     bool conditionTwo = false;
@@ -267,6 +275,9 @@ class RightTriangleController extends GetxController {
         'aCathetS $aCathetS bCathetS $bCathetS cHypotenuseS $cHypotenuseS aAngleS $aAngleS bAngleS $bAngleS');
     printt.i(
         'aCathetD $aCathetD bCathetD $bCathetD cHypotenuseD $cHypotenuseD aAngleD $aAngleD bAngleD $bAngleD');
+
+// если мы в минутах то переводим углы
+    convertDeg();
 
 // проверка если цифры не числа
     if (AppUtilsNumber.isDoublesNanAndInfinity(
@@ -572,8 +583,25 @@ class RightTriangleController extends GetxController {
     _isNext(false);
   }
 
+  void convertDeg() {
+// если мы в минутах то переводим углы
+    if (!isDeg.value) {
+      aAngle.value = AppUtilsNumber.convertDegToDMS(
+          double.parse(AppUtilsString.removeLastCharacter(aAngle.value)));
+      bAngle.value = AppUtilsNumber.convertDegToDMS(
+          double.parse(AppUtilsString.removeLastCharacter(bAngle.value)));
+    }
+  }
+
   void longClickConvertDeg() {
     isDeg.value = !(isDeg.value);
+
+    // if (isDeg.value) {
+    //   aAngleOld = aAngle.value;
+    //   bAngleOld = bAngle.value;
+    // }
+
+    convertDeg();
   }
 
   void longBackspace() {

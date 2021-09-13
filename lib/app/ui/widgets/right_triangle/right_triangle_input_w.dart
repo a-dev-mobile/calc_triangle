@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -17,15 +18,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'widget/r_triangle_image_input_w.dart';
-  late  RightTriangleController c = Get.find();
-  
+
+late RightTriangleController c = Get.find();
+
 class RightTriangleInputWidget extends StatelessWidget {
   RightTriangleInputWidget({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-
+  String textConvert = "";
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: _globalKey,
       drawer: const DrawerWidget(),
@@ -69,6 +70,12 @@ class RightTriangleInputWidget extends StatelessWidget {
               ],
             ),
             DrawerIconWidget(globalkey: _globalKey),
+            Obx(() {
+              c.isDeg.value
+                  ? textConvert = ConstString.degConvert
+                  : textConvert = ConstString.degMinSecConvert;
+              return Positioned(top: 10.h, right: 10.w, child: Text(textConvert,style: AppStyleText.convertText(context),));
+            })
           ],
         ),
       ),

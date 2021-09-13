@@ -1,6 +1,6 @@
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/ui/widgets/numpad/calculator_key.dart';
+import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 import 'package:calc_triangle/main.dart';

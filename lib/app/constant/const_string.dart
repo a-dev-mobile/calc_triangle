@@ -8,6 +8,10 @@ abstract class ConstString {
   static const String keyLocale = 'locale_app';
   static const String localeRu = 'ru';
   static const String localeEn = 'en';
+
+  static const String degConvert = "☺°.☺☺";
+  static const String degMinSecConvert = "☺°☺′☺″";
+
   static var playStoreUrl =
       'https://play.google.com/store/apps/details?id=com.webaddicted.movies4u';
 }

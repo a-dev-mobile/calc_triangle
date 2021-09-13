@@ -26,15 +26,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: AppUtils.isDark()
-            ? SystemUiOverlayStyle.dark.copyWith(
-                statusBarBrightness: Brightness.dark,
-                statusBarIconBrightness: Brightness.light,
-                statusBarColor: ConstColor.scaffoldDarkTheme)
-            : SystemUiOverlayStyle.dark.copyWith(
-                statusBarBrightness: Brightness.light,
-                statusBarIconBrightness: Brightness.dark,
-                statusBarColor: ConstColor.scaffoldLightTheme),
+       
         title: Text(TranslateHelper.setting),
       ),
       body: SingleChildScrollView(

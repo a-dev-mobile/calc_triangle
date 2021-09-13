@@ -7,7 +7,7 @@ abstract class Keys {
 
   static KeySymbol next = const KeySymbol('>');
   static KeySymbol prev = const KeySymbol('<');
-  static KeySymbol deg = const KeySymbol('°');
+  static KeySymbol deg = const KeySymbol('°.');
   static KeySymbol degMinSec = const KeySymbol('°′″');
   // static KeySymbol convert = const KeySymbol('°');
   static KeySymbol decimal = const KeySymbol('.');

@@ -17,23 +17,20 @@ abstract class AppUtils {
         GetStorage().read(ConstString.keyFirstStartApp) ?? true;
     printt.w('AppUtils GetStorage isFirstStartApp $isFirstStartApp');
     return isFirstStartApp;
-
-
   }
+
   static String getLocale() {
     String locale =
         GetStorage().read(ConstString.keyLocale) ?? ConstString.localeEn;
     printt.w('AppUtils getLocale $locale');
-    return locale;}
-
+    return locale;
+  }
 
   static Future<void> setLocale(String locale) async {
-    await GetStorage()
-        .write(ConstString.keyLocale, locale);
+    await GetStorage().write(ConstString.keyLocale, locale);
     printt.w('AppUtils setLocale  ${AppUtils.getLocale()}');
   }
-    
-  
+
   static Future<void> setFirstStartApp(bool isFirstStartApp) async {
     await GetStorage().write(ConstString.keyFirstStartApp, isFirstStartApp);
     printt.w('AppUtils setFirstStartApp  ${AppUtils.isFirstStartApp()}');
@@ -78,9 +75,6 @@ abstract class AppUtils {
   }
 
 //==============================================
-
-
-
 
 //==============================================
 
@@ -245,5 +239,34 @@ abstract class AppUtilsNumber {
       }
     }
     return false;
+  }
+
+  static double convertDegMinSectoDeg(String dms) {
+    //10°20′30″
+
+    if (!dms.contains('°') && !dms.contains('′') && !dms.contains('″′')) {
+      printt.e('error not symbol deg min sec = $dms');
+      return 0;
+    }
+
+    var dmsList = dms.split('°');
+    double deg = double.parse(dmsList[0]);
+    dmsList = dmsList[1].split('′');
+    double min = double.parse(dmsList[0]);
+    dmsList = dmsList[1].split('″');
+    double sec = double.parse(dmsList[0]);
+
+    return deg + (min / 60) + (sec / 3600);
+  }
+
+  static String convertDegToDMS(double degree) {
+    
+    var s = degree.toString().split('.');
+    String deg = s[0];
+    s = ((double.parse('0.' + s[1])) * 60).toString().split('.');
+    String min = s[0];
+    String sec = ((((double.parse('0.' + s[1])) * 60) - (double.parse(min))) * 60).toString();
+
+    return '$deg°$min′$sec″';
   }
 }
