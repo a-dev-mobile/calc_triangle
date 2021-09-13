@@ -77,6 +77,7 @@ abstract class AppStyleTextImage {
   static TextStyle activeInput(BuildContext context) {
     return TextStyle(
         color: Colors.red,
+          decoration: TextDecoration.underline,
         backgroundColor: AppColors.content(context),
         fontSize: 20.sp);
   }
@@ -84,7 +85,8 @@ abstract class AppStyleTextImage {
   static TextStyle activeParam(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context),
-        fontWeight: FontWeight.bold,
+        // fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline,
         backgroundColor: AppColors.content(context),
         fontSize: 20.sp);
   }

@@ -94,84 +94,12 @@ abstract class AppUtilsString {
     return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 1);
   }
 
-  static String getFormatNumber(double num, int numberDigitsAfterPoint) {
-// округляем, но нет удаления конечных нулей
-    String num2 = num.toStringAsFixed(numberDigitsAfterPoint);
-    // если нет точки возвращаем
-    if (!num2.contains('.')) return num2;
-
-    var s = num2.split('.');
-    String mainResult = num2;
-    // проверяем есть ли последние нули
-    if (getLastCharacter(s[1]) == '0') {
-      String oldString = "";
-      String newString = "";
-      oldString = s[1];
-
-      for (int i = 0; i < s[1].length; i++) {
-        if (getLastCharacter(oldString) == '0') {
-          newString = removeLastCharacter(oldString);
-        } else {
-          break;
-        }
-        oldString = newString;
-      }
-// действия, если после ни чего ни осталось оставляем split 0
-      if (newString.isEmpty) {
-        mainResult = s[0];
-      } else {
-        mainResult = s[0] + "." + newString;
-      }
-    }
-
-    return mainResult;
-  }
-
   static String removeLastCharacter(String str) {
     String result = '';
     if ((str != '') && (str.isNotEmpty)) {
       result = str.substring(0, str.length - 1);
     }
 
-    // print('old $str new $result');
-/*
-
-double num = 123.000;
-      String s;
-        String s2;
-        String s3;
- s = num.toStringAsFixed(2);
-
-    RegExp regex = RegExp(r"([.]*0)(?!.*\d)");
- s= s.replaceAll(regex, "");
-
- s3 = s.split('.')[1];
-
-  if(int.parse(s)>0){
-
-    print('остаток >0');
-  }
-
-
-   s2 = num.toString().replaceAll(regex, "");
-
-  print (s);
-    print (s2);
-
-
-    String s1 = '2.212100';
-
-  s1 = s1.split('.')[1];
- for(int i=0; i<s1.length; i++) {
-print( s1[i]);
-
-}
-  print(s1.substring(s1.length - 1));
-}
-
-
-
- */
     return result;
   }
 
@@ -224,6 +152,39 @@ print( s1[i]);
 }
 
 abstract class AppUtilsNumber {
+  static String getFormatNumber(double num, int numberDigitsAfterPoint) {
+// округляем, но нет удаления конечных нулей
+    String num2 = num.toStringAsFixed(numberDigitsAfterPoint);
+    // если нет точки возвращаем
+    if (!num2.contains('.')) return num2;
+
+    var s = num2.split('.');
+    String mainResult = num2;
+    // проверяем есть ли последние нули
+    if (AppUtilsString.getLastCharacter(s[1]) == '0') {
+      String oldString = "";
+      String newString = "";
+      oldString = s[1];
+
+      for (int i = 0; i < s[1].length; i++) {
+        if (AppUtilsString.getLastCharacter(oldString) == '0') {
+          newString = AppUtilsString.removeLastCharacter(oldString);
+        } else {
+          break;
+        }
+        oldString = newString;
+      }
+// действия, если после ни чего ни осталось оставляем split 0
+      if (newString.isEmpty) {
+        mainResult = s[0];
+      } else {
+        mainResult = s[0] + "." + newString;
+      }
+    }
+
+    return mainResult;
+  }
+
   static double toRadian(double degree) {
     return degree * (pi / 180);
   }
@@ -241,12 +202,9 @@ abstract class AppUtilsNumber {
     return false;
   }
 
-  static double convertDegMinSectoDeg(String dms) {
-    //10°20′30″
-
+  static String convertDMStoDeg(String dms,int precisionResults) {
     if (!dms.contains('°') && !dms.contains('′') && !dms.contains('″′')) {
-      printt.e('error not symbol deg min sec = $dms');
-      return 0;
+      return 'error';
     }
 
     var dmsList = dms.split('°');
@@ -256,17 +214,16 @@ abstract class AppUtilsNumber {
     dmsList = dmsList[1].split('″');
     double sec = double.parse(dmsList[0]);
 
-    return deg + (min / 60) + (sec / 3600);
+    return AppUtilsNumber.getFormatNumber(deg + (min / 60) + (sec / 3600),precisionResults);
   }
 
-  static String convertDegToDMS(double degree) {
+  static String convertDegToDMS(double degree, int precisionResults) {
+    int d = degree.toInt();
 
-    var s = degree.toString().split('.');
-    String deg = s[0];
-    s = ((double.parse('0.' + s[1])) * 60).toString().split('.');
-    String min = s[0];
-    String sec = ((((double.parse('0.' + s[1])) * 60) - (double.parse(min))) * 60).toString();
+    int m = ((degree - d) * 60).toInt();
 
-    return '$deg°$min′$sec″';
+    String s = getFormatNumber((degree - d - m / 60) * 3600, precisionResults);
+
+    return '$d°$m′$s″';
   }
 }

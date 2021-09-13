@@ -98,31 +98,26 @@ class RightTriangleController extends GetxController {
       return;
     }
 
+    // если две точки возврат
+    if (isTwoDecimalPointRightTriangle(keySymbol)) {
+      printt.v('isTwoDecimalPointRightTriangle');
+
+      return;
+    }
+    if (isAngleOver90(keySymbol)) {
+      printt.v('isAngleOver90');
+      showSnack(TranslateHelper.messageAngleOver90);
+
+      return;
+    }
+
     String newInput = keySymbol.value;
     String oldInput;
     String sumInput;
     printt.i('add key');
-    if (isaCathet.value) {
-      aCathet.value = newInput;
-    } else if (isbCathet.value) {
-      bCathet.value = newInput;
-    } else if (iscHypotenuse.value) {
-      cHypotenuse.value = newInput;
-    } else if (isaAngle.value) {
-      aAngle.value = newInput + "°";
-    } else if (isbAngle.value) {
-      bAngle.value = newInput + "°";
-    }
 
-    setActiveParam();
-
-    showMessage();
-    return;
     if (isaCathet.value) {
       oldInput = aCathet.value;
-
-      // если две точки возврат
-      if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
       // при вводе удаляю стартовый символ
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
@@ -134,8 +129,6 @@ class RightTriangleController extends GetxController {
     } else if (isbCathet.value) {
       oldInput = bCathet.value;
 
-      if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
-
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
@@ -144,8 +137,6 @@ class RightTriangleController extends GetxController {
     } else if (iscHypotenuse.value) {
       oldInput = cHypotenuse.value;
 
-      if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
-
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
@@ -153,8 +144,6 @@ class RightTriangleController extends GetxController {
       cHypotenuse.value = sumInput;
     } else if (isaAngle.value) {
       oldInput = aAngle.value;
-
-      if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
 
       // удаляю знак угла
       oldInput = AppUtilsString.removeLastCharacter(oldInput);
@@ -169,9 +158,6 @@ class RightTriangleController extends GetxController {
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
-// если две точки возврат
-      if (AppUtilsString.isTwoDecimalPoint(oldInput + newInput)) return;
-
 // удаляю знак угла
       oldInput = AppUtilsString.removeLastCharacter(oldInput);
       //удаляю начальное значение при вводе
@@ -183,10 +169,44 @@ class RightTriangleController extends GetxController {
       bAngle.value = sumInput + "°";
     }
 
+    showMessage();
+
+    setActiveParam();
+
+    return;
+
     calculate();
     initValue();
     printt.i('end_print');
     _printElements();
+  }
+
+  bool isTwoDecimalPointRightTriangle(KeySymbol keySymbol) {
+    String newInput = keySymbol.value;
+
+    if (isaCathet.value) {
+      if (AppUtilsString.isTwoDecimalPoint(aCathet.value + keySymbol.value)) {
+        return true;
+      }
+    } else if (isbCathet.value) {
+      if (AppUtilsString.isTwoDecimalPoint(bCathet.value + keySymbol.value)) {
+        return true;
+      }
+    } else if (iscHypotenuse.value) {
+      if (AppUtilsString.isTwoDecimalPoint(
+          cHypotenuse.value + keySymbol.value)) {
+        return true;
+      }
+    } else if (isaAngle.value) {
+      if (AppUtilsString.isTwoDecimalPoint(aAngle.value + keySymbol.value)) {
+        return true;
+      }
+    } else if (isbAngle.value) {
+      if (AppUtilsString.isTwoDecimalPoint(bAngle.value + keySymbol.value)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void resetActiveParam() {
@@ -228,11 +248,6 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
-    // if (isDeg.value&&aAngle.value!=startAngleValue&&bAngle.value!=startAngleValue) {
-    //   aAngle.value = aAngleOld;
-    //   bAngle.value = bAngleOld;
-    // }
-
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
     bool conditionTwo = false;
@@ -244,14 +259,14 @@ class RightTriangleController extends GetxController {
     if (conditionOne) {
       calc = 90 - aAngleD;
       bAngle.value =
-          AppUtilsString.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
+          AppUtilsNumber.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
     }
     //find aAngle
     conditionTwo = activeParm2 == RightTriangle.bAngle;
     if (conditionTwo) {
       calc = 90 - bAngleD;
       aAngle.value =
-          AppUtilsString.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
+          AppUtilsNumber.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
     }
     // знаем а угол и гипотенузу--
     conditionOne = activeParamMap.containsValue(RightTriangle.aAngle);
@@ -259,11 +274,11 @@ class RightTriangleController extends GetxController {
     if (conditionOne && conditionTwo) {
       aCathetD = cHypotenuseD * cos(AppUtilsNumber.toRadian(aAngleD));
       aCathet.value =
-          AppUtilsString.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
 
       bCathetD = cHypotenuseD * sin(AppUtilsNumber.toRadian(aAngleD));
       bCathet.value =
-          AppUtilsString.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
     }
 
     // знаем b угол и гипотенузу--
@@ -272,11 +287,11 @@ class RightTriangleController extends GetxController {
     if (conditionOne && conditionTwo) {
       aCathetD = cHypotenuseD * sin(AppUtilsNumber.toRadian(bAngleD));
       aCathet.value =
-          AppUtilsString.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
 
       bCathetD = cHypotenuseD * cos(AppUtilsNumber.toRadian(bAngleD));
       bCathet.value =
-          AppUtilsString.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
     }
 
     // знаем а угол и a катет--
@@ -285,12 +300,12 @@ class RightTriangleController extends GetxController {
     if (conditionOne && conditionTwo) {
       bCathetD = aCathetD * tan(AppUtilsNumber.toRadian(aAngleD));
       bCathet.value =
-          AppUtilsString.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
 
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsString.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
     }
 // знаем b угол и a катет--
     conditionOne = activeParamMap.containsValue(RightTriangle.bAngle);
@@ -298,12 +313,12 @@ class RightTriangleController extends GetxController {
     if (conditionOne && conditionTwo) {
       bCathetD = aCathetD / tan(AppUtilsNumber.toRadian(bAngleD));
       bCathet.value =
-          AppUtilsString.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
 
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsString.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
     }
 
     // знаем b угол и b катет--
@@ -312,12 +327,12 @@ class RightTriangleController extends GetxController {
     if (conditionOne && conditionTwo) {
       aCathetD = bCathetD * tan(AppUtilsNumber.toRadian(bAngleD));
       aCathet.value =
-          AppUtilsString.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
 
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsString.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
     }
 
     // знаем а угол и b катет--
@@ -326,12 +341,12 @@ class RightTriangleController extends GetxController {
     if (conditionOne && conditionTwo) {
       aCathetD = bCathetD / tan(AppUtilsNumber.toRadian(aAngleD));
       aCathet.value =
-          AppUtilsString.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
 
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsString.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
     }
 
     //знаем а катет и в катет --
@@ -341,19 +356,19 @@ class RightTriangleController extends GetxController {
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsString.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
 
       bAngleD = acos(
           (pow(bCathetD, 2) + pow(cHypotenuseD, 2) - pow(aCathetD, 2)) /
               (2 * bCathetD * cHypotenuseD));
-      bAngle.value = AppUtilsString.getFormatNumber(
+      bAngle.value = AppUtilsNumber.getFormatNumber(
               AppUtilsNumber.toDegree(bAngleD), numberDigitsAfterPoint) +
           "°";
 
       aAngleD = acos(
           (pow(aCathetD, 2) + pow(cHypotenuseD, 2) - pow(bCathetD, 2)) /
               (2 * aCathetD * cHypotenuseD));
-      aAngle.value = AppUtilsString.getFormatNumber(
+      aAngle.value = AppUtilsNumber.getFormatNumber(
               AppUtilsNumber.toDegree(aAngleD), numberDigitsAfterPoint) +
           "°";
     }
@@ -365,15 +380,15 @@ class RightTriangleController extends GetxController {
       // находим гипотенузу
       bCathetD = sqrt(pow(cHypotenuseD, 2) - pow(aCathetD, 2));
       bCathet.value =
-          AppUtilsString.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
 
       bAngleD = asin(aCathetD / cHypotenuseD);
-      bAngle.value = AppUtilsString.getFormatNumber(
+      bAngle.value = AppUtilsNumber.getFormatNumber(
               AppUtilsNumber.toDegree(bAngleD), numberDigitsAfterPoint) +
           "°";
 
       aAngleD = acos(aCathetD / cHypotenuseD);
-      aAngle.value = AppUtilsString.getFormatNumber(
+      aAngle.value = AppUtilsNumber.getFormatNumber(
               AppUtilsNumber.toDegree(aAngleD), numberDigitsAfterPoint) +
           "°";
     }
@@ -384,15 +399,15 @@ class RightTriangleController extends GetxController {
     if (conditionOne && conditionTwo) {
       aCathetD = sqrt(pow(cHypotenuseD, 2) - pow(bCathetD, 2));
       aCathet.value =
-          AppUtilsString.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
 
       bAngleD = acos(bCathetD / cHypotenuseD);
-      bAngle.value = AppUtilsString.getFormatNumber(
+      bAngle.value = AppUtilsNumber.getFormatNumber(
               AppUtilsNumber.toDegree(bAngleD), numberDigitsAfterPoint) +
           "°";
 
       aAngleD = asin(bCathetD / cHypotenuseD);
-      aAngle.value = AppUtilsString.getFormatNumber(
+      aAngle.value = AppUtilsNumber.getFormatNumber(
               AppUtilsNumber.toDegree(aAngleD), numberDigitsAfterPoint) +
           "°";
     }
@@ -492,13 +507,28 @@ class RightTriangleController extends GetxController {
 
 //если угол больше 90
     if (90 <= aAngleD || 90 <= bAngleD) {
-      showSnack(TranslateHelper.messageAngleLess90);
+      showSnack(TranslateHelper.messageAngleOver90);
 
       return;
     }
 
     // endSnack();
     showSnack('OK');
+  }
+
+  bool isAngleOver90(KeySymbol keySymbol) {
+    String newInput = keySymbol.value;
+    double sum = 0;
+    if (isaAngle.value) {
+      sum = double.parse(
+          AppUtilsString.removeLastCharacter(aAngle.value) + newInput);
+      if (90 <= sum) return true;
+    } else if (isbAngle.value) {
+      sum = double.parse(
+          AppUtilsString.removeLastCharacter(bAngle.value) + newInput);
+      if (90 <= sum) return true;
+    }
+    return false;
   }
 
   bool isActiveParamAngles() {
@@ -634,22 +664,23 @@ class RightTriangleController extends GetxController {
   }
 
   void convertDeg() {
+    initValue();
 // если мы в минутах то переводим углы
     if (!isDeg.value) {
       aAngle.value = AppUtilsNumber.convertDegToDMS(
-          double.parse(AppUtilsString.removeLastCharacter(aAngle.value)));
+          aAngleD, AppUtils.getPrecisionResults());
       bAngle.value = AppUtilsNumber.convertDegToDMS(
-          double.parse(AppUtilsString.removeLastCharacter(bAngle.value)));
+          bAngleD, AppUtils.getPrecisionResults());
+    } else {
+      aAngle.value = AppUtilsNumber.convertDMStoDeg(
+          aAngle.value, AppUtils.getPrecisionResults());
+      bAngle.value = AppUtilsNumber.convertDMStoDeg(
+          bAngle.value, AppUtils.getPrecisionResults());
     }
   }
 
   void longClickConvertDeg() {
     isDeg.value = !(isDeg.value);
-
-    // if (isDeg.value) {
-    //   aAngleOld = aAngle.value;
-    //   bAngleOld = bAngle.value;
-    // }
 
     convertDeg();
   }

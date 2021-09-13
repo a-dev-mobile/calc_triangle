@@ -39,7 +39,7 @@ class TranslateHelper {
   static String get selectTheme => 'select_theme'.tr;
   static String get selectThemeLight => 'select_theme_light'.tr;
   static String get selectThemeDark => 'select_theme_dark'.tr;
-  static String get messageAngleLess90 => 'message_angle_less_90'.tr;
+  static String get messageAngleOver90 => 'message_angle_less_90'.tr;
   static String get selectedPrecisionResult => 'selected_precision_result'.tr;
   static String get messageEnterValueSides => 'enter_value_sides'.tr;
   static String get messageHypotenuseGreaterCathetus =>
