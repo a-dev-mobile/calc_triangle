@@ -215,7 +215,7 @@ print( s1[i]);
     if (!value.contains('.')) return false;
 
     int i = value.length - (value.toString().indexOf('.') + 1);
-    printt.i('accuracy $i > $declaredAccuracy');
+    // printt.i('accuracy $i > $declaredAccuracy');
 
     if (i > declaredAccuracy) return true;
 
@@ -260,7 +260,7 @@ abstract class AppUtilsNumber {
   }
 
   static String convertDegToDMS(double degree) {
-    
+
     var s = degree.toString().split('.');
     String deg = s[0];
     s = ((double.parse('0.' + s[1])) * 60).toString().split('.');

@@ -56,7 +56,7 @@ class NumPad extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CalculatorKey(symbol: Keys.clear),
+              CalculatorKey(symbol: Keys.clearAll),
               CalculatorKey(symbol: Keys.zero),
               CalculatorKey(symbol: Keys.decimal),
               Obx(() {
@@ -112,19 +112,9 @@ class CalculatorKey extends StatelessWidget {
         },
         onPressed: () {
           // printt.v(symbol.value);
-
-          if (symbol == Keys.next) {
-            c.nextElement();
-          } else if (symbol == Keys.prev) {
-            c.prevElement();
-          } else if (symbol == Keys.clear) {
-            c.clearAll();
-          } else if (symbol == Keys.backspace) {
-            c.backspace();
-          } else if (symbol == Keys.deg) {
-          } else {
-            c.addKey(symbol);
-          }
+        
+            c.clickKey(symbol);
+          
         },
         child: Text(symbol.value, style: textStyle),
       ),

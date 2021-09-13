@@ -13,6 +13,7 @@ class TranslateHelper {
 
   static String get rightTriangle => 'right_triangle'.tr;
   static String get enterTwoParameters => 'enter_2_parameters'.tr;
+  static String get enterOneParameters => 'enter_1_parameters'.tr;
   static String get appName => 'app_name'.tr;
   static String get appNameSub => 'app_name_sub'.tr;
   static String get about => 'about'.tr;
@@ -40,7 +41,7 @@ class TranslateHelper {
   static String get selectThemeDark => 'select_theme_dark'.tr;
   static String get messageAngleLess90 => 'message_angle_less_90'.tr;
   static String get selectedPrecisionResult => 'selected_precision_result'.tr;
-  static String get enterValueSides => 'enter_value_sides'.tr;
+  static String get messageEnterValueSides => 'enter_value_sides'.tr;
   static String get messageHypotenuseGreaterCathetus =>
       'message_hypotenuse_greater_cathetus'.tr;
 }

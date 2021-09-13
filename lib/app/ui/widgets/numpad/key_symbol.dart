@@ -8,7 +8,7 @@ class KeySymbol {
   const KeySymbol(this.value);
 
   static final List<KeySymbol> _functions = [
-    Keys.clear,
+    Keys.clearAll,
     Keys.backspace,
   ];
   static final List<KeySymbol> _choice = [

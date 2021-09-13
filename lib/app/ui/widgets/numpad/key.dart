@@ -2,7 +2,7 @@ import 'key_symbol.dart';
 
 abstract class Keys {
   static KeySymbol empty = const KeySymbol('');
-  static KeySymbol clear = const KeySymbol('C');
+  static KeySymbol clearAll = const KeySymbol('C');
   static KeySymbol backspace = const KeySymbol('←');
 
   static KeySymbol next = const KeySymbol('>');
