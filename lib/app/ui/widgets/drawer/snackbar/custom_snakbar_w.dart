@@ -12,12 +12,18 @@ class CustomSnackBar extends StatelessWidget {
     return SizedBox(
       width: AppUtils.getWidth(context),
       // color: AppColors.contentRevers(context).withOpacity(0.5),
-      child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            message,
-            style: TextStyle(fontSize: 15.sp, color: AppColors.text(context)),
-          )),
+      child: Column(
+        children: [
+          Align(
+              alignment: Alignment.center,
+              child: Text(
+                message,
+                style: TextStyle(fontSize: 15.sp, color: AppColors.text(context)),
+              )),
+       Divider()
+       
+        ],
+      ),
       height: AppUtils.getHeight(context) * 0.05,
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
@@ -44,7 +46,11 @@ abstract class AppWidgets {
               TextButton(
                 child: Text(TranslateHelper.yes),
                 onPressed: () {
-                  SystemNavigator.pop();
+                  // SystemNavigator.pop();
+                  exit(0);
+      //             Future.delayed(const Duration(milliseconds: 1000), () {
+      //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      // });
                 },
               ),
               TextButton(

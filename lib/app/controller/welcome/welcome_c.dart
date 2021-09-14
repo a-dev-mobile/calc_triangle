@@ -52,8 +52,8 @@ class WelcomeController extends GetxController {
             ? ConstColor.scaffoldDarkTheme
             : ConstColor.scaffoldLightTheme, // Color for Android
         statusBarBrightness: isDarkTheme.value
-            ? Brightness.light
-            : Brightness.dark // Dark == white status bar -- for IOS.
+            ? Brightness.dark
+            : Brightness.light // Dark == white status bar -- for IOS.
         ));
   }
 
