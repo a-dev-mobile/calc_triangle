@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
@@ -190,13 +189,9 @@ class RightTriangleController extends GetxController {
     showMessage();
     return;
 
-    initValue();
-    printt.i('end_print');
-    _printElements();
   }
 
   bool isTwoDecimalPointRightTriangle(KeySymbol keySymbol) {
-    String newInput = keySymbol.value;
 
     if (isaCathet.value) {
       if (AppUtilsString.isTwoDecimalPoint(aCathet.value + keySymbol.value)) {

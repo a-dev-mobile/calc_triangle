@@ -1,6 +1,6 @@
 # calc_triangle
 
-A new Flutter project.
+Flutter project calculating the sides in a right triangle
 
 ## Getting Started
 

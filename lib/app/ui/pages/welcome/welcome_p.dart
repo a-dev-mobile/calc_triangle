@@ -64,10 +64,10 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             SizedBox(
                 width: 0.8.sw, height: 0.05.sh, child: const WelcomeBtnStart()),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),
@@ -141,7 +141,7 @@ class ImageAppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      ConstAssets.righTriangleInfo,
+      ConstAssets.rightTriangleInfo,
       fit: BoxFit.contain,
       color: AppColors.contentRevers(context),
 
@@ -169,7 +169,7 @@ class WelcomeBtnStart extends StatelessWidget {
 }
 
 class WelcomeAppTitle extends StatelessWidget {
-   WelcomeAppTitle({
+   const WelcomeAppTitle({
     Key? key, required this.fontSize,
   }) : super(key: key);
 

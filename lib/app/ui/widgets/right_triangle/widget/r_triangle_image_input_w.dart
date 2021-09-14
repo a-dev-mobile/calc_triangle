@@ -35,7 +35,7 @@ class RightTriangleImageInputWidget extends StatelessWidget {
               child: Image(
                 fit: BoxFit.contain,
                 color: AppColors.text(context),
-                image: const AssetImage(ConstAssets.righTriangleInput),
+                image: const AssetImage(ConstAssets.rightTriangleInput),
               ),
             ),
             //all widget text in image

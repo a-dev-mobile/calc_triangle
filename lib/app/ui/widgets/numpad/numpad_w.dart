@@ -3,7 +3,6 @@ import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
-import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get_core/src/get_main.dart';

@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="a.dev.mobile_angle_and_triangle">
-
+    package="a.dev.calc_triangle">
 <queries>
   <!-- If your app opens https URLs -->
   <intent>
@@ -9,9 +8,8 @@
   </intent>
 </queries>
     <uses-permission android:name="android.permission.INTERNET"/>
-
    <application
-        android:label="mobile_angle_and_triangle"
+        android:label="calc_triangle"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -38,10 +36,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-
        <meta-data
            android:name="com.google.android.gms.ads.APPLICATION_ID"
            android:value="ca-app-pub-6155876762943258~8843751708"/>
-
     </application>
 </manifest>

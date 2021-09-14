@@ -14,5 +14,5 @@ abstract class ConstString {
   static const String email = 'a.dev.mobile@gmail.com';
 //TODO замена
   static var playStoreUrl =
-      'https://play.google.com/store/apps/details?id=com.webaddicted.movies4u';
+      'https://play.google.com/store/apps/developer?id=%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D0%B9%20%D0%A2%D1%80%D0%BE%D1%84%D0%B8%D0%BC%D0%BE%D0%B2&hl=ru';
 }

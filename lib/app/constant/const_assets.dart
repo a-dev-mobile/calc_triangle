@@ -1,8 +1,8 @@
 
 abstract class ConstAssets {
-  static const String righTriangleInput =
+  static const String rightTriangleInput =
       'assets/image/triangle/right_triangle_input.png';
-  static const String righTriangleInfo =
+  static const String rightTriangleInfo =
       'assets/image/triangle/right_triangle_info.png'; 
       
 

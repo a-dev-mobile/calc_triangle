@@ -1,4 +1,3 @@
-import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';

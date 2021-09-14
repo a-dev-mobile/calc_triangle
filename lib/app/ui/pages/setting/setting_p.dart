@@ -1,4 +1,3 @@
-import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
@@ -12,7 +11,6 @@ import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart'
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 

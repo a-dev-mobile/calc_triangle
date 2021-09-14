@@ -2,7 +2,6 @@ import 'package:calc_triangle/app/bindings/calculate/calculate_b.dart';
 import 'package:calc_triangle/app/bindings/setting/setting_b.dart';
 
 import 'package:calc_triangle/app/bindings/welcome/welcom_b.dart';
-import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/ui/pages/calculate/calculate_p.dart';
 
 import 'package:calc_triangle/app/ui/pages/setting/setting_p.dart';
@@ -28,7 +27,7 @@ class AppPage {
       name: Routes.SETTING,
       transition: Transition.native,
       binding: SettingBinding(),
-      page: () => SettingPage(),
+      page: () => const SettingPage(),
     ),
   ];
 }
