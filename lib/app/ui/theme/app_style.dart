@@ -39,7 +39,7 @@ abstract class AppStyleDrawer {
 
   static double iconSize = 20.sp;
   static Color iconColor(BuildContext context) {
-    return AppColors.content(context);
+    return AppColors.contentRevers(context);
   }
 }
 

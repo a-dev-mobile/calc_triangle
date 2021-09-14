@@ -517,7 +517,7 @@ class RightTriangleController extends GetxController {
     }
 
 //если гипотенуза меньше
-    if (cHypotenuseD <= aCathetD || cHypotenuseD <= bCathetD) {
+    if (cHypotenuseD < aCathetD || cHypotenuseD < bCathetD) {
       showSnack(TranslateHelper.messageHypotenuseGreaterCathetus);
 
       return;

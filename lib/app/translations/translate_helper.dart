@@ -31,6 +31,8 @@ class TranslateHelper {
   static String get warning => 'warning'.tr;
   static String get yes => 'yes'.tr;
   static String get no => 'no'.tr;
+  static String get rateApp => 'rate_app'.tr;
+  static String get feedback => 'feedback'.tr;
 
   static String get showStartupScreen => 'show_startup_screen'.tr;
   static String get languageEn => 'language_en'.tr;

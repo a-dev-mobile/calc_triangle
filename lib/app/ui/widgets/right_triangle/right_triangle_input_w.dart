@@ -70,12 +70,12 @@ class RightTriangleInputWidget extends StatelessWidget {
               ],
             ),
             DrawerIconWidget(globalkey: _globalKey),
-            Obx(() {
-              c.isDeg.value
-                  ? textConvert = ConstString.degConvert
-                  : textConvert = ConstString.degMinSecConvert;
-              return Positioned(top: 10.h, right: 10.w, child: Text(textConvert,style: AppStyleText.convertText(context),));
-            })
+            // Obx(() {
+            //   c.isDeg.value
+            //       ? textConvert = ConstString.degConvert
+            //       : textConvert = ConstString.degMinSecConvert;
+            //   return Positioned(top: 10.h, right: 10.w, child: Text(textConvert,style: AppStyleText.convertText(context),));
+            // })
           ],
         ),
       ),

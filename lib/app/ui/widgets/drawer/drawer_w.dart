@@ -1,3 +1,4 @@
+import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/routes/app_routes.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({
@@ -86,6 +88,24 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   AppWidgets.dividerDrawer(),
                   DrawerRow(
                       onTap: () {
+                        launchURL();
+                      },
+                      icon: Icons.rate_review,
+                      msg: TranslateHelper.rateApp),
+
+                  AppWidgets.dividerDrawer(),
+
+                  DrawerRow(
+                      onTap: () {
+                        launch(emailLaunchUri.toString());
+                      },
+                      icon: Icons.feedback,
+                      msg: TranslateHelper.feedback),
+
+                  AppWidgets.dividerDrawer(),
+
+                  DrawerRow(
+                      onTap: () {
                         Get.defaultDialog(
                             title: TranslateHelper.about,
                             backgroundColor: AppColors.content(context),
@@ -111,6 +131,7 @@ get_storage: ^2.0.3
 logger: ^1.1.0
 google_mobile_ads: ^0.13.4
 share: ^2.0.4
+url_launcher: ^6.0.10
 ''',
                                     style: AppStyleText.subText(context),
                                   ),
@@ -137,6 +158,24 @@ share: ^2.0.4
     );
   }
 }
+
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
+
+final Uri emailLaunchUri = Uri(
+  scheme: 'mailto',
+  path: ConstString.email,
+  query: encodeQueryParameters(<String, String>{
+    'subject': '${TranslateHelper.feedback} -> ${TranslateHelper.appName}'
+  }),
+);
+void launchURL() async => await canLaunch(ConstString.playStoreUrl)
+    ? await launch(ConstString.playStoreUrl)
+    : throw 'Could not launch ${ConstString.playStoreUrl}';
 
 class DrawerRow extends StatelessWidget {
   const DrawerRow({
