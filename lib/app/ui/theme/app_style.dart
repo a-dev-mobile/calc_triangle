@@ -56,12 +56,9 @@ abstract class AppStyleText {
         color: AppColors.text(context).withOpacity(0.8), fontSize: 15.sp);
   }
 
-
- static TextStyle convertText(BuildContext context) {
-    return TextStyle(
-        color: AppColors.text(context), fontSize: 26.sp);
+  static TextStyle convertText(BuildContext context) {
+    return TextStyle(color: AppColors.text(context), fontSize: 26.sp);
   }
-
 }
 
 abstract class AppStyleTextImage {
@@ -76,17 +73,18 @@ abstract class AppStyleTextImage {
 
   static TextStyle activeInput(BuildContext context) {
     return TextStyle(
-        color: Colors.red,
-          decoration: TextDecoration.underline,
+        color: ConstColor.error,
+      
+      
         backgroundColor: AppColors.content(context),
         fontSize: 20.sp);
   }
 
   static TextStyle activeParam(BuildContext context) {
     return TextStyle(
-        color: AppColors.text(context),
-        // fontWeight: FontWeight.bold,
-          decoration: TextDecoration.underline,
+       color: ConstColor.primary,
+     
+
         backgroundColor: AppColors.content(context),
         fontSize: 20.sp);
   }

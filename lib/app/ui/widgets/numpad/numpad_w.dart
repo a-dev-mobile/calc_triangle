@@ -105,15 +105,11 @@ class CalculatorKey extends StatelessWidget {
             c.longBackspace();
           }
 
-          if (symbol == Keys.deg || symbol == Keys.degMinSec) {
-            c.longClickConvertDeg();
-            printt.v('long');
-          }
+        
         },
         onPressed: () {
           // printt.v(symbol.value);
-        
-            c.clickKey(symbol);
+                    c.clickKey(symbol);
           
         },
         child: Text(symbol.value, style: textStyle),

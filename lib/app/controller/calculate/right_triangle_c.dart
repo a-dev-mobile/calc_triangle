@@ -79,6 +79,17 @@ class RightTriangleController extends GetxController {
       return;
     }
 
+    //если нажалти на конвертацию
+    if (keySymbol == Keys.deg || keySymbol == Keys.degMinSec) {
+      clickConvertDeg();
+      return;
+    }
+
+    //если у нас углы в минутах при нажатие любой кнопки далее очищаем ввод
+    if (isDeg.isFalse) {
+      resetValue();
+      return;
+    }
     if (keySymbol == Keys.clearAll) {
       clearAll();
       showMessage();
@@ -87,7 +98,10 @@ class RightTriangleController extends GetxController {
 
     if (keySymbol == Keys.backspace) {
       backspace();
+      initValue();
       setActiveParam();
+
+      calculate();
       showMessage();
       return;
     }
@@ -169,13 +183,13 @@ class RightTriangleController extends GetxController {
       bAngle.value = sumInput + "°";
     }
 
-    showMessage();
-
+    initValue();
     setActiveParam();
 
+    calculate();
+    showMessage();
     return;
 
-    calculate();
     initValue();
     printt.i('end_print');
     _printElements();
@@ -228,11 +242,17 @@ class RightTriangleController extends GetxController {
 
   void initValue() {
     printt.v('initValue');
+
+    if (isDeg.isFalse) {
+      convertDMSToDeg();
+    }
     aCathetS = aCathet.value;
     bCathetS = bCathet.value;
     bAngleS = bAngle.value;
     cHypotenuseS = cHypotenuse.value;
     aAngleS = aAngle.value;
+
+    printt.i('aAngleS $aAngleS bAngleS $bAngleS');
 
     try {
       aCathetD = double.parse(aCathetS);
@@ -412,14 +432,12 @@ class RightTriangleController extends GetxController {
           "°";
     }
 
-// если мы в минутах то переводим углы
-    convertDeg();
-
 // проверка если цифры не числа
     if (AppUtilsNumber.isDoublesNanAndInfinity(
         [aCathetD, bCathetD, cHypotenuseD, bAngleD, aAngleD])) {
-      printt.i('clear');
-      resetValue();
+      printt.e('isDoublesNanAndInfinity');
+      // resetValue();
+      // resetActiveParam();
       // _resetActiveParam();
     }
   }
@@ -663,26 +681,25 @@ class RightTriangleController extends GetxController {
     _isNext(false);
   }
 
-  void convertDeg() {
-    initValue();
-// если мы в минутах то переводим углы
-    if (!isDeg.value) {
-      aAngle.value = AppUtilsNumber.convertDegToDMS(
-          aAngleD, AppUtils.getPrecisionResults());
-      bAngle.value = AppUtilsNumber.convertDegToDMS(
-          bAngleD, AppUtils.getPrecisionResults());
-    } else {
-      aAngle.value = AppUtilsNumber.convertDMStoDeg(
-          aAngle.value, AppUtils.getPrecisionResults());
-      bAngle.value = AppUtilsNumber.convertDMStoDeg(
-          bAngle.value, AppUtils.getPrecisionResults());
-    }
+  void convertDMSToDeg() {
+    aAngle.value = AppUtilsNumber.convertDMStoDeg(
+        aAngle.value, AppUtils.getPrecisionResults());
+    bAngle.value = AppUtilsNumber.convertDMStoDeg(
+        bAngle.value, AppUtils.getPrecisionResults());
   }
 
-  void longClickConvertDeg() {
+  void convertDegToDMS() {
+// если мы в минутах то переводим углы
+    aAngle.value =
+        AppUtilsNumber.convertDegToDMS(aAngleD, AppUtils.getPrecisionResults());
+    bAngle.value =
+        AppUtilsNumber.convertDegToDMS(bAngleD, AppUtils.getPrecisionResults());
+  }
+
+  void clickConvertDeg() {
     isDeg.value = !(isDeg.value);
 
-    convertDeg();
+    isDeg.value ? convertDMSToDeg() : convertDegToDMS();
   }
 
   void longBackspace() {
@@ -706,6 +723,7 @@ class RightTriangleController extends GetxController {
     //   _resetValue();
     // }
     restartActiveParamIfZeroValue();
+    showMessage();
   }
 
   void backspace() {
@@ -783,6 +801,7 @@ class RightTriangleController extends GetxController {
     bAngle.value = startAngleValue;
 
     aCathetD = bCathetD = cHypotenuseD = bAngleD = aAngleD = 0;
+    isDeg.value = true;
   }
 
   void _isNext(bool isNext) {

@@ -214,7 +214,7 @@ abstract class AppUtilsNumber {
     dmsList = dmsList[1].split('″');
     double sec = double.parse(dmsList[0]);
 
-    return AppUtilsNumber.getFormatNumber(deg + (min / 60) + (sec / 3600),precisionResults);
+    return AppUtilsNumber.getFormatNumber(deg + (min / 60) + (sec / 3600),precisionResults)+"°";
   }
 
   static String convertDegToDMS(double degree, int precisionResults) {
