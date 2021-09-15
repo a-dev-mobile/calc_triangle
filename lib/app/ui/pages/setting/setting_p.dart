@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -16,6 +17,7 @@ import 'package:get/get.dart';
 
 late SettingController c = Get.find();
 late WelcomeController c2 = Get.find();
+late RightTriangleController c3 = Get.find();
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -24,7 +26,6 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       
         title: Text(TranslateHelper.setting),
       ),
       body: SingleChildScrollView(
@@ -56,6 +57,7 @@ class SettingPage extends StatelessWidget {
                               TranslateHelper.updateLocale(
                                   const Locale(ConstString.localeEn));
                               c.setEnLocation();
+                                              c3.showMessage();
                               Navigator.of(context).pop();
                             },
                             title: Text(
@@ -71,6 +73,8 @@ class SettingPage extends StatelessWidget {
                               TranslateHelper.updateLocale(
                                   const Locale(ConstString.localeRu));
                               c.setRusLocation();
+                              // чтобы перевелся
+                              c3.showMessage();
                               Navigator.of(context).pop();
                             },
                             title: Text(

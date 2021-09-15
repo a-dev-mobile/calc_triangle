@@ -32,8 +32,14 @@ Future<void> main() async {
   await GetStorage.init();
   GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
 
-  AppUtils.setLocale(Platform.localeName);
+  GetStorage().writeIfNull(ConstString.keyLocale, Platform.localeName == 'ru_RU'
+      ? ConstString.localeRu
+      : ConstString.localeEn);
 
+
+
+
+  printt.v(Platform.localeName);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(const MyApp());
@@ -69,7 +75,7 @@ class MyApp extends StatelessWidget {
             // theme: isDarkTheme ? darkThemeData(context) : lightThemeData(context),
             darkTheme: darkThemeData(context),
             translations: AppTranslation(),
-            locale: AppUtils.getLocale() == 'ru_RU'
+            locale: AppUtils.getLocale() == ConstString.localeRu
                 ? const Locale(ConstString.localeRu)
                 : const Locale(ConstString.localeEn),
 

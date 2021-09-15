@@ -1,6 +1,6 @@
+import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:get/get.dart';
-
 
 class SettingController extends GetxController {
   var isShowLaunchScreen = AppUtils.isShowLaunchScreen().obs;
@@ -22,7 +22,9 @@ class SettingController extends GetxController {
 
   @override
   void onInit() {
-    if (AppUtils.getLocale() == 'ru_RU') {
+
+    
+    if (AppUtils.getLocale() == ConstString.localeRu) {
       isRus.value = true;
     } else {
       isRus.value = false;

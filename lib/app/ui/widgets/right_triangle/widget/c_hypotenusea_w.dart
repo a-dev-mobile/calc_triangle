@@ -45,7 +45,7 @@ class ChypotenuseWidget extends StatelessWidget {
                 styleText = AppStyleTextImage.inActive(context);
               }
 
-              return GestureDetector(
+               return GestureDetector(
                 onTap: () {
                 
                   c.isaCathet.value = false;
@@ -54,15 +54,12 @@ class ChypotenuseWidget extends StatelessWidget {
                   c.isaAngle.value = false;
                   c.isbAngle.value = false;
 
-                    c.initValue();
-              c.setActiveParam();
-              c.calculate();
-              c.showMessage();
+
                 },
                 child: Container(
-                  height: 30.sp,
-                  padding: EdgeInsets.symmetric(horizontal: 20.h),
-                  color: Colors.amber.withOpacity(0.5),
+             
+                  padding: EdgeInsets.symmetric(horizontal: 20.h,vertical: 10.h),
+                  color: Colors.transparent,
                   child: Text(
                     c.cHypotenuse.value,
                     style: styleText,

@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -43,23 +44,22 @@ class BcathetWidget extends StatelessWidget {
               }
 
               return GestureDetector(
-                onTap: () {
-      
-                  c.isaCathet.value = false;
-                  c.isbCathet.value = true;
-                  c.iscHypotenuse.value = false;
-                  c.isaAngle.value = false;
-                  c.isbAngle.value = false;
-         c.initValue();
-              c.setActiveParam();
-              c.calculate();
-              c.showMessage();
-                },
-                child: Text(
-                  c.bCathet.value,
-                  style: styleText,
-                ),
-              );
+                  onTap: () {
+                    c.isaCathet.value = false;
+                    c.isbCathet.value = true;
+                    c.iscHypotenuse.value = false;
+                    c.isaAngle.value = false;
+                    c.isbAngle.value = false;
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    color: Colors.transparent,
+                    child: Text(
+                      c.bCathet.value,
+                      style: styleText,
+                    ),
+                  ));
             })));
   }
 }

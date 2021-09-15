@@ -223,7 +223,13 @@ class RightTriangleController extends GetxController {
       2: RightTriangle.empty,
     };
 
-    if (isTapParam) resetValue();
+    resetValue();
+
+
+
+
+
+
   }
 
   void resetActiveInput() {
@@ -236,7 +242,7 @@ class RightTriangleController extends GetxController {
   }
 
   void initValue() {
-    printt.v('initValue');
+    // printt.v('initValue');
 
     if (isDeg.isFalse) {
       convertDMSToDeg();
@@ -246,8 +252,6 @@ class RightTriangleController extends GetxController {
     bAngleS = bAngle.value;
     cHypotenuseS = cHypotenuse.value;
     aAngleS = aAngle.value;
-
-    printt.i('aAngleS $aAngleS bAngleS $bAngleS');
 
     try {
       aCathetD = double.parse(aCathetS);
@@ -260,6 +264,8 @@ class RightTriangleController extends GetxController {
       resetValue();
       resetActiveParam();
     }
+    printt.v(
+        'initValue\n$aCathetD $aCathetS aCathet \n$bCathetD $bCathetS bCathet \n$cHypotenuseD $cHypotenuseS cHypotenuse \n$aAngleD $aAngleS aAngle \n$bAngleD $bAngleS bAngle');
   }
 
   void calculate() {
@@ -428,12 +434,24 @@ class RightTriangleController extends GetxController {
     }
 
 // проверка если цифры не числа
-    if (AppUtilsNumber.isDoublesNanAndInfinity(
-        [aCathetD, bCathetD, cHypotenuseD, bAngleD, aAngleD])) {
-      printt.e('isDoublesNanAndInfinity');
-      // resetValue();
-      // resetActiveParam();
-      // _resetActiveParam();
+    checkIfNaN();
+  }
+
+  void checkIfNaN() {
+    if (AppUtilsNumber.isNanAndInfinity(aCathetD)) {
+      aCathet.value = startLengthValue;
+    }
+    if (AppUtilsNumber.isNanAndInfinity(bCathetD)) {
+      bCathet.value = startLengthValue;
+    }
+    if (AppUtilsNumber.isNanAndInfinity(cHypotenuseD)) {
+      cHypotenuse.value = startLengthValue;
+    }
+    if (AppUtilsNumber.isNanAndInfinity(aAngleD)) {
+      aAngle.value = startAngleValue;
+    }
+    if (AppUtilsNumber.isNanAndInfinity(bAngleD)) {
+      bAngle.value = startAngleValue;
     }
   }
 
@@ -461,10 +479,10 @@ class RightTriangleController extends GetxController {
     } else if (iscHypotenuse.value) {
       if (cHypotenuse.value == startLengthValue) {
         resetActiveParam();
-          printt.v('cHypotenuse - not');
+        printt.v('cHypotenuse - not');
         return;
       }
-          printt.v('cHypotenuse - ok');
+      printt.v('cHypotenuse - ok');
       paramAll = RightTriangle.cHypotenuse;
       paramLenght = RightTriangle.cHypotenuse;
     } else if (isaAngle.value) {
@@ -482,12 +500,14 @@ class RightTriangleController extends GetxController {
     }
 
     activeParamMap[3] = paramAll;
-
+    printt.v('start convert param ${activeParamMap[1]}  ${activeParamMap[2]}');
     if (activeParamMap[1] == activeParamMap[2] ||
         activeParamMap[2] != activeParamMap[3]) {
       activeParamMap[1] = activeParamMap[2]!;
       activeParamMap[2] = activeParamMap[3]!;
     }
+
+    printt.v('end convert param ${activeParamMap[1]}  ${activeParamMap[2]}');
 
 // если активные углы то сбрасываем один выбор до последнй длины
     if (isActiveParamAngles()) {
@@ -527,8 +547,8 @@ class RightTriangleController extends GetxController {
       return;
     }
 
-    // endSnack();
-    showSnack('OK');
+    endSnack();
+    // showSnack('OK');
   }
 
   bool isAngleOver90(KeySymbol keySymbol) {
@@ -611,8 +631,8 @@ class RightTriangleController extends GetxController {
   void _printElements() {
     // printt.i(
     //     'aCathet ${aCathet.value} bCathet ${bCathet.value} cHypotenuse ${cHypotenuse.value} aAngle ${aAngle.value} bAngle ${bAngle.value}');
-    printt.i(
-        'print\n\nactiveParam  ${activeParamMap[1]} ${activeParamMap[2]}\naCathetS $aCathetS   bCathetS $bCathetS cHypotenuseS $cHypotenuseS aAngleS $aAngleS bAngleS $bAngleS\naCathetD $aCathetD   bCathetD $bCathetD cHypotenuseD $cHypotenuseD aAngleD $aAngleD bAngleD $bAngleD\nisaCathet ${isaCathet.value} isbCathet ${isbCathet.value} iscHypotenuse ${iscHypotenuse.value} isaAngle ${isaAngle.value} isbAngle ${isbAngle.value}');
+    // printt.i(
+    // 'print\n\nactiveParam  ${activeParamMap[1]} ${activeParamMap[2]}\naCathetS $aCathetS   bCathetS $bCathetS cHypotenuseS $cHypotenuseS aAngleS $aAngleS bAngleS $bAngleS\naCathetD $aCathetD   bCathetD $bCathetD cHypotenuseD $cHypotenuseD aAngleD $aAngleD bAngleD $bAngleD\nisaCathet ${isaCathet.value} isbCathet ${isbCathet.value} iscHypotenuse ${iscHypotenuse.value} isaAngle ${isaAngle.value} isbAngle ${isbAngle.value}');
   }
 
   void nextElement() {
@@ -712,15 +732,15 @@ class RightTriangleController extends GetxController {
     } else if (isbAngle.value) {
       bAngle.value = startAngleValue;
     }
+    initValue();
     setActiveParam();
-
     calculate();
+    showMessage();
 
     // if (aAngle.value == _startAngleValue || bAngle.value == _startAngleValue) {
     //   _resetValue();
     // }
     restartActiveParamIfZeroValue();
-    showMessage();
   }
 
   void backspace() {
@@ -777,7 +797,6 @@ class RightTriangleController extends GetxController {
       bAngle.value = newInput + '°';
     }
 
-    initValue();
   }
 
   void clearAll() {

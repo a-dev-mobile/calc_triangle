@@ -44,52 +44,25 @@ dependencies:
   url_launcher: ^6.0.10
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.9.2"
+  flutter_native_splash: ^1.2.3
 
 
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/icon/icon.png"
-  remove_alpha_ios: true
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^1.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
 
-# The following section is specific to Flutter.
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
 
     - assets/image/triangle/
-  #   - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
+ 
   fonts:
     - family: montserrat
       fonts:
@@ -105,6 +78,74 @@ flutter:
           weight: 700
         - asset: fonts/montserrat_mediumitalic.ttf
           style: italic
+ 
+flutter_native_splash:
+
+  color: "#1D1D35"
+  image: "assets/icon/launch_dark_screen_400.png"
+  # background_image: "assets/icon/launch_dark_screen.png"
+
+  # color_dark: "#1D1D35"
+  # image_dark: assets/icon/launch_dark_screen_400.png
+  #background_image_dark: "assets/dark-background.png"
+
+  android: true
+  ios: true
+  web: false
+
+ 
+  # fullscreen: true
+ # android_gravity can be one of the following Android Gravity (see 
+  # https://developer.android.com/reference/android/view/Gravity): bottom, center, 
+  # center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal,
+  # fill_vertical, left, right, start, or top.
+  #android_gravity: center
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  remove_alpha_ios: true
+  
+
+
+
+
+
+
+
+  # The position of the splash image can be set with android_gravity, ios_content_mode, and
+  # web_image_mode parameters.  All default to center.
   #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+  # android_gravity can be one of the following Android Gravity (see 
+  # https://developer.android.com/reference/android/view/Gravity): bottom, center, 
+  # center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal,
+  # fill_vertical, left, right, start, or top.
+  #android_gravity: center
+  #
+  # ios_content_mode can be one of the following iOS UIView.ContentMode (see 
+  # https://developer.apple.com/documentation/uikit/uiview/contentmode): scaleToFill, 
+  # scaleAspectFit, scaleAspectFill, center, top, bottom, left, right, topLeft, topRight, 
+  # bottomLeft, or bottomRight.
+  #ios_content_mode: center
+  #
+  # web_image_mode can be one of the following modes: center, contain, stretch, and cover.
+  #web_image_mode: center
+
+  # To hide the notification bar, use the fullscreen parameter.  Has no affect in web since web 
+  # has no notification bar.  Defaults to false.
+  # NOTE: Unlike Android, iOS will not automatically show the notification bar when the app loads.
+  #       To show the notification bar, add the following code to your Flutter app:
+  #       WidgetsFlutterBinding.ensureInitialized();
+  #       SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom, SystemUiOverlay.top]);
+  #fullscreen: true
+  
+  # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s) 
+  # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
+  # do not remove any spaces:
+  #info_plist_files:
+  #  - 'ios/Runner/Info-Debug.plist'
+  #  - 'ios/Runner/Info-Release.plist'
+
+  # To enable support for Android 12, set the following parameter to true.  Defaults to false.
+  #android12: true

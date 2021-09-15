@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -41,10 +42,22 @@ class BangleWidget extends StatelessWidget {
               styleText = AppStyleTextImage.inActive(context);
             }
 
-            return Text(
-              c.bAngle.value,
-              style: styleText,
-            );
+            return GestureDetector(
+                onTap: () {
+                  c.isaCathet.value = false;
+                  c.isbCathet.value = false;
+                  c.iscHypotenuse.value = false;
+                  c.isaAngle.value = false;
+                  c.isbAngle.value = true;
+                },
+                child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    color: Colors.transparent,
+                    child: Text(
+                      c.bAngle.value,
+                      style: styleText,
+                    )));
           }),
         ));
   }

@@ -50,7 +50,7 @@ class WelcomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 0.4.sh,
+                      height: 0.3.sh,
                       child: const ImageAppWidget(),
                     ),
                     // RightTriangleImageInfoWidget(),

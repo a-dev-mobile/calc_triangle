@@ -1,3 +1,4 @@
+import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
@@ -9,6 +10,7 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'widget/r_triangle_image_input_w.dart';
@@ -39,7 +41,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                       width: AppUtils.getWidth(context),
                       height: AppUtils.getHeight(context) * 0.05,
                       child: Align(
-                        child: AppWidgets.dividerWelcome(),
+                        child: Icon(Icons.done,color: ConstColor.secondary,size: 50.sp,),
                         alignment: Alignment.center,
                       ),
                     ),

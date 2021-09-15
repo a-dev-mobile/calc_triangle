@@ -28,9 +28,9 @@ Map<String, String> en = {
   'dark_theme': 'Dark theme',
   'light_theme': 'Light theme',
 
-  'message_angle_less_90': 'The angle must be less than 90°',
+  'message_angle_less_90': 'Angle > 90°',
   'enter_value_sides': 'Enter the value of one of the sides',
   'selected_precision_result': 'Select precision of results: ',
   'message_hypotenuse_greater_cathetus':
-      'Hypotenuse must be greater than the cathetus',
+      'Hypotenuse < cathetus',
 };

@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -35,7 +36,7 @@ class AangleWidget extends StatelessWidget {
             isActiveInput = c.isaAngle.value;
             isActiveParam =
                 c.activeParamMap.value.containsValue(RightTriangle.aAngle);
-                
+
             if (isActiveInput) {
               styleText = AppStyleTextImage.activeInput(context);
             } else if (isActiveParam) {
@@ -44,10 +45,22 @@ class AangleWidget extends StatelessWidget {
               styleText = AppStyleTextImage.inActive(context);
             }
 
-            return Text(
-              c.aAngle.value,
-              style: styleText,
-            );
+            return GestureDetector(
+                onTap: () {
+                  c.isaCathet.value = false;
+                  c.isbCathet.value = false;
+                  c.iscHypotenuse.value = false;
+                  c.isaAngle.value = true;
+                  c.isbAngle.value = false;
+                },
+                child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    color: Colors.transparent,
+                    child: Text(
+                      c.aAngle.value,
+                      style: styleText,
+                    )));
           }),
         ));
   }

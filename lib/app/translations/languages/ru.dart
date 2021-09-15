@@ -24,9 +24,9 @@ Map<String, String> ru = {
   'select_theme': 'Выберите тему: ',
   'dark_theme': 'Темная',
   'light_theme': 'Светлая',
-  'message_angle_less_90': 'Угол должен быть меньше 90°',
+  'message_angle_less_90': 'Угол > 90°',
   'enter_value_sides': 'Введите значение одной из сторон',
   'selected_precision_result': 'Выберите точность результатов: ',
   'message_hypotenuse_greater_cathetus':
-      'Гипотенуза должна быть больше катета',
+      'Гипотенуза < катета',
 };

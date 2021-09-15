@@ -9,7 +9,7 @@
 </queries>
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="Right Triangle"
+        android:label="Triangle"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

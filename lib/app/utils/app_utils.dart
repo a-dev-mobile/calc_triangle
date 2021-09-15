@@ -19,9 +19,9 @@ abstract class AppUtils {
     return isFirstStartApp;
   }
 
-  static String getLocale() {
+  static String? getLocale() {
     String locale =
-        GetStorage().read(ConstString.keyLocale) ?? ConstString.localeEn;
+        GetStorage().read(ConstString.keyLocale);
     printt.w('AppUtils getLocale $locale');
     return locale;
   }
@@ -193,15 +193,23 @@ abstract class AppUtilsNumber {
     return radian * (180 / pi);
   }
 
-  static bool isDoublesNanAndInfinity(List<double> listDouble) {
+  static bool isListNanAndInfinity(List<double> listDouble) {
     for (var item in listDouble) {
-      if (item.isNaN || item.isInfinite) {
+      if (isNanAndInfinity(item)) {
         return true;
       }
     }
     return false;
   }
 
+  static bool isNanAndInfinity(double value) {
+   
+      if (value.isNaN || value.isInfinite) {
+        return true;
+      }
+    return false;
+    }
+ 
   static String convertDMStoDeg(String dms,int precisionResults) {
     if (!dms.contains('°') && !dms.contains('′') && !dms.contains('″′')) {
       return 'error';

@@ -6,6 +6,7 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -40,24 +41,25 @@ class AcathetWidget extends StatelessWidget {
           }
 
           return GestureDetector(
-            onTap: () {
-              c.isaCathet.value = true;
+                onTap: () {
+                
+                  c.isaCathet.value = true;
+                  c.isbCathet.value = false;
+                  c.iscHypotenuse.value = false;
+                  c.isaAngle.value = false;
+                  c.isbAngle.value = false;
 
-              c.isbCathet.value = false;
-              c.iscHypotenuse.value = false;
-              c.isaAngle.value = false;
-              c.isbAngle.value = false;
 
-              c.initValue();
-              c.setActiveParam();
-              c.calculate();
-              c.showMessage();
-            },
-            child: Text(
-              c.aCathet.value,
-              style: styleText,
-            ),
-          );
+                },
+                child: Container(
+             
+                  padding: EdgeInsets.symmetric(horizontal: 20.h,vertical: 10.h),
+                  color: Colors.transparent,
+                  child: Text(
+                  c.aCathet.value,
+                  style: styleText,
+                ),
+              ));
         }));
   }
 }

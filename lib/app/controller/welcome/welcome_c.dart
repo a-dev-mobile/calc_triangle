@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
+import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +65,13 @@ class WelcomeController extends GetxController {
     isDarkTheme.value = AppUtils.isDark();
     precisionResult.value = AppUtils.getPrecisionResults().toInt();
     AppUtils.setFirstStartApp(false);
+
+
+
+
+
+
+
 
     super.onInit();
   }
