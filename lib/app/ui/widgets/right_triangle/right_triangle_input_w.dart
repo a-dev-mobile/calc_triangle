@@ -10,6 +10,7 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -23,6 +24,16 @@ class RightTriangleInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarIconBrightness:
+            AppUtils.isDark() ? Brightness.light : Brightness.dark,
+        statusBarColor: AppUtils.isDark()
+            ? ConstColor.scaffoldDarkTheme
+            : ConstColor.scaffoldLightTheme, // Color for Android
+        statusBarBrightness: AppUtils.isDark()
+            ? Brightness.dark
+            : Brightness.light // Dark == white status bar -- for IOS.
+        ));
     return Scaffold(
       key: _globalKey,
       drawer: const DrawerWidget(),

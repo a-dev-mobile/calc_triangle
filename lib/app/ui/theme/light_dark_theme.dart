@@ -2,6 +2,22 @@ import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
+/* 
+SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarIconBrightness:
+            isDarkTheme.value ? Brightness.light : Brightness.dark,
+        statusBarColor: isDarkTheme.value
+            ? ConstColor.scaffoldDarkTheme
+            : ConstColor.scaffoldLightTheme, // Color for Android
+        statusBarBrightness: isDarkTheme.value
+            ? Brightness.dark
+            : Brightness.light // Dark == white status bar -- for IOS.
+        ));
+
+*/
+
+
 ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
       primaryColor: ConstColor.primary,
