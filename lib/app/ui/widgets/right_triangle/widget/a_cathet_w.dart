@@ -3,6 +3,7 @@
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
+import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
 
@@ -27,21 +28,35 @@ class AcathetWidget extends StatelessWidget {
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Obx(() {
-            isActiveInput = c.isaCathet.value;
-            isActiveParam =
-                c.activeParamMap.value.containsValue(RightTriangle.aCathet);
-            if (isActiveInput) {
-              styleText = AppStyleTextImage.activeInput(context);
-            } else if (isActiveParam) {
-              styleText = AppStyleTextImage.activeParam(context);
-            } else {
-              styleText = AppStyleTextImage.inActive(context);
-            }
+          isActiveInput = c.isaCathet.value;
+          isActiveParam =
+              c.activeParamMap.value.containsValue(RightTriangle.aCathet);
+          if (isActiveInput) {
+            styleText = AppStyleTextImage.activeInput(context);
+          } else if (isActiveParam) {
+            styleText = AppStyleTextImage.activeParam(context);
+          } else {
+            styleText = AppStyleTextImage.inActive(context);
+          }
 
+          return GestureDetector(
+            onTap: () {
+              c.isaCathet.value = true;
 
-          return Text(
-            c.aCathet.value,
-            style: styleText,
+              c.isbCathet.value = false;
+              c.iscHypotenuse.value = false;
+              c.isaAngle.value = false;
+              c.isbAngle.value = false;
+
+              c.initValue();
+              c.setActiveParam();
+              c.calculate();
+              c.showMessage();
+            },
+            child: Text(
+              c.aCathet.value,
+              style: styleText,
+            ),
           );
         }));
   }

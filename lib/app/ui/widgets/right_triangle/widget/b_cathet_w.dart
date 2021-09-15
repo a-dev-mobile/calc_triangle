@@ -29,24 +29,37 @@ class BcathetWidget extends StatelessWidget {
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Transform.rotate(
-          angle: angle * pi / 180,
-          child: Obx(() {
-            isActiveInput = c.isbCathet.value;
-            isActiveParam =
-                c.activeParamMap.value.containsValue(RightTriangle.bCathet);
-            if (isActiveInput) {
-              styleText = AppStyleTextImage.activeInput(context);
-            } else if (isActiveParam) {
-              styleText = AppStyleTextImage.activeParam(context);
-            } else {
-              styleText = AppStyleTextImage.inActive(context);
-            }
+            angle: angle * pi / 180,
+            child: Obx(() {
+              isActiveInput = c.isbCathet.value;
+              isActiveParam =
+                  c.activeParamMap.value.containsValue(RightTriangle.bCathet);
+              if (isActiveInput) {
+                styleText = AppStyleTextImage.activeInput(context);
+              } else if (isActiveParam) {
+                styleText = AppStyleTextImage.activeParam(context);
+              } else {
+                styleText = AppStyleTextImage.inActive(context);
+              }
 
-            return Text(
-              c.bCathet.value,
-              style: styleText,
-            );
-          }),
-        ));
+              return GestureDetector(
+                onTap: () {
+      
+                  c.isaCathet.value = false;
+                  c.isbCathet.value = true;
+                  c.iscHypotenuse.value = false;
+                  c.isaAngle.value = false;
+                  c.isbAngle.value = false;
+         c.initValue();
+              c.setActiveParam();
+              c.calculate();
+              c.showMessage();
+                },
+                child: Text(
+                  c.bCathet.value,
+                  style: styleText,
+                ),
+              );
+            })));
   }
 }

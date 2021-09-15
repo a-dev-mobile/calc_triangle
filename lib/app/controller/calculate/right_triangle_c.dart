@@ -1,4 +1,3 @@
-
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -42,7 +41,7 @@ class RightTriangleController extends GetxController {
   var isActiveSnackBar = false.obs;
   var messageSnackBar = ''.obs;
   var isDeg = true.obs;
-
+  bool isTapParam = false;
   static const startLengthValue = '0';
   static const startAngleValue = '0°';
 
@@ -61,6 +60,8 @@ class RightTriangleController extends GetxController {
   double aAngleD = 0;
 
   void clickKey(KeySymbol keySymbol) {
+    isTapParam = false;
+
     showMessage();
 
     printt.i('start_print');
@@ -181,18 +182,16 @@ class RightTriangleController extends GetxController {
 
       bAngle.value = sumInput + "°";
     }
-
+    printt.i('calculate');
     initValue();
     setActiveParam();
 
     calculate();
     showMessage();
     return;
-
   }
 
   bool isTwoDecimalPointRightTriangle(KeySymbol keySymbol) {
-
     if (isaCathet.value) {
       if (AppUtilsString.isTwoDecimalPoint(aCathet.value + keySymbol.value)) {
         return true;
@@ -223,7 +222,8 @@ class RightTriangleController extends GetxController {
       1: RightTriangle.empty,
       2: RightTriangle.empty,
     };
-    resetValue();
+
+    if (isTapParam) resetValue();
   }
 
   void resetActiveInput() {
@@ -461,8 +461,10 @@ class RightTriangleController extends GetxController {
     } else if (iscHypotenuse.value) {
       if (cHypotenuse.value == startLengthValue) {
         resetActiveParam();
+          printt.v('cHypotenuse - not');
         return;
       }
+          printt.v('cHypotenuse - ok');
       paramAll = RightTriangle.cHypotenuse;
       paramLenght = RightTriangle.cHypotenuse;
     } else if (isaAngle.value) {

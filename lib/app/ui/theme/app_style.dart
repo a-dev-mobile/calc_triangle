@@ -68,7 +68,7 @@ abstract class AppStyleTextImage {
         height: 1,
         // backgroundColor: Colors.blue,
         backgroundColor: AppColors.content(context),
-        fontSize: 20.sp);
+        fontSize: 24.sp);
   }
 
   static TextStyle activeInput(BuildContext context) {
@@ -77,7 +77,7 @@ abstract class AppStyleTextImage {
       
       
         backgroundColor: AppColors.content(context),
-        fontSize: 20.sp);
+        fontSize: 25.sp);
   }
 
   static TextStyle activeParam(BuildContext context) {
@@ -86,14 +86,14 @@ abstract class AppStyleTextImage {
      
 
         backgroundColor: AppColors.content(context),
-        fontSize: 20.sp);
+        fontSize: 24.sp);
   }
 
   static TextStyle inActive(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context),
         backgroundColor: AppColors.content(context),
-        fontSize: 18.sp);
+        fontSize: 22.sp);
   }
 }
 
