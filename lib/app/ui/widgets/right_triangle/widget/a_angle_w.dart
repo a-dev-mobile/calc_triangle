@@ -13,12 +13,12 @@ import 'package:get/get.dart';
 
 class AangleWidget extends StatelessWidget {
   const AangleWidget(
-      {Key? key, required this.posX, required this.posY, required this.angle})
+      {Key? key, required this.posX, required this.posY})
       : super(key: key);
 
   final double posX;
   final double posY;
-  final double angle;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,38 +30,39 @@ class AangleWidget extends StatelessWidget {
     bool isActiveParam;
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
-        child: Transform.rotate(
-          angle: angle * pi / 180,
-          child: Obx(() {
-            isActiveInput = c.isaAngle.value;
-            isActiveParam =
-                c.activeParamMap.value.containsValue(RightTriangle.aAngle);
+        child: Obx(() {
+          isActiveInput = c.isaAngle.value;
+          isActiveParam =
+              c.activeParamMap.value.containsValue(RightTriangle.aAngle);
 
-            if (isActiveInput) {
-              styleText = AppStyleTextImage.activeInput(context);
-            } else if (isActiveParam) {
-              styleText = AppStyleTextImage.activeParam(context);
-            } else {
-              styleText = AppStyleTextImage.inActive(context);
-            }
+          if (isActiveInput) {
+            styleText = AppStyleTextImage.activeInput(context);
+          } else if (isActiveParam) {
+            styleText = AppStyleTextImage.activeParam(context);
+          } else {
+            styleText = AppStyleTextImage.inActive(context);
+          }
 
-            return GestureDetector(
-                onTap: () {
+          return GestureDetector(
+              onTap: () {
+
                   c.isaCathet.value = false;
                   c.isbCathet.value = false;
                   c.iscHypotenuse.value = false;
+           c.ishHeight.value = false;
+                  c.ismCompCside.value = false;
+                  c.iskCompCside.value = false;
                   c.isaAngle.value = true;
                   c.isbAngle.value = false;
-                },
-                child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
-                    color: Colors.transparent,
-                    child: Text(
-                      c.aAngle.value,
-                      style: styleText,
-                    )));
-          }),
-        ));
+              },
+              child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                  color: Colors.transparent,
+                  child: Text(
+                    c.aAngle.value,
+                    style: styleText,
+                  )));
+        }));
   }
 }

@@ -48,6 +48,9 @@ class BcathetWidget extends StatelessWidget {
                     c.isaCathet.value = false;
                     c.isbCathet.value = true;
                     c.iscHypotenuse.value = false;
+                    c.ishHeight.value = false;
+                    c.ismCompCside.value = false;
+                    c.iskCompCside.value = false;
                     c.isaAngle.value = false;
                     c.isbAngle.value = false;
                   },

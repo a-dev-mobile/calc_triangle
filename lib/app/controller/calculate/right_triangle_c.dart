@@ -13,27 +13,35 @@ enum RightTriangle {
   aCathet,
   bCathet,
   cHypotenuse,
+  hHeight,
+  kCompCside,
+  mCompCside,
   aAngle,
   bAngle,
   empty,
 }
+
 late WelcomeController c = Get.find();
 
 class RightTriangleController extends GetxController {
   var aCathet = startLengthValue.obs;
   var bCathet = startLengthValue.obs;
   var cHypotenuse = startLengthValue.obs;
+  var hHeight = startLengthValue.obs;
+  var kCompCside = startLengthValue.obs;
+  var mCompCside = startLengthValue.obs;
+
   var aAngle = startAngleValue.obs;
   var bAngle = startAngleValue.obs;
 
-  String aAngleOld = startAngleValue;
-  String bAngleOld = startAngleValue;
-
   var activeParamMap = <int, RightTriangle>{}.obs;
 
-  //начальное значение при запуске
+  //init varable
   var isaCathet = false.obs;
   var isbCathet = false.obs;
+  var ishHeight = false.obs;
+  var iskCompCside = false.obs;
+  var ismCompCside = false.obs;
   var iscHypotenuse = false.obs;
   var isaAngle = false.obs;
   var isbAngle = false.obs;
@@ -41,27 +49,31 @@ class RightTriangleController extends GetxController {
   var isActiveSnackBar = false.obs;
   var messageSnackBar = ''.obs;
   var isDeg = true.obs;
-  bool isTapParam = false;
+
   static const startLengthValue = '0';
   static const startAngleValue = '0°';
 
-  int numberDigitsAfterPoint = c.precisionResult.value;
+  int precisionResult = c.precisionResult.value;
 
   String aCathetS = "";
   String bCathetS = "";
   String bAngleS = "";
   String cHypotenuseS = "";
+  String hHeightS = "";
+  String mCompCsideS = "";
+  String kCompCsideS = "";
   String aAngleS = "";
 
   double aCathetD = 0;
   double bCathetD = 0;
   double cHypotenuseD = 0;
+  double hHeightD = 0;
+  double mCompCsideD = 0;
+  double kCompCsideD = 0;
   double bAngleD = 0;
   double aAngleD = 0;
 
   void clickKey(KeySymbol keySymbol) {
-    isTapParam = false;
-
     showMessage();
 
     printt.i('start_print');
@@ -156,6 +168,33 @@ class RightTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
       cHypotenuse.value = sumInput;
+    } else if (ishHeight.value) {
+      oldInput = hHeight.value;
+      // при вводе удаляю стартовый символ
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
+
+      sumInput = oldInput + newInput;
+      sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
+
+      hHeight.value = sumInput;
+    } else if (ismCompCside.value) {
+      oldInput = mCompCside.value;
+      // при вводе удаляю стартовый символ
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
+
+      sumInput = oldInput + newInput;
+      sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
+
+      mCompCside.value = sumInput;
+    } else if (iskCompCside.value) {
+      oldInput = kCompCside.value;
+      // при вводе удаляю стартовый символ
+      oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
+
+      sumInput = oldInput + newInput;
+      sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
+
+      kCompCside.value = sumInput;
     } else if (isaAngle.value) {
       oldInput = aAngle.value;
 
@@ -205,6 +244,20 @@ class RightTriangleController extends GetxController {
           cHypotenuse.value + keySymbol.value)) {
         return true;
       }
+    } else if (ishHeight.value) {
+      if (AppUtilsString.isTwoDecimalPoint(hHeight.value + keySymbol.value)) {
+        return true;
+      }
+    } else if (ismCompCside.value) {
+      if (AppUtilsString.isTwoDecimalPoint(
+          mCompCside.value + keySymbol.value)) {
+        return true;
+      }
+    } else if (iskCompCside.value) {
+      if (AppUtilsString.isTwoDecimalPoint(
+          kCompCside.value + keySymbol.value)) {
+        return true;
+      }
     } else if (isaAngle.value) {
       if (AppUtilsString.isTwoDecimalPoint(aAngle.value + keySymbol.value)) {
         return true;
@@ -224,12 +277,6 @@ class RightTriangleController extends GetxController {
     };
 
     resetValue();
-
-
-
-
-
-
   }
 
   void resetActiveInput() {
@@ -237,6 +284,9 @@ class RightTriangleController extends GetxController {
     isaCathet.value = true;
     isbCathet.value = false;
     iscHypotenuse.value = false;
+    ishHeight.value = false;
+    iskCompCside.value = false;
+    ismCompCside.value = false;
     isaAngle.value = false;
     isbAngle.value = false;
   }
@@ -251,12 +301,18 @@ class RightTriangleController extends GetxController {
     bCathetS = bCathet.value;
     bAngleS = bAngle.value;
     cHypotenuseS = cHypotenuse.value;
+    hHeightS = hHeight.value;
+    mCompCsideS = mCompCside.value;
+    kCompCsideS = kCompCside.value;
     aAngleS = aAngle.value;
 
     try {
       aCathetD = double.parse(aCathetS);
       bCathetD = double.parse(bCathetS);
       cHypotenuseD = double.parse(cHypotenuseS);
+      hHeightD = double.parse(hHeightS);
+      mCompCsideD = double.parse(mCompCsideS);
+      kCompCsideD = double.parse(kCompCsideS);
       bAngleD = double.parse(AppUtilsString.removeLastCharacter(bAngleS));
       aAngleD = double.parse(AppUtilsString.removeLastCharacter(aAngleS));
     } catch (e) {
@@ -268,171 +324,274 @@ class RightTriangleController extends GetxController {
         'initValue\n$aCathetD $aCathetS aCathet \n$bCathetD $bCathetS bCathet \n$cHypotenuseD $cHypotenuseS cHypotenuse \n$aAngleD $aAngleS aAngle \n$bAngleD $bAngleS bAngle');
   }
 
+  void calcCompCside() {
+    kCompCsideD = aCathetD * cos(AppUtilsNumber.toRadian(aAngleD));
+    kCompCside.value =
+        AppUtilsNumber.getFormatNumber(kCompCsideD, precisionResult);
+
+    mCompCsideD = cHypotenuseD - kCompCsideD;
+    mCompCside.value =
+        AppUtilsNumber.getFormatNumber(mCompCsideD, precisionResult);
+  }
+
+  void calcbAngle() {
+    bAngleD = 90 - aAngleD;
+    bAngle.value =
+        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+  }
+
+  void calcaAngle() {
+    printt.i('calc bAngle = $bAngleD');
+    aAngleD = 90 - bAngleD;
+    aAngle.value =
+        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+  }
+
+  void calchHeight() {
+    hHeightD = aCathetD * sin(AppUtilsNumber.toRadian(aAngleD));
+    hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
+  }
+
   void calculate() {
+    initValue();
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
     bool conditionTwo = false;
 
-    double calc;
+    //find aAngle
+    conditionOne = activeParm2 == RightTriangle.aAngle;
+    if (conditionOne) calcbAngle();
 
     //find bAngle
-    conditionOne = activeParm2 == RightTriangle.aAngle;
-    if (conditionOne) {
-      calc = 90 - aAngleD;
-      bAngle.value =
-          AppUtilsNumber.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
-    }
-    //find aAngle
     conditionTwo = activeParm2 == RightTriangle.bAngle;
-    if (conditionTwo) {
-      calc = 90 - bAngleD;
-      aAngle.value =
-          AppUtilsNumber.getFormatNumber(calc, numberDigitsAfterPoint) + "°";
-    }
+    if (conditionTwo) calcaAngle();
+
+    RightTriangle paramKnow1;
+    RightTriangle paramKnow2;
+    // ==========================================
     // знаем а угол и гипотенузу--
-    conditionOne = activeParamMap.containsValue(RightTriangle.aAngle);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
+    paramKnow1 = RightTriangle.aAngle;
+    paramKnow2 = RightTriangle.cHypotenuse;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
+
     if (conditionOne && conditionTwo) {
       aCathetD = cHypotenuseD * cos(AppUtilsNumber.toRadian(aAngleD));
-      aCathet.value =
-          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
       bCathetD = cHypotenuseD * sin(AppUtilsNumber.toRadian(aAngleD));
-      bCathet.value =
-          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+     
+     
+     
+     
+      calcbAngle();
+      calchHeight();
+      calcCompCside();
     }
 
+    // ==========================================
     // знаем b угол и гипотенузу--
-    conditionOne = activeParamMap.containsValue(RightTriangle.bAngle);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
+    paramKnow1 = RightTriangle.bAngle;
+    paramKnow2 = RightTriangle.cHypotenuse;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
+
     if (conditionOne && conditionTwo) {
       aCathetD = cHypotenuseD * sin(AppUtilsNumber.toRadian(bAngleD));
-      aCathet.value =
-          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
       bCathetD = cHypotenuseD * cos(AppUtilsNumber.toRadian(bAngleD));
-      bCathet.value =
-          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+      calcaAngle();
+      calchHeight();
+      calcCompCside();
     }
-
+    // ==========================================
     // знаем а угол и a катет--
-    conditionOne = activeParamMap.containsValue(RightTriangle.aAngle);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.aCathet);
+    paramKnow1 = RightTriangle.aAngle;
+    paramKnow2 = RightTriangle.aCathet;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
     if (conditionOne && conditionTwo) {
       bCathetD = aCathetD * tan(AppUtilsNumber.toRadian(aAngleD));
-      bCathet.value =
-          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
 
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
+      calcbAngle();
+      calchHeight();
+      calcCompCside();
     }
-// знаем b угол и a катет--
-    conditionOne = activeParamMap.containsValue(RightTriangle.bAngle);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.aCathet);
+    // ==========================================
+    // знаем b угол и a катет--
+    paramKnow1 = RightTriangle.bAngle;
+    paramKnow2 = RightTriangle.aCathet;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
     if (conditionOne && conditionTwo) {
       bCathetD = aCathetD / tan(AppUtilsNumber.toRadian(bAngleD));
-      bCathet.value =
-          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
 
-      // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
+      calcaAngle();
+      calchHeight();
+      calcCompCside();
     }
-
+    // ==========================================
     // знаем b угол и b катет--
-    conditionOne = activeParamMap.containsValue(RightTriangle.bAngle);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.bCathet);
+    paramKnow1 = RightTriangle.bAngle;
+    paramKnow2 = RightTriangle.bCathet;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
+
     if (conditionOne && conditionTwo) {
       aCathetD = bCathetD * tan(AppUtilsNumber.toRadian(bAngleD));
-      aCathet.value =
-          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
-    }
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
 
+      calcaAngle();
+
+      calchHeight();
+      calcCompCside();
+    }
+    // ==========================================
     // знаем а угол и b катет--
-    conditionOne = activeParamMap.containsValue(RightTriangle.aAngle);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.bCathet);
+    paramKnow1 = RightTriangle.aAngle;
+    paramKnow2 = RightTriangle.bCathet;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
     if (conditionOne && conditionTwo) {
       aCathetD = bCathetD / tan(AppUtilsNumber.toRadian(aAngleD));
-      aCathet.value =
-          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
-      // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
-    }
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
 
+      calcbAngle();
+      calchHeight();
+      calcCompCside();
+    }
+    // ==========================================
     //знаем а катет и в катет --
-    conditionOne = activeParamMap.containsValue(RightTriangle.aCathet);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.bCathet);
+    paramKnow1 = RightTriangle.aCathet;
+    paramKnow2 = RightTriangle.bCathet;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
     if (conditionOne && conditionTwo) {
       // находим гипотенузу
       cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
       cHypotenuse.value =
-          AppUtilsNumber.getFormatNumber(cHypotenuseD, numberDigitsAfterPoint);
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
 
       bAngleD = acos(
           (pow(bCathetD, 2) + pow(cHypotenuseD, 2) - pow(aCathetD, 2)) /
               (2 * bCathetD * cHypotenuseD));
       bAngle.value = AppUtilsNumber.getFormatNumber(
-              AppUtilsNumber.toDegree(bAngleD), numberDigitsAfterPoint) +
+              AppUtilsNumber.toDegree(bAngleD), precisionResult) +
           "°";
+      printt.i('bAngleD = $bAngleD');
+      calcaAngle();
 
-      aAngleD = acos(
-          (pow(aCathetD, 2) + pow(cHypotenuseD, 2) - pow(bCathetD, 2)) /
-              (2 * aCathetD * cHypotenuseD));
-      aAngle.value = AppUtilsNumber.getFormatNumber(
-              AppUtilsNumber.toDegree(aAngleD), numberDigitsAfterPoint) +
-          "°";
+      calchHeight();
+      calcCompCside();
     }
-
+// ==========================================
     //знаем а катет и гипотенузу--
-    conditionOne = activeParamMap.containsValue(RightTriangle.aCathet);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
+    paramKnow1 = RightTriangle.aCathet;
+    paramKnow2 = RightTriangle.cHypotenuse;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
     if (conditionOne && conditionTwo) {
       // находим гипотенузу
       bCathetD = sqrt(pow(cHypotenuseD, 2) - pow(aCathetD, 2));
-      bCathet.value =
-          AppUtilsNumber.getFormatNumber(bCathetD, numberDigitsAfterPoint);
+      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
 
       bAngleD = asin(aCathetD / cHypotenuseD);
       bAngle.value = AppUtilsNumber.getFormatNumber(
-              AppUtilsNumber.toDegree(bAngleD), numberDigitsAfterPoint) +
+              AppUtilsNumber.toDegree(bAngleD), precisionResult) +
           "°";
 
-      aAngleD = acos(aCathetD / cHypotenuseD);
-      aAngle.value = AppUtilsNumber.getFormatNumber(
-              AppUtilsNumber.toDegree(aAngleD), numberDigitsAfterPoint) +
-          "°";
+      // calcaAngle();
+
+ aAngleD = 90 - bAngleD;
+    aAngle.value =
+        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+
+
+      calchHeight();
+      calcCompCside();
     }
-
+    // ==========================================
     //знаем b катет и гипотенузу--
-    conditionOne = activeParamMap.containsValue(RightTriangle.bCathet);
-    conditionTwo = activeParamMap.containsValue(RightTriangle.cHypotenuse);
+    paramKnow1 = RightTriangle.bCathet;
+    paramKnow2 = RightTriangle.cHypotenuse;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
+
     if (conditionOne && conditionTwo) {
       aCathetD = sqrt(pow(cHypotenuseD, 2) - pow(bCathetD, 2));
-      aCathet.value =
-          AppUtilsNumber.getFormatNumber(aCathetD, numberDigitsAfterPoint);
+      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
       bAngleD = acos(bCathetD / cHypotenuseD);
       bAngle.value = AppUtilsNumber.getFormatNumber(
-              AppUtilsNumber.toDegree(bAngleD), numberDigitsAfterPoint) +
+              AppUtilsNumber.toDegree(bAngleD), precisionResult) +
           "°";
 
-      aAngleD = asin(bCathetD / cHypotenuseD);
-      aAngle.value = AppUtilsNumber.getFormatNumber(
-              AppUtilsNumber.toDegree(aAngleD), numberDigitsAfterPoint) +
-          "°";
+      calcaAngle();
+
+      calchHeight();
+      calcCompCside();
     }
 
+//================================================
+
+    //знаем m и к части гипотенузы
+    conditionOne = activeParamMap.containsValue(RightTriangle.mCompCside);
+    conditionTwo = activeParamMap.containsValue(RightTriangle.kCompCside);
+    if (conditionOne && conditionTwo) {
+      //расчет высоты треугольника
+      hHeightD = sqrt(mCompCsideD + kCompCsideD);
+      hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
+      // расчет гипотезузы
+      cHypotenuseD = kCompCsideD + mCompCsideD;
+      cHypotenuse.value =
+          AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
+
+      // расчет сторона А
+
+      aCathetD = sqrt(cHypotenuseD * mCompCsideD);
+
+      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+
+      // расчет сторона b
+      bCathetD = sqrt(cHypotenuseD * kCompCsideD);
+
+      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+    }
+
+    //================================================
+
+    //know h и a side
+    paramKnow1 = RightTriangle.hHeight;
+    paramKnow2 = RightTriangle.aCathet;
+    conditionOne = activeParamMap.containsValue(paramKnow1);
+    conditionTwo = activeParamMap.containsValue(paramKnow2);
+    if (conditionOne && conditionTwo) {
+      aAngleD = sin(hHeightD / aCathetD);
+      aAngle.value = AppUtilsNumber.getFormatNumber(
+              AppUtilsNumber.toDegree(aAngleD), precisionResult) +
+          "°";
+    }
 // проверка если цифры не числа
     checkIfNaN();
   }
@@ -446,6 +605,16 @@ class RightTriangleController extends GetxController {
     }
     if (AppUtilsNumber.isNanAndInfinity(cHypotenuseD)) {
       cHypotenuse.value = startLengthValue;
+    }
+
+    if (AppUtilsNumber.isNanAndInfinity(hHeightD)) {
+      hHeight.value = startLengthValue;
+    }
+    if (AppUtilsNumber.isNanAndInfinity(mCompCsideD)) {
+      mCompCside.value = startLengthValue;
+    }
+    if (AppUtilsNumber.isNanAndInfinity(kCompCsideD)) {
+      kCompCside.value = startLengthValue;
     }
     if (AppUtilsNumber.isNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
@@ -479,12 +648,33 @@ class RightTriangleController extends GetxController {
     } else if (iscHypotenuse.value) {
       if (cHypotenuse.value == startLengthValue) {
         resetActiveParam();
-        printt.v('cHypotenuse - not');
+
         return;
       }
-      printt.v('cHypotenuse - ok');
+
       paramAll = RightTriangle.cHypotenuse;
       paramLenght = RightTriangle.cHypotenuse;
+    } else if (ishHeight.value) {
+      if (hHeight.value == startLengthValue) {
+        resetActiveParam();
+        return;
+      }
+      paramAll = RightTriangle.hHeight;
+      paramLenght = RightTriangle.hHeight;
+    } else if (ismCompCside.value) {
+      if (mCompCside.value == startLengthValue) {
+        resetActiveParam();
+        return;
+      }
+      paramAll = RightTriangle.mCompCside;
+      paramLenght = RightTriangle.mCompCside;
+    } else if (iskCompCside.value) {
+      if (kCompCside.value == startLengthValue) {
+        resetActiveParam();
+        return;
+      }
+      paramAll = RightTriangle.kCompCside;
+      paramLenght = RightTriangle.kCompCside;
     } else if (isaAngle.value) {
       if (aAngle.value == startAngleValue) {
         resetActiveParam();
@@ -605,6 +795,21 @@ class RightTriangleController extends GetxController {
       if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
         return true;
       }
+    } else if (ishHeight.value) {
+      value = hHeight.value;
+      if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
+        return true;
+      }
+    } else if (iskCompCside.value) {
+      value = kCompCside.value;
+      if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
+        return true;
+      }
+    } else if (ismCompCside.value) {
+      value = mCompCside.value;
+      if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
+        return true;
+      }
     } else if (isaAngle.value) {
       value = AppUtilsString.removeLastCharacter(aAngle.value);
       if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
@@ -672,6 +877,32 @@ class RightTriangleController extends GetxController {
       activeParamMap[2] = RightTriangle.empty;
     }
 
+    if (activeParamMap[1] == RightTriangle.hHeight &&
+        hHeight.value == startLengthValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+    if (activeParamMap[2] == RightTriangle.hHeight &&
+        hHeight.value == startLengthValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
+
+    if (activeParamMap[1] == RightTriangle.kCompCside &&
+        kCompCside.value == startLengthValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+    if (activeParamMap[2] == RightTriangle.kCompCside &&
+        kCompCside.value == startLengthValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
+    if (activeParamMap[1] == RightTriangle.mCompCside &&
+        mCompCside.value == startLengthValue) {
+      activeParamMap[1] = RightTriangle.empty;
+    }
+    if (activeParamMap[2] == RightTriangle.mCompCside &&
+        mCompCside.value == startLengthValue) {
+      activeParamMap[2] = RightTriangle.empty;
+    }
+
     if (activeParamMap[1] == RightTriangle.aAngle &&
         aAngle.value == startAngleValue) {
       activeParamMap[1] = RightTriangle.empty;
@@ -727,6 +958,12 @@ class RightTriangleController extends GetxController {
       bCathet.value = startLengthValue;
     } else if (iscHypotenuse.value) {
       cHypotenuse.value = startLengthValue;
+    } else if (ishHeight.value) {
+      hHeight.value = startLengthValue;
+    } else if (ismCompCside.value) {
+      mCompCside.value = startLengthValue;
+    } else if (iskCompCside.value) {
+      kCompCside.value = startLengthValue;
     } else if (isaAngle.value) {
       aAngle.value = startAngleValue;
     } else if (isbAngle.value) {
@@ -772,6 +1009,30 @@ class RightTriangleController extends GetxController {
         newInput = startLengthValue;
       }
       cHypotenuse.value = newInput;
+    } else if (iskCompCside.value) {
+      oldInput = kCompCside.value;
+      newInput = AppUtilsString.removeLastCharacter(oldInput);
+
+      if (newInput.isEmpty) {
+        newInput = startLengthValue;
+      }
+      kCompCside.value = newInput;
+    } else if (ismCompCside.value) {
+      oldInput = kCompCside.value;
+      newInput = AppUtilsString.removeLastCharacter(oldInput);
+
+      if (newInput.isEmpty) {
+        newInput = startLengthValue;
+      }
+      mCompCside.value = newInput;
+    } else if (ishHeight.value) {
+      oldInput = hHeight.value;
+      newInput = AppUtilsString.removeLastCharacter(oldInput);
+
+      if (newInput.isEmpty) {
+        newInput = startLengthValue;
+      }
+      hHeight.value = newInput;
     } else if (isaAngle.value) {
       oldInput = aAngle.value;
 
@@ -796,7 +1057,6 @@ class RightTriangleController extends GetxController {
       }
       bAngle.value = newInput + '°';
     }
-
   }
 
   void clearAll() {
@@ -813,10 +1073,14 @@ class RightTriangleController extends GetxController {
     aCathet.value = startLengthValue;
     bCathet.value = startLengthValue;
     cHypotenuse.value = startLengthValue;
+    hHeight.value = startLengthValue;
+    kCompCside.value = startLengthValue;
+    mCompCside.value = startLengthValue;
     aAngle.value = startAngleValue;
     bAngle.value = startAngleValue;
 
-    aCathetD = bCathetD = cHypotenuseD = bAngleD = aAngleD = 0;
+    aCathetD = bCathetD = cHypotenuseD =
+        hHeightD = kCompCsideD = mCompCsideD = bAngleD = aAngleD = 0;
     isDeg.value = true;
   }
 
@@ -866,3 +1130,59 @@ class RightTriangleController extends GetxController {
     super.onInit();
   }
 }
+
+/* 
+enum RightTriangle {
+  aCathet,
+  bCathet,
+  cHypotenuse,
+  hHeight,
+  kCompCside,
+  mCompCside,
+  aAngle,
+  bAngle,
+  empty,
+}
+
+var values = RightTriangle.values;
+Map<RightTriangle, bool> paramets = {};
+
+void main(List<String> arguments) {
+
+
+  resetParam();
+
+  paramets[RightTriangle.bAngle] = true;
+  printParam();
+  resetParam();
+  paramets[RightTriangle.cHypotenuse] = true;
+  printParam();
+
+  return;
+}
+
+void resetParam() {
+  for (int i = 0; i < values.length - 1; i++) {
+    paramets[values[i]] = false;
+  }
+}
+
+void printParam() {
+  for (var item in paramets.entries) {
+    print('${item.key}  ${item.value}');
+  }
+    print('');
+}
+
+List<dynamic> getListWithoutLastVal(List val) {
+  List list = [];
+
+  for (var item in val) {
+    list.add(item);
+  }
+
+  return list;
+}
+
+
+ */

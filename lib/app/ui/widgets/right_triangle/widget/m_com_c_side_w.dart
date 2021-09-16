@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, invalid_use_of_protected_member
+// ignore_for_file: invalid_use_of_protected_member
 
 import 'dart:math';
 
@@ -11,15 +11,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-class ChypotenuseWidget extends StatelessWidget {
-  const ChypotenuseWidget(
+class McompCside extends StatelessWidget {
+  const McompCside(
       {Key? key, required this.posX, required this.posY, required this.angle})
       : super(key: key);
 
   final double posX;
   final double posY;
   final double angle;
-
   @override
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
@@ -33,10 +32,9 @@ class ChypotenuseWidget extends StatelessWidget {
         child: Transform.rotate(
             angle: angle * pi / 180,
             child: Obx(() {
-              isActiveInput = c.iscHypotenuse.value;
+              isActiveInput = c.ismCompCside.value;
               isActiveParam = c.activeParamMap.value
-                  .containsValue(RightTriangle.cHypotenuse);
-
+                  .containsValue(RightTriangle.mCompCside);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {
@@ -46,26 +44,26 @@ class ChypotenuseWidget extends StatelessWidget {
               }
 
               return GestureDetector(
-                onTap: () {
-                  c.isaCathet.value = false;
-                  c.isbCathet.value = false;
-                  c.iscHypotenuse.value = true;
-                  c.ishHeight.value = false;
-                  c.ismCompCside.value = false;
-                  c.iskCompCside.value = false;
-                  c.isaAngle.value = false;
-                  c.isbAngle.value = false;
-                },
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
-                  color: Colors.transparent,
-                  child: Text(
-                    c.cHypotenuse.value,
-                    style: styleText,
-                  ),
-                ),
-              );
+                  onTap: () {
+                    c.ismCompCside.value = true;
+
+                    c.isaCathet.value = false;
+                    c.isbCathet.value = false;
+                    c.iscHypotenuse.value = false;
+                    c.ishHeight.value = false;
+                    c.iskCompCside.value = false;
+                    c.isaAngle.value = false;
+                    c.isbAngle.value = false;
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    color: Colors.transparent,
+                    child: Text(
+                      c.mCompCside.value,
+                      style: styleText,
+                    ),
+                  ));
             })));
   }
 }

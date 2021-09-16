@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'widget/r_triangle_image_input_w.dart';
+import 'widget/r_t_image_input_w.dart';
 
 late RightTriangleController c = Get.find();
 
@@ -44,7 +44,7 @@ class RightTriangleInputWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const RightTriangleImageInputWidget(),
+                const RtImageInputWidget(),
                 Obx(() {
                   return Visibility(
                     visible: !c.isActiveSnackBar.value,

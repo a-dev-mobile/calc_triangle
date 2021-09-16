@@ -21,7 +21,7 @@ class WelcomeController extends GetxController {
     RightTriangleController c = Get.find();
 
     //вызов из другого контроллера для обновления точности результата расчета
-    c.numberDigitsAfterPoint = precision;
+    c.precisionResult = precision;
     c.calculate();
   }
 

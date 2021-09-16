@@ -11,8 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-class ChypotenuseWidget extends StatelessWidget {
-  const ChypotenuseWidget(
+class HheightWidget extends StatelessWidget {
+  const HheightWidget(
       {Key? key, required this.posX, required this.posY, required this.angle})
       : super(key: key);
 
@@ -31,41 +31,41 @@ class ChypotenuseWidget extends StatelessWidget {
     return Transform.translate(
         offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
         child: Transform.rotate(
-            angle: angle * pi / 180,
-            child: Obx(() {
-              isActiveInput = c.iscHypotenuse.value;
-              isActiveParam = c.activeParamMap.value
-                  .containsValue(RightTriangle.cHypotenuse);
+          angle: angle * pi / 180,
+          child: Obx(() {
+            isActiveInput = c.ishHeight.value;
+            isActiveParam =
+                c.activeParamMap.value.containsValue(RightTriangle.hHeight);
 
-              if (isActiveInput) {
-                styleText = AppStyleTextImage.activeInput(context);
-              } else if (isActiveParam) {
-                styleText = AppStyleTextImage.activeParam(context);
-              } else {
-                styleText = AppStyleTextImage.inActive(context);
-              }
+            if (isActiveInput) {
+              styleText = AppStyleTextImage.activeInput(context);
+            } else if (isActiveParam) {
+              styleText = AppStyleTextImage.activeParam(context);
+            } else {
+              styleText = AppStyleTextImage.inActive(context);
+            }
 
-              return GestureDetector(
+            return GestureDetector(
                 onTap: () {
+                  c.ishHeight.value = true;
+
                   c.isaCathet.value = false;
                   c.isbCathet.value = false;
-                  c.iscHypotenuse.value = true;
-                  c.ishHeight.value = false;
+                  c.iscHypotenuse.value = false;
                   c.ismCompCside.value = false;
                   c.iskCompCside.value = false;
                   c.isaAngle.value = false;
                   c.isbAngle.value = false;
                 },
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
-                  color: Colors.transparent,
-                  child: Text(
-                    c.cHypotenuse.value,
-                    style: styleText,
-                  ),
-                ),
-              );
-            })));
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    color: Colors.transparent,
+                    child: Text(
+                      c.hHeight.value,
+                      style: styleText,
+                    )));
+          }),
+        ));
   }
 }

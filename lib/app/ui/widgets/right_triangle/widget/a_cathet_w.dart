@@ -12,12 +12,12 @@ import 'package:get/get.dart';
 
 class AcathetWidget extends StatelessWidget {
   const AcathetWidget(
-      {Key? key, required this.posX, required this.posY, required this.angle})
+      {Key? key, required this.posX, required this.posY,})
       : super(key: key);
 
   final double posX;
   final double posY;
-  final double angle;
+
   @override
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
@@ -43,9 +43,12 @@ class AcathetWidget extends StatelessWidget {
           return GestureDetector(
                 onTap: () {
                 
-                  c.isaCathet.value = true;
+                     c.isaCathet.value = true;
                   c.isbCathet.value = false;
                   c.iscHypotenuse.value = false;
+           c.ishHeight.value = false;
+                  c.ismCompCside.value = false;
+                  c.iskCompCside.value = false;
                   c.isaAngle.value = false;
                   c.isbAngle.value = false;
 
