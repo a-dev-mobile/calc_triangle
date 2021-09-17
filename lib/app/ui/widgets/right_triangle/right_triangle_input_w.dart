@@ -1,6 +1,7 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/snackbar/custom_snakbar_w.dart';
@@ -8,6 +9,7 @@ import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_t_image_info_w.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
+import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -45,17 +47,23 @@ class RightTriangleInputWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-                const RightTriangleImageInfoWidget(),
-                // const RightTriangleImageInputWidget(),
+                Obx(() {
+                  return c.isActiveImageInfo.value
+                      ? const RightTriangleImageInfoWidget()
+                      : const RightTriangleImageInputWidget();
+                }),
                 Obx(() {
                   return Visibility(
                     visible: !c.isActiveSnackBar.value,
                     child: SizedBox(
-                      width: AppUtils.getWidth(context),
-                      height: AppUtils.getHeight(context) * 0.05,
+                      // width: AppUtils.getWidth(context),
+                      height: AppUtils.getHeight(context) * 0.06,
                       child: Align(
-                        child: Icon(Icons.done,color: ConstColor.secondary,size: 50.sp,),
+                        child: Icon(
+                          Icons.done,
+                          color: ConstColor.secondary,
+                          size: 50.sp,
+                        ),
                         alignment: Alignment.center,
                       ),
                     ),
@@ -65,7 +73,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                   // показ если что то не то))
                   return Visibility(
                     visible: c.isActiveSnackBar.value,
-                    child: CustomSnackBar(message: c.messageSnackBar.value),
+                    child: CustomMessageBar(message: c.messageSnackBar.value),
                   );
                 }),
                 Expanded(
@@ -79,13 +87,22 @@ class RightTriangleInputWidget extends StatelessWidget {
                 ),
               ],
             ),
+            Positioned(
+                top:20.h,
+                right: 20.w,
+                child: InkResponse(
+                  onTap: () {
+                    c.isActiveImageInfo.value = !(c.isActiveImageInfo.value);
+                    printt.i(
+                        'c.isActiveImageInfo.value ${c.isActiveImageInfo.value}');
+                  },
+                  child: Icon(
+                    Icons.change_circle_outlined,
+                    size: AppSize.iconSize*1.2,
+                    color: AppColors.text(context),
+                  ),
+                )),
             DrawerIconWidget(globalkey: _globalKey),
-            // Obx(() {
-            //   c.isDeg.value
-            //       ? textConvert = ConstString.degConvert
-            //       : textConvert = ConstString.degMinSecConvert;
-            //   return Positioned(top: 10.h, right: 10.w, child: Text(textConvert,style: AppStyleText.convertText(context),));
-            // })
           ],
         ),
       ),
