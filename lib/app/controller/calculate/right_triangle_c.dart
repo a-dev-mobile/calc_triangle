@@ -408,6 +408,14 @@ class RightTriangleController extends GetxController {
     aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
   }
 
+/*  void calcBangKnowHheiBcat() {
+   bAngleD = AppUtilsNumber.toDegree(asin(hHeightD / bCathetD));
+    bAngle.value = AppUtilsNumber.getFormatNumber(
+            bAngleD, precisionResult) +
+        "°";
+  }
+ */
+
   void calcAangKnowHheiAcat() {
     aAngleD = AppUtilsNumber.toDegree(asin(hHeightD / aCathetD));
     aAngle.value =
@@ -415,7 +423,7 @@ class RightTriangleController extends GetxController {
   }
 
   void calcBangKnowHheibcat() {
-    bAngleD = (hHeightD / bCathetD);
+    bAngleD = AppUtilsNumber.toDegree(asin(hHeightD / bCathetD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
@@ -541,10 +549,10 @@ class RightTriangleController extends GetxController {
     conditionTwo = activeParamMap.containsValue(paramKnow2);
     if (conditionOne && conditionTwo) {
       calcAangKnowHheiAcat();
-      calcBangleKnowAang();
-      calcBcatKnowAcatAang();
-      calcChypoKnowAcatBcat();
-      calcMKCompCsideKnowAcatAangChypo();
+      // calcBangleKnowAang();
+      // calcBcatKnowAcatAang();
+      // calcChypoKnowAcatBcat();
+      // calcMKCompCsideKnowAcatAangChypo();
     }
 // aCat hHeight
 
@@ -826,7 +834,8 @@ class RightTriangleController extends GetxController {
       activeParamMap[1] = paramLenght;
     }
 
-    printt.v('end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
+    printt.v(
+        'end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
   }
 
   void showMessage() {
@@ -846,6 +855,20 @@ class RightTriangleController extends GetxController {
       return;
     }
 
+    if (!(kCompCsideD < bCathetD)) {
+      showSnack('Component k must be < b = ${bCathet.value}');
+      return;
+    }
+
+    if (!(hHeightD < aCathetD)) {
+      showSnack('Height h must be < a = ${aCathet.value}');
+      return;
+    }
+
+    if (!(hHeightD < bCathetD)) {
+      showSnack('Height h must be < b = ${bCathet.value}');
+      return;
+    }
 //если гипотенуза меньше
     if (cHypotenuseD < aCathetD || cHypotenuseD < bCathetD) {
       showSnack(TranslateHelper.messageHypotenuseGreaterCathetus);
