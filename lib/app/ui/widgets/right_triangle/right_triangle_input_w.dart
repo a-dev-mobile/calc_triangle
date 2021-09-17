@@ -6,6 +6,7 @@ import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/snackbar/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
+import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_t_image_info_w.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
@@ -44,7 +45,9 @@ class RightTriangleInputWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const RtImageInputWidget(),
+
+                const RightTriangleImageInfoWidget(),
+                // const RightTriangleImageInputWidget(),
                 Obx(() {
                   return Visibility(
                     visible: !c.isActiveSnackBar.value,

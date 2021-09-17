@@ -4,7 +4,7 @@ import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/h_height_w.dart';
-import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/m_com_c_side_w.dart';
+import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/k_com_c_side_w.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +13,10 @@ import 'a_cathet_w.dart';
 import 'b_angle_w.dart';
 import 'b_cathet_w.dart';
 import 'c_hypotenusea_w.dart';
-import 'k_com_c_side_w.dart';
+import 'm_com_c_side_w.dart';
 
-class RtImageInputWidget extends StatelessWidget {
-  const RtImageInputWidget({
+class RightTriangleImageInputWidget extends StatelessWidget {
+  const RightTriangleImageInputWidget({
     Key? key,
   }) : super(key: key);
 
@@ -57,3 +57,4 @@ class RtImageInputWidget extends StatelessWidget {
     );
   }
 }
+

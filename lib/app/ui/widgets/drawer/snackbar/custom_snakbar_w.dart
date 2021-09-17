@@ -35,7 +35,7 @@ class CustomSnackBar extends StatelessWidget {
        
         ],
       ),
-      height: AppUtils.getHeight(context) * 0.05,
+      height: AppUtils.getHeight(context) * 0.08,
     );
   }
 }
