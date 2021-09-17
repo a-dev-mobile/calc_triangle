@@ -5,9 +5,6 @@ class TranslateHelper {
   // он предназначен для предотвращения создания экземпляра TranslateHelper
   TranslateHelper._();
   static updateLocale(Locale locale) {
-
-
-
     Get.updateLocale(locale);
   }
 

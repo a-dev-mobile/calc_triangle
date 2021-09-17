@@ -11,8 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-class KcompCside extends StatelessWidget {
-  const KcompCside(
+class McompCside extends StatelessWidget {
+  const McompCside(
       {Key? key, required this.posX, required this.posY, required this.angle})
       : super(key: key);
 
@@ -32,9 +32,9 @@ class KcompCside extends StatelessWidget {
         child: Transform.rotate(
             angle: angle * pi / 180,
             child: Obx(() {
-              isActiveInput = c.iskCompCside.value;
+              isActiveInput = c.ismCompCside.value;
               isActiveParam = c.activeParamMap.value
-                  .containsValue(RightTriangle.kCompCside);
+                  .containsValue(RightTriangle.mCompCside);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {
@@ -45,13 +45,13 @@ class KcompCside extends StatelessWidget {
 
               return GestureDetector(
                   onTap: () {
-                    c.iskCompCside.value = true;
+                    c.ismCompCside.value = true;
 
                     c.isaCathet.value = false;
                     c.isbCathet.value = false;
                     c.iscHypotenuse.value = false;
                     c.ishHeight.value = false;
-                    c.ismCompCside.value = false;
+                    c.iskCompCside.value = false;
                     c.isaAngle.value = false;
                     c.isbAngle.value = false;
                   },
@@ -60,7 +60,7 @@ class KcompCside extends StatelessWidget {
                         EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
                     color: Colors.transparent,
                     child: Text(
-                      c.kCompCside.value,
+                      c.mCompCside.value,
                       style: styleText,
                     ),
                   ));

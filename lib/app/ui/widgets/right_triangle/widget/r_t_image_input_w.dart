@@ -44,8 +44,8 @@ class RtImageInputWidget extends StatelessWidget {
             //all widget text in image
 
             const HheightWidget(angle: -45, posX: -18.225, posY: 18.225),
-            const McompCside(angle: 45, posX: -12.994, posY: -23.456),
-            const KcompCside(angle: 45, posX: 23.456, posY: 12.994),
+            const KcompCside(angle: 45, posX: -12.994, posY: -23.456),
+            const McompCside(angle: 45, posX: 23.456, posY: 12.994),
             const BangleWidget( posX: -20.573, posY: 0),
             const AangleWidget( posX: -3.0, posY: 23.943),
             const BcathetWidget(angle: -90, posX: -43.845, posY: 0),
