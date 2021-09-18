@@ -75,9 +75,9 @@ abstract class AppStyleTextImage {
     return TextStyle(
         color: ConstColor.error,
       
-      
+      fontWeight: FontWeight.bold,
         backgroundColor: AppColors.content(context),
-        fontSize: 25.sp);
+        fontSize: 24.sp);
   }
 
   static TextStyle activeParam(BuildContext context) {

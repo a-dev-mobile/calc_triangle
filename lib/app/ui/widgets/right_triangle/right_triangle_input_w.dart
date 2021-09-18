@@ -2,6 +2,7 @@ import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
+import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/snackbar/custom_snakbar_w.dart';
@@ -56,15 +57,61 @@ class RightTriangleInputWidget extends StatelessWidget {
                   return Visibility(
                     visible: !c.isActiveSnackBar.value,
                     child: SizedBox(
-                      // width: AppUtils.getWidth(context),
+                      width: 1.sw,
                       height: AppUtils.getHeight(context) * 0.06,
-                      child: Align(
-                        child: Icon(
-                          Icons.done,
-                          color: ConstColor.secondary,
-                          size: 50.sp,
-                        ),
-                        alignment: Alignment.center,
+                      child: Stack(
+                        
+                        children: [
+                          Positioned(
+                            left: 20.w,
+                            top: 0,
+                            bottom: 0,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Area:',
+                                  style: AppStyleText.titleText(context),
+                                ),
+                                Text(
+                                  c.area.value,
+                                  style: AppStyleText.subText(context),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            left: 0,
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            child: Icon(
+                              Icons.done,
+                              color: ConstColor.secondary,
+                              size: 50.sp,
+                            ),
+                          ),
+                          Positioned
+                          (
+                          right: 20.w,
+                            top: 0,
+                            bottom: 0,
+                          
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Perimeter:',
+                                  style: AppStyleText.titleText(context),
+                                ),
+                                Text(
+                                  c.perimeter.value,
+                                  style: AppStyleText.subText(context),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
@@ -88,7 +135,7 @@ class RightTriangleInputWidget extends StatelessWidget {
               ],
             ),
             Positioned(
-                top:20.h,
+                top: 20.h,
                 right: 20.w,
                 child: InkResponse(
                   onTap: () {
@@ -98,7 +145,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                   },
                   child: Icon(
                     Icons.change_circle_outlined,
-                    size: AppSize.iconSize*1.2,
+                    size: AppSize.iconSize * 1.2,
                     color: AppColors.text(context),
                   ),
                 )),

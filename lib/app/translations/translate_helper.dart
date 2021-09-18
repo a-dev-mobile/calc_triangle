@@ -43,4 +43,12 @@ class TranslateHelper {
   static String get messageEnterValueSides => 'enter_value_sides'.tr;
   static String get messageHypotenuseGreaterCathetus =>
       'message_hypotenuse_greater_cathetus'.tr;
+
+  static String get messageCmoreK => 'message_c_k'.tr;
+  static String get messageCmoreM => 'message_c_m'.tr;
+  static String get messageBmoreK => 'message_k_b'.tr;
+  static String get messageAmoreM => 'message_a_m'.tr;
+  static String get messageAmoreH => 'message_a_h'.tr;
+  static String get messageBmoreH => 'message_b_h'.tr;
+  static String get messageFormulaNotFound => 'message_formula_not_found'.tr;
 }

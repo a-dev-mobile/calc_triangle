@@ -38,6 +38,9 @@ class RightTriangleController extends GetxController {
   var kCompCside = startLengthValue.obs;
   var mCompCside = startLengthValue.obs;
 
+  var area = "".obs;
+  var perimeter = "".obs;
+
   var aAngleD = 0.0;
   var aCathetD = 0.0;
   var bAngleD = 0.0;
@@ -207,10 +210,12 @@ class RightTriangleController extends GetxController {
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
       aAngle.value = sumInput + "°";
+
+
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
-// удаляю знак угла
+    // удаляю знак угла
       oldInput = AppUtilsString.removeLastCharacter(oldInput);
       //удаляю начальное значение при вводе
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
@@ -455,6 +460,7 @@ class RightTriangleController extends GetxController {
     hHeightD = sqrt(pow(bCathetD, 2) - pow(mCompCsideD, 2));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
+
   void calcHheiKnowAcatMcomp() {
     hHeightD = sqrt(pow(aCathetD, 2) - pow(mCompCsideD, 2));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
@@ -463,6 +469,18 @@ class RightTriangleController extends GetxController {
   void calcBangKnowHheiBcat() {
     // ok
     bAngleD = AppUtilsNumber.toDegree(asin(hHeightD / bCathetD));
+    bAngle.value =
+        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+  }
+
+  void calcAangKnowHheiMcomp() {
+    aAngleD = AppUtilsNumber.toDegree(atan(hHeightD / mCompCsideD));
+    aAngle.value =
+        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+  }
+
+  void calcBangKnowHheiKcomp() {
+    bAngleD = AppUtilsNumber.toDegree(atan(hHeightD / kCompCsideD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
@@ -489,14 +507,24 @@ class RightTriangleController extends GetxController {
         AppUtilsNumber.getFormatNumber(kCompCsideD, precisionResult);
   }
 
-  calchHeightKnowAangMcomp() {
+  void calchHeightKnowAangMcomp() {
     hHeightD = mCompCsideD * tan(AppUtilsNumber.toRadian(aAngleD));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
-  calchHeightKnowBangKcomp() {
+  void calchHeightKnowBangKcomp() {
     hHeightD = kCompCsideD * tan(AppUtilsNumber.toRadian(bAngleD));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
+  }
+
+  void calcAreaKnowAcatBcat() {
+    area.value = AppUtilsNumber.getFormatNumber(
+        0.5 * aCathetD * bCathetD, precisionResult);
+  }
+
+  void calcPerimKnowAcatBcatChyp() {
+    perimeter.value = AppUtilsNumber.getFormatNumber(
+        aCathetD + bCathetD + cHypotenuseD, precisionResult);
   }
 
   void calculate() {
@@ -522,14 +550,16 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aCathet;
     param2 = RightTriangle.bCathet;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcChypoKnowAcatBcat();
       calcBangKnowBcatChypo();
       calcAangKnowBang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     // ==========================================
@@ -537,14 +567,16 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aCathet;
     param2 = RightTriangle.cHypotenuse;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcBcatKnowChypAcat();
       calcBangKnowBcatChypo();
       calcAangKnowBang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     // ==========================================
@@ -552,14 +584,16 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.aCathet;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
+      calcBangleKnowAang();
       calcBcatKnowAcatAang();
       calcChypoKnowAcatBcat();
-      calcAangKnowBang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     // ==========================================
@@ -567,14 +601,16 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.aCathet;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcBcatKnowAcatBang();
       calcChypoKnowAcatBcat();
       calcAangKnowBang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     //================================================
@@ -587,22 +623,14 @@ class RightTriangleController extends GetxController {
       calcAangKnowHheiAcat();
       calcBangleKnowAang();
       calcBcatKnowAcatAang();
+
       calcChypoKnowAcatBcat();
       calcKcompKnowChypMcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
-    //================================================
-    // aCat kSideC //не могу найти формулу
-    //================================================
-    param1 = RightTriangle.kCompCside;
-    param2 = RightTriangle.aCathet;
-    if (isBeParam(param1, param2)) {
-      // calcAangKnowHheiAcat();
-      // calcBangleKnowAang();
-      // calcBcatKnowAcatAang();
-      // calcChypoKnowAcatBcat();
-      // calcMKCompCsideKnowAcatAangChypo();
-    }
     //================================================
     // aCat hHeight ==OK
     //================================================
@@ -612,23 +640,28 @@ class RightTriangleController extends GetxController {
       calcAangKnowHheiAcat();
       calcBangleKnowAang();
       calcBcatKnowAcatAang();
+
       calcChypoKnowAcatBcat();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
     // ==========================================
     // bCat cHyp ==OK
     // ==========================================
     param1 = RightTriangle.bCathet;
     param2 = RightTriangle.cHypotenuse;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcAcatKnowChypBcat();
       calcBangKnowBcatChypo();
       calcAangKnowBang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     // ==========================================
@@ -636,14 +669,16 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.bCathet;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcAcatKnowBcatAang();
       calcChypoKnowAcatBcat();
       calcBangleKnowAang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     // ==========================================
@@ -651,33 +686,16 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.bCathet;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcAcatKnowBcatBang();
       calcChypoKnowAcatBcat();
       calcAangKnowBang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
-    }
 
-    // ==========================================
-    // bCat mSideC // not found formula
-    // ==========================================
-    param1 = RightTriangle.mCompCside;
-    param2 = RightTriangle.bCathet;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-    if (conditionOne && conditionTwo) {
-
-calcHheiKnowBcatMcomp(); 
-
-
-
-
-
-
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     // ==========================================
@@ -685,40 +703,40 @@ calcHheiKnowBcatMcomp();
     // ==========================================
     param1 = RightTriangle.kCompCside;
     param2 = RightTriangle.bCathet;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcHheiKnowBcatKcomp();
       calcBangKnowHheiBcat();
       calcAangKnowBang();
       calcAcatKnowBcatAang();
+
       calcChypoKnowAcatBcat();
       calcMcompKnowChypKcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
     // ==========================================
     // bCat hHeight ==OK
     // ==========================================
     param1 = RightTriangle.bCathet;
     param2 = RightTriangle.hHeight;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       calcBangKnowHheibcat();
       calcAangKnowBang();
       calcAcatKnowBcatAang();
+
       calcChypoKnowAcatBcat();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
     // ==========================================
     // cHyp aAng ==OK
     // ==========================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.cHypotenuse;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       aCathetD = cHypotenuseD * cos(AppUtilsNumber.toRadian(aAngleD));
       aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
@@ -726,8 +744,12 @@ calcHheiKnowBcatMcomp();
       bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
 
       calcBangleKnowAang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     // ==========================================
@@ -735,10 +757,7 @@ calcHheiKnowBcatMcomp();
     // ==========================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.cHypotenuse;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       aCathetD = cHypotenuseD * sin(AppUtilsNumber.toRadian(bAngleD));
       aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
@@ -746,8 +765,12 @@ calcHheiKnowBcatMcomp();
       bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
 
       calcAangKnowBang();
+
       calchHeightKnowAcatAangl();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     //================================================
@@ -762,6 +785,9 @@ calcHheiKnowBcatMcomp();
       calcAangKnowHheiAcat();
       calcBangleKnowAang();
       calcBcatKnowAcatAang();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     //================================================
@@ -776,16 +802,10 @@ calcHheiKnowBcatMcomp();
       calcAangKnowHheiAcat();
       calcBangleKnowAang();
       calcBcatKnowAcatAang();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
-
-    //================================================
-    // cHyp hHeight //not found formula
-    //================================================
-    param1 = RightTriangle.hHeight;
-    param2 = RightTriangle.cHypotenuse;
-    if (isBeParam(param1, param2)) {}
-
-// aAng bAng
 
     //================================================
     // aAng mSideC ==OK
@@ -801,6 +821,9 @@ calcHheiKnowBcatMcomp();
       calcBcatKnowAcatAang();
       calcChypoKnowAcatBcat();
       calcKcompKnowChypMcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     //================================================
@@ -817,6 +840,9 @@ calcHheiKnowBcatMcomp();
       calcBcatKnowAcatAang();
       calcChypoKnowAcatBcat();
       calcMcompKnowChypKcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     //================================================
@@ -830,6 +856,9 @@ calcHheiKnowBcatMcomp();
       calcAcatKnowHheiAang();
       calcChypoKnowAcatBcat();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
     //================================================
     // bAng kSideC ==OK
@@ -843,6 +872,9 @@ calcHheiKnowBcatMcomp();
       calcBcatKnowAcatAang();
       calcChypoKnowAcatBcat();
       calcMcompKnowChypKcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     //================================================
@@ -857,6 +889,9 @@ calcHheiKnowBcatMcomp();
       calcBcatKnowAcatAang();
       calcChypoKnowAcatBcat();
       calcKcompKnowChypMcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
     //================================================
@@ -871,16 +906,16 @@ calcHheiKnowBcatMcomp();
       calcAcatKnowHheiAang();
       calcChypoKnowAcatBcat();
       calcMKCompCsideKnowAcatAangChypo();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
     //================================================
     // mSideC kSideC =OK
     //================================================
     param1 = RightTriangle.mCompCside;
     param2 = RightTriangle.kCompCside;
-    conditionOne = activeParamMap.containsValue(param1);
-    conditionTwo = activeParamMap.containsValue(param2);
-
-    if (conditionOne && conditionTwo) {
+    if (isBeParam(param1, param2)) {
       hHeightD = sqrt(mCompCsideD * kCompCsideD);
       hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
 
@@ -893,10 +928,46 @@ calcHheiKnowBcatMcomp();
 
       calcBangKnowBcatChypo();
       calcAangKnowBang();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
     }
 
-// mSideC hHeight
-// kSideC hHeight
+    //================================================
+    // mSideC hHeight ==OK
+    //================================================
+    param1 = RightTriangle.mCompCside;
+    param2 = RightTriangle.hHeight;
+    if (isBeParam(param1, param2)) {
+      calcAangKnowHheiMcomp();
+      calcBangleKnowAang();
+      calcBcatKnowHheiBang();
+      calcAcatKnowHheiAang();
+      calcChypoKnowAcatBcat();
+
+      calcKcompKnowChypMcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
+    }
+
+    //================================================
+    // kSideC hHeight ==OK
+    //================================================
+    param1 = RightTriangle.kCompCside;
+    param2 = RightTriangle.hHeight;
+    if (isBeParam(param1, param2)) {
+      calcBangKnowHheiKcomp();
+      calcAangKnowBang();
+      calcBcatKnowHheiBang();
+      calcAcatKnowHheiAang();
+      calcChypoKnowAcatBcat();
+
+      calcMcompKnowChypKcomp();
+
+      calcAreaKnowAcatBcat();
+      calcPerimKnowAcatBcatChyp();
+    }
 
 // проверка если цифры не числа
     checkIfNaN();
@@ -1026,6 +1097,9 @@ calcHheiKnowBcatMcomp();
   }
 
   void showMessage() {
+    RightTriangle param1;
+    RightTriangle param2;
+
     printt.v('start show message');
 
     // если есть пустой параметр
@@ -1045,40 +1119,40 @@ calcHheiKnowBcatMcomp();
 
     if (isBeParam(RightTriangle.kCompCside, RightTriangle.bCathet)) {
       if (!(kCompCsideD < bCathetD)) {
-        showSnack('Component k must be < b = ${bCathet.value}');
+        showSnack('${TranslateHelper.messageCmoreK}${bCathet.value}');
         return;
       }
     }
 
     if (isBeParam(RightTriangle.mCompCside, RightTriangle.aCathet)) {
       if (!(aCathetD > mCompCsideD)) {
-        showSnack('Side a must be > m = ${mCompCside.value}');
+        showSnack('${TranslateHelper.messageAmoreM}${mCompCside.value}');
         return;
       }
     }
     if (isBeParam(RightTriangle.mCompCside, RightTriangle.cHypotenuse)) {
       if (!(cHypotenuseD > mCompCsideD)) {
-        showSnack('Side c must be > m = ${mCompCside.value}');
+        showSnack('${TranslateHelper.messageCmoreM}${mCompCside.value}');
         return;
       }
     }
 
     if (isBeParam(RightTriangle.kCompCside, RightTriangle.cHypotenuse)) {
       if (!(cHypotenuseD > kCompCsideD)) {
-        showSnack('Side c must be > k = ${kCompCside.value}');
+        showSnack('${TranslateHelper.messageCmoreK}${kCompCside.value}');
         return;
       }
     }
 
     if (isBeParam(RightTriangle.hHeight, RightTriangle.aCathet)) {
       if (!(hHeightD < aCathetD)) {
-        showSnack('Height h must be < a = ${aCathet.value}');
+        showSnack('${TranslateHelper.messageAmoreH}${aCathet.value}');
         return;
       }
     }
     if (isBeParam(RightTriangle.hHeight, RightTriangle.bCathet)) {
       if (!(bCathetD > hHeightD)) {
-        showSnack('Side b must be > h = ${hHeight.value}');
+        showSnack('${TranslateHelper.messageBmoreH}${bCathet.value}');
         return;
       }
     }
@@ -1098,6 +1172,35 @@ calcHheiKnowBcatMcomp();
     if (90 <= aAngleD || 90 <= bAngleD) {
       showSnack(TranslateHelper.messageAngleOver90);
 
+      return;
+    }
+
+    //================================================
+    // cHyp hHeight //not found formula
+    //================================================
+    param1 = RightTriangle.hHeight;
+    param2 = RightTriangle.cHypotenuse;
+    if (isBeParam(param1, param2)) {
+      showSnack(TranslateHelper.messageFormulaNotFound);
+      return;
+    }
+
+    // ==========================================
+    // bCat mSideC // not found formula
+    // ==========================================
+    param1 = RightTriangle.mCompCside;
+    param2 = RightTriangle.bCathet;
+    if (isBeParam(param1, param2)) {
+   showSnack(TranslateHelper.messageFormulaNotFound);
+      return;
+    }
+    //================================================
+    // aCat kSideC //не могу найти формулу
+    //================================================
+    param1 = RightTriangle.kCompCside;
+    param2 = RightTriangle.aCathet;
+    if (isBeParam(param1, param2)) {
+     showSnack(TranslateHelper.messageFormulaNotFound);
       return;
     }
 

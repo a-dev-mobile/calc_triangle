@@ -50,7 +50,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Padding(
                     padding: EdgeInsets.only(top: 0.05.sh),
                     child: SizedBox(
-                      height: 0.1.sh,
+                      height: 0.15.sh,
                       width: 1.sw,
                       child: Center(
                         child: WelcomeAppTitle(
