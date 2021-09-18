@@ -1,5 +1,6 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
+import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
@@ -7,7 +8,6 @@ import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/snackbar/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
-import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/widget/r_t_image_info_w.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/main.dart';
@@ -60,7 +60,6 @@ class RightTriangleInputWidget extends StatelessWidget {
                       width: 1.sw,
                       height: AppUtils.getHeight(context) * 0.06,
                       child: Stack(
-                        
                         children: [
                           Positioned(
                             left: 20.w,
@@ -70,7 +69,7 @@ class RightTriangleInputWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Area:',
+                                  TranslateHelper.area,
                                   style: AppStyleText.titleText(context),
                                 ),
                                 Text(
@@ -91,17 +90,15 @@ class RightTriangleInputWidget extends StatelessWidget {
                               size: 50.sp,
                             ),
                           ),
-                          Positioned
-                          (
-                          right: 20.w,
+                          Positioned(
+                            right: 20.w,
                             top: 0,
                             bottom: 0,
-                          
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Perimeter:',
+                                  TranslateHelper.perimeter,
                                   style: AppStyleText.titleText(context),
                                 ),
                                 Text(

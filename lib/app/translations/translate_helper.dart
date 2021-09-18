@@ -51,4 +51,6 @@ class TranslateHelper {
   static String get messageAmoreH => 'message_a_h'.tr;
   static String get messageBmoreH => 'message_b_h'.tr;
   static String get messageFormulaNotFound => 'message_formula_not_found'.tr;
+  static String get perimeter => 'perimeter'.tr;
+  static String get area => 'area'.tr;
 }

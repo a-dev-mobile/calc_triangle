@@ -28,16 +28,15 @@ var printt = Logger(
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-
+  Logger.level = Level.nothing; //TODO on LOG
   await GetStorage.init();
   GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
 
-  GetStorage().writeIfNull(ConstString.keyLocale, Platform.localeName == 'ru_RU'
-      ? ConstString.localeRu
-      : ConstString.localeEn);
-
-
-
+  GetStorage().writeIfNull(
+      ConstString.keyLocale,
+      Platform.localeName == 'ru_RU'
+          ? ConstString.localeRu
+          : ConstString.localeEn);
 
   printt.v(Platform.localeName);
   SystemChrome.setPreferredOrientations(

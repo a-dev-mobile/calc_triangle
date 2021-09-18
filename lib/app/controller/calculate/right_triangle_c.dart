@@ -456,7 +456,7 @@ class RightTriangleController extends GetxController {
   }
 
   void calcHheiKnowBcatMcomp() {
-    //TODO not work
+   
     hHeightD = sqrt(pow(bCathetD, 2) - pow(mCompCsideD, 2));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
@@ -1176,7 +1176,7 @@ class RightTriangleController extends GetxController {
     }
 
     //================================================
-    // cHyp hHeight //not found formula
+    // TODO  cHyp hHeight //not found formula 
     //================================================
     param1 = RightTriangle.hHeight;
     param2 = RightTriangle.cHypotenuse;

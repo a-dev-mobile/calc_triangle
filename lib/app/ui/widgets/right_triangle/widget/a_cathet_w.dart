@@ -3,7 +3,6 @@
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
-import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +10,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AcathetWidget extends StatelessWidget {
-  const AcathetWidget(
-      {Key? key, required this.posX, required this.posY,})
-      : super(key: key);
+  const AcathetWidget({
+    Key? key,
+    required this.posX,
+    required this.posY,
+  }) : super(key: key);
 
   final double posX;
   final double posY;
@@ -41,24 +42,20 @@ class AcathetWidget extends StatelessWidget {
           }
 
           return GestureDetector(
-                onTap: () {
-                
-                     c.isaCathet.value = true;
-                  c.isbCathet.value = false;
-                  c.iscHypotenuse.value = false;
-           c.ishHeight.value = false;
-                  c.ismCompCside.value = false;
-                  c.iskCompCside.value = false;
-                  c.isaAngle.value = false;
-                  c.isbAngle.value = false;
-
-
-                },
-                child: Container(
-             
-                  padding: EdgeInsets.symmetric(horizontal: 20.h,vertical: 10.h),
-                  color: Colors.transparent,
-                  child: Text(
+              onTap: () {
+                c.isaCathet.value = true;
+                c.isbCathet.value = false;
+                c.iscHypotenuse.value = false;
+                c.ishHeight.value = false;
+                c.ismCompCside.value = false;
+                c.iskCompCside.value = false;
+                c.isaAngle.value = false;
+                c.isbAngle.value = false;
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                color: Colors.transparent,
+                child: Text(
                   c.aCathet.value,
                   style: styleText,
                 ),

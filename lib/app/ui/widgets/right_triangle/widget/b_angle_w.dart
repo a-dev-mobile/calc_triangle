@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-import 'dart:math';
-
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';

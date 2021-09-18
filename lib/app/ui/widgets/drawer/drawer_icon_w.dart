@@ -1,8 +1,6 @@
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
-import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerIconWidget extends StatelessWidget {
   const DrawerIconWidget({

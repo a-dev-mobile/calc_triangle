@@ -4,7 +4,6 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppWidgets {
@@ -48,9 +47,9 @@ abstract class AppWidgets {
                 onPressed: () {
                   // SystemNavigator.pop();
                   exit(0);
-      //             Future.delayed(const Duration(milliseconds: 1000), () {
-      //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-      // });
+                  //             Future.delayed(const Duration(milliseconds: 1000), () {
+                  //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                  // });
                 },
               ),
               TextButton(
