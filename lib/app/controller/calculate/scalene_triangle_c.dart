@@ -1,5 +1,4 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
@@ -18,6 +17,8 @@ enum ScaleneTriangle {
 }
 
 class ScaleneTriangleController extends GetxController {
+    static ScaleneTriangleController get to => Get.find<ScaleneTriangleController>();
+
   static const startAngleValue = '0°';
   static const startLengthValue = '0';
 

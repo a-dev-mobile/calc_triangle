@@ -12,6 +12,5 @@ class CalculateBinding implements Bindings {
     Get.lazyPut(() => ScaleneTriangleController());
     Get.lazyPut(() => WelcomeController());
     Get.lazyPut(() => SelectShapeController());
-
   }
 }

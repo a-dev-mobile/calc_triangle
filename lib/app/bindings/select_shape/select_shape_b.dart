@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 class SelectShapeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(() => SelectShapeController());
-    Get.put(() => ScaleneTriangleController());
-    Get.put(() => RightTriangleController());
+    Get.lazyPut(() => SelectShapeController());
+    Get.lazyPut(() => RightTriangleController());
+    Get.lazyPut(() => ScaleneTriangleController());
 
   }
 }

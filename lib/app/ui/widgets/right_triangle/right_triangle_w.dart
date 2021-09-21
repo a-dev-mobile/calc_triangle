@@ -1,6 +1,7 @@
 import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
 import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -22,11 +23,10 @@ import 'package:get/get.dart';
 
 import 'widget/r_t_image_input_w.dart';
 
-late SelectShapeController selectShapeController = Get.find();
+late var selectShapeController = SelectShapeController.to;
+late var c = RightTriangleController.to;
 
 class RightTriangleWidget extends StatelessWidget {
-  var c = selectShapeController.activeController as RightTriangleController;
-
   RightTriangleWidget({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
@@ -54,7 +54,9 @@ class RightTriangleWidget extends StatelessWidget {
               children: [
                 Obx(() {
                   return c.isActiveImageInfo.value
-                      ? const ImageInfoWidget(pathAsset: ConstAssets.rightTriangleInfo,)
+                      ? const ImageInfoWidget(
+                          pathAsset: ConstAssets.rightTriangleInfo,
+                        )
                       : const RightTriangleImageInputWidget();
                 }),
                 Obx(() {

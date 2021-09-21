@@ -162,7 +162,7 @@ class WelcomeBtnStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Get.toNamed(Routes.calculate),
+      onPressed: () => Get.toNamed(Routes.selectShape),
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );
   }

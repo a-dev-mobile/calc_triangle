@@ -26,7 +26,7 @@ import 'widget/s_t_image_input_w.dart';
 
 
 
-late ScaleneTriangleController c = Get.find();
+late var c = ScaleneTriangleController.to;
 
 class ScaleneTriangleWidget extends StatelessWidget {
   ScaleneTriangleWidget({Key? key}) : super(key: key);

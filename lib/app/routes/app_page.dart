@@ -28,7 +28,7 @@ class AppPage {
     GetPage(
         name: Routes.selectShape,
         transition: Transition.rightToLeft,
-        page: () => const SelectShapePage(),
+        page: () =>  SelectShapePage(),
         binding: SelectShapeBinding()),
     GetPage(
       name: Routes.setting,
