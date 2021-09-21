@@ -1,13 +1,19 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
+import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
 import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
-
+import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
+import 'package:calc_triangle/app/ui/widgets/right_triangle/right_triangle_w.dart';
+import 'package:calc_triangle/app/ui/widgets/scalene_triangle/scalene_triangle_input_w.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-late SelectShapeController selectShapeController = Get.find();
+var selectShapeController = SelectShapeController.to;
+var scaleneTriangleController = ScaleneTriangleController.to;
+var rightTriangleController = RightTriangleController.to;
 
 class CalculatePage extends StatefulWidget {
   const CalculatePage({Key? key}) : super(key: key);
@@ -62,7 +68,20 @@ class _CalculatePageState extends State<CalculatePage> {
             )
           : null,
       // body: SafeArea(child: RightTriangleInputWidget()),
-      body: SafeArea(child: selectShapeController.activeWidgetCalculator),
+      body: SafeArea(child: getShape()),
     );
+  }
+
+  Widget getShape() {
+    var activeShape = selectShapeController.activeShape;
+    print('getShape $activeShape');
+    if (activeShape == Shape.rightTriangle) {
+      rightTriangleController.clearAll;
+      return RightTriangleWidget();
+    } else if (activeShape == Shape.scaleneTriangle) {
+      scaleneTriangleController.clearAll;
+      return ScaleneTriangleWidget();
+    }
+    return WelcomePage();
   }
 }

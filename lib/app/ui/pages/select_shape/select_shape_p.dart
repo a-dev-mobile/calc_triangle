@@ -7,9 +7,10 @@ import 'package:calc_triangle/app/ui/widgets/scalene_triangle/scalene_triangle_i
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+  late SelectShapeController c = Get.find();
 class SelectShapePage extends StatelessWidget {
   const SelectShapePage({Key? key}) : super(key: key);
-  // late SelectShapeController c = SelectShapeController.to;
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +21,17 @@ class SelectShapePage extends StatelessWidget {
         children: [
           InkWell(
               onTap: () {
-                var init = SelectShapeController.init(Shape.rightTriangle);
-                Get.toNamed(Routes.calculate,);
+                c.activeShape = Shape.rightTriangle;
+                // SelectShapeController.to.initWidgetControllerPath();
+                Get.toNamed(
+                  Routes.calculate,
+                );
               },
               child: const ImageInfoWidget(
                   pathAsset: ConstAssets.rightTriangleInfo)),
           InkWell(
               onTap: () {
-                c.initWidgetControllerPath(Shape.scaleneTriangle);
+                 c.activeShape = Shape.scaleneTriangle;
                 Get.toNamed(Routes.calculate);
               },
               child: const ImageInfoWidget(

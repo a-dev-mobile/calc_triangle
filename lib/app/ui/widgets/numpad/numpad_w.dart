@@ -8,17 +8,9 @@ import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/state_manager.dart';
-
-late RightTriangleController rightTriangleController =
-    RightTriangleController.to;
-late ScaleneTriangleController scaleneTriangleController =
-    ScaleneTriangleController.to;
-late SelectShapeController selectTriangleController = Get.find();
-
-var activeShape = selectTriangleController.activeShape;
+var rightTriangleController = RightTriangleController.to;
+var scaleneTriangleController = ScaleneTriangleController.to;
+var selectShapeController = SelectShapeController.to;
 
 class NumPad extends StatelessWidget {
   const NumPad({Key? key}) : super(key: key);
@@ -117,6 +109,8 @@ class CalculatorKey extends StatelessWidget {
   }
 
   void longPressBackspace() {
+    var activeShape = selectShapeController.activeShape;
+
     if (activeShape == Shape.rightTriangle) {
       rightTriangleController.longBackspace();
     } else if (activeShape == Shape.scaleneTriangle) {
@@ -125,7 +119,8 @@ class CalculatorKey extends StatelessWidget {
   }
 
   void onPresed() {
-    printt.i(activeShape);
+       var activeShape = selectShapeController.activeShape;
+    printt.i(' onPresed ${activeShape}');
     if (activeShape == Shape.rightTriangle) {
       rightTriangleController.clickKey(symbol);
     } else if (activeShape == Shape.scaleneTriangle) {

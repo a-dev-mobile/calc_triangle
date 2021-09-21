@@ -13,13 +13,20 @@ enum Shape {
 }
 
 class SelectShapeController extends GetxController {
-  SelectShapeController get to => Get.find<SelectShapeController>();
+  static SelectShapeController get to => Get.find<SelectShapeController>();
   var activeShape = Shape.none;
   var pathShapeInfo = '';
   var pathShapeInput = '';
   // var activeShape = Shape.none.obs;
 
   late Widget activeWidgetCalculator;
+
+  @override
+  void onReady() {
+    initWidgetControllerPath();
+    print('initWidgetControllerPath $activeShape');
+    super.onReady();
+  }
 
   void initWidgetControllerPath() {
     switch (activeShape) {
@@ -40,9 +47,9 @@ class SelectShapeController extends GetxController {
     }
   }
 
-  init(Shape shape) {
-    activeShape = shape;
-    printt.i('init SelectShapeController = ${activeShape}');
-    this;
-  }
+  // init(Shape shape) {
+  //   printt.i('init shape controller $shape');
+  //   activeShape = shape;
+  //   this;
+  // }
 }
