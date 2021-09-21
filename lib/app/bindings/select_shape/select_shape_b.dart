@@ -5,13 +5,12 @@ import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
 
 import 'package:get/get.dart';
 
-class CalculateBinding implements Bindings {
+class SelectShapeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => RightTriangleController());
-    Get.lazyPut(() => ScaleneTriangleController());
-    Get.lazyPut(() => WelcomeController());
-    Get.lazyPut(() => SelectShapeController());
+    Get.put(() => SelectShapeController());
+    Get.put(() => ScaleneTriangleController());
+    Get.put(() => RightTriangleController());
 
   }
 }

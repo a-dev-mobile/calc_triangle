@@ -72,7 +72,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   DrawerRow(
                       onTap: () {
                         Navigator.of(_context).pop();
-                        Get.toNamed(Routes.SETTING);
+                        Get.toNamed(Routes.setting);
                       },
                       icon: Icons.settings,
                       msg: TranslateHelper.setting),

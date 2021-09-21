@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 
@@ -9,7 +10,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/state_manager.dart';
 
-late RightTriangleController c = Get.find();
+late RightTriangleController rightTriangleController = Get.find();
+late SelectShapeController selectTriangleController = Get.find();
 
 class NumPad extends StatelessWidget {
   const NumPad({Key? key}) : super(key: key);
@@ -60,7 +62,9 @@ class NumPad extends StatelessWidget {
               CalculatorKey(symbol: Keys.decimal),
               Obx(() {
                 return CalculatorKey(
-                    symbol: c.isDeg.value ? Keys.deg : Keys.degMinSec);
+                    symbol: rightTriangleController.isDeg.value
+                        ? Keys.deg
+                        : Keys.degMinSec);
               }),
             ],
           ),
@@ -101,15 +105,12 @@ class CalculatorKey extends StatelessWidget {
       child: TextButton(
         onLongPress: () {
           if (symbol == Keys.backspace) {
-            c.longBackspace();
+            rightTriangleController.longBackspace();
           }
-
-        
         },
         onPressed: () {
           // printt.v(symbol.value);
-                    c.clickKey(symbol);
-          
+          rightTriangleController.clickKey(symbol);
         },
         child: Text(symbol.value, style: textStyle),
       ),

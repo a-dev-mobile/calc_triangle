@@ -28,7 +28,7 @@ var printt = Logger(
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  Logger.level = Level.nothing; //TODO on LOG
+  // Logger.level = Level.nothing; //TODO on LOG
   await GetStorage.init();
   GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
 
@@ -62,10 +62,10 @@ class MyApp extends StatelessWidget {
 
             //если первый запуск то запускаем в дальнейшем взависимости от настроек
             initialRoute: AppUtils.isFirstStartApp()
-                ? Routes.INITIAL
+                ? Routes.welcome
                 : AppUtils.isShowLaunchScreen()
-                    ? Routes.INITIAL
-                    : Routes.CALCULATE,
+                    ? Routes.welcome
+                    : Routes.selectShape,
 
             // defaultTransition: Transition.downToUp,
             getPages: AppPage.pages,
