@@ -1,6 +1,7 @@
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
-import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
+import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
+
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 
@@ -10,13 +11,14 @@ import 'package:flutter/material.dart';
 
 var rightTriangleController = RightTriangleController.to;
 var scaleneTriangleController = ScaleneTriangleController.to;
-var selectShapeController = SelectShapeController.to;
+late Shape activeShape;
 
 class NumPad extends StatelessWidget {
-  const NumPad({Key? key}) : super(key: key);
-
+  const NumPad({Key? key, required this.selectShape}) : super(key: key);
+  final Shape selectShape;
   @override
   Widget build(BuildContext context) {
+    activeShape = selectShape;
     return Column(
       children: [
         Expanded(
@@ -109,17 +111,17 @@ class CalculatorKey extends StatelessWidget {
   }
 
   void longPressBackspace() {
-    var activeShape = selectShapeController.activeShape;
+    // var activeShape = selectShapeController.activeShape;
 
-    if (activeShape == Shape.rightTriangle) {
-      rightTriangleController.longBackspace();
-    } else if (activeShape == Shape.scaleneTriangle) {
-      scaleneTriangleController.longBackspace();
-    }
+    // if (activeShape == Shape.rightTriangle) {
+    //   rightTriangleController.longBackspace();
+    // } else if (activeShape == Shape.scaleneTriangle) {
+    //   scaleneTriangleController.longBackspace();
+    // }
   }
 
   void onPresed() {
-       var activeShape = selectShapeController.activeShape;
+      
     printt.i(' onPresed ${activeShape}');
     if (activeShape == Shape.rightTriangle) {
       rightTriangleController.clickKey(symbol);

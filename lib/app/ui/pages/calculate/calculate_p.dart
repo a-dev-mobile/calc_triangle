@@ -1,21 +1,18 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
-import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
-import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
-import 'package:calc_triangle/app/ui/widgets/right_triangle/right_triangle_w.dart';
-import 'package:calc_triangle/app/ui/widgets/scalene_triangle/scalene_triangle_input_w.dart';
+
+import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
+
+import 'package:calc_triangle/app/ui/pages/calculate/triangle_w.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-var selectShapeController = SelectShapeController.to;
 var scaleneTriangleController = ScaleneTriangleController.to;
 var rightTriangleController = RightTriangleController.to;
-
-final Shape activeShape = Get.arguments;
 
 class CalculatePage extends StatefulWidget {
   const CalculatePage({Key? key}) : super(key: key);
@@ -61,6 +58,8 @@ class _CalculatePageState extends State<CalculatePage> {
 
   @override
   Widget build(BuildContext context) {
+    final Shape activeShape = Get.arguments ?? Shape.none;
+
     return Scaffold(
       bottomNavigationBar: _isBottomBannerAdLoaded
           ? SizedBox(
@@ -70,16 +69,10 @@ class _CalculatePageState extends State<CalculatePage> {
             )
           : null,
       // body: SafeArea(child: RightTriangleInputWidget()),
-      body: SafeArea(child: getShape()),
+      body: SafeArea(
+          child: TriangleWidget(
+        activeShape: activeShape,
+      )),
     );
-  }
-
-  Widget getShape() {
-     if (activeShape == Shape.rightTriangle) {
-      return const RightTriangleWidget();
-    } else if (activeShape == Shape.scaleneTriangle) {
-      return const ScaleneTriangleWidget();
-    }
-    return const WelcomePage();
   }
 }
