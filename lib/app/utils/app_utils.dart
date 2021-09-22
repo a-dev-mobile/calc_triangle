@@ -6,48 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
 abstract class AppUtils {
-  static bool isDark() {
-    bool isDark = GetStorage().read(ConstString.keyIsDarkTheme) ?? false;
-    printt.w('AppUtils GetStorage isDark $isDark');
-    return isDark;
-  }
 
-  static bool isFirstStartApp() {
-    bool isFirstStartApp =
-        GetStorage().read(ConstString.keyFirstStartApp) ?? true;
-    printt.w('AppUtils GetStorage isFirstStartApp $isFirstStartApp');
-    return isFirstStartApp;
-  }
-
-  static String? getLocale() {
-    String locale =
-        GetStorage().read(ConstString.keyLocale);
-    printt.w('AppUtils getLocale $locale');
-    return locale;
-  }
-
-  static Future<void> setLocale(String locale) async {
-    await GetStorage().write(ConstString.keyLocale, locale);
-    printt.w('AppUtils setLocale  ${AppUtils.getLocale()}');
-  }
-
-  static Future<void> setFirstStartApp(bool isFirstStartApp) async {
-    await GetStorage().write(ConstString.keyFirstStartApp, isFirstStartApp);
-    printt.w('AppUtils setFirstStartApp  ${AppUtils.isFirstStartApp()}');
-  }
-
-  static bool isShowLaunchScreen() {
-    bool isShowLaunchScreen =
-        GetStorage().read(ConstString.keyShowLaunchScreen) ?? false;
-    printt.w('AppUtils GetStorage isShowLaunchScreen $isShowLaunchScreen');
-    return isShowLaunchScreen;
-  }
-
-  static Future<void> setShowLaunchScreen(bool isShowFirstSettingPage) async {
-    await GetStorage()
-        .write(ConstString.keyShowLaunchScreen, isShowFirstSettingPage);
-    printt.w('AppUtils setShowFirstSetting  ${AppUtils.isShowLaunchScreen()}');
-  }
 
   static int getPrecisionResults() {
     var value = GetStorage().read(ConstString.keyPrecisionResult) ?? 1.0;
@@ -56,10 +15,7 @@ abstract class AppUtils {
     return value.toInt();
   }
 
-  static Future<void> setIsDarkTheme(bool isDark) async {
-    await GetStorage().write(ConstString.keyIsDarkTheme, isDark);
-    printt.w('AppUtils setIsDarkTheme  ${AppUtils.isDark()}');
-  }
+
 
   static Future<void> setPrecisionResult(int value) async {
     await GetStorage().write(ConstString.keyPrecisionResult, value);

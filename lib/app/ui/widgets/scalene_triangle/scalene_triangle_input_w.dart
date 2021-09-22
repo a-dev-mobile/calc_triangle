@@ -2,6 +2,7 @@ import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_color.dart';
 
 import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/services/serv_glob.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
@@ -29,18 +30,18 @@ import 'widget/s_t_image_input_w.dart';
 late var c = ScaleneTriangleController.to;
 
 class ScaleneTriangleWidget extends StatelessWidget {
-  ScaleneTriangleWidget({Key? key}) : super(key: key);
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  const ScaleneTriangleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarIconBrightness:
-            AppUtils.isDark() ? Brightness.light : Brightness.dark,
-        statusBarColor: AppUtils.isDark()
+            ServGlob.to.isDark() ? Brightness.light : Brightness.dark,
+        statusBarColor: ServGlob.to.isDark()
             ? ConstColor.scaffoldDarkTheme
             : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: AppUtils.isDark()
+        statusBarBrightness: ServGlob.to.isDark()
             ? Brightness.dark
             : Brightness.light // Dark == white status bar -- for IOS.
         ));

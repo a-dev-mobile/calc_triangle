@@ -53,4 +53,5 @@ class TranslateHelper {
   static String get messageFormulaNotFound => 'message_formula_not_found'.tr;
   static String get perimeter => 'perimeter'.tr;
   static String get area => 'area'.tr;
+  static String get chooseShape => 'choose_shape'.tr;
 }

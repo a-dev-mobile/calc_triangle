@@ -36,4 +36,5 @@ Map<String, String> en = {
   'message_formula_not_found': 'Formula is not found',
   'area': 'Area',
   'perimeter': 'Perimeter',
+  'choose_shape': 'Choose shape',
 };

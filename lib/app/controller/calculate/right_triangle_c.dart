@@ -1,5 +1,5 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
@@ -21,7 +21,7 @@ enum RightTriangle {
   empty,
 }
 
-late WelcomeController c = Get.find();
+// late WelcomeController c = Get.find();
 
 class RightTriangleController extends GetxController {
    static RightTriangleController get to => Get.find<RightTriangleController>();
@@ -72,7 +72,7 @@ class RightTriangleController extends GetxController {
 
   @override
   void onInit() {
-    precisionResult = c.precisionResult.value;
+    // precisionResult = c.precisionResult.value;
     showSnack(TranslateHelper.enterTwoParameters);
     clearAll();
     super.onInit();

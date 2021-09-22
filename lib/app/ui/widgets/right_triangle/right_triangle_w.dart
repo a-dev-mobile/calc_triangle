@@ -3,6 +3,7 @@ import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
 import 'package:calc_triangle/app/controller/select_shape/select_shape_c.dart';
+import 'package:calc_triangle/app/services/serv_glob.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
@@ -27,18 +28,18 @@ late var selectShapeController = SelectShapeController.to;
 late var c = RightTriangleController.to;
 
 class RightTriangleWidget extends StatelessWidget {
-  RightTriangleWidget({Key? key}) : super(key: key);
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  const RightTriangleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarIconBrightness:
-            AppUtils.isDark() ? Brightness.light : Brightness.dark,
-        statusBarColor: AppUtils.isDark()
+            ServGlob.to.isDark() ? Brightness.light : Brightness.dark,
+        statusBarColor: ServGlob.to.isDark()
             ? ConstColor.scaffoldDarkTheme
             : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: AppUtils.isDark()
+        statusBarBrightness:ServGlob.to.isDark()
             ? Brightness.dark
             : Brightness.light // Dark == white status bar -- for IOS.
         ));
@@ -138,7 +139,7 @@ class RightTriangleWidget extends StatelessWidget {
               ],
             ),
             Positioned(
-                top: 20.h,
+                top: 10.h,
                 right: 20.w,
                 child: InkResponse(
                   onTap: () {

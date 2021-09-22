@@ -1,7 +1,10 @@
 import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
-import 'package:calc_triangle/app/routes/app_routes.dart';
+import 'package:calc_triangle/app/controller/setting/setting_c.dart';
+
+import 'package:calc_triangle/app/routes/app_page.dart';
+import 'package:calc_triangle/app/services/serv_glob.dart';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -15,24 +18,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../widgets/other/change_theme_w.dart';
 
-late WelcomeController c = Get.find();
-
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-
-
-
-
-
-
-
-
     return Scaffold(
-
       body: SafeArea(
         child: Column(
           children: [
@@ -54,7 +45,9 @@ class WelcomePage extends StatelessWidget {
                       child: const ImageAppWidget(),
                     ),
                     // RightTriangleImageInfoWidget(),
-                     WelcomeAppTitle(fontSize:  AppSize.fontSizeHeadline4(context),),
+                    WelcomeAppTitle(
+                      fontSize: AppSize.fontSizeHeadline4(context),
+                    ),
                     AppWidgets.dividerWelcome(),
                     const ChangeThemeWidget(),
                     AppWidgets.dividerWelcome(),
@@ -85,7 +78,7 @@ class SliderPrecisionResultWidget extends StatelessWidget {
     String precision;
     String title = TranslateHelper.selectedPrecisionResult;
     return Obx(() {
-      int precisionResult = c.precisionResult.value;
+      int precisionResult = ContrSetting.to.precisionResult.value;
       switch (precisionResult) {
         case 1:
           precision = '0.0';
@@ -118,14 +111,12 @@ class SliderPrecisionResultWidget extends StatelessWidget {
             ]),
           ),
           Slider(
-
-              // label: precision,
-              value: c.precisionResult.value.toDouble(),
+              value: ContrSetting.to.precisionResult.value.toDouble(),
               min: 0,
               divisions: 5,
               max: 5,
               onChanged: (double value) {
-                c.setPrecisionResult(value.toInt());
+                ContrSetting.to.setPrecisionResult(value.toInt());
               }),
         ],
       );
@@ -162,15 +153,19 @@ class WelcomeBtnStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Get.toNamed(Routes.selectShape),
+      onPressed: () {
+        Get.offAllNamed(Routes.selectShape);
+        ServGlob.to.setNonFirstStartApp();
+      },
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );
   }
 }
 
 class WelcomeAppTitle extends StatelessWidget {
-   const WelcomeAppTitle({
-    Key? key, required this.fontSize,
+  const WelcomeAppTitle({
+    Key? key,
+    required this.fontSize,
   }) : super(key: key);
 
   final double fontSize;
@@ -184,7 +179,7 @@ class WelcomeAppTitle extends StatelessWidget {
           style: TextStyle(
             color: AppColors.text(context),
             letterSpacing: 2.0,
-            fontSize:fontSize,
+            fontSize: fontSize,
             fontWeight: FontWeight.bold,
             shadows: Get.isDarkMode == true
                 //тень взависимости от темы

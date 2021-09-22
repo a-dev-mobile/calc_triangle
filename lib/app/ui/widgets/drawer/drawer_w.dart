@@ -1,5 +1,6 @@
 import 'package:calc_triangle/app/constant/const_string.dart';
-import 'package:calc_triangle/app/routes/app_routes.dart';
+import 'package:calc_triangle/app/routes/app_page.dart';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -64,10 +65,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   DrawerRow(
                       onTap: () {
                         // Get.toNamed(Routes.SELECT_SHAPE);
-                        Navigator.of(_context).pop();
+                        Get.offAllNamed(Routes.selectShape);
                       },
                       icon: Icons.home,
-                      msg: TranslateHelper.home),
+                      msg: TranslateHelper.chooseShape),
                   AppWidgets.dividerDrawer(),
                   DrawerRow(
                       onTap: () {

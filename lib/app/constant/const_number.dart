@@ -5,4 +5,5 @@ abstract class ConstNumber {
   static const double ratioFigureImage = 0.4;
   static const double maxValueInput = 999999.99999990;
   static const int maxNumberAfterPoint = 5;
+  static const int defPrecisionResult = 3;
 }

@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/routes/app_page.dart';
-import 'package:calc_triangle/app/routes/app_routes.dart';
+import 'package:calc_triangle/app/services/serv_glob.dart';
+
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
@@ -28,17 +30,12 @@ var printt = Logger(
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  // Logger.level = Level.nothing; //TODO on LOG
   await GetStorage.init();
-  GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
 
-  GetStorage().writeIfNull(
-      ConstString.keyLocale,
-      Platform.localeName == 'ru_RU'
-          ? ConstString.localeRu
-          : ConstString.localeEn);
+  Get.putAsync<ServGlob>(() async => ServGlob(), permanent: true);
 
-  printt.v(Platform.localeName);
+  // Logger.level = Level.nothing; //TODO on LOG
+
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(const MyApp());
@@ -55,26 +52,24 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(360, 800),
         builder: () {
-          var isDarkTheme = AppUtils.isDark();
-
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,
 
             //если первый запуск то запускаем в дальнейшем взависимости от настроек
-            initialRoute: AppUtils.isFirstStartApp()
+            initialRoute: ServGlob.to.isFirstStartApp
                 ? Routes.welcome
-                : AppUtils.isShowLaunchScreen()
+                : ServGlob.to.isShowLaunchScreen.value
                     ? Routes.welcome
                     : Routes.selectShape,
 
-            // defaultTransition: Transition.downToUp,
+            defaultTransition: Transition.downToUp,
             getPages: AppPage.pages,
-            themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+            themeMode:
+                ServGlob.to.isDark.value ? ThemeMode.dark : ThemeMode.light,
             theme: lightThemeData(context),
-            // theme: isDarkTheme ? darkThemeData(context) : lightThemeData(context),
             darkTheme: darkThemeData(context),
             translations: AppTranslation(),
-            locale: AppUtils.getLocale() == ConstString.localeRu
+            locale: ServGlob.to.appLocale() == ConstString.localeRu
                 ? const Locale(ConstString.localeRu)
                 : const Locale(ConstString.localeEn),
 

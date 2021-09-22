@@ -1,7 +1,8 @@
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
-import 'package:calc_triangle/app/controller/welcome/welcome_c.dart';
+import 'package:calc_triangle/app/services/serv_glob.dart';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -9,15 +10,14 @@ import 'package:calc_triangle/app/ui/widgets/other/change_theme_w.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
-import 'package:calc_triangle/app/utils/app_utils.dart';
+
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-late SettingController c = Get.find();
-late WelcomeController c2 = Get.find();
-late RightTriangleController c3 = Get.find();
+// late WelcomeController c2 = Get.find();
+// late RightTriangleController c3 = Get.find();
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -53,12 +53,13 @@ class SettingPage extends StatelessWidget {
                             onTap: () {
                               printt.i('english');
 
-                              AppUtils.setLocale(ConstString.localeEn);
+                              ServGlob.to
+                                  .setStorageLocale(ConstString.localeEn);
                               TranslateHelper.updateLocale(
                                   const Locale(ConstString.localeEn));
-                              c.setEnLocation();
-                                              c3.showMessage();
-                              Navigator.of(context).pop();
+                              ContrSetting.to.setEnLocation();
+                              // c3.showMessage();
+                             Get.back();
                             },
                             title: Text(
                               TranslateHelper.languageEn,
@@ -69,12 +70,13 @@ class SettingPage extends StatelessWidget {
                             onTap: () {
                               printt.i('russsss');
 
-                              AppUtils.setLocale(ConstString.localeRu);
+                              ServGlob.to
+                                  .setStorageLocale(ConstString.localeRu);
                               TranslateHelper.updateLocale(
                                   const Locale(ConstString.localeRu));
-                              c.setRusLocation();
+                              ContrSetting.to.setRusLocation();
                               // чтобы перевелся
-                              c3.showMessage();
+                              // c3.showMessage();
                               Navigator.of(context).pop();
                             },
                             title: Text(
@@ -90,7 +92,7 @@ class SettingPage extends StatelessWidget {
                   style: AppStyleText.titleText(context),
                 ),
                 subtitle: Text(
-                  c.isRus.value
+                  ServGlob.to.appLocale.value == ConstString.localeRu
                       ? TranslateHelper.languageRu
                       : TranslateHelper.languageEn,
                   style: AppStyleText.subText(context),

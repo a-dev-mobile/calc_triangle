@@ -15,6 +15,8 @@ var selectShapeController = SelectShapeController.to;
 var scaleneTriangleController = ScaleneTriangleController.to;
 var rightTriangleController = RightTriangleController.to;
 
+final Shape activeShape = Get.arguments;
+
 class CalculatePage extends StatefulWidget {
   const CalculatePage({Key? key}) : super(key: key);
 
@@ -73,15 +75,11 @@ class _CalculatePageState extends State<CalculatePage> {
   }
 
   Widget getShape() {
-    var activeShape = selectShapeController.activeShape;
-    print('getShape $activeShape');
-    if (activeShape == Shape.rightTriangle) {
-      rightTriangleController.clearAll;
-      return RightTriangleWidget();
+     if (activeShape == Shape.rightTriangle) {
+      return const RightTriangleWidget();
     } else if (activeShape == Shape.scaleneTriangle) {
-      scaleneTriangleController.clearAll;
-      return ScaleneTriangleWidget();
+      return const ScaleneTriangleWidget();
     }
-    return WelcomePage();
+    return const WelcomePage();
   }
 }
