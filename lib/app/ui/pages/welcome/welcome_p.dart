@@ -12,6 +12,7 @@ import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
+import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -116,7 +117,10 @@ class SliderPrecisionResultWidget extends StatelessWidget {
               divisions: 5,
               max: 5,
               onChanged: (double value) {
-                ContrSetting.to.setPrecisionResult(value.toInt());
+                printt.e(value);
+
+                ContrSetting.to.precisionResult.value = (value.toInt());
+                // ContrSetting.to.setPrecisionResult(value.toInt());
               }),
         ],
       );

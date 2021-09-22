@@ -13,8 +13,6 @@ class ContrSetting extends GetxController {
 
   var precisionResult = ConstNumber.defPrecisionResult.obs;
 
-  
-
   void setRusLocation() {
     ServGlob.to.appLocale.value = ConstString.localeRu;
   }
@@ -26,7 +24,7 @@ class ContrSetting extends GetxController {
   void setPrecisionResult(int precision) {
     if (precisionResult.value == precision) return;
     precisionResult.value = precision;
-
+    printt.e('${precisionResult.value}');
     AppUtils.setPrecisionResult(precision);
 
     // RightTriangleController c = Get.find();
@@ -67,11 +65,9 @@ class ContrSetting extends GetxController {
         ));
   }
 
-
   @override
   void onInit() {
     precisionResult.value = AppUtils.getPrecisionResults().toInt();
-
 
     super.onInit();
   }

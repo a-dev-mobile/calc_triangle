@@ -21,7 +21,7 @@ class AcathetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
+    RightTriangleController c = RightTriangleController.to;
 
     double minSize = AppUtils.getImageMinSize();
     TextStyle styleText;
