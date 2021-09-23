@@ -1426,17 +1426,17 @@ class RightTriangleController extends GetxController {
 
   void convertDMSToDeg() {
     aAngle.value = AppUtilsNumber.convertDMStoDeg(
-        aAngle.value, AppUtils.getPrecisionResults());
+        aAngle.value, AppUtils.getStoragePrecisionResults());
     bAngle.value = AppUtilsNumber.convertDMStoDeg(
-        bAngle.value, AppUtils.getPrecisionResults());
+        bAngle.value, AppUtils.getStoragePrecisionResults());
   }
 
   void convertDegToDMS() {
 // если мы в минутах то переводим углы
     aAngle.value =
-        AppUtilsNumber.convertDegToDMS(aAngleD, AppUtils.getPrecisionResults());
+        AppUtilsNumber.convertDegToDMS(aAngleD, AppUtils.getStoragePrecisionResults());
     bAngle.value =
-        AppUtilsNumber.convertDegToDMS(bAngleD, AppUtils.getPrecisionResults());
+        AppUtilsNumber.convertDegToDMS(bAngleD, AppUtils.getStoragePrecisionResults());
   }
 
   void clickConvertDeg() {

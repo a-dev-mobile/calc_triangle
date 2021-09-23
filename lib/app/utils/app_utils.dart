@@ -8,19 +8,6 @@ import 'package:get_storage/get_storage.dart';
 abstract class AppUtils {
 
 
-  static int getPrecisionResults() {
-    var value = GetStorage().read(ConstString.keyPrecisionResult) ?? 1.0;
-    printt.w('AppUtils GetStorage getPrecisionResults $value');
-
-    return value.toInt();
-  }
-
-
-
-  static Future<void> setPrecisionResult(int value) async {
-    await GetStorage().write(ConstString.keyPrecisionResult, value);
-    printt.w('AppUtils setPrecisionResult  ${AppUtils.getPrecisionResults()}');
-  }
 
   static double getWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;

@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class ContrSetting extends GetxController {
   static ContrSetting get to => ContrSetting();
 
-  var precisionResult = ConstNumber.defPrecisionResult.obs;
+  RxInt  precisionResult = ConstNumber.defPrecisionResult.obs;
 
   void setRusLocation() {
     ServGlob.to.appLocale.value = ConstString.localeRu;
@@ -24,8 +24,8 @@ class ContrSetting extends GetxController {
   void setPrecisionResult(int precision) {
     if (precisionResult.value == precision) return;
     precisionResult.value = precision;
-    printt.e('${precisionResult.value}');
-    AppUtils.setPrecisionResult(precision);
+    printt.e('setPrecisionResult ${precisionResult.value}');
+   setStoragePrecisionResult(precision);
 
     // RightTriangleController c = Get.find();
 
@@ -34,6 +34,19 @@ class ContrSetting extends GetxController {
     // c.calculate();
   }
 
+  // =====================================
+  int getStoragePrecisionResults() {
+    var value = ServGlob.to.box.read(ConstString.keyPrecisionResult) ?? 1.0;
+    printt.w('AppUtils GetStorage getPrecisionResults $value');
+
+    return value.toInt();
+  }
+
+  Future<void> setStoragePrecisionResult(int value) async {
+    await ServGlob.to.box.write(ConstString.keyPrecisionResult, value);
+    printt.w('AppUtils setPrecisionResult  ${getStoragePrecisionResults()}');
+  }
+  // =====================================
   void setDarkTheme() {
     if (ServGlob.to.isDark.value == true) return;
 
@@ -67,7 +80,7 @@ class ContrSetting extends GetxController {
 
   @override
   void onInit() {
-    precisionResult.value = AppUtils.getPrecisionResults().toInt();
+    precisionResult.value = AppUtils.getStoragePrecisionResults().toInt();
 
     super.onInit();
   }

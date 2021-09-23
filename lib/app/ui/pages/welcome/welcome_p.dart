@@ -78,7 +78,7 @@ class SliderPrecisionResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String precision;
     String title = TranslateHelper.selectedPrecisionResult;
-    return Obx(() {
+  
       int precisionResult = ContrSetting.to.precisionResult.value;
       switch (precisionResult) {
         case 1:
@@ -104,29 +104,30 @@ class SliderPrecisionResultWidget extends StatelessWidget {
 
       return Column(
         children: [
-          RichText(
+           Obx(() =>  RichText(
             text:
                 TextSpan(style: DefaultTextStyle.of(context).style, children: [
               TextSpan(text: title, style: AppStyleText.titleText(context)),
-              TextSpan(text: precision, style: AppStyleText.subText(context))
+           TextSpan(text: ContrSetting.to.precisionResult.value.toString(), style: AppStyleText.subText(context)),
             ]),
-          ),
+          )),
           Slider(
               value: ContrSetting.to.precisionResult.value.toDouble(),
+              // value: ContrSetting.to.precisionResult.value.toDouble(),
               min: 0,
               divisions: 5,
               max: 5,
               onChanged: (double value) {
-                printt.e(value);
+                printt.e('Slider   $value');
 
-                ContrSetting.to.precisionResult.value = (value.toInt());
-                // ContrSetting.to.setPrecisionResult(value.toInt());
+                // ContrSetting.to.precisionResult.value = (value.toInt());
+                ContrSetting.to.setPrecisionResult(value.toInt());
               }),
         ],
       );
-    });
+    }
   }
-}
+
 
 class ImageAppWidget extends StatelessWidget {
   const ImageAppWidget({

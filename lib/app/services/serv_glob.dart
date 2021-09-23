@@ -85,16 +85,20 @@ class ServGlob extends GetxService {
     printt.w('GetStorage isShowLaunchScreen false');
   }
 
+  void startOthe() async {
+    getStorageTheme();
+    getStorageLocale();
+    getStorageIsShowLaunchScreen();
+  }
+
   @override
   void onInit() {
     initFirstStartApp();
     initStartTheme();
     initStartLocale();
     initSetStorageShowLaunchScreen();
-    
-    getStorageTheme();
-    getStorageLocale();
-    getStorageIsShowLaunchScreen();
+    startOthe();
+
     super.onInit();
   }
 }
