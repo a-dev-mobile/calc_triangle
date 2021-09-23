@@ -5,7 +5,6 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

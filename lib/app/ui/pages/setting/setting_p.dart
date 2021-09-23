@@ -1,5 +1,4 @@
 import 'package:calc_triangle/app/constant/const_string.dart';
-import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
@@ -12,7 +11,6 @@ import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 
-import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

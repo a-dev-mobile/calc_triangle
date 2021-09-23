@@ -2,7 +2,6 @@ import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
-import 'package:calc_triangle/app/routes/app_page.dart';
 
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -14,7 +13,6 @@ import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
-import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/image_info_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/r_t_image_input_w.dart';
 import 'package:calc_triangle/app/ui/widgets/scalene_triangle/s_t_image_input_w.dart';
@@ -22,7 +20,6 @@ import 'package:calc_triangle/app/ui/widgets/snackbar/custom_snakbar_w.dart';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
-import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
 
@@ -63,11 +60,11 @@ class TriangleWidget extends StatelessWidget {
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarIconBrightness:
-            GlobalServ.to.isDark() ? Brightness.light : Brightness.dark,
-        statusBarColor: GlobalServ.to.isDark()
+            GlobalServ.to.isDarkTheme() ? Brightness.light : Brightness.dark,
+        statusBarColor: GlobalServ.to.isDarkTheme()
             ? ConstColor.scaffoldDarkTheme
             : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: GlobalServ.to.isDark()
+        statusBarBrightness: GlobalServ.to.isDarkTheme()
             ? Brightness.dark
             : Brightness.light // Dark == white status bar -- for IOS.
         ));

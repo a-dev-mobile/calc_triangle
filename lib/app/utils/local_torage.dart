@@ -15,13 +15,12 @@ class LocalStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var val = prefs.getString(key);
     val ??= '';
-   
-    log.w('GET $_info > $key');
+
+    log.w('GET $_info > $key = $val');
     return val;
   }
 
-
- Future<void> setItemBool(String key, bool value) async {
+  Future<void> setItemBool(String key, bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(key, value);
 
@@ -31,45 +30,56 @@ class LocalStorage {
   Future<double> getItemDouble(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var val = prefs.getDouble(key);
-    val ??=0.0;
-   
-    log.w('GET $_info > $key');
+    val ??= 0.0;
+
+    log.w('GET $_info > $key = $val');
     return val;
   }
 
-
- Future<void> setItemDouble(String key, double value) async {
+  Future<void> setItemDouble(String key, double value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setDouble(key, value);
 
     log.w('SET $_info > $key = $value');
   }
+
   Future<bool> getItemBool(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var val = prefs.getBool(key);
     val ??= false;
-   
-    log.w('GET $_info > $key');
+
+    log.w('GET $_info > $key = $val');
     return val;
   }
-
-
-
 
   Future<void> setItemInt(String key, int value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt(key, value);
-    
+
     log.w('SET $_info > $key = $value');
   }
 
   Future<int> getItemInt(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var value = prefs.getInt(key);
-    value ??= 0;
-   
-    log.w('GET $_info > $key');
-    return value;
+    var val = prefs.getInt(key);
+    val ??= 0;
+
+    log.w('GET $_info > $key = $val');
+    return val;
+  }
+
+  Future<bool> isNull(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var val = prefs.get(key);
+    bool result;
+
+    if (val == null) {
+      result = true;
+    } else {
+      result = false;
+    }
+    log.w('GET  $_info | isNull $result | > $key = $val');
+    return result;
   }
 
   Future<void> clearAll() async {

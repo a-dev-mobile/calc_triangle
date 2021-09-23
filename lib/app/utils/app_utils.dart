@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'dart:io';
-import 'dart:math';
 
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';

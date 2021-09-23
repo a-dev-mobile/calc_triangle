@@ -7,7 +7,6 @@ import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
-import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 
 var rightTriangleController = RightTriangleController.to;
@@ -122,7 +121,7 @@ class CalculatorKey extends StatelessWidget {
   }
 
   void onPresed() {
-    logger.i(' onPresed ${activeShape}');
+    logger.i(' onPresed $activeShape');
     if (activeShape == Shape.rightTriangle) {
       rightTriangleController.clickKey(symbol);
     } else if (activeShape == Shape.scaleneTriangle) {

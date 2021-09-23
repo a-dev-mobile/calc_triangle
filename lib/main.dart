@@ -1,10 +1,5 @@
-import 'dart:io';
-
-import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/routes/app_page.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
-
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,28 +8,21 @@ import 'package:get/get.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-
 import 'app/constant/const_string.dart';
 import 'app/translations/app_translations.dart';
 
 import 'app/ui/theme/light_dark_theme.dart';
+import 'app/utils/local_torage.dart';
 
-
-
-initServices() async {
-  Get.log('starting services ...');
-  MobileAds.instance.initialize();
-
-
-  Get.putAsync<GlobalServ>(() async => GlobalServ());
-  Get.log('All services started...');
-}
 
 void main() async {
   // Logger.level = Level.nothing; //TODO on LOG
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initServices();
+  MobileAds.instance.initialize();
+  Get.putAsync<GlobalServ>(() async => GlobalServ());
+
+
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
@@ -64,8 +52,9 @@ class MyApp extends StatelessWidget {
 
             defaultTransition: Transition.downToUp,
             getPages: AppPage.pages,
-            themeMode:
-                GlobalServ.to.isDark.value ? ThemeMode.dark : ThemeMode.light,
+            themeMode: GlobalServ.to.isDarkTheme.value
+                ? ThemeMode.dark
+                : ThemeMode.light,
             theme: lightThemeData(context),
             darkTheme: darkThemeData(context),
             translations: AppTranslation(),

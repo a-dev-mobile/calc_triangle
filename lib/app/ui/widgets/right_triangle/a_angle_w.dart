@@ -1,9 +1,7 @@
 // ignore_for_file: avoid_print, invalid_use_of_protected_member
 
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
-import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/utils/app_utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

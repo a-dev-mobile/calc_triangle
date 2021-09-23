@@ -17,7 +17,7 @@ class ChangeThemeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      bool isDark = GlobalServ.to.isDark.value;
+      bool isDark = GlobalServ.to.isDarkTheme.value;
       String theme =
           isDark ? TranslateHelper.darkTheme : TranslateHelper.lightTheme;
 

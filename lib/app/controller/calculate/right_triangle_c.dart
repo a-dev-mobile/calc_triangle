@@ -1,6 +1,6 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
-import 'package:calc_triangle/app/controller/setting/setting_c.dart';
+
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
@@ -80,7 +80,7 @@ class RightTriangleController extends GetxController {
   void onInit() async {
     // precisionResult = c.precisionResult.value;
     showSnack(TranslateHelper.enterTwoParameters);
-    precisionResult = SettingContrl.to.precisionResult.value;
+    precisionResult = await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
     minSizeImage = await LocalStorage().getItemDouble(ConstString.keyMinSize);
 
     clearAll();
@@ -1432,7 +1432,7 @@ class RightTriangleController extends GetxController {
 
   void convertDMSToDeg() {
     aAngle.value = AppConvert.convertDMStoDeg(
-        aAngle.value, SettingContrl.to.precisionResult.value);
+        aAngle.value, precisionResult);
     bAngle.value = AppConvert.convertDMStoDeg(bAngle.value, precisionResult);
   }
 

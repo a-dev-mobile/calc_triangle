@@ -1,5 +1,6 @@
 import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 
 import 'package:calc_triangle/app/routes/app_page.dart';
@@ -12,8 +13,7 @@ import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
-import 'package:calc_triangle/app/utils/logger.dart';
-import 'package:calc_triangle/main.dart';
+import 'package:calc_triangle/app/utils/local_torage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +53,7 @@ class WelcomePage extends StatelessWidget {
                     AppWidgets.dividerWelcome(),
                     const ChangeThemeWidget(),
                     AppWidgets.dividerWelcome(),
-                    SliderPrecisionResultWidget(),
+                    const SliderPrecisionResultWidget(),
                     const SettingLaunchScreenWidget(),
                   ],
                 ),
@@ -119,8 +119,6 @@ class SliderPrecisionResultWidget extends StatelessWidget {
               divisions: 5,
               max: 5,
               onChanged: (double value) {
-             
-
                 // SettingContrl.to.setPrecisionResult(value.toInt());
                 // SettingContrl.to.setPrecisionResult(value.toInt());
                 // GlobalServ.to.precisionResult.value = value.toInt();
@@ -163,7 +161,9 @@ class WelcomeBtnStart extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Get.offAllNamed(Routes.selectShape);
-        GlobalServ.to.setNonFirstStartApp();
+
+        LocalStorage().setItemBool(
+            ConstString.keyIsFirstStartApp, false);
       },
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );
