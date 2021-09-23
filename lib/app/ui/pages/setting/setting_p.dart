@@ -1,7 +1,7 @@
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
-import 'package:calc_triangle/app/services/serv_glob.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
@@ -53,11 +53,11 @@ class SettingPage extends StatelessWidget {
                             onTap: () {
                               printt.i('english');
 
-                              ServGlob.to
+                              GlobalServ.to
                                   .setStorageLocale(ConstString.localeEn);
                               TranslateHelper.updateLocale(
                                   const Locale(ConstString.localeEn));
-                              ContrSetting.to.setEnLocation();
+                              SettingContrl.to.setEnLocation();
                               // c3.showMessage();
                              Get.back();
                             },
@@ -70,11 +70,11 @@ class SettingPage extends StatelessWidget {
                             onTap: () {
                               printt.i('russsss');
 
-                              ServGlob.to
+                              GlobalServ.to
                                   .setStorageLocale(ConstString.localeRu);
                               TranslateHelper.updateLocale(
                                   const Locale(ConstString.localeRu));
-                              ContrSetting.to.setRusLocation();
+                              SettingContrl.to.setRusLocation();
                               // чтобы перевелся
                               // c3.showMessage();
                               Navigator.of(context).pop();
@@ -92,7 +92,7 @@ class SettingPage extends StatelessWidget {
                   style: AppStyleText.titleText(context),
                 ),
                 subtitle: Text(
-                  ServGlob.to.appLocale.value == ConstString.localeRu
+                  GlobalServ.to.appLocale.value == ConstString.localeRu
                       ? TranslateHelper.languageRu
                       : TranslateHelper.languageEn,
                   style: AppStyleText.subText(context),

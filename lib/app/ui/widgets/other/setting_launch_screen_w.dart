@@ -1,4 +1,4 @@
-import 'package:calc_triangle/app/services/serv_glob.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +13,16 @@ class SettingLaunchScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return SwitchListTile(
-        value: ServGlob.to.isShowLaunchScreen.value,
+        value: GlobalServ.to.isShowLaunchScreen.value,
         onChanged: (val) {
-          ServGlob.to.changeShowLaunchScreen();
+          GlobalServ.to.changeShowLaunchScreen();
         },
         title: Text(
           TranslateHelper.showStartupScreen,
           style: AppStyleText.titleText(context),
         ),
         subtitle: Text(
-          ServGlob.to.isShowLaunchScreen.value
+          GlobalServ.to.isShowLaunchScreen.value
               ? TranslateHelper.yes
               : TranslateHelper.no,
           style: AppStyleText.subText(context),

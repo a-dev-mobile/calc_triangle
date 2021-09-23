@@ -26,7 +26,7 @@ class AppPage {
         name: Routes.welcome,
         page: () => const WelcomePage(),
         binding: BindingsBuilder(() {
-          Get.put<ContrSetting>(ContrSetting());
+          Get.put<SettingContrl>(SettingContrl());
         })),
     GetPage(
         name: Routes.selectShape,
@@ -44,7 +44,7 @@ class AppPage {
         name: Routes.setting,
         page: () => const SettingPage(),
         binding: BindingsBuilder(() {
-          Get.put<ContrSetting>(ContrSetting());
+          Get.put<SettingContrl>(SettingContrl());
         })),
   ];
 }

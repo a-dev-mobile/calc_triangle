@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
@@ -1426,17 +1427,17 @@ class RightTriangleController extends GetxController {
 
   void convertDMSToDeg() {
     aAngle.value = AppUtilsNumber.convertDMStoDeg(
-        aAngle.value, AppUtils.getStoragePrecisionResults());
+        aAngle.value, SettingContrl.to.getStoragePrecisionResults());
     bAngle.value = AppUtilsNumber.convertDMStoDeg(
-        bAngle.value, AppUtils.getStoragePrecisionResults());
+        bAngle.value, SettingContrl.to.getStoragePrecisionResults());
   }
 
   void convertDegToDMS() {
 // если мы в минутах то переводим углы
     aAngle.value =
-        AppUtilsNumber.convertDegToDMS(aAngleD, AppUtils.getStoragePrecisionResults());
+        AppUtilsNumber.convertDegToDMS(aAngleD, SettingContrl.to.getStoragePrecisionResults());
     bAngle.value =
-        AppUtilsNumber.convertDegToDMS(bAngleD, AppUtils.getStoragePrecisionResults());
+        AppUtilsNumber.convertDegToDMS(bAngleD, SettingContrl.to.getStoragePrecisionResults());
   }
 
   void clickConvertDeg() {

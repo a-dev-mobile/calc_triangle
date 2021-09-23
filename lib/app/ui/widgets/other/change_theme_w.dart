@@ -1,6 +1,6 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
-import 'package:calc_triangle/app/services/serv_glob.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -17,7 +17,7 @@ class ChangeThemeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      bool isDark = ServGlob.to.isDark.value;
+      bool isDark = GlobalServ.to.isDark.value;
       String theme =
           isDark ? TranslateHelper.darkTheme : TranslateHelper.lightTheme;
 
@@ -37,7 +37,7 @@ class ChangeThemeWidget extends StatelessWidget {
           children: [
             CircleButton(
                 onTap: () {
-                   ContrSetting.to.setDarkTheme();
+                   SettingContrl.to.setDarkTheme();
                 },
                 color: ConstColor.scaffoldDarkTheme,
                 icon: isDark
@@ -45,7 +45,7 @@ class ChangeThemeWidget extends StatelessWidget {
                     : AppStyleButton.iconNotActiveTheme(context)),
             CircleButton(
                 onTap: () {
-                ContrSetting.to.setLightTheme();
+                SettingContrl.to.setLightTheme();
                 },
                 color: ConstColor.scaffoldLightTheme,
                 icon: !isDark

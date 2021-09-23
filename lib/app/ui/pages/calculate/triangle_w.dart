@@ -4,7 +4,7 @@ import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
 import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
 import 'package:calc_triangle/app/routes/app_page.dart';
 
-import 'package:calc_triangle/app/services/serv_glob.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
@@ -62,11 +62,11 @@ class TriangleWidget extends StatelessWidget {
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarIconBrightness:
-            ServGlob.to.isDark() ? Brightness.light : Brightness.dark,
-        statusBarColor: ServGlob.to.isDark()
+            GlobalServ.to.isDark() ? Brightness.light : Brightness.dark,
+        statusBarColor: GlobalServ.to.isDark()
             ? ConstColor.scaffoldDarkTheme
             : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: ServGlob.to.isDark()
+        statusBarBrightness: GlobalServ.to.isDark()
             ? Brightness.dark
             : Brightness.light // Dark == white status bar -- for IOS.
         ));

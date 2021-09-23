@@ -6,10 +6,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class ServGlob extends GetxService {
-  static ServGlob get to => Get.find();
+class GlobalServ extends GetxService {
+  static GlobalServ get to => Get.find();
 
-  var box = GetStorage();
+  RxInt precisionResult = 1.obs;
+
   var isDark = false.obs;
   var isFirstStartApp = false;
   var appLocale = ConstString.localeEn.obs;
@@ -17,16 +18,16 @@ class ServGlob extends GetxService {
 
 // ========================================
   void initStartTheme() {
-    box.writeIfNull(ConstString.keyIsDarkTheme, false);
+    GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
   }
 
   void getStorageTheme() {
-    isDark.value = box.read(ConstString.keyIsDarkTheme) ?? false;
+    isDark.value = GetStorage().read(ConstString.keyIsDarkTheme) ?? false;
     printt.w('GetStorage GetStorage isDark $isDark');
   }
 
   void setStorageIsDarkTheme(bool isDarkTheme) async {
-    box.write(ConstString.keyIsDarkTheme, isDarkTheme);
+    GetStorage().write(ConstString.keyIsDarkTheme, isDarkTheme);
     isDark.value = isDarkTheme;
     printt.w('GetStorage setIsDarkTheme  ${isDark.value}');
   }
@@ -37,31 +38,31 @@ class ServGlob extends GetxService {
         ? ConstString.localeRu
         : ConstString.localeEn;
 
-    box.writeIfNull(ConstString.keyLocale, appLocale.value);
+    GetStorage().writeIfNull(ConstString.keyLocale, appLocale.value);
   }
 
   Future<void> setStorageLocale(String locale) async {
-    await box.write(ConstString.keyLocale, locale);
+    await GetStorage().write(ConstString.keyLocale, locale);
     appLocale.value = locale;
     printt.w('AppUtils setLocale  ${appLocale.value}');
   }
 
   void getStorageLocale() {
-    String locale = box.read(ConstString.keyLocale);
+    String locale = GetStorage().read(ConstString.keyLocale);
     printt.w('GetStorage getLocale $locale');
     appLocale.value = locale;
   }
 // ========================================
 
   void initFirstStartApp() {
-    isFirstStartApp = box.read(ConstString.keyFirstStartApp) ?? true;
+    isFirstStartApp = GetStorage().read(ConstString.keyFirstStartApp) ?? true;
 
     printt.w('GetStorage isFirstStartApp $isFirstStartApp');
   }
 
   void setNonFirstStartApp() async {
     isFirstStartApp = false;
-    box.write(ConstString.keyFirstStartApp, isFirstStartApp);
+    GetStorage().write(ConstString.keyFirstStartApp, isFirstStartApp);
     printt.w('GetStorage setFirstStartApp isFirstStartApp $isFirstStartApp');
   }
 
@@ -69,7 +70,8 @@ class ServGlob extends GetxService {
 
   void changeShowLaunchScreen() async {
     isShowLaunchScreen.value = !(isShowLaunchScreen.value);
-    box.write(ConstString.keyShowLaunchScreen, isShowLaunchScreen.value);
+    GetStorage()
+        .write(ConstString.keyShowLaunchScreen, isShowLaunchScreen.value);
     printt.w('GetStorage ShowLaunchScreen  ${isShowLaunchScreen.value}');
   }
 
@@ -81,7 +83,7 @@ class ServGlob extends GetxService {
 
   void getStorageIsShowLaunchScreen() {
     isShowLaunchScreen.value =
-        box.read(ConstString.keyShowLaunchScreen) ?? false;
+        GetStorage().read(ConstString.keyShowLaunchScreen) ?? false;
     printt.w('GetStorage isShowLaunchScreen false');
   }
 

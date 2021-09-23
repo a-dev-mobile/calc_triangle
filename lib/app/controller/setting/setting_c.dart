@@ -1,28 +1,29 @@
 import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
-import 'package:calc_triangle/app/services/serv_glob.dart';
-import 'package:calc_triangle/app/utils/app_utils.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
+
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-class ContrSetting extends GetxController {
-  static ContrSetting get to => ContrSetting();
+class SettingContrl extends GetxController {
+  static SettingContrl get to => SettingContrl();
 
-  RxInt  precisionResult = ConstNumber.defPrecisionResult.obs;
+RxInt  precisionResult = 2.obs;
 
   void setRusLocation() {
-    ServGlob.to.appLocale.value = ConstString.localeRu;
+    GlobalServ.to.appLocale.value = ConstString.localeRu;
   }
 
   void setEnLocation() {
-    ServGlob.to.appLocale.value = ConstString.localeEn;
+    GlobalServ.to.appLocale.value = ConstString.localeEn;
   }
 
   void setPrecisionResult(int precision) {
-    if (precisionResult.value == precision) return;
+    // if (precisionResult.value == precision) return;
     precisionResult.value = precision;
     printt.e('setPrecisionResult ${precisionResult.value}');
    setStoragePrecisionResult(precision);
@@ -36,31 +37,31 @@ class ContrSetting extends GetxController {
 
   // =====================================
   int getStoragePrecisionResults() {
-    var value = ServGlob.to.box.read(ConstString.keyPrecisionResult) ?? 1.0;
+    var value =GetStorage().read(ConstString.keyPrecisionResult) ?? 1.0;
     printt.w('AppUtils GetStorage getPrecisionResults $value');
 
     return value.toInt();
   }
 
   Future<void> setStoragePrecisionResult(int value) async {
-    await ServGlob.to.box.write(ConstString.keyPrecisionResult, value);
+    await GetStorage().write(ConstString.keyPrecisionResult, value);
     printt.w('AppUtils setPrecisionResult  ${getStoragePrecisionResults()}');
   }
   // =====================================
   void setDarkTheme() {
-    if (ServGlob.to.isDark.value == true) return;
+    if (GlobalServ.to.isDark.value == true) return;
 
     Get.changeThemeMode(ThemeMode.dark);
-    ServGlob.to.setStorageIsDarkTheme(true);
+    GlobalServ.to.setStorageIsDarkTheme(true);
 
     setThemeAppBar();
   }
 
   void setLightTheme() {
-    if (ServGlob.to.isDark.value == false) return;
+    if (GlobalServ.to.isDark.value == false) return;
 
     Get.changeThemeMode(ThemeMode.light);
-    ServGlob.to.setStorageIsDarkTheme(false);
+    GlobalServ.to.setStorageIsDarkTheme(false);
 
     setThemeAppBar();
   }
@@ -68,11 +69,11 @@ class ContrSetting extends GetxController {
   void setThemeAppBar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarIconBrightness:
-            ServGlob.to.isDark.value ? Brightness.light : Brightness.dark,
-        statusBarColor: ServGlob.to.isDark.value
+            GlobalServ.to.isDark.value ? Brightness.light : Brightness.dark,
+        statusBarColor: GlobalServ.to.isDark.value
             ? ConstColor.scaffoldDarkTheme
             : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: ServGlob.to.isDark.value
+        statusBarBrightness: GlobalServ.to.isDark.value
             ? Brightness.dark
             : Brightness.light // Dark == white status bar -- for IOS.
         ));
@@ -80,7 +81,7 @@ class ContrSetting extends GetxController {
 
   @override
   void onInit() {
-    precisionResult.value = AppUtils.getStoragePrecisionResults().toInt();
+    precisionResult.value = SettingContrl.to.getStoragePrecisionResults().toInt();
 
     super.onInit();
   }

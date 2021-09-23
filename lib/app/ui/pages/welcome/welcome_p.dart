@@ -3,7 +3,7 @@ import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 
 import 'package:calc_triangle/app/routes/app_page.dart';
-import 'package:calc_triangle/app/services/serv_glob.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
@@ -52,7 +52,7 @@ class WelcomePage extends StatelessWidget {
                     AppWidgets.dividerWelcome(),
                     const ChangeThemeWidget(),
                     AppWidgets.dividerWelcome(),
-                    const SliderPrecisionResultWidget(),
+                    SliderPrecisionResultWidget(),
                     const SettingLaunchScreenWidget(),
                   ],
                 ),
@@ -76,10 +76,11 @@ class SliderPrecisionResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String precision;
+    String precision = '';
     String title = TranslateHelper.selectedPrecisionResult;
-  
-      int precisionResult = ContrSetting.to.precisionResult.value;
+    return Obx(() {
+      int precisionResult =  GlobalServ.to.precisionResult.value;
+      // int precisionResult = GlobalServ.to.precisionResult.value;
       switch (precisionResult) {
         case 1:
           precision = '0.0';
@@ -101,18 +102,17 @@ class SliderPrecisionResultWidget extends StatelessWidget {
         default:
           precision = '0';
       }
-
       return Column(
         children: [
-           Obx(() =>  RichText(
+          RichText(
             text:
                 TextSpan(style: DefaultTextStyle.of(context).style, children: [
               TextSpan(text: title, style: AppStyleText.titleText(context)),
-           TextSpan(text: ContrSetting.to.precisionResult.value.toString(), style: AppStyleText.subText(context)),
+              TextSpan(text: precision, style: AppStyleText.subText(context)),
             ]),
-          )),
+          ),
           Slider(
-              value: ContrSetting.to.precisionResult.value.toDouble(),
+              value:  GlobalServ.to.precisionResult.value.toDouble(),
               // value: ContrSetting.to.precisionResult.value.toDouble(),
               min: 0,
               divisions: 5,
@@ -120,14 +120,16 @@ class SliderPrecisionResultWidget extends StatelessWidget {
               onChanged: (double value) {
                 printt.e('Slider   $value');
 
-                // ContrSetting.to.precisionResult.value = (value.toInt());
-                ContrSetting.to.setPrecisionResult(value.toInt());
+                // SettingContrl.to.precisionResult.value = value.toInt();
+              // SettingContrl.to.setPrecisionResult(value.toInt());
+                // SettingContrl.to.setPrecisionResult(value.toInt());
+                GlobalServ.to.precisionResult.value = value.toInt();
               }),
         ],
       );
-    }
+    });
   }
-
+}
 
 class ImageAppWidget extends StatelessWidget {
   const ImageAppWidget({
@@ -160,7 +162,7 @@ class WelcomeBtnStart extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Get.offAllNamed(Routes.selectShape);
-        ServGlob.to.setNonFirstStartApp();
+        GlobalServ.to.setNonFirstStartApp();
       },
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );

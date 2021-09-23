@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/routes/app_page.dart';
-import 'package:calc_triangle/app/services/serv_glob.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
@@ -27,13 +27,19 @@ var printt = Logger(
   printer: PrettyPrinter(methodCount: 0),
 );
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+initServices() async {
+  Get.log('starting services ...');
   MobileAds.instance.initialize();
   await GetStorage.init();
 
-  Get.putAsync<ServGlob>(() async => ServGlob(), permanent: true);
+  Get.putAsync<GlobalServ>(() async => GlobalServ());
+  Get.log('All services started...');
+}
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initServices();
   // Logger.level = Level.nothing; //TODO on LOG
 
   SystemChrome.setPreferredOrientations(
@@ -56,20 +62,20 @@ class MyApp extends StatelessWidget {
             navigatorKey: MyApp.materialKey,
 
             //если первый запуск то запускаем в дальнейшем взависимости от настроек
-            initialRoute: ServGlob.to.isFirstStartApp
+            initialRoute: GlobalServ.to.isFirstStartApp
                 ? Routes.welcome
-                : ServGlob.to.isShowLaunchScreen.value
+                : GlobalServ.to.isShowLaunchScreen.value
                     ? Routes.welcome
                     : Routes.selectShape,
 
             defaultTransition: Transition.downToUp,
             getPages: AppPage.pages,
             themeMode:
-                ServGlob.to.isDark.value ? ThemeMode.dark : ThemeMode.light,
+                GlobalServ.to.isDark.value ? ThemeMode.dark : ThemeMode.light,
             theme: lightThemeData(context),
             darkTheme: darkThemeData(context),
             translations: AppTranslation(),
-            locale: ServGlob.to.appLocale() == ConstString.localeRu
+            locale: GlobalServ.to.appLocale() == ConstString.localeRu
                 ? const Locale(ConstString.localeRu)
                 : const Locale(ConstString.localeEn),
 
