@@ -24,7 +24,7 @@ class ChypotenuseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
 
-    double minSize = AppUtils.getImageMinSize();
+    double minSize = RightTriangleController.to.minSizeImage;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;

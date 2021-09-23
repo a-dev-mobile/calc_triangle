@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:calc_triangle/app/constant/const_string.dart';
-import 'package:calc_triangle/main.dart';
+import 'package:calc_triangle/app/utils/local_torage.dart';
+
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+
 
 class GlobalServ extends GetxService {
   static GlobalServ get to => Get.find();
@@ -18,18 +19,16 @@ class GlobalServ extends GetxService {
 
 // ========================================
   void initStartTheme() {
-    GetStorage().writeIfNull(ConstString.keyIsDarkTheme, false);
+    LocalStorage().setItemBool(ConstString.keyIsDarkTheme, false);
   }
 
-  void getStorageTheme() {
-    isDark.value = GetStorage().read(ConstString.keyIsDarkTheme) ?? false;
-    printt.w('GetStorage GetStorage isDark $isDark');
+  Future<void> getStorageTheme() async {
+    isDark.value = await LocalStorage().getItemBool(ConstString.keyIsDarkTheme);
   }
 
   void setStorageIsDarkTheme(bool isDarkTheme) async {
-    GetStorage().write(ConstString.keyIsDarkTheme, isDarkTheme);
+    LocalStorage().setItemBool(ConstString.keyIsDarkTheme, isDarkTheme);
     isDark.value = isDarkTheme;
-    printt.w('GetStorage setIsDarkTheme  ${isDark.value}');
   }
 
 // ========================================
@@ -38,41 +37,38 @@ class GlobalServ extends GetxService {
         ? ConstString.localeRu
         : ConstString.localeEn;
 
-    GetStorage().writeIfNull(ConstString.keyLocale, appLocale.value);
+    LocalStorage().setItemString(ConstString.keyLocale, appLocale.value);
   }
 
   Future<void> setStorageLocale(String locale) async {
-    await GetStorage().write(ConstString.keyLocale, locale);
+    LocalStorage().setItemString(ConstString.keyLocale, locale);
     appLocale.value = locale;
-    printt.w('AppUtils setLocale  ${appLocale.value}');
   }
 
-  void getStorageLocale() {
-    String locale = GetStorage().read(ConstString.keyLocale);
-    printt.w('GetStorage getLocale $locale');
+  Future<void> getStorageLocale() async {
+    String locale = await LocalStorage().getItemString(ConstString.keyLocale);
+
     appLocale.value = locale;
   }
 // ========================================
 
-  void initFirstStartApp() {
-    isFirstStartApp = GetStorage().read(ConstString.keyFirstStartApp) ?? true;
-
-    printt.w('GetStorage isFirstStartApp $isFirstStartApp');
+  void initFirstStartApp() async {
+    isFirstStartApp =
+        await LocalStorage().getItemBool(ConstString.keyFirstStartApp);
   }
 
   void setNonFirstStartApp() async {
     isFirstStartApp = false;
-    GetStorage().write(ConstString.keyFirstStartApp, isFirstStartApp);
-    printt.w('GetStorage setFirstStartApp isFirstStartApp $isFirstStartApp');
+      await LocalStorage().setItemBool(ConstString.keyFirstStartApp, isFirstStartApp);
+
   }
 
 // ========================================
 
   void changeShowLaunchScreen() async {
     isShowLaunchScreen.value = !(isShowLaunchScreen.value);
-    GetStorage()
-        .write(ConstString.keyShowLaunchScreen, isShowLaunchScreen.value);
-    printt.w('GetStorage ShowLaunchScreen  ${isShowLaunchScreen.value}');
+   LocalStorage().setItemBool(ConstString.keyShowLaunchScreen, isShowLaunchScreen.value);
+ 
   }
 
   Future<void> initSetStorageShowLaunchScreen() async {
@@ -81,10 +77,10 @@ class GlobalServ extends GetxService {
     }
   }
 
-  void getStorageIsShowLaunchScreen() {
+  void getStorageIsShowLaunchScreen() async{
     isShowLaunchScreen.value =
-        GetStorage().read(ConstString.keyShowLaunchScreen) ?? false;
-    printt.w('GetStorage isShowLaunchScreen false');
+        await LocalStorage().getItemBool(ConstString.keyShowLaunchScreen);
+    
   }
 
   void startOthe() async {

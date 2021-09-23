@@ -1,12 +1,16 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
+import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
+import 'package:calc_triangle/app/utils/local_torage.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
+import 'package:calc_triangle/app/utils/validation_utils.dart';
 
-import 'package:calc_triangle/main.dart';
 import 'dart:math';
 import 'package:get/get.dart';
 
@@ -25,7 +29,7 @@ enum RightTriangle {
 // late WelcomeController c = Get.find();
 
 class RightTriangleController extends GetxController {
-   static RightTriangleController get to => Get.find<RightTriangleController>();
+  static RightTriangleController get to => Get.find<RightTriangleController>();
   static const startAngleValue = '0°';
   static const startLengthValue = '0';
 
@@ -42,6 +46,7 @@ class RightTriangleController extends GetxController {
 
   var area = "".obs;
   var perimeter = "".obs;
+  double minSizeImage = 0;
 
   var aAngleD = 0.0;
   var aCathetD = 0.0;
@@ -72,15 +77,18 @@ class RightTriangleController extends GetxController {
   int precisionResult = 0;
 
   @override
-  void onInit() {
+  void onInit() async {
     // precisionResult = c.precisionResult.value;
     showSnack(TranslateHelper.enterTwoParameters);
+    precisionResult = SettingContrl.to.precisionResult.value;
+    minSizeImage = await LocalStorage().getItemDouble(ConstString.keyMinSize);
+
     clearAll();
     super.onInit();
   }
 
   void clickKey(KeySymbol keySymbol) {
-    printt.v('start click ${keySymbol.value}');
+    log.v('start click ${keySymbol.value}');
     printElements();
     // showMessage();
 
@@ -124,19 +132,19 @@ class RightTriangleController extends GetxController {
     }
 
     if (ifMaxNumbeEnter()) {
-      printt.e('return max value');
+      log.e('return max value');
       showMessage();
       return;
     }
 
     // если две точки возврат
     if (isTwoDecimalPointRightTriangle(keySymbol)) {
-      printt.e('isTwoDecimalPointRightTriangle');
+      log.e('isTwoDecimalPointRightTriangle');
 
       return;
     }
     if (isAngleOver90(keySymbol)) {
-      printt.e('isAngleOver90');
+      log.e('isAngleOver90');
       showSnack(TranslateHelper.messageAngleOver90);
 
       return;
@@ -145,7 +153,7 @@ class RightTriangleController extends GetxController {
     String newInput = keySymbol.value;
     String oldInput;
     String sumInput;
-    printt.v('start input');
+    log.v('start input');
     if (isaCathet.value) {
       oldInput = aCathet.value;
 
@@ -212,12 +220,10 @@ class RightTriangleController extends GetxController {
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
       aAngle.value = sumInput + "°";
-
-
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
-    // удаляю знак угла
+      // удаляю знак угла
       oldInput = AppUtilsString.removeLastCharacter(oldInput);
       //удаляю начальное значение при вводе
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
@@ -228,7 +234,7 @@ class RightTriangleController extends GetxController {
       bAngle.value = sumInput + "°";
     }
     printElements();
-    printt.v('end input');
+    log.v('end input');
     setActiveParam();
     showMessage();
 
@@ -240,43 +246,43 @@ class RightTriangleController extends GetxController {
     showMessage();
 
     printElements();
-    printt.v('end click ${keySymbol.value}');
+    log.v('end click ${keySymbol.value}');
   }
 
   bool isTwoDecimalPointRightTriangle(KeySymbol keySymbol) {
     if (isaCathet.value) {
-      if (AppUtilsString.isTwoDecimalPoint(aCathet.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(aCathet.value + keySymbol.value)) {
         return true;
       }
     } else if (isbCathet.value) {
-      if (AppUtilsString.isTwoDecimalPoint(bCathet.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(bCathet.value + keySymbol.value)) {
         return true;
       }
     } else if (iscHypotenuse.value) {
-      if (AppUtilsString.isTwoDecimalPoint(
+      if (ValidationUtils.isTwoDecimalPoint(
           cHypotenuse.value + keySymbol.value)) {
         return true;
       }
     } else if (ishHeight.value) {
-      if (AppUtilsString.isTwoDecimalPoint(hHeight.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(hHeight.value + keySymbol.value)) {
         return true;
       }
     } else if (ismCompCside.value) {
-      if (AppUtilsString.isTwoDecimalPoint(
+      if (ValidationUtils.isTwoDecimalPoint(
           mCompCside.value + keySymbol.value)) {
         return true;
       }
     } else if (iskCompCside.value) {
-      if (AppUtilsString.isTwoDecimalPoint(
+      if (ValidationUtils.isTwoDecimalPoint(
           kCompCside.value + keySymbol.value)) {
         return true;
       }
     } else if (isaAngle.value) {
-      if (AppUtilsString.isTwoDecimalPoint(aAngle.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(aAngle.value + keySymbol.value)) {
         return true;
       }
     } else if (isbAngle.value) {
-      if (AppUtilsString.isTwoDecimalPoint(bAngle.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(bAngle.value + keySymbol.value)) {
         return true;
       }
     }
@@ -305,7 +311,7 @@ class RightTriangleController extends GetxController {
   }
 
   void initValue() {
-    printt.v('start initValue');
+    log.v('start initValue');
 
     if (isDeg.isFalse) {
       convertDMSToDeg();
@@ -346,7 +352,7 @@ class RightTriangleController extends GetxController {
             double.parse(AppUtilsString.removeLastCharacter(bAngle.value));
       }
     } catch (e) {
-      printt.e('initValue error to double');
+      log.e('initValue error to double');
       resetValue();
       resetActiveParam();
     }
@@ -354,7 +360,7 @@ class RightTriangleController extends GetxController {
   }
 
   void calcMKCompCsideKnowAcatAangChypo() {
-    mCompCsideD = aCathetD * cos(AppUtilsNumber.toRadian(aAngleD));
+    mCompCsideD = aCathetD * cos(AppConvert.toRadian(aAngleD));
     mCompCside.value =
         AppUtilsNumber.getFormatNumber(mCompCsideD, precisionResult);
 
@@ -376,18 +382,18 @@ class RightTriangleController extends GetxController {
   }
 
   void calchHeightKnowAcatAangl() {
-    hHeightD = aCathetD * sin(AppUtilsNumber.toRadian(aAngleD));
+    hHeightD = aCathetD * sin(AppConvert.toRadian(aAngleD));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
   void calcBangKnowBcatChypo() {
-    bAngleD = AppUtilsNumber.toDegree(acos(bCathetD / cHypotenuseD));
+    bAngleD = AppConvert.toDegree(acos(bCathetD / cHypotenuseD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
   void calcBangKnowAcatBcatChypo() {
-    bAngleD = AppUtilsNumber.toDegree(acos(
+    bAngleD = AppConvert.toDegree(acos(
         (pow(bCathetD, 2) + pow(cHypotenuseD, 2) - pow(aCathetD, 2)) /
             (2 * bCathetD * cHypotenuseD)));
     bAngle.value =
@@ -411,34 +417,34 @@ class RightTriangleController extends GetxController {
   }
 
   void calcBcatKnowAcatAang() {
-    bCathetD = aCathetD * tan(AppUtilsNumber.toRadian(aAngleD));
+    bCathetD = aCathetD * tan(AppConvert.toRadian(aAngleD));
     bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
   }
 
   void calcBcatKnowAcatBang() {
-    bCathetD = aCathetD / tan(AppUtilsNumber.toRadian(bAngleD));
+    bCathetD = aCathetD / tan(AppConvert.toRadian(bAngleD));
     bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
   }
 
   void calcAcatKnowBcatAang() {
-    aCathetD = bCathetD / tan(AppUtilsNumber.toRadian(aAngleD));
+    aCathetD = bCathetD / tan(AppConvert.toRadian(aAngleD));
     aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
   }
 
   void calcAangKnowHheiAcat() {
-    aAngleD = AppUtilsNumber.toDegree(asin(hHeightD / aCathetD));
+    aAngleD = AppConvert.toDegree(asin(hHeightD / aCathetD));
     aAngle.value =
         AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
   }
 
   void calcBangKnowHheibcat() {
-    bAngleD = AppUtilsNumber.toDegree(asin(hHeightD / bCathetD));
+    bAngleD = AppConvert.toDegree(asin(hHeightD / bCathetD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
   void calcAcatKnowBcatBang() {
-    aCathetD = bCathetD * tan(AppUtilsNumber.toRadian(bAngleD));
+    aCathetD = bCathetD * tan(AppConvert.toRadian(bAngleD));
     aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
   }
 
@@ -458,7 +464,6 @@ class RightTriangleController extends GetxController {
   }
 
   void calcHheiKnowBcatMcomp() {
-   
     hHeightD = sqrt(pow(bCathetD, 2) - pow(mCompCsideD, 2));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
@@ -470,30 +475,30 @@ class RightTriangleController extends GetxController {
 
   void calcBangKnowHheiBcat() {
     // ok
-    bAngleD = AppUtilsNumber.toDegree(asin(hHeightD / bCathetD));
+    bAngleD = AppConvert.toDegree(asin(hHeightD / bCathetD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
   void calcAangKnowHheiMcomp() {
-    aAngleD = AppUtilsNumber.toDegree(atan(hHeightD / mCompCsideD));
+    aAngleD = AppConvert.toDegree(atan(hHeightD / mCompCsideD));
     aAngle.value =
         AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
   }
 
   void calcBangKnowHheiKcomp() {
-    bAngleD = AppUtilsNumber.toDegree(atan(hHeightD / kCompCsideD));
+    bAngleD = AppConvert.toDegree(atan(hHeightD / kCompCsideD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
   void calcAcatKnowHheiAang() {
-    aCathetD = hHeightD / (sin(AppUtilsNumber.toRadian(aAngleD)));
+    aCathetD = hHeightD / (sin(AppConvert.toRadian(aAngleD)));
     aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
   }
 
   void calcBcatKnowHheiBang() {
-    bCathetD = hHeightD / (sin(AppUtilsNumber.toRadian(bAngleD)));
+    bCathetD = hHeightD / (sin(AppConvert.toRadian(bAngleD)));
     bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
   }
 
@@ -510,12 +515,12 @@ class RightTriangleController extends GetxController {
   }
 
   void calchHeightKnowAangMcomp() {
-    hHeightD = mCompCsideD * tan(AppUtilsNumber.toRadian(aAngleD));
+    hHeightD = mCompCsideD * tan(AppConvert.toRadian(aAngleD));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
   void calchHeightKnowBangKcomp() {
-    hHeightD = kCompCsideD * tan(AppUtilsNumber.toRadian(bAngleD));
+    hHeightD = kCompCsideD * tan(AppConvert.toRadian(bAngleD));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
@@ -530,7 +535,7 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
-    printt.i('start calculate');
+    log.i('start calculate');
     printElements();
     RightTriangle activeParm2 = activeParamMap[2]!;
     bool conditionOne = false;
@@ -739,10 +744,10 @@ class RightTriangleController extends GetxController {
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.cHypotenuse;
     if (isBeParam(param1, param2)) {
-      aCathetD = cHypotenuseD * cos(AppUtilsNumber.toRadian(aAngleD));
+      aCathetD = cHypotenuseD * cos(AppConvert.toRadian(aAngleD));
       aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
-      bCathetD = cHypotenuseD * sin(AppUtilsNumber.toRadian(aAngleD));
+      bCathetD = cHypotenuseD * sin(AppConvert.toRadian(aAngleD));
       bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
 
       calcBangleKnowAang();
@@ -760,10 +765,10 @@ class RightTriangleController extends GetxController {
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.cHypotenuse;
     if (isBeParam(param1, param2)) {
-      aCathetD = cHypotenuseD * sin(AppUtilsNumber.toRadian(bAngleD));
+      aCathetD = cHypotenuseD * sin(AppConvert.toRadian(bAngleD));
       aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
-      bCathetD = cHypotenuseD * cos(AppUtilsNumber.toRadian(bAngleD));
+      bCathetD = cHypotenuseD * cos(AppConvert.toRadian(bAngleD));
       bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
 
       calcAangKnowBang();
@@ -974,39 +979,39 @@ class RightTriangleController extends GetxController {
 // проверка если цифры не числа
     checkIfNaN();
     printElements();
-    printt.i('end calculate');
+    log.i('end calculate');
   }
 
   void checkIfNaN() {
-    if (AppUtilsNumber.isNanAndInfinity(aCathetD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(aCathetD)) {
       aCathet.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(bCathetD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(bCathetD)) {
       bCathet.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(cHypotenuseD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(cHypotenuseD)) {
       cHypotenuse.value = startLengthValue;
     }
 
-    if (AppUtilsNumber.isNanAndInfinity(hHeightD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(mCompCsideD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(mCompCsideD)) {
       mCompCside.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(kCompCsideD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(kCompCsideD)) {
       kCompCside.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(aAngleD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(bAngleD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
       bAngle.value = startAngleValue;
     }
   }
 
   void setActiveParam() {
-    printt.v(
+    log.v(
         'start active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
     RightTriangle paramAll = RightTriangle.empty;
 
@@ -1083,7 +1088,7 @@ class RightTriangleController extends GetxController {
       activeParamMap[1] = paramLenght;
     }
 
-    printt.v(
+    log.v(
         'end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
   }
 
@@ -1102,7 +1107,7 @@ class RightTriangleController extends GetxController {
     RightTriangle param1;
     RightTriangle param2;
 
-    printt.v('start show message');
+    log.v('start show message');
 
     // если есть пустой параметр
     if (isActiveOneParamEmpty()) {
@@ -1178,7 +1183,7 @@ class RightTriangleController extends GetxController {
     }
 
     //================================================
-    // TODO  cHyp hHeight //not found formula 
+    // TODO  cHyp hHeight //not found formula
     //================================================
     param1 = RightTriangle.hHeight;
     param2 = RightTriangle.cHypotenuse;
@@ -1193,7 +1198,7 @@ class RightTriangleController extends GetxController {
     param1 = RightTriangle.mCompCside;
     param2 = RightTriangle.bCathet;
     if (isBeParam(param1, param2)) {
-   showSnack(TranslateHelper.messageFormulaNotFound);
+      showSnack(TranslateHelper.messageFormulaNotFound);
       return;
     }
     //================================================
@@ -1202,7 +1207,7 @@ class RightTriangleController extends GetxController {
     param1 = RightTriangle.kCompCside;
     param2 = RightTriangle.aCathet;
     if (isBeParam(param1, param2)) {
-     showSnack(TranslateHelper.messageFormulaNotFound);
+      showSnack(TranslateHelper.messageFormulaNotFound);
       return;
     }
 
@@ -1254,7 +1259,7 @@ class RightTriangleController extends GetxController {
   }
 
   bool isMaxNumberAfterPoint(String value) {
-    return AppUtilsString.isMoreAccuracy(
+    return ValidationUtils.isMoreAccuracy(
         value, ConstNumber.maxNumberAfterPoint);
   }
 
@@ -1322,7 +1327,7 @@ class RightTriangleController extends GetxController {
   }
 
   void printElements() {
-    printt.v('''printElements
+    log.v('''printElements
         ${activeParamMap[1]} ${activeParamMap[2]}
 
         $aCathetD ${aCathet.value} aCathet 
@@ -1426,18 +1431,15 @@ class RightTriangleController extends GetxController {
   }
 
   void convertDMSToDeg() {
-    aAngle.value = AppUtilsNumber.convertDMStoDeg(
-        aAngle.value, SettingContrl.to.getStoragePrecisionResults());
-    bAngle.value = AppUtilsNumber.convertDMStoDeg(
-        bAngle.value, SettingContrl.to.getStoragePrecisionResults());
+    aAngle.value = AppConvert.convertDMStoDeg(
+        aAngle.value, SettingContrl.to.precisionResult.value);
+    bAngle.value = AppConvert.convertDMStoDeg(bAngle.value, precisionResult);
   }
 
   void convertDegToDMS() {
 // если мы в минутах то переводим углы
-    aAngle.value =
-        AppUtilsNumber.convertDegToDMS(aAngleD, SettingContrl.to.getStoragePrecisionResults());
-    bAngle.value =
-        AppUtilsNumber.convertDegToDMS(bAngleD, SettingContrl.to.getStoragePrecisionResults());
+    aAngle.value = AppConvert.convertDegToDMS(aAngleD, precisionResult);
+    bAngle.value = AppConvert.convertDegToDMS(bAngleD, precisionResult);
   }
 
   void clickConvertDeg() {
@@ -1554,7 +1556,7 @@ class RightTriangleController extends GetxController {
 
   void clearAll() {
     //устанавливаем начальные значения
-    printt.v(' start clearAll');
+    log.v(' start clearAll');
     printElements();
     resetValue();
 
@@ -1562,7 +1564,7 @@ class RightTriangleController extends GetxController {
     resetActiveParam();
 
     printElements();
-    printt.v(' end clearAll');
+    log.v(' end clearAll');
   }
 
   void resetValue() {
@@ -1620,7 +1622,7 @@ class RightTriangleController extends GetxController {
   }
 
 /*  void calcBangKnowHheiBcat() {
-   bAngleD = AppUtilsNumber.toDegree(asin(hHeightD / bCathetD));
+   bAngleD = AppConvert.toDegree(asin(hHeightD / bCathetD));
     bAngle.value = AppUtilsNumber.getFormatNumber(
             bAngleD, precisionResult) +
         "°";

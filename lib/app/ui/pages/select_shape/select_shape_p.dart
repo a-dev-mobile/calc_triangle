@@ -6,18 +6,18 @@ import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 
 import 'package:calc_triangle/app/ui/widgets/other/image_info_w.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/main.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 enum Shape {
   rightTriangle,
   scaleneTriangle,
   none,
 }
+
 class SelectShapePage extends StatelessWidget {
   const SelectShapePage({Key? key}) : super(key: key);
   @override
@@ -35,7 +35,8 @@ class SelectShapePage extends StatelessWidget {
                 InkWell(
                     onTap: () {
                       // SelectShapeController.to.initWidgetControllerPath();
-                        printt.i('Get.offAllNamed(Routes.calculate, arguments: Shape.rightTriangle);');
+                      logger.i(
+                          'Get.offAllNamed(Routes.calculate, arguments: Shape.rightTriangle);');
                       Get.offAllNamed(Routes.calculate,
                           arguments: Shape.rightTriangle);
                     },
@@ -43,7 +44,8 @@ class SelectShapePage extends StatelessWidget {
                         pathAsset: ConstAssets.rightTriangleInfo)),
                 InkWell(
                     onTap: () {
-                                              printt.i('Get.offAllNamed(Routes.calculate, arguments: Shape.scaleneTriangle);');
+                      logger.i(
+                          'Get.offAllNamed(Routes.calculate, arguments: Shape.scaleneTriangle);');
                       Get.offAllNamed(Routes.calculate,
                           arguments: Shape.scaleneTriangle);
                     },

@@ -23,7 +23,7 @@ class AcathetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RightTriangleController c = RightTriangleController.to;
 
-    double minSize = AppUtils.getImageMinSize();
+    double minSize = RightTriangleController.to.minSizeImage;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;

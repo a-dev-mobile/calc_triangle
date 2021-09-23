@@ -21,6 +21,7 @@ import 'package:calc_triangle/app/ui/widgets/scalene_triangle/s_t_image_input_w.
 import 'package:calc_triangle/app/ui/widgets/snackbar/custom_snakbar_w.dart';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class TriangleWidget extends StatelessWidget {
   late Widget infoWidget;
 
   dynamic getActiveContr() {
-    printt.i('getActiveContr $activeShape');
+    logger.i('getActiveContr $activeShape');
     switch (activeShape) {
       case Shape.rightTriangle:
         inputWidget = const RightTriangleImageInputWidget();
@@ -57,7 +58,7 @@ class TriangleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-          final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
     var c = getActiveContr();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
@@ -72,7 +73,6 @@ class TriangleWidget extends StatelessWidget {
         ));
     return WillPopScope(
       onWillPop: () {
-  
         _globalKey.currentState?.openDrawer();
         return Future.value(false);
       },
@@ -162,7 +162,9 @@ class TriangleWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.content(context),
                       ),
-                      child: NumPad(selectShape: activeShape,),
+                      child: NumPad(
+                        selectShape: activeShape,
+                      ),
                     ),
                   ),
                 ],
@@ -173,7 +175,7 @@ class TriangleWidget extends StatelessWidget {
                   child: InkResponse(
                     onTap: () {
                       c.isActiveImageInfo.value = !(c.isActiveImageInfo.value);
-                      printt.i(
+                      logger.i(
                           'c.isActiveImageInfo.value ${c.isActiveImageInfo.value}');
                     },
                     child: Icon(

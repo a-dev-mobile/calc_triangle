@@ -10,6 +10,7 @@ import 'package:calc_triangle/app/ui/widgets/other/change_theme_w.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
 
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class SettingPage extends StatelessWidget {
                         children: [
                           ListTile(
                             onTap: () {
-                              printt.i('english');
+                              logger.i('english');
 
                               GlobalServ.to
                                   .setStorageLocale(ConstString.localeEn);
@@ -59,7 +60,7 @@ class SettingPage extends StatelessWidget {
                                   const Locale(ConstString.localeEn));
                               SettingContrl.to.setEnLocation();
                               // c3.showMessage();
-                             Get.back();
+                              Get.back();
                             },
                             title: Text(
                               TranslateHelper.languageEn,
@@ -68,7 +69,7 @@ class SettingPage extends StatelessWidget {
                           ),
                           ListTile(
                             onTap: () {
-                              printt.i('russsss');
+                              logger.i('russsss');
 
                               GlobalServ.to
                                   .setStorageLocale(ConstString.localeRu);

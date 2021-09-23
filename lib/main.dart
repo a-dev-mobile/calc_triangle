@@ -4,43 +4,37 @@ import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/routes/app_page.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
-import 'package:calc_triangle/app/utils/app_utils.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:logger/logger.dart';
+
 
 import 'app/constant/const_string.dart';
 import 'app/translations/app_translations.dart';
 
 import 'app/ui/theme/light_dark_theme.dart';
 
-var log = Logger(
-  printer: PrettyPrinter(methodCount: 2),
-);
 
-var printt = Logger(
-  printer: PrettyPrinter(methodCount: 0),
-);
 
 initServices() async {
   Get.log('starting services ...');
   MobileAds.instance.initialize();
-  await GetStorage.init();
+
 
   Get.putAsync<GlobalServ>(() async => GlobalServ());
   Get.log('All services started...');
 }
 
 void main() async {
+  // Logger.level = Level.nothing; //TODO on LOG
   WidgetsFlutterBinding.ensureInitialized();
 
   await initServices();
-  // Logger.level = Level.nothing; //TODO on LOG
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {

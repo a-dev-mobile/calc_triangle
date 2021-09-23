@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, invalid_use_of_protected_member
 
 import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
@@ -20,7 +21,7 @@ class AangleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
 
-    double minSize = AppUtils.getImageMinSize();
+    double minSize = RightTriangleController.to.minSizeImage;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;

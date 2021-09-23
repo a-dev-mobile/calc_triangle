@@ -24,7 +24,7 @@ class HheightWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ScaleneTriangleController c = Get.find();
 
-    double minSize = AppUtils.getImageMinSize();
+double minSize = ScaleneTriangleController.to.minSizeImage;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;

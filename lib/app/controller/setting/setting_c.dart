@@ -2,17 +2,19 @@ import 'package:calc_triangle/app/constant/const_color.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
+import 'package:calc_triangle/app/utils/local_torage.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
 
 import 'package:calc_triangle/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 class SettingContrl extends GetxController {
-  static SettingContrl get to => SettingContrl();
+  static SettingContrl get to => Get.find();
 
-RxInt  precisionResult = 2.obs;
+  RxInt precisionResult = 2.obs;
 
   void setRusLocation() {
     GlobalServ.to.appLocale.value = ConstString.localeRu;
@@ -25,8 +27,8 @@ RxInt  precisionResult = 2.obs;
   void setPrecisionResult(int precision) {
     // if (precisionResult.value == precision) return;
     precisionResult.value = precision;
-    printt.e('setPrecisionResult ${precisionResult.value}');
-   setStoragePrecisionResult(precision);
+    log.e('setPrecisionResult ${precisionResult.value}');
+    setStoragePrecisionResult(precision);
 
     // RightTriangleController c = Get.find();
 
@@ -36,17 +38,18 @@ RxInt  precisionResult = 2.obs;
   }
 
   // =====================================
-  int getStoragePrecisionResults() {
-    var value =GetStorage().read(ConstString.keyPrecisionResult) ?? 1.0;
-    printt.w('AppUtils GetStorage getPrecisionResults $value');
-
+  Future<int> getStoragePrecisionResults() async {
+     var value = await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
+    precisionResult.value = value;
     return value.toInt();
   }
 
   Future<void> setStoragePrecisionResult(int value) async {
-    await GetStorage().write(ConstString.keyPrecisionResult, value);
-    printt.w('AppUtils setPrecisionResult  ${getStoragePrecisionResults()}');
+    await LocalStorage().setItemInt(ConstString.keyPrecisionResult, value);
+
+
   }
+
   // =====================================
   void setDarkTheme() {
     if (GlobalServ.to.isDark.value == true) return;
@@ -80,8 +83,8 @@ RxInt  precisionResult = 2.obs;
   }
 
   @override
-  void onInit() {
-    precisionResult.value = SettingContrl.to.getStoragePrecisionResults().toInt();
+  Future<void> onInit() async {
+    precisionResult.value = await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
 
     super.onInit();
   }

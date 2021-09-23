@@ -12,6 +12,7 @@ import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/main.dart';
 
 import 'package:flutter/material.dart';
@@ -79,8 +80,8 @@ class SliderPrecisionResultWidget extends StatelessWidget {
     String precision = '';
     String title = TranslateHelper.selectedPrecisionResult;
     return Obx(() {
-      int precisionResult =  GlobalServ.to.precisionResult.value;
-      // int precisionResult = GlobalServ.to.precisionResult.value;
+      int precisionResult = SettingContrl.to.precisionResult.value;
+      // int precisionResult =  GlobalServ.to.precisionResult.value;
       switch (precisionResult) {
         case 1:
           precision = '0.0';
@@ -112,18 +113,18 @@ class SliderPrecisionResultWidget extends StatelessWidget {
             ]),
           ),
           Slider(
-              value:  GlobalServ.to.precisionResult.value.toDouble(),
-              // value: ContrSetting.to.precisionResult.value.toDouble(),
+              value: SettingContrl.to.precisionResult.value.toDouble(),
+              // value:  GlobalServ.to.precisionResult.value.toDouble(),
               min: 0,
               divisions: 5,
               max: 5,
               onChanged: (double value) {
-                printt.e('Slider   $value');
+             
 
-                // SettingContrl.to.precisionResult.value = value.toInt();
-              // SettingContrl.to.setPrecisionResult(value.toInt());
                 // SettingContrl.to.setPrecisionResult(value.toInt());
-                GlobalServ.to.precisionResult.value = value.toInt();
+                // SettingContrl.to.setPrecisionResult(value.toInt());
+                // GlobalServ.to.precisionResult.value = value.toInt();
+                SettingContrl.to.precisionResult.value = value.toInt();
               }),
         ],
       );

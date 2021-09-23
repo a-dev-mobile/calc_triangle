@@ -1,9 +1,14 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/controller/setting/setting_c.dart';
+import 'package:calc_triangle/app/constant/const_string.dart';
+
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
+import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
-import 'package:calc_triangle/main.dart';
+import 'package:calc_triangle/app/utils/local_torage.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
+import 'package:calc_triangle/app/utils/validation_utils.dart';
+
 import 'package:get/get.dart';
 
 enum ScaleneTriangle {
@@ -18,7 +23,8 @@ enum ScaleneTriangle {
 }
 
 class ScaleneTriangleController extends GetxController {
-    static ScaleneTriangleController get to => Get.find<ScaleneTriangleController>();
+  static ScaleneTriangleController get to =>
+      Get.find<ScaleneTriangleController>();
 
   static const startAngleValue = '0°';
   static const startLengthValue = '0';
@@ -62,9 +68,10 @@ class ScaleneTriangleController extends GetxController {
   var paramLenght = ScaleneTriangle.empty;
 
   int precisionResult = 0;
+  double minSizeImage = 0;
 
   void clickKey(KeySymbol keySymbol) {
-    printt.v('start click ${keySymbol.value}');
+    log.v('start click ${keySymbol.value}');
     printElements();
     // showMessage();
 
@@ -108,24 +115,22 @@ class ScaleneTriangleController extends GetxController {
     }
 
     if (ifMaxNumbeEnter()) {
-      printt.e('return max value');
+      log.e('return max value');
       showMessage();
       return;
     }
 
     // если две точки возврат
     if (isTwoDecimalPointRightTriangle(keySymbol)) {
-      printt.e('isTwoDecimalPointRightTriangle');
+      log.e('isTwoDecimalPointRightTriangle');
 
       return;
     }
 
-    
-
     String newInput = keySymbol.value;
     String oldInput;
     String sumInput;
-    printt.v('start input');
+    log.v('start input');
     if (isaSide.value) {
       oldInput = aSide.value;
 
@@ -204,11 +209,9 @@ class ScaleneTriangleController extends GetxController {
       yAngle.value = sumInput + "°";
     }
     printElements();
-    printt.v('end input');
+    log.v('end input');
     setActiveParam();
     showMessage();
-
-
 
     initValue();
     setActiveParam();
@@ -216,11 +219,11 @@ class ScaleneTriangleController extends GetxController {
     showMessage();
 
     printElements();
-    printt.v('end click ${keySymbol.value}');
+    log.v('end click ${keySymbol.value}');
   }
 
   void printElements() {
-    printt.v('''printElements
+    log.v('''printElements
         ${activeParamMap[1]} ${activeParamMap[2]}
 
         $aSideD ${aSide.value} aSide 
@@ -235,31 +238,31 @@ class ScaleneTriangleController extends GetxController {
 
   bool isTwoDecimalPointRightTriangle(KeySymbol keySymbol) {
     if (isaSide.value) {
-      if (AppUtilsString.isTwoDecimalPoint(aSide.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(aSide.value + keySymbol.value)) {
         return true;
       }
     } else if (isbSide.value) {
-      if (AppUtilsString.isTwoDecimalPoint(bSide.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(bSide.value + keySymbol.value)) {
         return true;
       }
     } else if (iscSide.value) {
-      if (AppUtilsString.isTwoDecimalPoint(cSide.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(cSide.value + keySymbol.value)) {
         return true;
       }
     } else if (ishHeight.value) {
-      if (AppUtilsString.isTwoDecimalPoint(hHeight.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(hHeight.value + keySymbol.value)) {
         return true;
       }
     } else if (isaAngle.value) {
-      if (AppUtilsString.isTwoDecimalPoint(aAngle.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(aAngle.value + keySymbol.value)) {
         return true;
       }
     } else if (isbAngle.value) {
-      if (AppUtilsString.isTwoDecimalPoint(bAngle.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(bAngle.value + keySymbol.value)) {
         return true;
       }
     } else if (isyAngle.value) {
-      if (AppUtilsString.isTwoDecimalPoint(yAngle.value + keySymbol.value)) {
+      if (ValidationUtils.isTwoDecimalPoint(yAngle.value + keySymbol.value)) {
         return true;
       }
     }
@@ -289,7 +292,7 @@ class ScaleneTriangleController extends GetxController {
   }
 
   void initValue() {
-    printt.v('start initValue');
+    log.v('start initValue');
 
     if (isDeg.isFalse) {
       convertDMSToDeg();
@@ -326,7 +329,7 @@ class ScaleneTriangleController extends GetxController {
             double.parse(AppUtilsString.removeLastCharacter(yAngle.value));
       }
     } catch (e) {
-      printt.e('initValue error to double');
+      log.e('initValue error to double');
       resetValue();
       resetActiveParam();
     }
@@ -334,42 +337,42 @@ class ScaleneTriangleController extends GetxController {
   }
 
   void calculate() {
-    printt.i('start calculate');
+    log.i('start calculate');
     printElements();
 
 // проверка если цифры не числа
     checkIfNaN();
     printElements();
-    printt.i('end calculate');
+    log.i('end calculate');
   }
 
   void checkIfNaN() {
-    if (AppUtilsNumber.isNanAndInfinity(aSideD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
       aSide.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(bSideD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(bSideD)) {
       bSide.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(cSideD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(cSideD)) {
       cSide.value = startLengthValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(hHeightD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
     }
 
-    if (AppUtilsNumber.isNanAndInfinity(aAngleD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(bAngleD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
       bAngle.value = startAngleValue;
     }
-    if (AppUtilsNumber.isNanAndInfinity(yAngleD)) {
+    if (ValidationUtils.isNumberNanAndInfinity(yAngleD)) {
       yAngle.value = startAngleValue;
     }
   }
 
   void setActiveParam() {
-    printt.v(
+    log.v(
         'start active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
     var paramAll = ScaleneTriangle.empty;
 
@@ -437,7 +440,7 @@ class ScaleneTriangleController extends GetxController {
       activeParamMap[1] = paramLenght;
     }
 
-    printt.v(
+    log.v(
         'end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
   }
 
@@ -471,7 +474,7 @@ class ScaleneTriangleController extends GetxController {
   }
 
   bool isMaxNumberAfterPoint(String value) {
-    return AppUtilsString.isMoreAccuracy(
+    return ValidationUtils.isMoreAccuracy(
         value, ConstNumber.maxNumberAfterPoint);
   }
 
@@ -656,22 +659,22 @@ class ScaleneTriangleController extends GetxController {
   }
 
   void convertDMSToDeg() {
-    aAngle.value = AppUtilsNumber.convertDMStoDeg(
-        aAngle.value, SettingContrl.to.getStoragePrecisionResults());
-    bAngle.value = AppUtilsNumber.convertDMStoDeg(
-        bAngle.value, SettingContrl.to.getStoragePrecisionResults());
-    yAngle.value = AppUtilsNumber.convertDMStoDeg(
-        yAngle.value, SettingContrl.to.getStoragePrecisionResults());
+    aAngle.value = AppConvert.convertDMStoDeg(
+        aAngle.value, precisionResult);
+    bAngle.value = AppConvert.convertDMStoDeg(
+        bAngle.value, precisionResult);
+    yAngle.value = AppConvert.convertDMStoDeg(
+        yAngle.value, precisionResult);
   }
 
   void convertDegToDMS() {
 // если мы в минутах то переводим углы
-    aAngle.value =
-        AppUtilsNumber.convertDegToDMS(aAngleD, SettingContrl.to.getStoragePrecisionResults());
-    bAngle.value =
-        AppUtilsNumber.convertDegToDMS(bAngleD, SettingContrl.to.getStoragePrecisionResults());
-    yAngle.value =
-        AppUtilsNumber.convertDegToDMS(bAngleD, SettingContrl.to.getStoragePrecisionResults());
+    aAngle.value = AppConvert.convertDegToDMS(
+        aAngleD, precisionResult);
+    bAngle.value = AppConvert.convertDegToDMS(
+        bAngleD, precisionResult);
+    yAngle.value = AppConvert.convertDegToDMS(
+        bAngleD, precisionResult);
   }
 
   void clickConvertDeg() {
@@ -782,7 +785,7 @@ class ScaleneTriangleController extends GetxController {
 
   void clearAll() {
     //устанавливаем начальные значения
-    printt.v(' start clearAll');
+    log.v(' start clearAll');
     printElements();
     resetValue();
 
@@ -790,7 +793,7 @@ class ScaleneTriangleController extends GetxController {
     resetActiveParam();
 
     printElements();
-    printt.v(' end clearAll');
+    log.v(' end clearAll');
   }
 
   void resetValue() {
@@ -855,4 +858,12 @@ class ScaleneTriangleController extends GetxController {
       // }
     }
   }
+
+
+@override
+  Future<void> onInit() async {
+      minSizeImage = await LocalStorage().getItemDouble(ConstString.keyMinSize);
+    super.onInit();
+  }
+
 }
