@@ -162,8 +162,10 @@ class WelcomeBtnStart extends StatelessWidget {
       onPressed: () {
         Get.offAllNamed(Routes.selectShape);
 
-        LocalStorage().setItemBool(
-            ConstString.keyIsFirstStartApp, false);
+// сохраняем если перый запуск
+        if (GlobalServ.to.isFirstStartApp) {
+          LocalStorage().setItemBool(ConstString.keyIsFirstStartApp, false);
+        }
       },
       child: Text(TranslateHelper.launch, style: AppStyleButton.start(context)),
     );

@@ -11,10 +11,10 @@ class LocalStorage {
     log.w('SET $_info > $key = $value');
   }
 
-  Future<String> getItemString(String key) async {
+  Future<String> getItemString(String key, [String defaultValue = '']) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var val = prefs.getString(key);
-    val ??= '';
+    val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
     return val;
@@ -27,10 +27,10 @@ class LocalStorage {
     log.w('SET $_info > $key = $value');
   }
 
-  Future<double> getItemDouble(String key) async {
+  Future<double> getItemDouble(String key, [double defaultValue = 0.0]) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var val = prefs.getDouble(key);
-    val ??= 0.0;
+    val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
     return val;
@@ -43,10 +43,10 @@ class LocalStorage {
     log.w('SET $_info > $key = $value');
   }
 
-  Future<bool> getItemBool(String key) async {
+  Future<bool> getItemBool(String key, [bool defaultValue = false]) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var val = prefs.getBool(key);
-    val ??= false;
+    val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
     return val;
@@ -59,10 +59,10 @@ class LocalStorage {
     log.w('SET $_info > $key = $value');
   }
 
-  Future<int> getItemInt(String key) async {
+  Future<int> getItemInt(String key, [int defaultValue = 0]) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var val = prefs.getInt(key);
-    val ??= 0;
+    val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
     return val;

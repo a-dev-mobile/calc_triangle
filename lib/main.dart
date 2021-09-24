@@ -12,7 +12,7 @@ import 'app/constant/const_string.dart';
 import 'app/translations/app_translations.dart';
 
 import 'app/ui/theme/light_dark_theme.dart';
-import 'app/utils/local_torage.dart';
+
 
 
 void main() async {

@@ -27,6 +27,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class TriangleWidget extends StatelessWidget {
   TriangleWidget({Key? key, required this.activeShape}) : super(key: key);
   final Shape activeShape;
@@ -34,7 +35,7 @@ class TriangleWidget extends StatelessWidget {
   late Widget infoWidget;
 
   dynamic getActiveContr() {
-    logger.i('getActiveContr $activeShape');
+    logger.w('getActiveContr $activeShape');
     switch (activeShape) {
       case Shape.rightTriangle:
         inputWidget = const RightTriangleImageInputWidget();

@@ -21,29 +21,7 @@ class SettingContrl extends GetxController {
     GlobalServ.to.appLocale.value = ConstString.localeEn;
   }
 
-  void setPrecisionResult(int precision) {
-    // if (precisionResult.value == precision) return;
-    precisionResult.value = precision;
-    log.e('setPrecisionResult ${precisionResult.value}');
-    setStoragePrecisionResult(precision);
-
-    // RightTriangleController c = Get.find();
-
-    // //вызов из другого контроллера для обновления точности результата расчета
-    // c.precisionResult = precision;
-    // c.calculate();
-  }
-
   // =====================================
-  Future<int> getStoragePrecisionResults() async {
-    var value = await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
-    precisionResult.value = value;
-    return value.toInt();
-  }
-
-  Future<void> setStoragePrecisionResult(int value) async {
-    await LocalStorage().setItemInt(ConstString.keyPrecisionResult, value);
-  }
 
   // =====================================
   void setDarkTheme() {
@@ -80,22 +58,16 @@ class SettingContrl extends GetxController {
 
   @override
   Future<void> onInit() async {
+    if(!GlobalServ.to.isFirstStartApp){
     precisionResult.value =
         await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
-
+  }
     super.onInit();
   }
 
   @override
   void onClose() async {
-    LocalStorage().setItemBool(ConstString.keyIsShowLaunchScreen,
-        GlobalServ.to.isShowLaunchScreen.value);
-    LocalStorage()
-        .setItemString(ConstString.keyLocaleApp, GlobalServ.to.appLocale.value);
-    LocalStorage().setItemBool(
-        ConstString.keyIsDarkTheme, GlobalServ.to.isDarkTheme.value);
-    LocalStorage()
-        .setItemInt(ConstString.keyPrecisionResult, precisionResult.value);
+    GlobalServ.to.startIfCloseApp();
     super.onClose();
   }
 }

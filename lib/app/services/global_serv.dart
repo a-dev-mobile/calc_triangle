@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +18,6 @@ class GlobalServ extends GetxService {
   var isShowLaunchScreen = false.obs;
 
 // ========================================
-
 
   void setStorageIsDarkTheme(bool isDark) async {
     isDarkTheme.value = isDark;
@@ -45,11 +45,24 @@ class GlobalServ extends GetxService {
     isShowLaunchScreen.value = !isShowLaunchScreen.value;
   }
 
+  void startIfCloseApp() async {
+    LocalStorage().setItemBool(ConstString.keyIsShowLaunchScreen,
+        GlobalServ.to.isShowLaunchScreen.value);
+    LocalStorage()
+        .setItemString(ConstString.keyLocaleApp, GlobalServ.to.appLocale.value);
+    LocalStorage().setItemBool(
+        ConstString.keyIsDarkTheme, GlobalServ.to.isDarkTheme.value);
+    LocalStorage().setItemInt(
+        ConstString.keyPrecisionResult, SettingContrl.to.precisionResult.value);
+  }
+
   @override
   void onInit() async {
-        logger.d('onInit global service');
+    logger.d('onInit global service');
+
     bool isNullFirstStartApp =
         await LocalStorage().isNull(ConstString.keyIsFirstStartApp);
+
     // если первый запуск
     if (isNullFirstStartApp) {
       isFirstStartApp = true;
@@ -58,6 +71,7 @@ class GlobalServ extends GetxService {
       setDefaultLocale();
     } else {
       // устанавливаем если не первый запуск
+      isFirstStartApp = false;
       isShowLaunchScreen.value =
           await LocalStorage().getItemBool(ConstString.keyIsShowLaunchScreen);
       appLocale.value =
@@ -68,52 +82,4 @@ class GlobalServ extends GetxService {
 
     super.onInit();
   }
-
-
 }
-
-class LifecycleEventHandler extends WidgetsBindingObserver {
-  LifecycleEventHandler({required this.resumeCallBack, required this.suspendingCallBack});
-
-  final AsyncCallback  resumeCallBack;
-  final AsyncCallback  suspendingCallBack;
-
-//  @override
-//  Future<bool> didPopRoute()
-
-//  @override
-//  void didHaveMemoryPressure()
-
-  @override
-  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
-    switch (state) {
-    case AppLifecycleState.resumed:
-        await resumeCallBack();
-        break;
-      case AppLifecycleState.inactive:
-      case AppLifecycleState.paused:
-      case AppLifecycleState.detached:
-        await suspendingCallBack();
-        break;
-    }
-    log.e('''
-=============================================================
-               $state
-=============================================================
-''');
-  }
-
-//  @override
-//  void didChangeLocale(Locale locale)
-
-//  @override
-//  void didChangeTextScaleFactor()
-
-//  @override
-//  void didChangeMetrics();
-
-//  @override
-//  Future<bool> didPushRoute(String route)
-}
-
-
