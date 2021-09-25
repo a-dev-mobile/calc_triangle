@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_number.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/a_angle_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/a_cathet_w.dart';
@@ -20,8 +21,6 @@ class RightTriangleImageInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String pathAsset = ConstAssets.rightTriangleInput;
-    
     var size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height * ConstNumber.ratioFigureImage,
@@ -29,7 +28,9 @@ class RightTriangleImageInputWidget extends StatelessWidget {
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
 
-        AppUtils.setImageMinSize(minSize);
+// сохраняем в глоб переменные
+        GlobalServ.to.minSizeSide = minSize;
+
 
         return Stack(
           alignment: Alignment.center,
@@ -38,7 +39,7 @@ class RightTriangleImageInputWidget extends StatelessWidget {
               child: Image(
                 fit: BoxFit.contain,
                 color: AppColors.text(context),
-                image: AssetImage(pathAsset),
+                image: const AssetImage(ConstAssets.rightTriangleInput),
               ),
             ),
             //all widget text in image

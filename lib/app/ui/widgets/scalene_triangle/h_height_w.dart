@@ -5,6 +5,7 @@ import 'dart:math';
 
 
 import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class HheightWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ScaleneTriangleController c = Get.find();
 
-double minSize = ScaleneTriangleController.to.minSizeImage;
+    double minSize = GlobalServ.to.minSizeSide;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;

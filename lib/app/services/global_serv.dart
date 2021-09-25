@@ -16,7 +16,7 @@ class GlobalServ extends GetxService {
   var isFirstStartApp = false;
   var appLocale = ConstString.localeEn.obs;
   var isShowLaunchScreen = false.obs;
-
+  late double minSizeSide;
 // ========================================
 
   void setStorageIsDarkTheme(bool isDark) async {

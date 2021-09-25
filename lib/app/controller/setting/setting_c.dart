@@ -3,7 +3,6 @@ import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -58,16 +57,17 @@ class SettingContrl extends GetxController {
 
   @override
   Future<void> onInit() async {
-    if(!GlobalServ.to.isFirstStartApp){
-    precisionResult.value =
-        await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
-  }
+    if (!GlobalServ.to.isFirstStartApp) {
+      precisionResult.value =
+          await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
+    }
     super.onInit();
   }
 
   @override
   void onClose() async {
     GlobalServ.to.startIfCloseApp();
+
     super.onClose();
   }
 }

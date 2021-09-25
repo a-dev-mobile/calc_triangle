@@ -1,13 +1,17 @@
 // ignore_for_file: avoid_print, invalid_use_of_protected_member
 
-
+import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
+import 'package:calc_triangle/app/utils/local_torage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+
+late var c = RightTriangleController.to;
 
 class AangleWidget extends StatelessWidget {
   const AangleWidget({Key? key, required this.posX, required this.posY})
@@ -18,9 +22,7 @@ class AangleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
-
-    double minSize = RightTriangleController.to.minSizeImage;
+    double minSize = GlobalServ.to.minSizeSide;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;

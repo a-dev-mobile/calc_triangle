@@ -4,6 +4,7 @@ import 'dart:math';
 
 
 import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class McompCside extends StatelessWidget {
   Widget build(BuildContext context) {
     RightTriangleController c = Get.find();
 
-    double minSize = RightTriangleController.to.minSizeImage;
+    double minSize = GlobalServ.to.minSizeSide;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;

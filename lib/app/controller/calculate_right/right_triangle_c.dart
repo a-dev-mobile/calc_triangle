@@ -1,5 +1,6 @@
 import 'package:calc_triangle/app/constant/const_number.dart';
 import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
@@ -32,11 +33,7 @@ class RightTriangleController extends GetxController {
   static const startAngleValue = '0°';
   static const startLengthValue = '0';
 
-  var activeParamMap = <int, RightTriangle>{
-    1:RightTriangle.empty,
-    2:RightTriangle.empty,
-    3:RightTriangle.empty
-       
+  var activeParamMap = <int, RightTriangle>{      
     }.obs;
 
   var aAngle = startAngleValue.obs;
@@ -82,13 +79,13 @@ class RightTriangleController extends GetxController {
 
   @override
   void onInit() async {
-    // precisionResult = c.precisionResult.value;
+    // precisionResult = GlobalServ.to.precisionResult.value;
     showSnack(TranslateHelper.enterTwoParameters);
     precisionResult =
         await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
     minSizeImage = await LocalStorage().getItemDouble(ConstString.keyMinSize);
 
-    // clearAll();
+    clearAll();
     super.onInit();
   }
 
