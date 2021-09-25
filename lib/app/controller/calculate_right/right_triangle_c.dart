@@ -32,7 +32,12 @@ class RightTriangleController extends GetxController {
   static const startAngleValue = '0°';
   static const startLengthValue = '0';
 
-  var activeParamMap = <int, RightTriangle>{}.obs;
+  var activeParamMap = <int, RightTriangle>{
+    1:RightTriangle.empty,
+    2:RightTriangle.empty,
+    3:RightTriangle.empty
+       
+    }.obs;
 
   var aAngle = startAngleValue.obs;
   var aCathet = startLengthValue.obs;

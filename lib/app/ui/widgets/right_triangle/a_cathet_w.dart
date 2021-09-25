@@ -1,6 +1,5 @@
-// ignore_for_file: avoid_print, invalid_use_of_protected_member
 
-import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class AcathetWidget extends StatelessWidget {
         child: Obx(() {
           isActiveInput = c.isaCathet.value;
           isActiveParam =
-              c.activeParamMap.value.containsValue(RightTriangle.aCathet);
+              c.activeParamMap.containsValue(RightTriangle.aCathet);
           if (isActiveInput) {
             styleText = AppStyleTextImage.activeInput(context);
           } else if (isActiveParam) {

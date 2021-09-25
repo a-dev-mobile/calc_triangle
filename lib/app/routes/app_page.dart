@@ -1,8 +1,10 @@
-import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
-import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
 
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
-import 'package:calc_triangle/app/ui/pages/calculate/calculate_p.dart';
+import 'package:calc_triangle/app/ui/pages/calculate_right/calculate_admob_right_p.dart';
+import 'package:calc_triangle/app/ui/pages/calculate_scalene/calculate_scalene_p.dart';
+
 import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
 
 import 'package:calc_triangle/app/ui/pages/setting/setting_p.dart';
@@ -10,13 +12,12 @@ import 'package:calc_triangle/app/ui/pages/setting/setting_p.dart';
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
 import 'package:get/get.dart';
 
-// ignore_for_file: constant_identifier_names
-
 abstract class Routes {
   static const initial = welcome;
   static const welcome = '/welcome';
   static const selectShape = '/selectShape';
-  static const calculate = '/calculate';
+  static const calculateRight = '/calculateRight';
+  static const calculateScalene = '/calculateScalene';
   static const setting = '/setting';
 }
 
@@ -29,16 +30,20 @@ class AppPage {
           Get.put<SettingContrl>(SettingContrl());
         })),
     GetPage(
-        name: Routes.selectShape,
-        page: () => const SelectShapePage(),),
-       
+      name: Routes.selectShape,
+      page: () => const SelectShapePage(),
+    ),
     GetPage(
-        name: Routes.calculate,
-        page: () => const CalculatePage(),
+        name: Routes.calculateRight,
+        page: () => const CalculateRightPage(),
         binding: BindingsBuilder(() {
-          Get.lazyPut<RightTriangleController>(() => RightTriangleController());
-          Get.lazyPut<ScaleneTriangleController>(
-              () => ScaleneTriangleController());
+          Get.put<RightTriangleController>(RightTriangleController());
+        })),
+    GetPage(
+        name: Routes.calculateScalene,
+        page: () => const CalculateScalenePage(),
+        binding: BindingsBuilder(() {
+          Get.put<ScaleneTriangleController>(ScaleneTriangleController());
         })),
     GetPage(
         name: Routes.setting,

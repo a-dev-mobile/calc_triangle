@@ -5,8 +5,8 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomMessageBar extends StatelessWidget {
-  const CustomMessageBar({Key? key, required this.message}) : super(key: key);
+class CustomMessageView extends StatelessWidget {
+  const CustomMessageView({Key? key, required this.message}) : super(key: key);
   final String message;
 
   @override

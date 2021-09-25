@@ -1,5 +1,5 @@
-import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
-import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
 import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
 
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
@@ -8,17 +8,15 @@ import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-var rightTriangleController = RightTriangleController.to;
-var scaleneTriangleController = ScaleneTriangleController.to;
-late Shape activeShape;
+var c = ScaleneTriangleController.to;
 
-class NumPad extends StatelessWidget {
-  const NumPad({Key? key, required this.selectShape}) : super(key: key);
-  final Shape selectShape;
+class NumPadScaleneWidget extends StatelessWidget {
+  const NumPadScaleneWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    activeShape = selectShape;
     return Column(
       children: [
         Expanded(
@@ -80,7 +78,7 @@ class CalculatorKey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // logger.i(symbol.value,symbol.type);
+    // printt.i(symbol.value,symbol.type);
     TextStyle textStyle;
     switch (symbol.type) {
       case KeyType.function:
@@ -100,32 +98,15 @@ class CalculatorKey extends StatelessWidget {
     return Expanded(
       child: TextButton(
         onLongPress: () {
-          if (symbol == Keys.backspace) longPressBackspace();
+          if (symbol == Keys.backspace) {
+            c.longBackspace();
+          }
         },
         onPressed: () {
-          onPresed();
+          c.clickKey(symbol);
         },
         child: Text(symbol.value, style: textStyle),
       ),
     );
-  }
-
-  void longPressBackspace() {
-    // var activeShape = selectShapeController.activeShape;
-
-    // if (activeShape == Shape.rightTriangle) {
-    //   rightTriangleController.longBackspace();
-    // } else if (activeShape == Shape.scaleneTriangle) {
-    //   scaleneTriangleController.longBackspace();
-    // }
-  }
-
-  void onPresed() {
-    logger.i(' onPresed $activeShape');
-    if (activeShape == Shape.rightTriangle) {
-      rightTriangleController.clickKey(symbol);
-    } else if (activeShape == Shape.scaleneTriangle) {
-      scaleneTriangleController.clickKey(symbol);
-    }
   }
 }

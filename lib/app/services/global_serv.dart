@@ -4,8 +4,8 @@ import 'package:calc_triangle/app/constant/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+
+
 
 import 'package:get/get.dart';
 

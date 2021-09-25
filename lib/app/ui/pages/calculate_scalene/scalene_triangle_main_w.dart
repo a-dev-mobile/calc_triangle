@@ -1,21 +1,22 @@
 import 'package:calc_triangle/app/constant/const_assets.dart';
 import 'package:calc_triangle/app/constant/const_color.dart';
-import 'package:calc_triangle/app/controller/calculate/right_triangle_c.dart';
-import 'package:calc_triangle/app/controller/calculate/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
+
 
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
+
 import 'package:calc_triangle/app/ui/theme/app_color.dart';
 import 'package:calc_triangle/app/ui/theme/app_size.dart';
 import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 
-import 'package:calc_triangle/app/ui/widgets/numpad/numpad_w.dart';
 import 'package:calc_triangle/app/ui/widgets/other/image_info_w.dart';
-import 'package:calc_triangle/app/ui/widgets/right_triangle/r_t_image_input_w.dart';
-import 'package:calc_triangle/app/ui/widgets/scalene_triangle/s_t_image_input_w.dart';
+
+import 'package:calc_triangle/app/ui/widgets/scalene_triangle/numpad_scalene_w.dart';
+import 'package:calc_triangle/app/ui/widgets/scalene_triangle/scalene_triangle_image_input_w.dart';
+
 import 'package:calc_triangle/app/ui/widgets/snackbar/custom_snakbar_w.dart';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
@@ -27,37 +28,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-// ignore: must_be_immutable
-class TriangleWidget extends StatelessWidget {
-  TriangleWidget({Key? key, required this.activeShape}) : super(key: key);
-  final Shape activeShape;
-  late Widget inputWidget;
-  late Widget infoWidget;
+late var c = ScaleneTriangleController.to;
 
-  dynamic getActiveContr() {
-    logger.w('getActiveContr $activeShape');
-    switch (activeShape) {
-      case Shape.rightTriangle:
-        inputWidget = const RightTriangleImageInputWidget();
-        infoWidget = const ImageInfoWidget(
-          pathAsset: ConstAssets.rightTriangleInfo,
-        );
-        return RightTriangleController.to;
-
-      case Shape.scaleneTriangle:
-        inputWidget = const ScaleneTriangleImageInputWidget();
-        infoWidget = const ImageInfoWidget(
-          pathAsset: ConstAssets.scaleneTriangleInfo,
-        );
-        return ScaleneTriangleController.to;
-      default:
-    }
-  }
+class ScaleneTriangleMainWidget extends StatelessWidget {
+  const ScaleneTriangleMainWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String patchAssetInfo = ConstAssets.scaleneTriangleInfo;
+
+
     final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
-    var c = getActiveContr();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarIconBrightness:
@@ -85,7 +66,9 @@ class TriangleWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Obx(() {
-                    return c.isActiveImageInfo.value ? infoWidget : inputWidget;
+                    return c.isActiveImageInfo.value
+                        ? ImageInfoWidget(pathAsset: patchAssetInfo)
+                        : const ScaleneTriangleImageInputWidget();
                   }),
                   Obx(() {
                     return Visibility(
@@ -151,7 +134,8 @@ class TriangleWidget extends StatelessWidget {
                     // показ если что то не то))
                     return Visibility(
                       visible: c.isActiveSnackBar.value,
-                      child: CustomMessageBar(message: c.messageSnackBar.value),
+                      child:
+                          CustomMessageView(message: c.messageSnackBar.value),
                     );
                   }),
                   Expanded(
@@ -160,9 +144,7 @@ class TriangleWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: AppColors.content(context),
                       ),
-                      child: NumPad(
-                        selectShape: activeShape,
-                      ),
+                      child: const NumPadScaleneWidget(),
                     ),
                   ),
                 ],
