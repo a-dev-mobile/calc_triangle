@@ -15,22 +15,22 @@ import 'package:get/get.dart';
 
 class YangleWidget extends StatelessWidget {
   const YangleWidget(
-      {Key? key, required this.posX, required this.posY, required this.angle})
+     {Key? key, required this.posX, required this.posY, required this.angle, required this.minSizeImage})
       : super(key: key);
 
   final double posX;
   final double posY;
   final double angle;
+  final double minSizeImage;
   @override
   Widget build(BuildContext context) {
     ScaleneTriangleController c = Get.find();
 
-    double minSize = GlobalServ.to.minSizeSide;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;
     return Transform.translate(
-        offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
+        offset: Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Transform.rotate(
             angle: angle * pi / 180,
             child: Obx(() {

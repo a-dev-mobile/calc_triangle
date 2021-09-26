@@ -39,6 +39,8 @@ class ScaleneTriangleController extends GetxController {
   var cSide = startLengthValue.obs;
   var hHeight = startLengthValue.obs;
 
+
+
   var area = "".obs;
   var perimeter = "".obs;
 
@@ -659,22 +661,16 @@ class ScaleneTriangleController extends GetxController {
   }
 
   void convertDMSToDeg() {
-    aAngle.value = AppConvert.convertDMStoDeg(
-        aAngle.value, precisionResult);
-    bAngle.value = AppConvert.convertDMStoDeg(
-        bAngle.value, precisionResult);
-    yAngle.value = AppConvert.convertDMStoDeg(
-        yAngle.value, precisionResult);
+    aAngle.value = AppConvert.convertDMStoDeg(aAngle.value, precisionResult);
+    bAngle.value = AppConvert.convertDMStoDeg(bAngle.value, precisionResult);
+    yAngle.value = AppConvert.convertDMStoDeg(yAngle.value, precisionResult);
   }
 
   void convertDegToDMS() {
 // если мы в минутах то переводим углы
-    aAngle.value = AppConvert.convertDegToDMS(
-        aAngleD, precisionResult);
-    bAngle.value = AppConvert.convertDegToDMS(
-        bAngleD, precisionResult);
-    yAngle.value = AppConvert.convertDegToDMS(
-        bAngleD, precisionResult);
+    aAngle.value = AppConvert.convertDegToDMS(aAngleD, precisionResult);
+    bAngle.value = AppConvert.convertDegToDMS(bAngleD, precisionResult);
+    yAngle.value = AppConvert.convertDegToDMS(bAngleD, precisionResult);
   }
 
   void clickConvertDeg() {
@@ -859,11 +855,14 @@ class ScaleneTriangleController extends GetxController {
     }
   }
 
-
-@override
+  @override
   Future<void> onInit() async {
-      minSizeImage = await LocalStorage().getItemDouble(ConstString.keyMinSize);
+
     super.onInit();
   }
+  @override
+  void onClose() {
 
+    super.onClose();
+  }
 }

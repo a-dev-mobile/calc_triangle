@@ -29,8 +29,6 @@ class RightTriangleImageInputWidget extends StatelessWidget {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
 
 // сохраняем в глоб переменные
-        GlobalServ.to.minSizeSide = minSize;
-
 
         return Stack(
           alignment: Alignment.center,
@@ -44,14 +42,51 @@ class RightTriangleImageInputWidget extends StatelessWidget {
             ),
             //all widget text in image
 
-            const HheightWidget(angle: -45, posX: -18.225, posY: 18.225),
-            const KcompCside(angle: 45, posX: -12.994, posY: -23.456),
-            const McompCside(angle: 45, posX: 23.456, posY: 12.994),
-            const BangleWidget(posX: -20.573, posY: 0),
-            const AangleWidget(posX: -3.0, posY: 23.943),
-            const BcathetWidget(angle: -90, posX: -43.845, posY: 0),
-            const AcathetWidget(posX: 0, posY: 43.545),
-            const ChypotenuseWidget(angle: 45, posX: 11.093, posY: -11.093),
+            HheightWidget(
+              angle: -45,
+              posX: -18.225,
+              posY: 18.225,
+              minSizeImage: minSize,
+            ),
+            KcompCside(
+              angle: 45,
+              posX: -12.994,
+              posY: -23.456,
+              minSizeImage: minSize,
+            ),
+            McompCside(
+              angle: 45,
+              posX: 23.456,
+              posY: 12.994,
+              minSizeImage: minSize,
+            ),
+            BangleWidget(
+              posX: -20.573,
+              posY: 0,
+              minSizeImage: minSize,
+            ),
+            AangleWidget(
+              posX: -3.0,
+              posY: 23.943,
+              minSizeImage: minSize,
+            ),
+            BcathetWidget(
+              angle: -90,
+              posX: -43.845,
+              posY: 0,
+              minSizeImage: minSize,
+            ),
+            AcathetWidget(
+              posX: 0,
+              posY: 43.545,
+              minSizeImage: minSize,
+            ),
+            ChypotenuseWidget(
+              angle: 45,
+              posX: 11.093,
+              posY: -11.093,
+              minSizeImage: minSize,
+            ),
           ],
         );
       }),

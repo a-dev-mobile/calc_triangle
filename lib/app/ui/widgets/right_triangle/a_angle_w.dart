@@ -11,23 +11,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late var c = RightTriangleController.to;
+late RightTriangleController c = RightTriangleController.to;
 
 class AangleWidget extends StatelessWidget {
-  const AangleWidget({Key? key, required this.posX, required this.posY})
+  const AangleWidget(
+      {Key? key,
+      required this.posX,
+      required this.posY,
+      required this.minSizeImage})
       : super(key: key);
 
   final double posX;
   final double posY;
 
+  final double minSizeImage;
+
   @override
   Widget build(BuildContext context) {
-    double minSize = GlobalServ.to.minSizeSide;
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;
     return Transform.translate(
-        offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
+        offset:
+            Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Obx(() {
           isActiveInput = c.isaAngle.value;
           isActiveParam =

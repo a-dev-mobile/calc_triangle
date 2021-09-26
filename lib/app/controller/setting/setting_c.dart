@@ -66,8 +66,9 @@ class SettingContrl extends GetxController {
 
   @override
   void onClose() async {
-    GlobalServ.to.startIfCloseApp();
-
+    GlobalServ.to.startIfCloseSetiing();
+    //сохранил чтобы локально не считывать
+    GlobalServ.to.precisionResult = precisionResult.value;
     super.onClose();
   }
 }

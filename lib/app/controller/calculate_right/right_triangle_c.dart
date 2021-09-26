@@ -30,11 +30,11 @@ enum RightTriangle {
 
 class RightTriangleController extends GetxController {
   static RightTriangleController get to => Get.find<RightTriangleController>();
+
   static const startAngleValue = '0°';
   static const startLengthValue = '0';
 
-  var activeParamMap = <int, RightTriangle>{      
-    }.obs;
+  var activeParamMap = <int, RightTriangle>{}.obs;
 
   var aAngle = startAngleValue.obs;
   var aCathet = startLengthValue.obs;
@@ -47,7 +47,6 @@ class RightTriangleController extends GetxController {
 
   var area = "".obs;
   var perimeter = "".obs;
-  double minSizeImage = 0;
 
   var aAngleD = 0.0;
   var aCathetD = 0.0;
@@ -77,16 +76,54 @@ class RightTriangleController extends GetxController {
 
   int precisionResult = 0;
 
-  @override
-  void onInit() async {
+@override
+  void onReady() {
+         log.i(' right onReady');
+    // closeStreem();
+    clearAll();
     // precisionResult = GlobalServ.to.precisionResult.value;
     showSnack(TranslateHelper.enterTwoParameters);
-    precisionResult =
-        await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
-    minSizeImage = await LocalStorage().getItemDouble(ConstString.keyMinSize);
+    
+
+
+    super.onReady();
+  }
+
+  @override
+  void onInit()  {
+     log.i(' right onInit');
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    log.i(' right onClose');
+    // closeStreem();
 
     clearAll();
-    super.onInit();
+    super.onClose();
+  }
+
+  void closeStreem() {
+    aAngle.close();
+
+    aCathet.close();
+    bAngle.close();
+    bCathet.close();
+    cHypotenuse.close();
+    hHeight.close();
+    kCompCside.close();
+    mCompCside.close();
+
+    isDeg.close();
+    isaAngle.close();
+    isaCathet.close();
+    isbAngle.close();
+    isbCathet.close();
+    iscHypotenuse.close();
+    ishHeight.close();
+    iskCompCside.close();
+    ismCompCside.close();
   }
 
   void clickKey(KeySymbol keySymbol) {
@@ -1585,6 +1622,7 @@ class RightTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
+    print('next');
     if (isNext) {
       if (isaCathet.value) {
         isbCathet.value = true;

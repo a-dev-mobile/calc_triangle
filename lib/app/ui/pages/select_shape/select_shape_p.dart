@@ -40,7 +40,7 @@ class SelectShapePage extends StatelessWidget {
                       // SelectShapeController.to.initWidgetControllerPath();
                       logger.i(
                           'Get.offAllNamed(Routes.calculate, arguments: Shape.rightTriangle);');
-                      Get.offNamed(Routes.calculateRight);
+                      Get.toNamed(Routes.calculateRight);
                     },
                     child: const ImageInfoWidget(
                         pathAsset: ConstAssets.rightTriangleInfo)),
@@ -48,7 +48,7 @@ class SelectShapePage extends StatelessWidget {
                     onTap: () {
                       logger.i(
                           'Get.offAllNamed(Routes.calculate, arguments: Shape.scaleneTriangle);');
-                      Get.offNamed(Routes.calculateScalene);
+                     Get.toNamed(Routes.calculateScalene);
                     },
                     child: const ImageInfoWidget(
                         pathAsset: ConstAssets.scaleneTriangleInfo)),

@@ -25,8 +25,7 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
 
-        AppUtils.setImageMinSize(minSize);
-
+       
         return Stack(
           alignment: Alignment.center,
           children: [
@@ -39,7 +38,7 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
             ),
             //all widget text in image
 
-            const HheightWidget(angle: -90, posX: -16.503, posY: 7.051),
+            HheightWidget(angle: -90, posX: -16.503, posY: 7.051, minSizeImage: minSize,),
             // const HheightWidget(angle: -45, posX: -18.225, posY: 18.225),
             // const KcompCside(angle: 45, posX: -12.994, posY: -23.456),
             // const McompCside(angle: 45, posX: 23.456, posY: 12.994),

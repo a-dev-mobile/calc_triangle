@@ -9,23 +9,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-
+late RightTriangleController c = RightTriangleController.to;
 class BangleWidget extends StatelessWidget {
-  const BangleWidget({Key? key, required this.posX, required this.posY})
+  const BangleWidget(      {Key? key, required this.posX, required this.posY, required this.minSizeImage})
       : super(key: key);
 
   final double posX;
   final double posY;
 
+  final double minSizeImage;
+
   @override
   Widget build(BuildContext context) {
-    RightTriangleController c = Get.find();
-    double minSize = GlobalServ.to.minSizeSide;
+
+
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;
     return Transform.translate(
-        offset: Offset((posX / 100) * minSize, (posY / 100) * minSize),
+        offset: Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Obx(() {
           isActiveInput = c.isbAngle.value;
           isActiveParam =

@@ -16,7 +16,10 @@ class GlobalServ extends GetxService {
   var isFirstStartApp = false;
   var appLocale = ConstString.localeEn.obs;
   var isShowLaunchScreen = false.obs;
-  late double minSizeSide;
+
+  //что бы не доставать локально, сохраним в глоб сервисе
+
+  late int precisionResult;
 // ========================================
 
   void setStorageIsDarkTheme(bool isDark) async {
@@ -45,7 +48,7 @@ class GlobalServ extends GetxService {
     isShowLaunchScreen.value = !isShowLaunchScreen.value;
   }
 
-  void startIfCloseApp() async {
+  void startIfCloseSetiing() async {
     LocalStorage().setItemBool(ConstString.keyIsShowLaunchScreen,
         GlobalServ.to.isShowLaunchScreen.value);
     LocalStorage()
@@ -54,6 +57,7 @@ class GlobalServ extends GetxService {
         ConstString.keyIsDarkTheme, GlobalServ.to.isDarkTheme.value);
     LocalStorage().setItemInt(
         ConstString.keyPrecisionResult, SettingContrl.to.precisionResult.value);
+
   }
 
   @override
