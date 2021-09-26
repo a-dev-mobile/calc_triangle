@@ -1,14 +1,12 @@
-import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
-import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/1/calculate_ad_p.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/right_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 
-import 'package:calc_triangle/app/controller/setting/setting_c.dart';
-import 'package:calc_triangle/app/ui/pages/calculate_right/calculate_admob_right_p.dart';
-import 'package:calc_triangle/app/ui/pages/calculate_scalene/calculate_scalene_p.dart';
+import 'package:calc_triangle/app/features/setting/controller/setting_c.dart';
+import 'package:calc_triangle/app/features/setting/view/setting_p.dart';
+import 'package:calc_triangle/app/features/welcome/views/welcome_p.dart';
 
-import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
-
-import 'package:calc_triangle/app/ui/pages/setting/setting_p.dart';
-import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
 
 
 import 'package:get/get.dart';
@@ -36,16 +34,15 @@ class AppPage {
     ),
     GetPage(
         name: Routes.calculate,
-        page: () => const CalculateRightPage(),
+        page: () => CalculatePage(),
         binding: BindingsBuilder(() {
-          Get.put<RightTriangleController>(RightTriangleController());
+
+   Get.lazyPut<RightTriangleController>(() => RightTriangleController());
+   Get.lazyPut<ScaleneTriangleController>(() => ScaleneTriangleController());
+
+
         })),
-    GetPage(
-        name: Routes.calculateScalene,
-        page: () => const CalculateScalenePage(),
-        binding: BindingsBuilder(() {
-          Get.put<ScaleneTriangleController>(ScaleneTriangleController());
-        })),
+  
     GetPage(
         name: Routes.setting,
         page: () => const SettingPage(),

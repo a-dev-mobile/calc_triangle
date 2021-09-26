@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:calc_triangle/app/constants/const_string.dart';
-import 'package:calc_triangle/app/controller/setting/setting_c.dart';
+import 'package:calc_triangle/app/features/setting/controller/setting_c.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 

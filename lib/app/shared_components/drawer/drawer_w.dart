@@ -6,7 +6,7 @@ import 'package:calc_triangle/app/constants/const_string.dart';
 
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
+import 'package:calc_triangle/app/features/welcome/views/page/welcome_p.dart';
 
 
 
