@@ -1,5 +1,5 @@
-import 'package:calc_triangle/app/constant/const_color.dart';
-import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/constants/const_color.dart';
+import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 

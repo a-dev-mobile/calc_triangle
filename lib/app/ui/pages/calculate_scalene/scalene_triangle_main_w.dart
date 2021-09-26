@@ -1,16 +1,17 @@
-import 'package:calc_triangle/app/constant/const_assets.dart';
-import 'package:calc_triangle/app/constant/const_color.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_size.dart';
+import 'package:calc_triangle/app/config/theme/app_style.dart';
+import 'package:calc_triangle/app/constants/const_assets.dart';
+import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
 
-
 import 'package:calc_triangle/app/services/global_serv.dart';
+import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
+import 'package:calc_triangle/app/shared_components/drawer/drawer_w.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_size.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
-import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
+
+
 
 import 'package:calc_triangle/app/ui/widgets/other/image_info_w.dart';
 
@@ -21,6 +22,7 @@ import 'package:calc_triangle/app/ui/widgets/snackbar/custom_snakbar_w.dart';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -35,8 +37,7 @@ class ScaleneTriangleMainWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String patchAssetInfo = ConstAssets.scaleneTriangleInfo;
-
+    String patchAssetInfo = ConstImageRaster.scaleneTriangleInfo;
 
     final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 

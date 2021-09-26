@@ -1,9 +1,9 @@
-import 'package:calc_triangle/app/constant/const_color.dart';
+import 'package:calc_triangle/app/constants/const_color.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-/* 
+/*
 SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarIconBrightness:
             isDarkTheme.value ? Brightness.light : Brightness.dark,
@@ -16,7 +16,6 @@ SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         ));
 
 */
-
 
 ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(

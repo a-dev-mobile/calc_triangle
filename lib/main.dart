@@ -1,4 +1,4 @@
-import 'package:calc_triangle/app/routes/app_page.dart';
+
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:flutter/material.dart';
@@ -8,10 +8,10 @@ import 'package:get/get.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'app/constant/const_string.dart';
+import 'app/config/routes/app_page.dart';
+import 'app/config/theme/light_dark_theme.dart';
+import 'app/constants/const_string.dart';
 import 'app/translations/app_translations.dart';
-
-import 'app/ui/theme/light_dark_theme.dart';
 
 
 
@@ -21,8 +21,6 @@ void main() async {
 
   MobileAds.instance.initialize();
   Get.putAsync<GlobalServ>(() async => GlobalServ());
-
-
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {

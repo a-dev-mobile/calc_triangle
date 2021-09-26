@@ -1,24 +1,25 @@
-import 'package:calc_triangle/app/constant/const_assets.dart';
-import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/config/routes/app_page.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_size.dart';
+import 'package:calc_triangle/app/config/theme/app_style.dart';
+import 'package:calc_triangle/app/constants/const_assets.dart';
+import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 
-import 'package:calc_triangle/app/routes/app_page.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_size.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
+import 'package:calc_triangle/app/ui/widgets/other/change_theme_w.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../widgets/other/change_theme_w.dart';
+
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -138,7 +139,7 @@ class ImageAppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      ConstAssets.rightTriangleInfo,
+      ConstImageRaster.rightTriangleInfo,
       fit: BoxFit.contain,
       color: AppColors.contentRevers(context),
 

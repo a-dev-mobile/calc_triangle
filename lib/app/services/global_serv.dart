@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
-
-
 
 import 'package:get/get.dart';
 
@@ -57,7 +55,6 @@ class GlobalServ extends GetxService {
         ConstString.keyIsDarkTheme, GlobalServ.to.isDarkTheme.value);
     LocalStorage().setItemInt(
         ConstString.keyPrecisionResult, SettingContrl.to.precisionResult.value);
-
   }
 
   @override

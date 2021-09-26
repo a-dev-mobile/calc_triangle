@@ -1,15 +1,20 @@
-
+import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
-import 'package:calc_triangle/app/services/global_serv.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-   late RightTriangleController c = RightTriangleController.to;
+
+late RightTriangleController c = RightTriangleController.to;
+
 class AcathetWidget extends StatelessWidget {
-  const AcathetWidget(      {Key? key, required this.posX, required this.posY,  required this.minSizeImage})
+  const AcathetWidget(
+      {Key? key,
+      required this.posX,
+      required this.posY,
+      required this.minSizeImage})
       : super(key: key);
 
   final double posX;
@@ -19,17 +24,15 @@ class AcathetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;
     return Transform.translate(
-        offset: Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
+        offset:
+            Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Obx(() {
           isActiveInput = c.isaCathet.value;
-          isActiveParam =
-              c.activeParamMap.containsValue(RightTriangle.aCathet);
+          isActiveParam = c.activeParamMap.containsValue(RightTriangle.aCathet);
           if (isActiveInput) {
             styleText = AppStyleTextImage.activeInput(context);
           } else if (isActiveParam) {

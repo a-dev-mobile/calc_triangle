@@ -2,11 +2,9 @@
 
 import 'dart:math';
 
-
-
+import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
-import 'package:calc_triangle/app/services/global_serv.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +13,11 @@ import 'package:get/get.dart';
 
 class YangleWidget extends StatelessWidget {
   const YangleWidget(
-     {Key? key, required this.posX, required this.posY, required this.angle, required this.minSizeImage})
+      {Key? key,
+      required this.posX,
+      required this.posY,
+      required this.angle,
+      required this.minSizeImage})
       : super(key: key);
 
   final double posX;
@@ -30,7 +32,8 @@ class YangleWidget extends StatelessWidget {
     bool isActiveInput;
     bool isActiveParam;
     return Transform.translate(
-        offset: Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
+        offset:
+            Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Transform.rotate(
             angle: angle * pi / 180,
             child: Obx(() {

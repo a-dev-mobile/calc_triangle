@@ -1,12 +1,14 @@
-import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_style.dart';
+import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
+
 import 'package:calc_triangle/app/ui/widgets/other/change_theme_w.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
+
 import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 import 'package:calc_triangle/app/ui/widgets/other/setting_launch_screen_w.dart';
 import 'package:calc_triangle/app/utils/logger.dart';

@@ -1,6 +1,7 @@
-import 'package:calc_triangle/app/constant/const_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_size.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_size.dart';
+import 'package:calc_triangle/app/constants/const_color.dart';
+
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,18 +21,21 @@ class CustomMessageView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
-             Icon(Icons.info_outline,color: ConstColor.warninng,size: AppSize.iconSize,),
-              SizedBox(width: 2.w,),
-              
+              Icon(
+                Icons.info_outline,
+                color: ConstColor.warninng,
+                size: AppSize.iconSize,
+              ),
+              SizedBox(
+                width: 2.w,
+              ),
               Text(
                 message,
-                style: TextStyle(fontSize: 15.sp, color: AppColors.text(context)),
+                style:
+                    TextStyle(fontSize: 15.sp, color: AppColors.text(context)),
               ),
             ],
           ),
-       
-       
         ],
       ),
       height: AppUtils.getHeight(context) * 0.06,

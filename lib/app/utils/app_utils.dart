@@ -1,15 +1,9 @@
-// ignore_for_file: constant_identifier_names
-
-
-import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 
 import 'package:flutter/material.dart';
 
-
 class AppUtils {
-
-
   static double getWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
@@ -20,17 +14,16 @@ class AppUtils {
 
 //==============================================
 
-
 //==============================================
 
   static Future<double> getImageMinSize() async {
-    double minSize =  await LocalStorage().getItemDouble(ConstString.keyMinSize);
+    double minSize = await LocalStorage().getItemDouble(ConstString.keyMinSize);
 
     return minSize;
   }
 
-  static void setImageMinSize(double size)  {
-   LocalStorage().setItemDouble(ConstString.keyMinSize, size);
+  static void setImageMinSize(double size) {
+    LocalStorage().setItemDouble(ConstString.keyMinSize, size);
   }
 }
 
@@ -108,7 +101,6 @@ class AppUtilsNumber {
 
     return mainResult;
   }
-
 }
 
 abstract class AppUtilsMap {

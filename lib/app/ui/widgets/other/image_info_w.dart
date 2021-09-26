@@ -1,11 +1,13 @@
-import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/constants/const_number.dart';
+
 
 import 'package:flutter/material.dart';
 
 class ImageInfoWidget extends StatelessWidget {
   const ImageInfoWidget({
-    Key? key, required this.pathAsset,
+    Key? key,
+    required this.pathAsset,
   }) : super(key: key);
   final String pathAsset;
   @override

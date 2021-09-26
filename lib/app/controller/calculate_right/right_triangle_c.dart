@@ -1,15 +1,15 @@
-import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/constant/const_string.dart';
-import 'package:calc_triangle/app/services/global_serv.dart';
+import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/shared_components/numpad/key.dart';
+import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
+
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
-import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
-import 'package:calc_triangle/app/utils/local_torage.dart';
+
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
+
 
 import 'dart:math';
 import 'package:get/get.dart';
@@ -76,22 +76,20 @@ class RightTriangleController extends GetxController {
 
   int precisionResult = 0;
 
-@override
+  @override
   void onReady() {
-         log.i(' right onReady');
+    log.i(' right onReady');
     // closeStreem();
     clearAll();
     // precisionResult = GlobalServ.to.precisionResult.value;
     showSnack(TranslateHelper.enterTwoParameters);
-    
-
 
     super.onReady();
   }
 
   @override
-  void onInit()  {
-     log.i(' right onInit');
+  void onInit() {
+    log.i(' right onInit');
     super.onInit();
   }
 
@@ -1622,7 +1620,6 @@ class RightTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
-    print('next');
     if (isNext) {
       if (isaCathet.value) {
         isbCathet.value = true;

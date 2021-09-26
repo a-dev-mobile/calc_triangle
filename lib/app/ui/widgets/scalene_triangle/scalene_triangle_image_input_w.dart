@@ -1,15 +1,13 @@
 import 'dart:math';
 
-import 'package:calc_triangle/app/constant/const_assets.dart';
-import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/constants/const_assets.dart';
+import 'package:calc_triangle/app/constants/const_number.dart';
 
-import 'package:calc_triangle/app/utils/app_utils.dart';
+
 import 'package:flutter/material.dart';
 
 import 'h_height_w.dart';
-
-
 
 class ScaleneTriangleImageInputWidget extends StatelessWidget {
   const ScaleneTriangleImageInputWidget({
@@ -25,7 +23,6 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
 
-       
         return Stack(
           alignment: Alignment.center,
           children: [
@@ -33,12 +30,17 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
               child: Image(
                 fit: BoxFit.contain,
                 color: AppColors.text(context),
-                image: const AssetImage(ConstAssets.scaleneTriangleInput),
+                image: const AssetImage(ConstImageRaster.scaleneTriangleInput),
               ),
             ),
             //all widget text in image
 
-            HheightWidget(angle: -90, posX: -16.503, posY: 7.051, minSizeImage: minSize,),
+            HheightWidget(
+              angle: -90,
+              posX: -16.503,
+              posY: 7.051,
+              minSizeImage: minSize,
+            ),
             // const HheightWidget(angle: -45, posX: -18.225, posY: 18.225),
             // const KcompCside(angle: 45, posX: -12.994, posY: -23.456),
             // const McompCside(angle: 45, posX: 23.456, posY: 12.994),
@@ -53,4 +55,3 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
     );
   }
 }
-

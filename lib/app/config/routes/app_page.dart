@@ -8,15 +8,16 @@ import 'package:calc_triangle/app/ui/pages/calculate_scalene/calculate_scalene_p
 import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
 
 import 'package:calc_triangle/app/ui/pages/setting/setting_p.dart';
-
 import 'package:calc_triangle/app/ui/pages/welcome/welcome_p.dart';
+
+
 import 'package:get/get.dart';
 
 abstract class Routes {
   static const initial = welcome;
   static const welcome = '/welcome';
   static const selectShape = '/selectShape';
-  static const calculateRight = '/calculateRight';
+  static const calculate = '/calculate';
   static const calculateScalene = '/calculateScalene';
   static const setting = '/setting';
 }
@@ -34,7 +35,7 @@ class AppPage {
       page: () => const SelectShapePage(),
     ),
     GetPage(
-        name: Routes.calculateRight,
+        name: Routes.calculate,
         page: () => const CalculateRightPage(),
         binding: BindingsBuilder(() {
           Get.put<RightTriangleController>(RightTriangleController());

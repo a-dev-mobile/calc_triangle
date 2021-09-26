@@ -1,11 +1,10 @@
-import 'package:calc_triangle/app/constant/const_assets.dart';
+import 'package:calc_triangle/app/config/routes/app_page.dart';
+import 'package:calc_triangle/app/constants/const_assets.dart';
+import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
+import 'package:calc_triangle/app/shared_components/drawer/drawer_w.dart';
 
 
 
-import 'package:calc_triangle/app/routes/app_page.dart';
-
-import 'package:calc_triangle/app/ui/widgets/drawer/drawer_icon_w.dart';
-import 'package:calc_triangle/app/ui/widgets/drawer/drawer_w.dart';
 
 
 import 'package:calc_triangle/app/ui/widgets/other/image_info_w.dart';
@@ -40,18 +39,18 @@ class SelectShapePage extends StatelessWidget {
                       // SelectShapeController.to.initWidgetControllerPath();
                       logger.i(
                           'Get.offAllNamed(Routes.calculate, arguments: Shape.rightTriangle);');
-                      Get.toNamed(Routes.calculateRight);
+                      Get.toNamed(Routes.calculate);
                     },
                     child: const ImageInfoWidget(
-                        pathAsset: ConstAssets.rightTriangleInfo)),
+                        pathAsset: ConstImageRaster.rightTriangleInfo)),
                 InkWell(
                     onTap: () {
                       logger.i(
                           'Get.offAllNamed(Routes.calculate, arguments: Shape.scaleneTriangle);');
-                     Get.toNamed(Routes.calculateScalene);
+                      Get.toNamed(Routes.calculateScalene);
                     },
                     child: const ImageInfoWidget(
-                        pathAsset: ConstAssets.scaleneTriangleInfo)),
+                        pathAsset: ConstImageRaster.scaleneTriangleInfo)),
               ],
             ),
             DrawerIconWidget(globalkey: _globalKey),

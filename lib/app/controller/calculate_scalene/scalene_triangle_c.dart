@@ -1,13 +1,14 @@
-import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/constant/const_string.dart';
+import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/shared_components/numpad/key.dart';
+import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
-import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
-import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
+
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
-import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
+
+
 
 import 'package:get/get.dart';
 
@@ -38,8 +39,6 @@ class ScaleneTriangleController extends GetxController {
   var bSide = startLengthValue.obs;
   var cSide = startLengthValue.obs;
   var hHeight = startLengthValue.obs;
-
-
 
   var area = "".obs;
   var perimeter = "".obs;
@@ -857,12 +856,6 @@ class ScaleneTriangleController extends GetxController {
 
   @override
   Future<void> onInit() async {
-
     super.onInit();
-  }
-  @override
-  void onClose() {
-
-    super.onClose();
   }
 }

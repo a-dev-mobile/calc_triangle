@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:calc_triangle/app/constant/const_assets.dart';
-import 'package:calc_triangle/app/constant/const_number.dart';
-import 'package:calc_triangle/app/services/global_serv.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/constants/const_assets.dart';
+import 'package:calc_triangle/app/constants/const_number.dart';
+
 import 'package:calc_triangle/app/ui/widgets/right_triangle/a_angle_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/a_cathet_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/b_angle_w.dart';
@@ -13,7 +13,6 @@ import 'package:calc_triangle/app/ui/widgets/right_triangle/h_height_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/k_com_c_side_w.dart';
 import 'package:calc_triangle/app/ui/widgets/right_triangle/m_com_c_side_w.dart';
 
-import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 
 class RightTriangleImageInputWidget extends StatelessWidget {
@@ -37,7 +36,7 @@ class RightTriangleImageInputWidget extends StatelessWidget {
               child: Image(
                 fit: BoxFit.contain,
                 color: AppColors.text(context),
-                image: const AssetImage(ConstAssets.rightTriangleInput),
+                image: const AssetImage(ConstImageRaster.rightTriangleInput),
               ),
             ),
             //all widget text in image

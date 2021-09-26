@@ -1,6 +1,7 @@
+import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

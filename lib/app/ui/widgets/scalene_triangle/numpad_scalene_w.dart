@@ -1,14 +1,13 @@
-import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
+import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/controller/calculate_scalene/scalene_triangle_c.dart';
-import 'package:calc_triangle/app/ui/pages/select_shape/select_shape_p.dart';
+import 'package:calc_triangle/app/shared_components/numpad/key.dart';
+import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/ui/widgets/numpad/key.dart';
 
-import 'package:calc_triangle/app/ui/widgets/numpad/key_symbol.dart';
-import 'package:calc_triangle/app/utils/logger.dart';
+
+
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 var c = ScaleneTriangleController.to;
 

@@ -1,10 +1,8 @@
-// ignore_for_file: avoid_print, invalid_use_of_protected_member
 
-import 'package:calc_triangle/app/constant/const_string.dart';
+
+import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/controller/calculate_right/right_triangle_c.dart';
-import 'package:calc_triangle/app/services/global_serv.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
-import 'package:calc_triangle/app/utils/local_torage.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +35,7 @@ class AangleWidget extends StatelessWidget {
         child: Obx(() {
           isActiveInput = c.isaAngle.value;
           isActiveParam =
-              c.activeParamMap.value.containsValue(RightTriangle.aAngle);
+              c.activeParamMap.containsValue(RightTriangle.aAngle);
 
           if (isActiveInput) {
             styleText = AppStyleTextImage.activeInput(context);

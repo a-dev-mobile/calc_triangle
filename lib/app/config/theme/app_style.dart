@@ -1,8 +1,11 @@
-import 'package:calc_triangle/app/constant/const_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
+import 'package:calc_triangle/app/constants/const_color.dart';
+
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'app_color.dart';
 
 abstract class AppStyleNumpad {
   static TextStyle function(BuildContext context) {
@@ -74,17 +77,14 @@ abstract class AppStyleTextImage {
   static TextStyle activeInput(BuildContext context) {
     return TextStyle(
         color: ConstColor.error,
-      
-      fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.bold,
         backgroundColor: AppColors.content(context),
         fontSize: 24.sp);
   }
 
   static TextStyle activeParam(BuildContext context) {
     return TextStyle(
-       color: ConstColor.primary,
-     
-
+        color: ConstColor.primary,
         backgroundColor: AppColors.content(context),
         fontSize: 24.sp);
   }

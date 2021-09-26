@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_size.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_size.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

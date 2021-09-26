@@ -1,15 +1,15 @@
-import 'package:calc_triangle/app/constant/const_color.dart';
+import 'package:calc_triangle/app/config/theme/app_color.dart';
+import 'package:calc_triangle/app/config/theme/app_style.dart';
+import 'package:calc_triangle/app/constants/const_color.dart';
+
 import 'package:calc_triangle/app/controller/setting/setting_c.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/ui/theme/app_color.dart';
-import 'package:calc_triangle/app/ui/theme/app_style.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-
 
 class ChangeThemeWidget extends StatelessWidget {
   const ChangeThemeWidget({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class ChangeThemeWidget extends StatelessWidget {
           children: [
             CircleButton(
                 onTap: () {
-                   SettingContrl.to.setDarkTheme();
+                  SettingContrl.to.setDarkTheme();
                 },
                 color: ConstColor.scaffoldDarkTheme,
                 icon: isDark
@@ -45,7 +45,7 @@ class ChangeThemeWidget extends StatelessWidget {
                     : AppStyleButton.iconNotActiveTheme(context)),
             CircleButton(
                 onTap: () {
-                SettingContrl.to.setLightTheme();
+                  SettingContrl.to.setLightTheme();
                 },
                 color: ConstColor.scaffoldLightTheme,
                 icon: !isDark
