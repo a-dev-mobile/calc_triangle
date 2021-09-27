@@ -5,7 +5,7 @@ import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 
 import 'package:calc_triangle/app/constants/const_color.dart';
 
-import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_detail_info_w.dart';
 

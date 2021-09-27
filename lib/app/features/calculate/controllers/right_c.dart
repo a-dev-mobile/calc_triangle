@@ -570,7 +570,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aCathet;
     param2 = RightTriangle.bCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcChypoKnowAcatBcat();
       calcBangKnowBcatChypo();
       calcAangKnowBang();
@@ -587,7 +587,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aCathet;
     param2 = RightTriangle.cHypotenuse;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBcatKnowChypAcat();
       calcBangKnowBcatChypo();
       calcAangKnowBang();
@@ -604,7 +604,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.aCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBangleKnowAang();
       calcBcatKnowAcatAang();
       calcChypoKnowAcatBcat();
@@ -621,7 +621,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.aCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBcatKnowAcatBang();
       calcChypoKnowAcatBcat();
       calcAangKnowBang();
@@ -638,7 +638,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.mCompCside;
     param2 = RightTriangle.aCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcHheiKnowAcatMcomp();
       calcAangKnowHheiAcat();
       calcBangleKnowAang();
@@ -656,7 +656,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.hHeight;
     param2 = RightTriangle.aCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAangKnowHheiAcat();
       calcBangleKnowAang();
       calcBcatKnowAcatAang();
@@ -672,7 +672,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.bCathet;
     param2 = RightTriangle.cHypotenuse;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAcatKnowChypBcat();
       calcBangKnowBcatChypo();
       calcAangKnowBang();
@@ -689,7 +689,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.bCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAcatKnowBcatAang();
       calcChypoKnowAcatBcat();
       calcBangleKnowAang();
@@ -706,7 +706,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.bCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAcatKnowBcatBang();
       calcChypoKnowAcatBcat();
       calcAangKnowBang();
@@ -723,7 +723,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.kCompCside;
     param2 = RightTriangle.bCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcHheiKnowBcatKcomp();
       calcBangKnowHheiBcat();
       calcAangKnowBang();
@@ -740,7 +740,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.bCathet;
     param2 = RightTriangle.hHeight;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBangKnowHheibcat();
       calcAangKnowBang();
       calcAcatKnowBcatAang();
@@ -756,7 +756,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.cHypotenuse;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       aCathetD = cHypotenuseD * cos(AppConvert.toRadian(aAngleD));
       aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
@@ -777,7 +777,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.cHypotenuse;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       aCathetD = cHypotenuseD * sin(AppConvert.toRadian(bAngleD));
       aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
 
@@ -798,7 +798,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.mCompCside;
     param2 = RightTriangle.cHypotenuse;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcKcompKnowChypMcomp();
       calcAcatKnowChypMcomp();
       calcHheiKnowAcatMcomp();
@@ -815,7 +815,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.kCompCside;
     param2 = RightTriangle.cHypotenuse;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcMcompKnowChypKcomp();
       calcAcatKnowChypMcomp();
       calcHheiKnowAcatMcomp();
@@ -832,7 +832,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.mCompCside;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBangleKnowAang();
       calchHeightKnowAangMcomp();
 
@@ -851,7 +851,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.kCompCside;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBangleKnowAang();
       calchHeightKnowBangKcomp();
 
@@ -870,7 +870,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.aAngle;
     param2 = RightTriangle.hHeight;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBangleKnowAang();
       calcBcatKnowHheiBang();
       calcAcatKnowHheiAang();
@@ -885,7 +885,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.kCompCside;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAangKnowBang();
       calchHeightKnowBangKcomp();
       calcAcatKnowHheiAang();
@@ -902,7 +902,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.mCompCside;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAangKnowBang();
       calchHeightKnowAangMcomp();
       calcAcatKnowHheiAang();
@@ -919,7 +919,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.bAngle;
     param2 = RightTriangle.hHeight;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAangKnowBang();
 
       calcBcatKnowHheiBang();
@@ -935,7 +935,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.mCompCside;
     param2 = RightTriangle.kCompCside;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       hHeightD = sqrt(mCompCsideD * kCompCsideD);
       hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
 
@@ -958,7 +958,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.mCompCside;
     param2 = RightTriangle.hHeight;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcAangKnowHheiMcomp();
       calcBangleKnowAang();
       calcBcatKnowHheiBang();
@@ -976,7 +976,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.kCompCside;
     param2 = RightTriangle.hHeight;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       calcBangKnowHheiKcomp();
       calcAangKnowBang();
       calcBcatKnowHheiBang();
@@ -1105,7 +1105,7 @@ class RightTriangleController extends GetxController {
         'end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
   }
 
-  bool isAvailableParams(
+  bool isAvailableTwoParams(
     RightTriangle param1,
     RightTriangle param2,
   ) {
@@ -1116,7 +1116,7 @@ class RightTriangleController extends GetxController {
     return false;
   }
 
-  bool isAvailableParam(RightTriangle param1) {
+  bool isAvailableOneParam(RightTriangle param1) {
     if (activeParamMap.containsValue(param1)) {
       return true;
     }
@@ -1144,20 +1144,20 @@ class RightTriangleController extends GetxController {
       return;
     }
 
-    if (isAvailableParams(RightTriangle.kCompCside, RightTriangle.bCathet)) {
+    if (isAvailableTwoParams(RightTriangle.kCompCside, RightTriangle.bCathet)) {
       if (!(kCompCsideD < bCathetD)) {
         showSnack('${TranslateHelper.messageCmoreK}${bCathet.value}');
         return;
       }
     }
 
-    if (isAvailableParams(RightTriangle.mCompCside, RightTriangle.aCathet)) {
+    if (isAvailableTwoParams(RightTriangle.mCompCside, RightTriangle.aCathet)) {
       if (!(aCathetD > mCompCsideD)) {
         showSnack('${TranslateHelper.messageAmoreM}${mCompCside.value}');
         return;
       }
     }
-    if (isAvailableParams(
+    if (isAvailableTwoParams(
         RightTriangle.mCompCside, RightTriangle.cHypotenuse)) {
       if (!(cHypotenuseD > mCompCsideD)) {
         showSnack('${TranslateHelper.messageCmoreM}${mCompCside.value}');
@@ -1165,7 +1165,7 @@ class RightTriangleController extends GetxController {
       }
     }
 
-    if (isAvailableParams(
+    if (isAvailableTwoParams(
         RightTriangle.kCompCside, RightTriangle.cHypotenuse)) {
       if (!(cHypotenuseD > kCompCsideD)) {
         showSnack('${TranslateHelper.messageCmoreK}${kCompCside.value}');
@@ -1173,13 +1173,13 @@ class RightTriangleController extends GetxController {
       }
     }
 
-    if (isAvailableParams(RightTriangle.hHeight, RightTriangle.aCathet)) {
+    if (isAvailableTwoParams(RightTriangle.hHeight, RightTriangle.aCathet)) {
       if (!(hHeightD < aCathetD)) {
         showSnack('${TranslateHelper.messageAmoreH}${aCathet.value}');
         return;
       }
     }
-    if (isAvailableParams(RightTriangle.hHeight, RightTriangle.bCathet)) {
+    if (isAvailableTwoParams(RightTriangle.hHeight, RightTriangle.bCathet)) {
       if (!(bCathetD > hHeightD)) {
         showSnack('${TranslateHelper.messageBmoreH}${bCathet.value}');
         return;
@@ -1188,8 +1188,8 @@ class RightTriangleController extends GetxController {
 
 //если гипотенуза меньше
 
-    if (isAvailableParams(RightTriangle.cHypotenuse, RightTriangle.aCathet) ||
-        isAvailableParams(RightTriangle.cHypotenuse, RightTriangle.bCathet)) {
+    if (isAvailableTwoParams(RightTriangle.cHypotenuse, RightTriangle.aCathet) ||
+        isAvailableTwoParams(RightTriangle.cHypotenuse, RightTriangle.bCathet)) {
       if (cHypotenuseD < aCathetD || cHypotenuseD < bCathetD) {
         showSnack(TranslateHelper.messageHypotenuseGreaterCathetus);
 
@@ -1209,7 +1209,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.hHeight;
     param2 = RightTriangle.cHypotenuse;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       showSnack(TranslateHelper.messageFormulaNotFound);
       return;
     }
@@ -1219,7 +1219,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     param1 = RightTriangle.mCompCside;
     param2 = RightTriangle.bCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       showSnack(TranslateHelper.messageFormulaNotFound);
       return;
     }
@@ -1228,7 +1228,7 @@ class RightTriangleController extends GetxController {
     //================================================
     param1 = RightTriangle.kCompCside;
     param2 = RightTriangle.aCathet;
-    if (isAvailableParams(param1, param2)) {
+    if (isAvailableTwoParams(param1, param2)) {
       showSnack(TranslateHelper.messageFormulaNotFound);
       return;
     }

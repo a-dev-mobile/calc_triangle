@@ -1,6 +1,6 @@
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/shared_components/app_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,49 +16,49 @@ class RightDetailInfoWidget extends StatelessWidget {
       return Column(
         children: [
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.aCathet),
+            isActive: c.isAvailableOneParam(RightTriangle.aCathet),
             leading: 'a',
             subtitle: 'a - catheti',
             title: c.aCathet.value,
           ),
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.bCathet),
+            isActive: c.isAvailableOneParam(RightTriangle.bCathet),
             leading: 'b',
             subtitle: 'b - catheti',
             title: c.bCathet.value,
           ),
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.cHypotenuse),
+            isActive: c.isAvailableOneParam(RightTriangle.cHypotenuse),
             leading: 'c',
             subtitle: 'c - hypotenuse',
             title: c.cHypotenuse.value,
           ),
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.hHeight),
+            isActive: c.isAvailableOneParam(RightTriangle.hHeight),
             leading: 'h',
             subtitle: 'h - height of the triangle',
             title: c.hHeight.value,
           ),
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.aAngle),
+            isActive: c.isAvailableOneParam(RightTriangle.aAngle),
             leading: 'α',
             subtitle: 'α - acute angles in degrees',
             title: c.aAngle.value,
           ),
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.bAngle),
+            isActive: c.isAvailableOneParam(RightTriangle.bAngle),
             leading: 'β',
             subtitle: 'β - acute angles in degrees',
             title: c.bAngle.value,
           ),
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.mCompCside),
+            isActive: c.isAvailableOneParam(RightTriangle.mCompCside),
             leading: 'm',
             subtitle: 'm - components of the c - hypotenuse',
             title: c.mCompCside.value,
           ),
           ItemDetail(
-            isActive: c.isAvailableParam(RightTriangle.kCompCside),
+            isActive: c.isAvailableOneParam(RightTriangle.kCompCside),
             leading: 'k',
             subtitle: 'k - components of the c - hypotenuse',
             title: c.kCompCside.value,

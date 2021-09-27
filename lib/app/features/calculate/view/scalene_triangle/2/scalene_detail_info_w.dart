@@ -1,7 +1,7 @@
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_triangle_c.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/shared_components/app_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

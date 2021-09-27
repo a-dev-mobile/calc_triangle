@@ -1,6 +1,6 @@
 
-import 'package:calc_triangle/app/features/calculate/controllers/right_triangle_c.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/features/calculate/view/1/calculate_ad_p.dart';
 import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 

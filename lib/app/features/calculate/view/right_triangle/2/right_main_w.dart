@@ -4,7 +4,7 @@ import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 
 import 'package:calc_triangle/app/constants/const_color.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_info_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_input_w.dart';

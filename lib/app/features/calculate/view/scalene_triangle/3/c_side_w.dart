@@ -3,7 +3,7 @@
 import 'dart:math';
 
 import 'package:calc_triangle/app/config/theme/app_style.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
