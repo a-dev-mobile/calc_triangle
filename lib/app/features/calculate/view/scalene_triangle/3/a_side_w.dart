@@ -12,8 +12,8 @@ import 'package:get/get.dart';
 
 late var c = ScaleneTriangleController.to;
 
-class Asideidget extends StatelessWidget {
-  const Asideidget(
+class AsideWidget extends StatelessWidget {
+  const AsideWidget(
       {Key? key,
       required this.posX,
       required this.posY,

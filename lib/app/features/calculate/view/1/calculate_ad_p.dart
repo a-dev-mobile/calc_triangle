@@ -1,5 +1,5 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_triangle_main_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_main_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_triangle_main_w.dart';
 import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 import 'package:calc_triangle/app/features/welcome/welcome_p.dart';

@@ -1,7 +1,7 @@
 import 'package:calc_triangle/app/config/routes/app_page.dart';
 
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_tiangle_image_info_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_triangle_image_info_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_info_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_image_info_w.dart';
 
 import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/shared_components/drawer/drawer_w.dart';

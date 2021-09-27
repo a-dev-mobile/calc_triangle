@@ -36,8 +36,9 @@ ThemeData lightThemeData(BuildContext context) {
           centerTitle: true,
           elevation: 0),
       textTheme: Theme.of(context).textTheme.apply(
-          fontFamily: 'montserrat', bodyColor: ConstColor.scaffoldDarkTheme),
+          fontFamily: 'montserrat', bodyColor: ConstColor.scaffoldDarkTheme,),
       colorScheme: const ColorScheme.light(
+        
         primary: ConstColor.primary,
         secondary: ConstColor.secondary,
         error: ConstColor.error,

@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class SettingContrl extends GetxController {
   static SettingContrl get to => Get.find();
 
-  RxInt precisionResult = 2.obs;
+
 
   void setRusLocation() {
     GlobalServ.to.appLocale.value = ConstString.localeRu;
@@ -55,20 +55,12 @@ class SettingContrl extends GetxController {
         ));
   }
 
-  @override
-  Future<void> onInit() async {
-    if (!GlobalServ.to.isFirstStartApp) {
-      precisionResult.value =
-          await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
-    }
-    super.onInit();
-  }
 
   @override
   void onClose() async {
     GlobalServ.to.startIfCloseSetiing();
+    
     //сохранил чтобы локально не считывать
-    GlobalServ.to.precisionResult = precisionResult.value;
     super.onClose();
   }
 }

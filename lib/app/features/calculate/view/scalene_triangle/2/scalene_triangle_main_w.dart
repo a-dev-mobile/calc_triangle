@@ -7,9 +7,9 @@ import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 import 'package:calc_triangle/app/constants/const_color.dart';
 
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_tiangle_image_info_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_triangle_image_input_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/numpad_right_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_info_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_input_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/numpad_right_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/numpad_scalene_w.dart';
 
 
@@ -32,7 +32,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'scalene_triangle_image_input_w.dart';
-import 'scalene_triangle_image_info_w.dart';
+import 'scalene_image_info_w.dart';
 
 late var c = ScaleneTriangleController.to;
 

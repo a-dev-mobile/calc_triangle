@@ -17,7 +17,7 @@ class GlobalServ extends GetxService {
 
   //что бы не доставать локально, сохраним в глоб сервисе
 
-  late int precisionResult;
+  var precisionResult = 3.obs;
 // ========================================
 
   void setStorageIsDarkTheme(bool isDark) async {
@@ -54,7 +54,7 @@ class GlobalServ extends GetxService {
     LocalStorage().setItemBool(
         ConstString.keyIsDarkTheme, GlobalServ.to.isDarkTheme.value);
     LocalStorage().setItemInt(
-        ConstString.keyPrecisionResult, SettingContrl.to.precisionResult.value);
+        ConstString.keyPrecisionResult, GlobalServ.to.precisionResult.value);
   }
 
   @override
@@ -70,6 +70,8 @@ class GlobalServ extends GetxService {
       isShowLaunchScreen.value = false;
       isDarkTheme.value = false;
       setDefaultLocale();
+
+
     } else {
       // устанавливаем если не первый запуск
       isFirstStartApp = false;
@@ -79,6 +81,10 @@ class GlobalServ extends GetxService {
           await LocalStorage().getItemString(ConstString.keyLocaleApp);
       isDarkTheme.value =
           await LocalStorage().getItemBool(ConstString.keyIsDarkTheme);
+         precisionResult.value =
+          await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
+    
+   
     }
 
     super.onInit();

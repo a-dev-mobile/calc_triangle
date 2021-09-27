@@ -83,7 +83,7 @@ class SliderPrecisionResultWidget extends StatelessWidget {
     String precision = '';
     String title = TranslateHelper.selectedPrecisionResult;
     return Obx(() {
-      int precisionResult = SettingContrl.to.precisionResult.value;
+      int precisionResult = GlobalServ.to.precisionResult.value;
       // int precisionResult =  GlobalServ.to.precisionResult.value;
       switch (precisionResult) {
         case 1:
@@ -116,16 +116,14 @@ class SliderPrecisionResultWidget extends StatelessWidget {
             ]),
           ),
           Slider(
-              value: SettingContrl.to.precisionResult.value.toDouble(),
-              // value:  GlobalServ.to.precisionResult.value.toDouble(),
+              value:GlobalServ.to.precisionResult.value.toDouble(),
+             
               min: 0,
               divisions: 5,
               max: 5,
               onChanged: (double value) {
-                // SettingContrl.to.setPrecisionResult(value.toInt());
-                // SettingContrl.to.setPrecisionResult(value.toInt());
-                // GlobalServ.to.precisionResult.value = value.toInt();
-                SettingContrl.to.precisionResult.value = value.toInt();
+               
+               GlobalServ.to.precisionResult.value = value.toInt();
               }),
         ],
       );

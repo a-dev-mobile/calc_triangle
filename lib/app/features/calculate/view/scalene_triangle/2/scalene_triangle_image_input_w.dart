@@ -3,7 +3,13 @@ import 'dart:math';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/a_angle_w.dart';
+
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/a_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/b_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/c_side_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/h_height_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/y_angle_w.dart';
 
 import 'package:flutter/material.dart';
 
@@ -41,14 +47,40 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
               posY: 7.051,
               minSizeImage: minSize,
             ),
-            // const HheightWidget(angle: -45, posX: -18.225, posY: 18.225),
-            // const KcompCside(angle: 45, posX: -12.994, posY: -23.456),
-            // const McompCside(angle: 45, posX: 23.456, posY: 12.994),
-            // const BangleWidget( posX: -20.573, posY: 0),
-            // const AangleWidget( posX: -3.0, posY: 23.943),
-            // const BcathetWidget(angle: -90, posX: -43.845, posY: 0),
-            // const AcathetWidget(posX: 0, posY: 43.545),
-            // const ChypotenuseWidget(angle: 45, posX: 11.093, posY: -11.093),
+            AsideWidget(
+              angle: 0,
+              posX: -4.711,
+              posY: 43.377,
+              minSizeImage: minSize,
+            ),
+            CsideWidget(
+              angle: -71.323,
+              posX: -35.572,
+              posY: -1.783,
+              minSizeImage: minSize,
+            ),
+            BsideWidget(
+              angle: 56.523,
+              posX: 13.244,
+              posY: -3.719,
+              minSizeImage: minSize,
+            ),
+            AangleWidget(
+              angle: 54.341,
+              posX: -22.37,
+              posY: 22.748,
+              minSizeImage: minSize,),
+               YangleWidget(
+              angle: -7.381,
+              posX: -14.16,
+              posY: -16.77 ,
+              minSizeImage: minSize,)
+            // ), AangleWidget(
+            //   angle: -35.485,
+            //   posX: -26.299,
+            //   posY: 25.809,
+            //   minSizeImage: minSize,
+            // ),
           ],
         );
       }),
