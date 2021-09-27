@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/constants/const_color.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,4 +70,22 @@ ThemeData darkThemeData(BuildContext context) {
         secondary: ConstColor.secondary,
         error: ConstColor.error,
       ));
+}
+
+
+ void settingBar(){
+
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        statusBarIconBrightness:
+            GlobalServ.to.isDarkTheme() ? Brightness.light : Brightness.dark,
+        statusBarColor: GlobalServ.to.isDarkTheme()
+            ? ConstColor.scaffoldDarkTheme
+            : ConstColor.scaffoldLightTheme, // Color for Android
+        statusBarBrightness: GlobalServ.to.isDarkTheme()
+            ? Brightness.dark
+            : Brightness.light // Dark == white status bar -- for IOS.
+        ));
+
+
 }

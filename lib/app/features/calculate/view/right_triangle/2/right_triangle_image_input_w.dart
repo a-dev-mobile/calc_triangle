@@ -12,10 +12,6 @@ import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/h_hei
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/k_com_c_side_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/m_com_c_side_w.dart';
 
-
-
-
-
 import 'package:flutter/material.dart';
 
 String pathAssestInput = ConstImageRaster.rightTriangleInput;

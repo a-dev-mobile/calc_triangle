@@ -13,7 +13,7 @@ abstract class ConstString {
   static const String degConvert = "☺°.☺☺";
   static const String degMinSecConvert = "☺°☺′☺″";
   static const String email = 'a.dev.mobile@gmail.com';
-//TODO замена
+
   static var playStoreUrl =
       'http://play.google.com/store/apps/details?id=a.dev.calc_triangle';
 }

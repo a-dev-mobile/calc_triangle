@@ -10,7 +10,6 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
 
-
 import 'dart:math';
 import 'package:get/get.dart';
 

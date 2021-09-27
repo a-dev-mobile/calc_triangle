@@ -2,15 +2,13 @@ import 'package:calc_triangle/app/config/routes/app_page.dart';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
+import 'package:calc_triangle/app/features/welcome/welcome_p.dart';
+import 'package:calc_triangle/app/shared_components/app_widgets.dart';
 
 
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/features/welcome/views/page/welcome_p.dart';
 
-
-
-import 'package:calc_triangle/app/ui/widgets/other/app_widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -5,13 +5,12 @@ import 'dart:math';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late ScaleneTriangleController c = ScaleneTriangleController.to;
+late var c = ScaleneTriangleController.to;
 
 class HheightWidget extends StatelessWidget {
   const HheightWidget(
@@ -26,20 +25,40 @@ class HheightWidget extends StatelessWidget {
   final double posY;
   final double angle;
   final double minSizeImage;
+
+  // ====change====
+  void onTap() {
+    c.isaSide.value = false;
+    c.isbSide.value = false;
+    c.iscSide.value = false;
+    c.ishHeight.value = true;
+    c.isaAngle.value = false;
+    c.isbAngle.value = false;
+    c.isyAngle.value = false;
+  }
+
+  //===============
   @override
   Widget build(BuildContext context) {
     TextStyle styleText;
+
     bool isActiveInput;
     bool isActiveParam;
+    ScaleneTriangle elementFigure;
+    String activeValue;
     return Transform.translate(
         offset:
             Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Transform.rotate(
             angle: angle * pi / 180,
             child: Obx(() {
+              // ====change====
+              activeValue = c.hHeight.value;
               isActiveInput = c.ishHeight.value;
+              elementFigure = ScaleneTriangle.hHeight;
+              //===============
               isActiveParam =
-                  c.activeParamMap.value.containsValue(ScaleneTriangle.hHeight);
+                  c.activeParamMap.value.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {
@@ -50,20 +69,14 @@ class HheightWidget extends StatelessWidget {
 
               return GestureDetector(
                   onTap: () {
-                    c.isaSide.value = false;
-                    c.isbSide.value = false;
-                    c.iscSide.value = false;
-                    c.ishHeight.value = true;
-                    c.isaAngle.value = false;
-                    c.isbAngle.value = false;
-                    c.isyAngle.value = false;
+                    onTap();
                   },
                   child: Container(
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
                     color: Colors.transparent,
                     child: Text(
-                      c.hHeight.value,
+                      activeValue,
                       style: styleText,
                     ),
                   ));

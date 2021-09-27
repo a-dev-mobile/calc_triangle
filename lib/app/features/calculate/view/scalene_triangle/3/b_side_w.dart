@@ -5,14 +5,15 @@ import 'dart:math';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_triangle_c.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-class BsideWidget extends StatelessWidget {
-  const BsideWidget(
+late var c = ScaleneTriangleController.to;
+
+class Bsideidget extends StatelessWidget {
+  const Bsideidget(
       {Key? key,
       required this.posX,
       required this.posY,
@@ -24,22 +25,40 @@ class BsideWidget extends StatelessWidget {
   final double posY;
   final double angle;
   final double minSizeImage;
+
+  // ====change====
+  void onTap() {
+    c.isaSide.value = false;
+    c.isbSide.value = true;
+    c.iscSide.value = false;
+    c.ishHeight.value = false;
+    c.isaAngle.value = false;
+    c.isbAngle.value = false;
+    c.isyAngle.value = false;
+  }
+
+  //===============
   @override
   Widget build(BuildContext context) {
-    ScaleneTriangleController c = Get.find();
-
     TextStyle styleText;
+
     bool isActiveInput;
     bool isActiveParam;
+    ScaleneTriangle elementFigure;
+    String activeValue;
     return Transform.translate(
         offset:
             Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Transform.rotate(
             angle: angle * pi / 180,
             child: Obx(() {
+              // ====change====
+              activeValue = c.bSide.value;
               isActiveInput = c.isbSide.value;
+              elementFigure = ScaleneTriangle.bSide;
+              //===============
               isActiveParam =
-                  c.activeParamMap.value.containsValue(ScaleneTriangle.bSide);
+                  c.activeParamMap.value.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {
@@ -50,20 +69,14 @@ class BsideWidget extends StatelessWidget {
 
               return GestureDetector(
                   onTap: () {
-                    c.isaSide.value = false;
-                    c.isbSide.value = true;
-                    c.iscSide.value = false;
-                    c.ishHeight.value = false;
-                    c.isaAngle.value = false;
-                    c.isbAngle.value = false;
-                    c.isyAngle.value = false;
+                    onTap();
                   },
                   child: Container(
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
                     color: Colors.transparent,
                     child: Text(
-                      c.bSide.value,
+                      activeValue,
                       style: styleText,
                     ),
                   ));

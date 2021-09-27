@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late RightTriangleController c = RightTriangleController.to;
+late var c = RightTriangleController.to;
 
 class AangleWidget extends StatelessWidget {
   const AangleWidget(

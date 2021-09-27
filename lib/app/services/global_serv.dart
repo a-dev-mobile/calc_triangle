@@ -67,7 +67,7 @@ class GlobalServ extends GetxService {
     // если первый запуск
     if (isNullFirstStartApp) {
       isFirstStartApp = true;
-      isShowLaunchScreen.value = true;
+      isShowLaunchScreen.value = false;
       isDarkTheme.value = false;
       setDefaultLocale();
     } else {

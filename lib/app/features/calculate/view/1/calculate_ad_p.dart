@@ -1,5 +1,8 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_triangle_main_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_triangle_main_w.dart';
+import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
+import 'package:calc_triangle/app/features/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/model/calculate_m.dart';
 
 import 'package:flutter/material.dart';
@@ -7,13 +10,8 @@ import 'package:get/get.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../2/right_ttriangle_main_w.dart';
-
-
-
 class CalculatePage extends StatefulWidget {
- CalculatePage({Key? key}) : super(key: key);
-
+  const CalculatePage({Key? key}) : super(key: key);
 
   @override
   _CalculatePageState createState() => _CalculatePageState();
@@ -54,9 +52,21 @@ class _CalculatePageState extends State<CalculatePage> {
     _bottomBannerAd.dispose();
   }
 
+  Widget getShapeCalculate() {
+    final Shape shape = Get.arguments;
+
+    switch (shape) {
+      case Shape.rightTriangle:
+        return const RightTriangleMainWidget();
+      case Shape.scaleneTriangle:
+        return const ScaleneTriangleMainWidget();
+      case Shape.none:
+        return const WelcomePage();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-        final CalculateModel calculateModel = Get.arguments;
     return Scaffold(
       bottomNavigationBar: _isBottomBannerAdLoaded
           ? SizedBox(
@@ -66,7 +76,7 @@ class _CalculatePageState extends State<CalculatePage> {
             )
           : null,
       // body: SafeArea(child: RightTriangleInputWidget()),
-      body: SafeArea(child: RightTriangleMainWidget()),
+      body: SafeArea(child: getShapeCalculate()),
     );
   }
 }
