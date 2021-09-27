@@ -8,7 +8,7 @@ import 'package:calc_triangle/app/features/calculate/controllers/right_triangle_
 
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_info_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_input_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/numpad_right_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_numpad_w.dart';
 
 import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/shared_components/drawer/drawer_w.dart';
@@ -24,7 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'detail_info_righ_w.dart';
+import 'right_detail_info_w.dart';
 
 late var c = RightTriangleController.to;
 
@@ -52,8 +52,6 @@ class RightTriangleMainWidget extends StatelessWidget {
                       : const RightTriangleImageInputWidget();
                 }),
 
-
-
                 //показываем если не инфо
                 Obx(() {
                   return Visibility(
@@ -66,13 +64,10 @@ class RightTriangleMainWidget extends StatelessWidget {
                       child: const MessageWidget());
                 }),
 
-
-
-
                 Expanded(
                   child: Obx(() {
                     return c.isActiveImageInfo.value
-                        ? const DetailInfoRightWidget()
+                        ? const RightDetailInfoWidget()
                         : const NumPadRightWidget();
                   }),
                 ),

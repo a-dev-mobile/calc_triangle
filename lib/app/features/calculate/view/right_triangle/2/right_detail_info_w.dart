@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 
 late var c = RightTriangleController.to;
 
-class DetailInfoRightWidget extends StatelessWidget {
-  const DetailInfoRightWidget({Key? key}) : super(key: key);
+class RightDetailInfoWidget extends StatelessWidget {
+  const RightDetailInfoWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

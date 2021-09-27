@@ -6,6 +6,7 @@ import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/a_angle_w.dart';
 
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/a_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/b_angle_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/b_side_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/c_side_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/h_height_w.dart';
@@ -41,12 +42,7 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
             ),
             //all widget text in image
 
-            HheightWidget(
-              angle: -90,
-              posX: -16.503,
-              posY: 7.051,
-              minSizeImage: minSize,
-            ),
+         
             AsideWidget(
               angle: 0,
               posX: -4.711,
@@ -65,16 +61,31 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
               posY: -3.719,
               minSizeImage: minSize,
             ),
-            AangleWidget(
+          
+               HheightWidget(
+              angle: -90,
+              posX: -16.503,
+              posY: 7.051,
+              minSizeImage: minSize,
+            ),
+              AangleWidget(
               angle: 54.341,
               posX: -22.37,
               posY: 22.748,
-              minSizeImage: minSize,),
-               YangleWidget(
+              minSizeImage: minSize,
+            ),
+            BangleWidget(
+              angle: -61.705,
+              posX: 8.008,
+              posY: 23.864,
+              minSizeImage: minSize,
+            ),
+            YangleWidget(
               angle: -7.381,
-              posX: -14.16,
-              posY: -16.77 ,
-              minSizeImage: minSize,)
+              posX: -13.56,
+              posY: -13.39,
+              minSizeImage: minSize,
+            )
             // ), AangleWidget(
             //   angle: -35.485,
             //   posX: -26.299,

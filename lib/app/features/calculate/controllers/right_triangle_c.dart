@@ -36,26 +36,26 @@ class RightTriangleController extends GetxController {
 
   var activeParamMap = <int, RightTriangle>{}.obs;
 
-  var aAngle = startAngleValue.obs;
   var aCathet = startLengthValue.obs;
-  var bAngle = startAngleValue.obs;
   var bCathet = startLengthValue.obs;
   var cHypotenuse = startLengthValue.obs;
   var hHeight = startLengthValue.obs;
   var kCompCside = startLengthValue.obs;
   var mCompCside = startLengthValue.obs;
+  var aAngle = startAngleValue.obs;
+  var bAngle = startAngleValue.obs;
 
   var area = "".obs;
   var perimeter = "".obs;
 
-  var aAngleD = 0.0;
   var aCathetD = 0.0;
-  var bAngleD = 0.0;
   var bCathetD = 0.0;
   var cHypotenuseD = 0.0;
   var hHeightD = 0.0;
   var kCompCsideD = 0.0;
   var mCompCsideD = 0.0;
+  var aAngleD = 0.0;
+  var bAngleD = 0.0;
 
   var isDeg = true.obs;
   var isaAngle = false.obs;
@@ -72,7 +72,7 @@ class RightTriangleController extends GetxController {
   var isActiveImageInfo = false.obs;
 
   //что  бы не сбрасывать в методе
-  RightTriangle paramLenght = RightTriangle.empty;
+  var paramLenght = RightTriangle.empty;
 
   late int precisionResult;
 
@@ -245,6 +245,21 @@ class RightTriangleController extends GetxController {
 
     printElements();
     log.v('end click ${keySymbol.value}');
+  }
+
+  void printElements() {
+    log.v('''printElements
+        ${activeParamMap[1]} ${activeParamMap[2]}
+
+        $aCathetD ${aCathet.value} aCathet 
+        $bCathetD ${bCathet.value} bCathet 
+        $cHypotenuseD ${cHypotenuse.value} cHypotenuse 
+        $hHeightD ${hHeight.value} Height
+        $mCompCsideD ${mCompCside.value} mCompCside
+        $kCompCsideD ${kCompCside.value} kCompCside
+        $aAngleD ${aAngle.value} aAngle 
+        $bAngleD ${bAngle.value} bAngle
+       ''');
   }
 
   bool isTwoDecimalPointRightTriangle(KeySymbol keySymbol) {
@@ -1333,21 +1348,6 @@ class RightTriangleController extends GetxController {
     messageSnackBar.value = message;
   }
 
-  void printElements() {
-    log.v('''printElements
-        ${activeParamMap[1]} ${activeParamMap[2]}
-
-        $aCathetD ${aCathet.value} aCathet 
-        $bCathetD ${bCathet.value} bCathet 
-        $cHypotenuseD ${cHypotenuse.value} cHypotenuse 
-        $hHeightD ${hHeight.value} Height
-        $mCompCsideD ${mCompCside.value} mCompCside
-        $kCompCsideD ${kCompCside.value} kCompCside
-        $aAngleD ${aAngle.value} aAngle 
-        $bAngleD ${bAngle.value} bAngle
-       ''');
-  }
-
   void nextElement() {
     // переключение вперед между widgets backspace
 
@@ -1583,7 +1583,7 @@ class RightTriangleController extends GetxController {
     mCompCside.value = startLengthValue;
     aAngle.value = startAngleValue;
     bAngle.value = startAngleValue;
-    
+
     perimeter.value = startLengthValue;
     area.value = startLengthValue;
 
@@ -1629,68 +1629,4 @@ class RightTriangleController extends GetxController {
       }
     }
   }
-
-/*  void calcBangKnowHheiBcat() {
-   bAngleD = AppConvert.toDegree(asin(hHeightD / bCathetD));
-    bAngle.value = AppUtilsNumber.getFormatNumber(
-            bAngleD, precisionResult) +
-        "°";
-  }
- */
 }
-
-/* 
-enum RightTriangle {
-  aCathet,
-  bCathet,
-  cHypotenuse,
-  hHeight,
-  kCompCside,
-  mCompCside,
-  aAngle,
-  bAngle,
-  empty,
-}
-
-var values = RightTriangle.values;
-Map<RightTriangle, bool> paramets = {};
-
-void main(List<String> arguments) {
-
-
-  resetParam();
-
-  paramets[RightTriangle.bAngle] = true;
-  printParam();
-  resetParam();
-  paramets[RightTriangle.cHypotenuse] = true;
-  printParam();
-
-  return;
-}
-
-void resetParam() {
-  for (int i = 0; i < values.length - 1; i++) {
-    paramets[values[i]] = false;
-  }
-}
-
-void printParam() {
-  for (var item in paramets.entries) {
-    print('${item.key}  ${item.value}');
-  }
-    print('');
-}
-
-List<dynamic> getListWithoutLastVal(List val) {
-  List list = [];
-
-  for (var item in val) {
-    list.add(item);
-  }
-
-  return list;
-}
-
-
- */

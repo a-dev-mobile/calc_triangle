@@ -28,7 +28,6 @@ class RightTriangleImageInputWidget extends StatelessWidget {
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
 
-// сохраняем в глоб переменные
 
         return Stack(
           alignment: Alignment.center,

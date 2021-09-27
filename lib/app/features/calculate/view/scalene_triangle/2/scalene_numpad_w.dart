@@ -9,7 +9,7 @@ import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
 import 'package:flutter/material.dart';
 
-var c = ScaleneTriangleController.to;
+late var c = ScaleneTriangleController.to;
 
 class NumPadScaleneWidget extends StatelessWidget {
   const NumPadScaleneWidget({Key? key}) : super(key: key);

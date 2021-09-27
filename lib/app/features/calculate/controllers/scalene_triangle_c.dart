@@ -1,14 +1,12 @@
 import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
-
 
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
-
-
 
 import 'package:get/get.dart';
 
@@ -32,24 +30,24 @@ class ScaleneTriangleController extends GetxController {
 
   var activeParamMap = <int, ScaleneTriangle>{}.obs;
 
-  var aAngle = startAngleValue.obs;
-  var bAngle = startAngleValue.obs;
-  var yAngle = startAngleValue.obs;
   var aSide = startLengthValue.obs;
   var bSide = startLengthValue.obs;
   var cSide = startLengthValue.obs;
   var hHeight = startLengthValue.obs;
+  var aAngle = startAngleValue.obs;
+  var bAngle = startAngleValue.obs;
+  var yAngle = startAngleValue.obs;
 
   var area = "".obs;
   var perimeter = "".obs;
 
-  var aAngleD = 0.0;
-  var bAngleD = 0.0;
-  var yAngleD = 0.0;
-  var aSideD = 0.0;
-  var bSideD = 0.0;
-  var cSideD = 0.0;
-  var hHeightD = 0.0;
+  double aSideD = 0.0;
+  double bSideD = 0.0;
+  double cSideD = 0.0;
+  double hHeightD = 0.0;
+  double aAngleD = 0.0;
+  double bAngleD = 0.0;
+  double yAngleD = 0.0;
 
   var isDeg = true.obs;
 
@@ -68,10 +66,19 @@ class ScaleneTriangleController extends GetxController {
   //что  бы не сбрасывать в методе
   var paramLenght = ScaleneTriangle.empty;
 
-  int precisionResult = 0;
+  late int precisionResult;
   double minSizeImage = 0;
 
+  @override
+  void onInit() {
+    clearAll();
+    showMessage();
+    super.onInit();
+  }
+
   void clickKey(KeySymbol keySymbol) {
+    precisionResult = GlobalServ.to.precisionResult.value;
+
     log.v('start click ${keySymbol.value}');
     printElements();
     // showMessage();
@@ -115,9 +122,9 @@ class ScaleneTriangleController extends GetxController {
       return;
     }
 
-    if (ifMaxNumbeEnter()) {
-      log.e('return max value');
-      showMessage();
+    if (ifMaxNumberEnter()) {
+      log.e('return max');
+      showSnack('max');
       return;
     }
 
@@ -214,6 +221,7 @@ class ScaleneTriangleController extends GetxController {
     setActiveParam();
     showMessage();
 
+    // if (isActiveOneParamEmpty()) return;
     initValue();
     setActiveParam();
     calculate();
@@ -223,6 +231,7 @@ class ScaleneTriangleController extends GetxController {
     log.v('end click ${keySymbol.value}');
   }
 
+//
   void printElements() {
     log.v('''printElements
         ${activeParamMap[1]} ${activeParamMap[2]}
@@ -487,7 +496,7 @@ class ScaleneTriangleController extends GetxController {
     return false;
   }
 
-  bool ifMaxNumbeEnter() {
+  bool ifMaxNumberEnter() {
     String value;
 
     if (isaSide.value) {
@@ -852,10 +861,5 @@ class ScaleneTriangleController extends GetxController {
       // }
       // }
     }
-  }
-
-  @override
-  Future<void> onInit() async {
-    super.onInit();
   }
 }
