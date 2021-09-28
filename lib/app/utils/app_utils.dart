@@ -103,30 +103,5 @@ class AppUtilsNumber {
   }
 }
 
-abstract class AppUtilsMap {
-  /* void main() {
-  foo<E1>(E1.values);
-  foo<E2>(E2.values);
-}
 
-enum E1 { a, b }
-enum E2 { c, d }
 
-void foo<T>(List<T> values) {
-  for (var v in values) {
-    print(v);
-  }
-  print(values[0]);
-}
-
- */
-  //получить без последнего значения и начиная с одного
-  static dynamic getN<T>(List<T> val) {
-    Map<int, dynamic> switchParam = {};
-    for (int i = 0; i < val.length - 1; i++) {
-      switchParam[i + 1] = val[i];
-    }
-
-    return switchParam;
-  }
-}

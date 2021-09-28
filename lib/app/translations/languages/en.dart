@@ -2,6 +2,7 @@ Map<String, String> en = {
   'about': 'About App',
   'app_name': 'Triangle',
   'app_name_sub': 'Calculations',
+  'enter_3_parameters': 'Enter 3 parameters',
   'enter_2_parameters': 'Enter 2 parameters',
   'enter_1_parameters': 'Enter 1 parameter',
   'rate_app': 'Rate app',

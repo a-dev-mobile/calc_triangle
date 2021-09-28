@@ -8,6 +8,7 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
+import 'package:calc_triangle/app/utils/app_utils_map.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
 
@@ -122,6 +123,9 @@ class ScaleneTriangleController extends GetxController {
     if (keySymbol == Keys.backspace) {
       backspace();
       setActiveParam();
+      log.v(
+          'backspace active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
+
       initValue();
       calculate();
       showMessage();
@@ -236,6 +240,9 @@ class ScaleneTriangleController extends GetxController {
     // if (isActiveOneParamEmpty()) return;
 
     setActiveParam();
+   log.v(
+          'click active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
+  
     initValue();
     calculate();
     showMessage();
@@ -592,43 +599,88 @@ class ScaleneTriangleController extends GetxController {
 
     activeInput = isaSide.value;
     valueActiveInput = aSide.value;
+    ScaleneTriangle oldValue;
+    var newValue = ScaleneTriangle.empty;
+
     if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = ScaleneTriangle.aSide;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, ScaleneTriangle>();
+
       return true;
     }
 
     activeInput = isbSide.value;
     valueActiveInput = bSide.value;
     if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = ScaleneTriangle.bSide;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, ScaleneTriangle>();
+
       return true;
     }
 
     activeInput = iscSide.value;
     valueActiveInput = cSide.value;
     if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = ScaleneTriangle.cSide;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, ScaleneTriangle>();
+
       return true;
     }
 
     activeInput = ishHeight.value;
     valueActiveInput = hHeight.value;
     if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = ScaleneTriangle.hHeight;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, ScaleneTriangle>();
+
       return true;
     }
 
     activeInput = isaAngle.value;
     valueActiveInput = aAngle.value;
     if (activeInput && valueActiveInput == startAngleValue) {
+      oldValue = ScaleneTriangle.aAngle;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, ScaleneTriangle>();
+
       return true;
     }
 
     activeInput = isbAngle.value;
     valueActiveInput = bAngle.value;
     if (activeInput && valueActiveInput == startAngleValue) {
+      oldValue = ScaleneTriangle.bAngle;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, ScaleneTriangle>();
+
       return true;
     }
 
     activeInput = isyAngle.value;
     valueActiveInput = yAngle.value;
     if (activeInput && valueActiveInput == startAngleValue) {
+      oldValue = ScaleneTriangle.yAngle;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, ScaleneTriangle>();
+
       return true;
     }
     return false;
@@ -637,14 +689,10 @@ class ScaleneTriangleController extends GetxController {
   void setActiveParam() {
     log.v(
         'start active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
+
     ScaleneTriangle paramActive = ScaleneTriangle.empty;
 
-    if (isInputStartValue()) {
-      resetLastActiveParam();
-      log.v(
-          'isInputStartValue active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
-      return;
-    }
+    if (isInputStartValue()) return;
 
     if (isaSide.value) {
       paramActive = ScaleneTriangle.aSide;
@@ -666,6 +714,17 @@ class ScaleneTriangleController extends GetxController {
       paramActive = ScaleneTriangle.yAngle;
     }
 
+//если один параметр пустой заменяем его
+    if (isOnlyOneParamEmpty()) {
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap,
+              oldValue: ScaleneTriangle.empty,
+              newValue: paramActive)
+          .cast<int, ScaleneTriangle>();
+
+      return;
+    }
+
     activeParamMap[4] = paramActive;
 
 //если последний параметр похож на активный
@@ -678,8 +737,7 @@ class ScaleneTriangleController extends GetxController {
 
     activeParamMap[3] = activeParamMap[4]!;
 
-    log.v(
-        'end active param | ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
+   
   }
 
   bool isAvailableOneParam(
@@ -721,13 +779,20 @@ class ScaleneTriangleController extends GetxController {
     log.w('start showMessage');
 
     // если есть пустой параметр
-    if (isOnlyOneParamEmpty()) {
-      showSnack(TranslateHelper.enterOneParameters);
-      return;
-    }
-
     if (isActiveThreeParamAngles()) {
       showSnack(TranslateHelper.messageEnterAnyLength);
+      return;
+    }
+    if (isOnlyThreeParamEmpty()) {
+      showSnack(TranslateHelper.enterThreeParameters);
+      return;
+    }
+    if (isOnlyTwoParamEmpty()) {
+      showSnack(TranslateHelper.enterTwoParameters);
+      return;
+    }
+    if (isOnlyOneParamEmpty()) {
+      showSnack(TranslateHelper.enterOneParameters);
       return;
     }
 
@@ -829,6 +894,30 @@ class ScaleneTriangleController extends GetxController {
         activeParamMap[1] != ScaleneTriangle.empty &&
             activeParamMap[2] != ScaleneTriangle.empty &&
             activeParamMap[3] == ScaleneTriangle.empty) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isOnlyTwoParamEmpty() {
+    if (activeParamMap[1] == ScaleneTriangle.empty &&
+            activeParamMap[2] == ScaleneTriangle.empty &&
+            activeParamMap[3] != ScaleneTriangle.empty ||
+        activeParamMap[1] == ScaleneTriangle.empty &&
+            activeParamMap[2] != ScaleneTriangle.empty &&
+            activeParamMap[3] == ScaleneTriangle.empty ||
+        activeParamMap[1] != ScaleneTriangle.empty &&
+            activeParamMap[2] == ScaleneTriangle.empty &&
+            activeParamMap[3] == ScaleneTriangle.empty) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isOnlyThreeParamEmpty() {
+    if (activeParamMap[1] == ScaleneTriangle.empty &&
+        activeParamMap[2] == ScaleneTriangle.empty &&
+        activeParamMap[3] == ScaleneTriangle.empty) {
       return true;
     }
     return false;
@@ -1080,6 +1169,9 @@ class ScaleneTriangleController extends GetxController {
 
     initValue();
     setActiveParam();
+       log.v(
+          'longBack active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
+  
     calculate();
     showMessage();
     restartActiveParamIfZeroValue();
@@ -1096,6 +1188,7 @@ class ScaleneTriangleController extends GetxController {
       //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
         aSideD = 0;
+
         newInput = startLengthValue;
       }
       aSide.value = newInput;
