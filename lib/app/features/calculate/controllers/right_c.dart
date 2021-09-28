@@ -1130,7 +1130,7 @@ class RightTriangleController extends GetxController {
     log.v('start show message');
 
     // если есть пустой параметр
-    if (isActiveOneParamEmpty()) {
+    if (isOnlyOneParamEmpty()) {
       showSnack(TranslateHelper.enterOneParameters);
       return;
     }
@@ -1262,7 +1262,7 @@ class RightTriangleController extends GetxController {
     return false;
   }
 
-  bool isActiveOneParamEmpty() {
+  bool isOnlyOneParamEmpty() {
     if (activeParamMap[1] == RightTriangle.empty &&
             activeParamMap[2] != RightTriangle.empty ||
         activeParamMap[2] == RightTriangle.empty &&
