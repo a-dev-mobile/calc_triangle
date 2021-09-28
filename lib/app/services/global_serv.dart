@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:calc_triangle/app/constants/const_string.dart';
+import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 import 'package:calc_triangle/app/features/setting/controller/setting_c.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
@@ -18,6 +19,7 @@ class GlobalServ extends GetxService {
   //что бы не доставать локально, сохраним в глоб сервисе
 
   var precisionResult = 3.obs;
+  late Shape aciveShape;
 // ========================================
 
   void setStorageIsDarkTheme(bool isDark) async {
@@ -70,8 +72,6 @@ class GlobalServ extends GetxService {
       isShowLaunchScreen.value = false;
       isDarkTheme.value = false;
       setDefaultLocale();
-
-
     } else {
       // устанавливаем если не первый запуск
       isFirstStartApp = false;
@@ -81,10 +81,8 @@ class GlobalServ extends GetxService {
           await LocalStorage().getItemString(ConstString.keyLocaleApp);
       isDarkTheme.value =
           await LocalStorage().getItemBool(ConstString.keyIsDarkTheme);
-         precisionResult.value =
+      precisionResult.value =
           await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
-    
-   
     }
 
     super.onInit();

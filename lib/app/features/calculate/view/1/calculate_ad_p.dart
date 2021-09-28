@@ -4,6 +4,7 @@ import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/sca
 import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 import 'package:calc_triangle/app/features/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/model/calculate_m.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,7 +54,7 @@ class _CalculatePageState extends State<CalculatePage> {
   }
 
   Widget getShapeCalculate() {
-    final Shape shape = Get.arguments;
+    final Shape shape = GlobalServ.to.aciveShape;
 
     switch (shape) {
       case Shape.rightTriangle:

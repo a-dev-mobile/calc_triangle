@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
+import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
@@ -40,6 +43,8 @@ class ScaleneTriangleController extends GetxController {
 
   var area = "".obs;
   var perimeter = "".obs;
+  var xSPoint = "".obs;
+  var ySPoint = "".obs;
 
   double aSideD = 0.0;
   double bSideD = 0.0;
@@ -64,10 +69,9 @@ class ScaleneTriangleController extends GetxController {
   var isActiveImageInfo = false.obs;
 
   //что  бы не сбрасывать в методе
-  var paramLenght = ScaleneTriangle.empty;
+  var paramLastLenght = ScaleneTriangle.empty;
 
   late int precisionResult;
-  double minSizeImage = 0;
 
   @override
   void onInit() {
@@ -113,8 +117,8 @@ class ScaleneTriangleController extends GetxController {
 
     if (keySymbol == Keys.backspace) {
       backspace();
-      initValue();
       setActiveParam();
+      initValue();
       calculate();
       showMessage();
 
@@ -122,7 +126,8 @@ class ScaleneTriangleController extends GetxController {
     }
 
     if (ifMaxNumberEnter()) {
-      showMessage();
+      log.e('return max');
+      showSnack('max');
       return;
     }
 
@@ -132,7 +137,11 @@ class ScaleneTriangleController extends GetxController {
 
       return;
     }
-    
+    if (isAngleOver180(keySymbol)) {
+      log.e('isAngleOver180');
+      showSnack(TranslateHelper.messageAngleOver180);
+      return;
+    }
 
     String newInput = keySymbol.value;
     String oldInput;
@@ -217,22 +226,13 @@ class ScaleneTriangleController extends GetxController {
     }
 
     log.v('end input');
-    setActiveParam();
+    // setActiveParam();
     // showMessage();
 
     // if (isActiveOneParamEmpty()) return;
 
-    initValue();
-
-    if (isAngleOver180()) {
-      log.e('isAngleOver90');
-      showSnack(TranslateHelper.messageAngleOver90);
-
-      return;
-    }
-
-
     setActiveParam();
+    initValue();
     calculate();
     showMessage();
 
@@ -245,13 +245,13 @@ class ScaleneTriangleController extends GetxController {
     log.v('''printElements
         ${activeParamMap[1]} ${activeParamMap[2]} ${activeParamMap[3]}
 
-        $aSideD ${aSide.value} aSide 
-        $bSide ${bSide.value} bSide 
-        $cSide ${cSide.value} cSide 
-        $hHeightD ${hHeight.value} Height
-        $aAngleD ${aAngle.value} aAngle 
-        $bAngleD ${bAngle.value} bAngle
-        $yAngleD ${yAngle.value} yAngle
+        $aSideD | ${aSide.value} aSide 
+        $bSideD | ${bSide.value} bSide 
+        $cSideD | ${cSide.value} cSide 
+        $hHeightD | ${hHeight.value} Height
+        $aAngleD | ${aAngle.value} aAngle 
+        $bAngleD | ${bAngle.value} bAngle
+        $yAngleD | ${yAngle.value} yAngle
        ''');
   }
 
@@ -293,7 +293,6 @@ class ScaleneTriangleController extends GetxController {
       1: ScaleneTriangle.empty,
       2: ScaleneTriangle.empty,
       3: ScaleneTriangle.empty,
-      4: ScaleneTriangle.empty,
     };
 
     resetValue();
@@ -358,21 +357,83 @@ class ScaleneTriangleController extends GetxController {
 
   void calcYangKnowAangBang() {
     yAngleD = 180 - aAngleD - bAngleD;
-    yAngle.value = AppUtilsNumber.getFormatNumber(yAngleD, precisionResult);
+
+    yAngle.value =
+        AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
   }
+
   void calcAangKnowYangBang() {
     aAngleD = 180 - yAngleD - bAngleD;
-    aAngle.value = AppUtilsNumber.getFormatNumber(aAngleD, precisionResult);
+
+    aAngle.value =
+        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
   }
-    void calcBangKnowYangAang() {
+
+  void calcBangKnowYangAang() {
     bAngleD = 180 - yAngleD - aAngleD;
+
+    bAngle.value =
+        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+  }
+
+  void calcHheiKnowCsideAang() {
+    hHeightD = cSideD * sin(AppConvert.toRadian(aAngleD));
+    hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
+  }
+
+  void calcHheiKnowBsideBang() {
+    hHeightD = bSideD * sin(AppConvert.toRadian(bAngleD));
+    hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
+  }
+
+  void calcBangKnowAsideBSideCside() {
+    bAngleD = AppConvert.toDegree(acos(
+        (pow(aSideD, 2) + pow(bSideD, 2) - pow(cSideD, 2)) /
+            (2 * aSideD * bSideD)));
     bAngle.value = AppUtilsNumber.getFormatNumber(bAngleD, precisionResult);
   }
+
+  void calcYangKnowAsideBSideCside() {
+    yAngleD = AppConvert.toDegree(acos(
+        (pow(bSideD, 2) + pow(cSideD, 2) - pow(aSideD, 2)) /
+            (2 * cSideD * bSideD)));
+    yAngle.value = AppUtilsNumber.getFormatNumber(yAngleD, precisionResult);
+  }
+
+  void calcAangKnowAsideBSideCside() {
+    aAngleD = AppConvert.toDegree(acos(
+        (pow(aSideD, 2) + pow(cSideD, 2) - pow(bSideD, 2)) /
+            (2 * aSideD * cSideD)));
+    aAngle.value = AppUtilsNumber.getFormatNumber(aAngleD, precisionResult);
+  }
+
+  void calcAreaKnowAsideHhei() {
+    area.value = AppUtilsNumber.getFormatNumber(
+        0.5 * aSideD * hHeightD, precisionResult);
+  }
+
+  void calcPerimKnowAsideBsideCside() {
+    perimeter.value = AppUtilsNumber.getFormatNumber(
+        aSideD + bSideD + cSideD, precisionResult);
+  }
+
+  void calcXsPointKnowAsideCsideAang() {
+    xSPoint.value = AppUtilsNumber.getFormatNumber(
+        (aSideD + cSideD * cos(AppConvert.toRadian(aAngleD))) / 3,
+        precisionResult);
+  }
+
+  void calcYsPointKnowCsideAang() {
+    ySPoint.value = AppUtilsNumber.getFormatNumber(
+        (cSideD * sin(AppConvert.toRadian(aAngleD))) / 3, precisionResult);
+  }
+
   void calculate() {
     log.i('start calculate');
     printElements();
     ScaleneTriangle param1;
     ScaleneTriangle param2;
+    ScaleneTriangle param3;
 
     // ==========================================
     // aAngle bAngle == ok
@@ -400,6 +461,58 @@ class ScaleneTriangleController extends GetxController {
     if (isAvailableTwoParams(param1, param2)) {
       calcBangKnowYangAang();
     }
+
+    // ==========================================
+    //  //aSide bSide cSide ==
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.cSide;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowAsideBSideCside();
+      calcAangKnowAsideBSideCside();
+      calcYangKnowAsideBSideCside();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+//aSide bSide hHeight
+//aSide bSide aAngle
+//aSide bSide bAngle
+//aSide bSide yAngle
+//aSide cSide hHeight
+//aSide cSide aAngle
+//aSide cSide bAngle
+//aSide cSide yAngle
+//aSide hHeight aAngle
+//aSide hHeight bAngle
+//aSide hHeight yAngle
+//aSide aAngle bAngle
+//aSide aAngle yAngle
+//aSide bAngle yAngle
+//bSide cSide hHeight
+//bSide cSide aAngle
+//bSide cSide bAngle
+//bSide cSide yAngle
+//bSide hHeight aAngle
+//bSide hHeight bAngle
+//bSide hHeight yAngle
+//bSide aAngle bAngle
+//bSide aAngle yAngle
+//bSide bAngle yAngle
+//cSide hHeight aAngle
+//cSide hHeight bAngle
+//cSide hHeight yAngle
+//cSide aAngle bAngle
+//cSide aAngle yAngle
+//cSide bAngle yAngle
+//hHeight aAngle bAngle
+//hHeight aAngle yAngle
+//hHeight bAngle yAngle
+//aAngle bAngle yAngle
 
 // проверка если цифры не числа
     checkIfNaN();
@@ -435,50 +548,53 @@ class ScaleneTriangleController extends GetxController {
   void setActiveParam() {
     log.v(
         'start active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
-    var paramActive = ScaleneTriangle.empty;
+    ScaleneTriangle paramActive = ScaleneTriangle.empty;
 
     if (isaSide.value) {
       if (aSide.value == startLengthValue) {
-        // resetActiveParam();
+        resetActiveParam();
         return;
       }
 
       paramActive = ScaleneTriangle.aSide;
+      paramLastLenght = ScaleneTriangle.aSide;
     } else if (isbSide.value) {
       if (bSide.value == startLengthValue) {
-        // resetActiveParam();
+        resetActiveParam();
         return;
       }
-
       paramActive = ScaleneTriangle.bSide;
+      paramLastLenght = ScaleneTriangle.bSide;
     } else if (iscSide.value) {
       if (cSide.value == startLengthValue) {
-        // resetActiveParam();
+        resetActiveParam();
         return;
       }
 
       paramActive = ScaleneTriangle.cSide;
+      paramLastLenght = ScaleneTriangle.cSide;
     } else if (ishHeight.value) {
       if (hHeight.value == startLengthValue) {
-        // resetActiveParam();
+        resetActiveParam();
         return;
       }
       paramActive = ScaleneTriangle.hHeight;
+      paramLastLenght = ScaleneTriangle.hHeight;
     } else if (isaAngle.value) {
       if (aAngle.value == startAngleValue) {
-        // resetActiveParam();
+        resetActiveParam();
         return;
       }
       paramActive = ScaleneTriangle.aAngle;
     } else if (isbAngle.value) {
       if (bAngle.value == startAngleValue) {
-        // resetActiveParam();
+        resetActiveParam();
         return;
       }
       paramActive = ScaleneTriangle.bAngle;
     } else if (isyAngle.value) {
       if (yAngle.value == startAngleValue) {
-        // resetActiveParam();
+        resetActiveParam();
         return;
       }
       paramActive = ScaleneTriangle.yAngle;
@@ -486,31 +602,25 @@ class ScaleneTriangleController extends GetxController {
 
     activeParamMap[4] = paramActive;
 
-//если последний параметр похож на активный
-    if (activeParamMap[3] == activeParamMap[4]) return;
+// //если последний параметр похож на активный
+//     if (activeParamMap[3] == activeParamMap[4]) return;
 
-    activeParamMap[1] = activeParamMap[2]!;
-    activeParamMap[2] = activeParamMap[3]!;
-    activeParamMap[3] = activeParamMap[4]!;
-    // }
-    // if (activeParamMap[1] == activeParamMap[2] ||
-    //     activeParamMap[2] != activeParamMap[3]) {
-    //   activeParamMap[1] = activeParamMap[2]!;
-    //   activeParamMap[2] = activeParamMap[3]!;
-    // }
+    if (activeParamMap[1] == activeParamMap[2] ||
+        activeParamMap[2] == activeParamMap[3] ||
+        activeParamMap[3] != activeParamMap[4]) {
+      activeParamMap[1] = activeParamMap[2]!;
+      activeParamMap[2] = activeParamMap[3]!;
+      activeParamMap[3] = activeParamMap[4]!;
+    }
 
     log.v(
-        'end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
+        'end active param | ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]} ${activeParamMap[4]}');
   }
 
-  bool isAvailableThreeParams(
+  bool isAvailableOneParam(
     ScaleneTriangle param1,
-    ScaleneTriangle param2,
-    ScaleneTriangle param3,
   ) {
-    if (activeParamMap.containsValue(param1) &&
-        activeParamMap.containsValue(param2) &&
-        activeParamMap.containsValue(param3)) {
+    if (activeParamMap.containsValue(param1)) {
       return true;
     }
     return false;
@@ -527,10 +637,24 @@ class ScaleneTriangleController extends GetxController {
     return false;
   }
 
+  bool isAvailableThreeParams(
+    ScaleneTriangle param1,
+    ScaleneTriangle param2,
+    ScaleneTriangle param3,
+  ) {
+    if (activeParamMap.containsValue(param1) &&
+        activeParamMap.containsValue(param2) &&
+        activeParamMap.containsValue(param3)) {
+      return true;
+    }
+    return false;
+  }
+
   void showMessage() {
     // если активные углы то сбрасываем один выбор до последнй длины
-    if (isActiveParamAngles()) {
-      showSnack('введите одну из сторон');
+
+    if (isActiveThreeParamAngles()) {
+      showSnack(TranslateHelper.messageEnterAnyLength);
       return;
     }
 
@@ -543,27 +667,69 @@ class ScaleneTriangleController extends GetxController {
     // showSnack('OK');
   }
 
-  bool isAngleOver180() {
-// TODO сделать проверку на углы
+  bool isAngleOver180(KeySymbol keySymbol) {
+    String newInput = keySymbol.value;
+    initValue();
     double sum = 0;
     if (isaAngle.value) {
       sum = double.parse(
           AppUtilsString.removeLastCharacter(aAngle.value) + newInput);
-      if (90 <= sum) return true;
+      if (180 <= sum) {
+        return true;
+      } else if (180 <= yAngleD + bAngleD) {
+        return true;
+      }
     } else if (isbAngle.value) {
       sum = double.parse(
           AppUtilsString.removeLastCharacter(bAngle.value) + newInput);
-      if (90 <= sum) return true;
+      if (180 <= sum) {
+        return true;
+      } else if (180 <= yAngleD + aAngleD) {
+        return true;
+      }
+    } else if (isyAngle.value) {
+      sum = double.parse(
+          AppUtilsString.removeLastCharacter(yAngle.value) + newInput);
+      if (180 <= sum) {
+        return true;
+      } else if (180 <= yAngleD + bAngleD) {
+        return true;
+      }
     }
+
     return false;
   }
-  bool isActiveParamAngles() {
+
+  bool isActiveThreeParamAngles() {
     bool condition1 = activeParamMap.containsValue(ScaleneTriangle.aAngle);
     bool condition2 = activeParamMap.containsValue(ScaleneTriangle.bAngle);
     bool condition3 = activeParamMap.containsValue(ScaleneTriangle.yAngle);
 
     if (condition1 && condition2 && condition3) {
-      logger.e('isActiveParamAngles');
+      logger.e('isActiveThreeParamAngles');
+      return true;
+    }
+
+    return false;
+  }
+
+  bool isActiveTwoParamAngles() {
+    bool condition1 = activeParamMap.containsValue(ScaleneTriangle.aAngle);
+    bool condition2 = activeParamMap.containsValue(ScaleneTriangle.bAngle);
+    bool condition3 = activeParamMap.containsValue(ScaleneTriangle.yAngle);
+
+    if (condition1 && condition2) {
+      logger.e('isActiveTwoParamAngles');
+      return true;
+    }
+
+    if (condition1 && condition3) {
+      logger.e('isActiveTwoParamAngles');
+      return true;
+    }
+
+    if (condition2 && condition3) {
+      logger.e('isActiveTwoParamAngles');
       return true;
     }
     return false;
@@ -779,8 +945,7 @@ class ScaleneTriangleController extends GetxController {
       aSide.value = startLengthValue;
     } else if (isbSide.value) {
       bSide.value = startLengthValue;
-    }
-    if (iscSide.value) {
+    } else if (iscSide.value) {
       cSide.value = startLengthValue;
     } else if (ishHeight.value) {
       hHeight.value = startLengthValue;
@@ -901,6 +1066,8 @@ class ScaleneTriangleController extends GetxController {
     area.value = startLengthValue;
     perimeter.value = startLengthValue;
 
+    xSPoint.value = startLengthValue;
+    ySPoint.value = startLengthValue;
     aSideD = 0;
     bSideD = 0;
     cSideD = 0;

@@ -16,55 +16,53 @@ class ScaleneDetailInfoWidget extends StatelessWidget {
     return SingleChildScrollView(child: Obx(() {
       return Column(
         children: [
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.aCathet),
-          //   leading: 'a',
-          //   subtitle: 'a - catheti',
-          //   title: c.aCathet.value,
-          // ),
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.bCathet),
-          //   leading: 'b',
-          //   subtitle: 'b - catheti',
-          //   title: c.bCathet.value,
-          // ),
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.cHypotenuse),
-          //   leading: 'c',
-          //   subtitle: 'c - hypotenuse',
-          //   title: c.cHypotenuse.value,
-          // ),
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.hHeight),
-          //   leading: 'h',
-          //   subtitle: 'h - height of the triangle',
-          //   title: c.hHeight.value,
-          // ),
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.aAngle),
-          //   leading: 'α',
-          //   subtitle: 'α - acute angles in degrees',
-          //   title: c.aAngle.value,
-          // ),
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.bAngle),
-          //   leading: 'β',
-          //   subtitle: 'β - acute angles in degrees',
-          //   title: c.bAngle.value,
-          // ),
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.mCompCside),
-          //   leading: 'm',
-          //   subtitle: 'm - components of the c - hypotenuse',
-          //   title: c.mCompCside.value,
-          // ),
-          // ItemDetail(
-          //   isActive: c.isAvailableParam(RightTriangle.kCompCside),
-          //   leading: 'k',
-          //   subtitle: 'k - components of the c - hypotenuse',
-          //   title: c.kCompCside.value,
-          // ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(ScaleneTriangle.aSide),
+            leading: 'a',
+            subtitle: 'a - base of the triangle',
+            title: c.aSide.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(ScaleneTriangle.bSide),
+            leading: 'b',
+            subtitle: 'b - sides of the triangle',
+            title: c.bSide.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(ScaleneTriangle.cSide),
+            leading: 'c',
+            subtitle: 'c - sides of the triangle',
+            title: c.cSide.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(ScaleneTriangle.hHeight),
+            leading: 'h',
+            subtitle: 'h - height of the triangle',
+            title: c.hHeight.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(ScaleneTriangle.aAngle),
+            leading: 'α',
+            subtitle: 'α - internal angle in degrees',
+            title: c.aAngle.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(ScaleneTriangle.bAngle),
+            leading: 'β',
+            subtitle: 'β - internal angle in degrees',
+            title: c.bAngle.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(ScaleneTriangle.yAngle),
+            leading: 'γ',
+            subtitle: 'γ - internal angle in degrees',
+            title: c.aAngle.value,
+          ),
           AppWidgets.dividerWelcome(),
+           Text(
+            'Area and Perimeter',
+            style: AppStyleText.titleText(context),
+          ),
           ItemDetail(
             isActive: false,
             leading: 'A',
@@ -76,6 +74,23 @@ class ScaleneDetailInfoWidget extends StatelessWidget {
             leading: 'P',
             subtitle: 'Perimeter',
             title: c.perimeter.value,
+          ),
+          AppWidgets.dividerWelcome(),
+          Text(
+            'Geometric centroid',
+            style: AppStyleText.titleText(context),
+          ),
+          ItemDetail(
+            isActive: false,
+            leading: 'Xs',
+            subtitle: 'X cordinate of the S point',
+            title: c.xSPoint.value,
+          ),
+          ItemDetail(
+            isActive: false,
+            leading: 'Ys',
+            subtitle: 'Y cordinate of the S point',
+            title: c.ySPoint.value,
           ),
         ],
       );

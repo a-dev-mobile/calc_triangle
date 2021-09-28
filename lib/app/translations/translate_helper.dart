@@ -39,8 +39,9 @@ class TranslateHelper {
   static String get selectThemeLight => 'select_theme_light'.tr;
   static String get selectThemeDark => 'select_theme_dark'.tr;
   static String get messageAngleOver90 => 'message_angle_less_90'.tr;
+  static String get messageAngleOver180 => 'message_angle_less_180'.tr;
   static String get selectedPrecisionResult => 'selected_precision_result'.tr;
-  static String get messageEnterValueSides => 'enter_value_sides'.tr;
+  static String get messageEnterAnyLength => 'message_enter_any_length'.tr;
   static String get messageHypotenuseGreaterCathetus =>
       'message_hypotenuse_greater_cathetus'.tr;
 

@@ -48,14 +48,14 @@ class RightTriangleController extends GetxController {
   var area = "".obs;
   var perimeter = "".obs;
 
-  var aCathetD = 0.0;
-  var bCathetD = 0.0;
-  var cHypotenuseD = 0.0;
-  var hHeightD = 0.0;
-  var kCompCsideD = 0.0;
-  var mCompCsideD = 0.0;
-  var aAngleD = 0.0;
-  var bAngleD = 0.0;
+  double aCathetD = 0.0;
+  double bCathetD = 0.0;
+  double cHypotenuseD = 0.0;
+  double hHeightD = 0.0;
+  double kCompCsideD = 0.0;
+  double mCompCsideD = 0.0;
+  double aAngleD = 0.0;
+  double bAngleD = 0.0;
 
   var isDeg = true.obs;
   var isaAngle = false.obs;
@@ -72,7 +72,7 @@ class RightTriangleController extends GetxController {
   var isActiveImageInfo = false.obs;
 
   //что  бы не сбрасывать в методе
-  var paramLenght = RightTriangle.empty;
+  var paramLastLenght = RightTriangle.empty;
 
   late int precisionResult;
 
@@ -86,19 +86,19 @@ class RightTriangleController extends GetxController {
   void clickKey(KeySymbol keySymbol) {
     precisionResult = GlobalServ.to.precisionResult.value;
 
-    log.v('start click ${keySymbol.value}');
+    log.w('start click ${keySymbol.value}');
     printElements();
-    // showMessage();
+
 
     if (keySymbol == Keys.next) {
       nextElement();
-      // showMessage();
+
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
-      // showMessage();
+
       return;
     }
 
@@ -236,7 +236,7 @@ class RightTriangleController extends GetxController {
     setActiveParam();
     showMessage();
 
-    if (isActiveOneParamEmpty()) return;
+    // if (isActiveOneParamEmpty()) return;
 
     initValue();
     setActiveParam();
@@ -244,7 +244,7 @@ class RightTriangleController extends GetxController {
     showMessage();
 
     printElements();
-    log.v('end click ${keySymbol.value}');
+    log.w('end click ${keySymbol.value}');
   }
 
   void printElements() {
@@ -324,7 +324,7 @@ class RightTriangleController extends GetxController {
   }
 
   void initValue() {
-    log.v('start initValue');
+    log.w('start initValue');
 
     if (isDeg.isFalse) {
       convertDMSToDeg();
@@ -1026,7 +1026,7 @@ class RightTriangleController extends GetxController {
   void setActiveParam() {
     log.v(
         'start active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
-    RightTriangle paramAll = RightTriangle.empty;
+    RightTriangle paramActive = RightTriangle.empty;
 
     if (isaCathet.value) {
       if (aCathet.value == startLengthValue) {
@@ -1034,15 +1034,15 @@ class RightTriangleController extends GetxController {
         return;
       }
 
-      paramAll = RightTriangle.aCathet;
-      paramLenght = RightTriangle.aCathet;
+      paramActive = RightTriangle.aCathet;
+      paramLastLenght = RightTriangle.aCathet;
     } else if (isbCathet.value) {
       if (bCathet.value == startLengthValue) {
         resetActiveParam();
         return;
       }
-      paramAll = RightTriangle.bCathet;
-      paramLenght = RightTriangle.bCathet;
+      paramActive = RightTriangle.bCathet;
+      paramLastLenght = RightTriangle.bCathet;
     } else if (iscHypotenuse.value) {
       if (cHypotenuse.value == startLengthValue) {
         resetActiveParam();
@@ -1050,45 +1050,45 @@ class RightTriangleController extends GetxController {
         return;
       }
 
-      paramAll = RightTriangle.cHypotenuse;
-      paramLenght = RightTriangle.cHypotenuse;
+      paramActive = RightTriangle.cHypotenuse;
+      paramLastLenght = RightTriangle.cHypotenuse;
     } else if (ishHeight.value) {
       if (hHeight.value == startLengthValue) {
         resetActiveParam();
         return;
       }
-      paramAll = RightTriangle.hHeight;
-      paramLenght = RightTriangle.hHeight;
+      paramActive = RightTriangle.hHeight;
+      paramLastLenght = RightTriangle.hHeight;
     } else if (ismCompCside.value) {
       if (mCompCside.value == startLengthValue) {
         resetActiveParam();
         return;
       }
 
-      paramAll = RightTriangle.mCompCside;
-      paramLenght = RightTriangle.mCompCside;
+      paramActive = RightTriangle.mCompCside;
+      paramLastLenght = RightTriangle.mCompCside;
     } else if (iskCompCside.value) {
       if (kCompCside.value == startLengthValue) {
         resetActiveParam();
         return;
       }
-      paramAll = RightTriangle.kCompCside;
-      paramLenght = RightTriangle.kCompCside;
+      paramActive = RightTriangle.kCompCside;
+      paramLastLenght = RightTriangle.kCompCside;
     } else if (isaAngle.value) {
       if (aAngle.value == startAngleValue) {
         resetActiveParam();
         return;
       }
-      paramAll = RightTriangle.aAngle;
+      paramActive = RightTriangle.aAngle;
     } else if (isbAngle.value) {
       if (bAngle.value == startAngleValue) {
         resetActiveParam();
         return;
       }
-      paramAll = RightTriangle.bAngle;
+      paramActive = RightTriangle.bAngle;
     }
 
-    activeParamMap[3] = paramAll;
+    activeParamMap[3] = paramActive;
 
     if (activeParamMap[1] == activeParamMap[2] ||
         activeParamMap[2] != activeParamMap[3]) {
@@ -1097,9 +1097,9 @@ class RightTriangleController extends GetxController {
     }
 
 // если активные углы то сбрасываем один выбор до последнй длины
-    if (isActiveParamAngles()) {
-      activeParamMap[1] = paramLenght;
-    }
+    // if (isActiveParamAngles()) {
+    //   activeParamMap[1] = paramLenght;
+    // }
 
     log.v(
         'end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
@@ -1136,7 +1136,7 @@ class RightTriangleController extends GetxController {
     }
 
     if (isActiveParamAngles()) {
-      showSnack(TranslateHelper.messageEnterValueSides);
+      showSnack(TranslateHelper.messageEnterAnyLength);
       return;
     }
     if (isActiveTwoParamEmpty()) {
