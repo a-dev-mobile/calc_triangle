@@ -35,6 +35,7 @@ class CsideWidget extends StatelessWidget {
     c.isaAngle.value = false;
     c.isbAngle.value = false;
     c.isyAngle.value = false;
+      c.showMessage();
   }
 
   //===============

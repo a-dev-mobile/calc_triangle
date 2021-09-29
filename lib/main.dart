@@ -16,6 +16,7 @@ import 'app/translations/app_translations.dart';
 
 
 void main() async {
+  
   // Logger.level = Level.nothing; //TODO on LOG
   WidgetsFlutterBinding.ensureInitialized();
 
