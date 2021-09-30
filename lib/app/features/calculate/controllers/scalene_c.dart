@@ -923,7 +923,7 @@ class ScaleneTriangleController extends GetxController {
 //bSide hHeight bAngle
 
     // ==========================================
-    //bSide hHeight yAngle
+    //bSide hHeight yAngle ==ok
     // ==========================================
     param1 = ScaleneTriangle.hHeight;
     param2 = ScaleneTriangle.bSide;
@@ -941,7 +941,7 @@ class ScaleneTriangleController extends GetxController {
     }
 
     // ==========================================
-    //aSide hHeight aAngle
+    //aSide hHeight aAngle ==ok
     // ==========================================
     param1 = ScaleneTriangle.hHeight;
     param2 = ScaleneTriangle.aSide;
@@ -951,7 +951,7 @@ class ScaleneTriangleController extends GetxController {
       calcBsideKnowAsideCSideAang();
       calcBangKnowCsideBsideAang();
       calcYangKnowAangBang();
-      calcAsideKnowBsideAangYang();
+      
       calcPerimKnowAsideBsideCside();
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
