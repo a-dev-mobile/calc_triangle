@@ -413,7 +413,7 @@ class ScaleneTriangleController extends GetxController {
     bAngle.value = AppUtilsNumber.getFormatNumber(bAngleD, precisionResult);
   }
 
-  void calcYangKnowAsideBSideCside() {
+  void calcYangKnowAsideBsideCside() {
     yAngleD = AppConvert.toDegree(acos(
         (pow(bSideD, 2) + pow(cSideD, 2) - pow(aSideD, 2)) /
             (2 * cSideD * bSideD)));
@@ -480,6 +480,80 @@ class ScaleneTriangleController extends GetxController {
     ySPoint.value = AppUtilsNumber.getFormatNumber(ySPointD, precisionResult);
   }
 
+  void calcBangKnowHheiBside() {
+    bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
+    bAngle.value =
+        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+  }
+
+  void calcYangKnowAsideBsideAang() {
+    yAngleD = AppConvert.toDegree(
+        asin(aSideD * sin(AppConvert.toRadian(aAngleD)) / bSideD));
+    yAngle.value =
+        AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
+  }
+
+  void calcYangKnowAsideCsideBang() {
+    yAngleD = AppConvert.toDegree(
+        asin(aSideD * sin(AppConvert.toRadian(bAngleD)) / cSideD));
+    yAngle.value =
+        AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
+  }
+
+  void calcBangKnowAsideCsideYang() {
+    bAngleD = AppConvert.toDegree(
+        (asin(cSideD * sin(AppConvert.toRadian(yAngleD)) / aSideD)));
+    bAngle.value =
+        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+  }
+
+  void calcAangKnowAsideBsideYang() {
+    aAngleD = AppConvert.toDegree(
+        asin(bSideD * sin(AppConvert.toRadian(yAngleD)) / aSideD));
+    aAngle.value =
+        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+  }
+
+  void calcBangKnowCsideBsideAang() {
+    bAngleD = AppConvert.toDegree(
+        asin(cSideD * sin(AppConvert.toRadian(aAngleD)) / bSideD));
+    bAngle.value =
+        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+  }
+
+  void calcAangKnowCsideBsideBang() {
+    aAngleD = AppConvert.toDegree(
+        asin(bSideD * sin(AppConvert.toRadian(bAngleD)) / cSideD));
+    aAngle.value =
+        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+  }
+
+  void calcCsideKnowBsideAangBang() {
+    cSideD = (bSideD *
+        sin(AppConvert.toRadian(bAngleD)) /
+        sin(AppConvert.toRadian(aAngleD)));
+    cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult) + "°";
+  }
+
+  void calcAsideKnowBsideAangYang() {
+    aSideD = (bSideD *
+        sin(AppConvert.toRadian(yAngleD)) /
+        sin(AppConvert.toRadian(aAngleD)));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult) + "°";
+  }
+
+  void calcAsideKnowCsideBangYang() {
+    aSideD = (cSideD *
+        sin(AppConvert.toRadian(yAngleD)) /
+        sin(AppConvert.toRadian(bAngleD)));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult) + "°";
+  }
+
+  void calcCsideKnowHheiAang() {
+    cSideD = hHeightD / (sin(AppConvert.toRadian(aAngleD)));
+    cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult) + "°";
+  }
+
   void calculate() {
     if (isOnlyTwoParamEmpty()) return;
     log.i('start calculate');
@@ -514,8 +588,6 @@ class ScaleneTriangleController extends GetxController {
     if (isAvailableTwoParams(param1, param2)) {
       calcBangKnowYangAang();
     }
-    // почему то расчитывается улы при вооде хоть одного
-    // if (isOnlyOneParamEmpty()) return;
 
     // ==========================================
     //  //aSide bSide cSide == ok
@@ -526,7 +598,7 @@ class ScaleneTriangleController extends GetxController {
     if (isAvailableThreeParams(param1, param2, param3)) {
       calcBangKnowAsideBSideCside();
       calcAangKnowAsideBSideCside();
-      calcYangKnowAsideBSideCside();
+      calcYangKnowAsideBsideCside();
       calcPerimKnowAsideBsideCside();
       calcHheiKnowBsideBang();
       calcAreaKnowAsideHhei();
@@ -534,8 +606,40 @@ class ScaleneTriangleController extends GetxController {
       calcYsPointKnowCsideAang();
     }
 
-//aSide bSide hHeight
-//aSide bSide aAngle
+// ==========================================
+    //  //aSide bSide hHeight = ok
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.hHeight;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowHheiBside();
+      calcCsideKnowAsideBSideBang();
+      calcAangKnowAsideBSideCside();
+      calcYangKnowAangBang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    // //aSide bSide aAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcYangKnowAsideBsideAang();
+      calcBangKnowYangAang();
+      calcCsideKnowAsideBSideBang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
 
     // ==========================================
     //  // //aSide bSide bAngle==ok
@@ -546,7 +650,7 @@ class ScaleneTriangleController extends GetxController {
     if (isAvailableThreeParams(param1, param2, param3)) {
       calcCsideKnowAsideBSideBang();
       calcAangKnowAsideBSideCside();
-      calcYangKnowAsideBSideCside();
+      calcYangKnowAsideBsideCside();
       calcPerimKnowAsideBsideCside();
       calcHheiKnowBsideBang();
       calcAreaKnowAsideHhei();
@@ -554,8 +658,32 @@ class ScaleneTriangleController extends GetxController {
       calcYsPointKnowCsideAang();
     }
 
-//aSide bSide yAngle
-//aSide cSide hHeight
+    // ==========================================
+    //aSide bSide yAngle == ok
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowAsideBsideYang();
+
+      calcBangKnowYangAang();
+
+      calcCsideKnowAsideBSideBang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //aSide cSide hHeight
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.hHeight;
+    if (isAvailableThreeParams(param1, param2, param3)) {}
 
     // ==========================================
     //  // ////aSide cSide aAngle = ok
@@ -566,7 +694,7 @@ class ScaleneTriangleController extends GetxController {
     if (isAvailableThreeParams(param1, param2, param3)) {
       calcBsideKnowAsideCSideAang();
       calcBangKnowAsideBSideCside();
-      calcYangKnowAsideBSideCside();
+      calcYangKnowAsideBsideCside();
       calcPerimKnowAsideBsideCside();
       calcHheiKnowBsideBang();
       calcAreaKnowAsideHhei();
@@ -574,15 +702,42 @@ class ScaleneTriangleController extends GetxController {
       calcYsPointKnowCsideAang();
     }
 
-//aSide cSide bAngle
-
-//aSide cSide yAngle
-//aSide hHeight aAngle
-//aSide hHeight bAngle
-//aSide hHeight yAngle
+    // ==========================================
+    // //aSide cSide bAngle == ok
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcYangKnowAsideCsideBang();
+      calcAangKnowYangBang();
+      calcBsideKnowAsideCSideAang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
 
     // ==========================================
-    //  //aSide aAngle bAngle
+    //aSide cSide yAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowAsideCsideYang();
+      calcAangKnowYangBang();
+      calcBsideKnowAsideCSideAang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //  //aSide aAngle bAngle ==ok
     // ==========================================
     param1 = ScaleneTriangle.aSide;
     param2 = ScaleneTriangle.aAngle;
@@ -636,9 +791,42 @@ class ScaleneTriangleController extends GetxController {
       calcYsPointKnowCsideAang();
     }
 
-//bSide cSide hHeight
-//bSide cSide aAngle
-//bSide cSide bAngle
+    // ==========================================
+    //bSide cSide aAngle == ok
+    // ==========================================
+    param1 = ScaleneTriangle.bSide;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.aAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowCsideBsideAang();
+      calcBangKnowCsideBsideAang();
+
+      calcYangKnowAangBang();
+
+      calcAsideKnowBsideCSideYang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //bSide cSide bAngle = ok
+    // ==========================================
+    param1 = ScaleneTriangle.bSide;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowCsideBsideBang();
+      calcYangKnowAangBang();
+      calcAsideKnowBsideCSideYang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
 
     // ==========================================
     //  // bSide cSide yAngle ==ok
@@ -657,22 +845,228 @@ class ScaleneTriangleController extends GetxController {
       calcYsPointKnowCsideAang();
     }
 
-//bSide hHeight aAngle
-//bSide hHeight bAngle
-//bSide hHeight yAngle
-//bSide aAngle bAngle
-//bSide aAngle yAngle
-//bSide bAngle yAngle
+    // ==========================================
+    //hHeight aAngle bAngle = ok
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowYangBang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //hHeight aAngle yAngle
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowYangAang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //hHeight bAngle yAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.bAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowYangBang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
 //cSide hHeight aAngle
+
 //cSide hHeight bAngle
 //cSide hHeight yAngle
-//cSide aAngle bAngle
-//cSide aAngle yAngle
-//cSide bAngle yAngle
-//hHeight aAngle bAngle
-//hHeight aAngle yAngle
-//hHeight bAngle yAngle
-//aAngle bAngle yAngle
+
+    // ==========================================
+    //bSide hHeight aAngle
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.aAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcCsideKnowHheiAang();
+      calcBangKnowCsideBsideAang();
+      calcYangKnowAangBang();
+      calcAsideKnowBsideAangYang();
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+//bSide hHeight bAngle
+
+    // ==========================================
+    //bSide hHeight yAngle
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowHheiBside();
+      calcAangKnowYangBang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowBsideAangYang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //aSide hHeight aAngle
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.aSide;
+    param3 = ScaleneTriangle.aAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcCsideKnowHheiAang();
+      calcBsideKnowAsideCSideAang();
+      calcBangKnowCsideBsideAang();
+      calcYangKnowAangBang();
+      calcAsideKnowBsideAangYang();
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+//aSide hHeight bAngle
+
+//aSide hHeight yAngle
+//bSide cSide hHeight
+
+    // ==========================================
+    //bSide aAngle bAngle == ok
+    // ==========================================
+    param1 = ScaleneTriangle.bSide;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcYangKnowAangBang();
+      calcCsideKnowBsideAangBang();
+      calcAsideKnowBsideAangYang();
+
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //bSide aAngle yAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.bSide;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowYangAang();
+      calcCsideKnowBsideAangBang();
+      calcAsideKnowBsideAangYang();
+
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //bSide bAngle yAngle = ok
+    // ==========================================
+    param1 = ScaleneTriangle.bSide;
+    param2 = ScaleneTriangle.bAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowYangBang();
+      calcCsideKnowBsideAangBang();
+      calcAsideKnowBsideAangYang();
+
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //cSide aAngle bAngle
+    // ==========================================
+    param1 = ScaleneTriangle.cSide;
+    param2 = ScaleneTriangle.bAngle;
+    param3 = ScaleneTriangle.aAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcYangKnowAangBang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //cSide aAngle yAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.cSide;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowYangAang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //cSide bAngle yAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.cSide;
+    param2 = ScaleneTriangle.bAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowYangBang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+      calcPerimKnowAsideBsideCside();
+      calcHheiKnowBsideBang();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
 
 // проверка если цифры не числа
     checkIfNaN();
