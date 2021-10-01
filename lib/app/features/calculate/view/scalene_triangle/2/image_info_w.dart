@@ -4,13 +4,14 @@ import 'package:calc_triangle/app/constants/const_number.dart';
 
 import 'package:flutter/material.dart';
 
-String pathAssestInfo = ConstImageRaster.scaleneTriangleInfo;
 
-class ScaleneTriangleImageInfoWidget extends StatelessWidget {
-  const ScaleneTriangleImageInfoWidget({
+
+class ImageInfoWidget extends StatelessWidget {
+  const ImageInfoWidget({
     Key? key,
+    required this.patchAsset,
   }) : super(key: key);
-
+  final String patchAsset;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -21,7 +22,7 @@ class ScaleneTriangleImageInfoWidget extends StatelessWidget {
           child: Image(
             fit: BoxFit.contain,
             color: AppColors.text(context),
-            image: AssetImage(pathAssestInfo),
+            image: AssetImage(patchAsset),
           ),
         ));
   }

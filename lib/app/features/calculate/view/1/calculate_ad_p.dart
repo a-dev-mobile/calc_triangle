@@ -1,6 +1,6 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_main_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_main_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_input_w.dart';
 import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 import 'package:calc_triangle/app/features/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/model/calculate_m.dart';
@@ -60,7 +60,7 @@ class _CalculatePageState extends State<CalculatePage> {
       case Shape.rightTriangle:
         return const RightTriangleMainWidget();
       case Shape.scaleneTriangle:
-        return const ScaleneTriangleMainWidget();
+        return const ScaleneInput();
       case Shape.none:
         return const WelcomePage();
     }

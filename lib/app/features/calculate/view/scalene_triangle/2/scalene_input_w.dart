@@ -7,8 +7,7 @@ import 'package:calc_triangle/app/constants/const_color.dart';
 
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_detail_info_w.dart';
-
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_detail_w.dart';
 
 import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
 import 'package:calc_triangle/app/shared_components/drawer/drawer_w.dart';
@@ -25,13 +24,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'scalene_image_input_w.dart';
-import 'scalene_image_info_w.dart';
+import 'image_info_w.dart';
 import 'scalene_numpad_w.dart';
 
 late var c = ScaleneTriangleController.to;
 
-class ScaleneTriangleMainWidget extends StatelessWidget {
-  const ScaleneTriangleMainWidget({Key? key}) : super(key: key);
+class ScaleneInput extends StatelessWidget {
+  const ScaleneInput({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,37 +43,31 @@ class ScaleneTriangleMainWidget extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Obx(() {
-                  return c.isActiveImageInfo.value
-                      ? const ScaleneTriangleImageInfoWidget()
-                      : const ScaleneTriangleImageInputWidget();
-                }),
+            Obx(() {
+              return c.isActiveImageInfo.value
+                  ? const ScaleneDetail()
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const ScaleneTriangleImageInputWidget(),
+                        //показываем если не инфо
+                        Obx(() {
+                          return Visibility(
+                              visible: !c.isActiveImageInfo.value,
+                              child: const AreaAndPerimeterWidget());
+                        }),
+                        Obx(() {
+                          return Visibility(
+                              visible: !c.isActiveImageInfo.value,
+                              child: const MessageWidget());
+                        }),
 
-                //показываем если не инфо
-                Obx(() {
-                  return Visibility(
-                      visible: !c.isActiveImageInfo.value,
-                      child: const AreaAndPerimeterWidget());
-                }),
-                Obx(() {
-                  return Visibility(
-                      visible: !c.isActiveImageInfo.value,
-                      child: const MessageWidget());
-                }),
+                        const Expanded(child: NumPadScaleneWidget()),
+                      ],
+                    );
+            }),
 
-                Expanded(
-                  child: Obx(() {
-                    return c.isActiveImageInfo.value
-                        ? const ScaleneDetailInfoWidget()
-                        : const NumPadScaleneWidget();
-                  }),
-                ),
-              ],
-            ),
             // child: NumPadRightWidget(),
             const IconInputInfoWidget(),
             DrawerIconWidget(globalkey: _globalKey),

@@ -1,7 +1,8 @@
 import 'package:calc_triangle/app/config/routes/app_page.dart';
+import 'package:calc_triangle/app/constants/const_assets.dart';
 
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_info_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_image_info_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/image_info_w.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
@@ -48,7 +49,7 @@ class SelectShapePage extends StatelessWidget {
                       GlobalServ.to.aciveShape = Shape.scaleneTriangle;
                       Get.offAllNamed(Routes.calculate);
                     },
-                    child: const ScaleneTriangleImageInfoWidget()),
+                    child: const ImageInfoWidget(patchAsset: ConstImageRaster.scaleneTriangleInfo,)),
               ],
             ),
             DrawerIconWidget(globalkey: _globalKey),
