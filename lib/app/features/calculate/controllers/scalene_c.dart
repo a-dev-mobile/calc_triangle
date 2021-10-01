@@ -80,6 +80,9 @@ class ScaleneTriangleController extends GetxController {
 
   late int precisionResult;
 
+  String message = "";
+  bool isNotFormula = false;
+
   @override
   void onInit() {
     clearAll();
@@ -125,8 +128,6 @@ class ScaleneTriangleController extends GetxController {
     if (keySymbol == Keys.backspace) {
       backspace();
       setActiveParam();
-      log.v(
-          '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} 3 ${activeParamMap[3]} Backspace active param');
 
       initValue();
       calculate();
@@ -136,8 +137,7 @@ class ScaleneTriangleController extends GetxController {
     }
 
     if (ifMaxNumberEnter()) {
-      log.e('return max');
-      showSnack('max');
+      showSnack(TranslateHelper.message_max_number_entered);
       return;
     }
 
@@ -618,7 +618,7 @@ class ScaleneTriangleController extends GetxController {
       calcAangKnowAsideBSideCside();
       calcYangKnowAangBang();
       calcPerimKnowAsideBsideCside();
-      calcHheiKnowBsideBang();
+
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
@@ -629,7 +629,7 @@ class ScaleneTriangleController extends GetxController {
     // ==========================================
     param1 = ScaleneTriangle.aSide;
     param2 = ScaleneTriangle.bSide;
-    param3 = ScaleneTriangle.bAngle;
+    param3 = ScaleneTriangle.aAngle;
     if (isAvailableThreeParams(param1, param2, param3)) {
       calcYangKnowAsideBsideAang();
       calcBangKnowYangAang();
@@ -676,14 +676,6 @@ class ScaleneTriangleController extends GetxController {
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
     }
-
-    // ==========================================
-    //aSide cSide hHeight
-    // ==========================================
-    param1 = ScaleneTriangle.aSide;
-    param2 = ScaleneTriangle.cSide;
-    param3 = ScaleneTriangle.hHeight;
-    if (isAvailableThreeParams(param1, param2, param3)) {}
 
     // ==========================================
     //  // ////aSide cSide aAngle = ok
@@ -846,124 +838,6 @@ class ScaleneTriangleController extends GetxController {
     }
 
     // ==========================================
-    //hHeight aAngle bAngle = ok
-    // ==========================================
-    param1 = ScaleneTriangle.hHeight;
-    param2 = ScaleneTriangle.aAngle;
-    param3 = ScaleneTriangle.bAngle;
-    if (isAvailableThreeParams(param1, param2, param3)) {
-      calcAangKnowYangBang();
-      calcCsideKnowHheiAang();
-      calcAsideKnowCsideBangYang();
-      calcBsideKnowAsideCSideAang();
-
-      calcPerimKnowAsideBsideCside();
-      calcAreaKnowAsideHhei();
-      calcXsPointKnowAsideCsideAang();
-      calcYsPointKnowCsideAang();
-    }
-
-    // ==========================================
-    //hHeight aAngle yAngle
-    // ==========================================
-    param1 = ScaleneTriangle.hHeight;
-    param2 = ScaleneTriangle.aAngle;
-    param3 = ScaleneTriangle.yAngle;
-    if (isAvailableThreeParams(param1, param2, param3)) {
-      calcBangKnowYangAang();
-      calcCsideKnowHheiAang();
-      calcAsideKnowCsideBangYang();
-      calcBsideKnowAsideCSideAang();
-
-      calcPerimKnowAsideBsideCside();
-      calcAreaKnowAsideHhei();
-      calcXsPointKnowAsideCsideAang();
-      calcYsPointKnowCsideAang();
-    }
-
-    // ==========================================
-    //hHeight bAngle yAngle ==ok
-    // ==========================================
-    param1 = ScaleneTriangle.hHeight;
-    param2 = ScaleneTriangle.bAngle;
-    param3 = ScaleneTriangle.yAngle;
-    if (isAvailableThreeParams(param1, param2, param3)) {
-      calcAangKnowYangBang();
-      calcCsideKnowHheiAang();
-      calcAsideKnowCsideBangYang();
-      calcBsideKnowAsideCSideAang();
-
-      calcPerimKnowAsideBsideCside();
-      calcAreaKnowAsideHhei();
-      calcXsPointKnowAsideCsideAang();
-      calcYsPointKnowCsideAang();
-    }
-
-//cSide hHeight aAngle
-
-//cSide hHeight bAngle
-//cSide hHeight yAngle
-
-    // ==========================================
-    //bSide hHeight aAngle
-    // ==========================================
-    param1 = ScaleneTriangle.hHeight;
-    param2 = ScaleneTriangle.bSide;
-    param3 = ScaleneTriangle.aAngle;
-    if (isAvailableThreeParams(param1, param2, param3)) {
-      calcCsideKnowHheiAang();
-      calcBangKnowCsideBsideAang();
-      calcYangKnowAangBang();
-      calcAsideKnowBsideAangYang();
-      calcPerimKnowAsideBsideCside();
-      calcAreaKnowAsideHhei();
-      calcXsPointKnowAsideCsideAang();
-      calcYsPointKnowCsideAang();
-    }
-//bSide hHeight bAngle
-
-    // ==========================================
-    //bSide hHeight yAngle ==ok
-    // ==========================================
-    param1 = ScaleneTriangle.hHeight;
-    param2 = ScaleneTriangle.bSide;
-    param3 = ScaleneTriangle.yAngle;
-    if (isAvailableThreeParams(param1, param2, param3)) {
-      calcBangKnowHheiBside();
-      calcAangKnowYangBang();
-      calcCsideKnowHheiAang();
-      calcAsideKnowBsideAangYang();
-
-      calcPerimKnowAsideBsideCside();
-      calcAreaKnowAsideHhei();
-      calcXsPointKnowAsideCsideAang();
-      calcYsPointKnowCsideAang();
-    }
-
-    // ==========================================
-    //aSide hHeight aAngle ==ok
-    // ==========================================
-    param1 = ScaleneTriangle.hHeight;
-    param2 = ScaleneTriangle.aSide;
-    param3 = ScaleneTriangle.aAngle;
-    if (isAvailableThreeParams(param1, param2, param3)) {
-      calcCsideKnowHheiAang();
-      calcBsideKnowAsideCSideAang();
-      calcBangKnowCsideBsideAang();
-      calcYangKnowAangBang();
-      
-      calcPerimKnowAsideBsideCside();
-      calcAreaKnowAsideHhei();
-      calcXsPointKnowAsideCsideAang();
-      calcYsPointKnowCsideAang();
-    }
-
-//aSide hHeight bAngle
-
-//aSide hHeight yAngle
-//bSide cSide hHeight
-
-    // ==========================================
     //bSide aAngle bAngle == ok
     // ==========================================
     param1 = ScaleneTriangle.bSide;
@@ -1068,62 +942,246 @@ class ScaleneTriangleController extends GetxController {
       calcYsPointKnowCsideAang();
     }
 
-// проверка если цифры не числа
-    checkIfNaN();
+    // ==========================================
+    //hHeight aAngle bAngle = ok
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowYangBang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //hHeight aAngle yAngle
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowYangAang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //hHeight bAngle yAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.bAngle;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcAangKnowYangBang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowCsideBangYang();
+      calcBsideKnowAsideCSideAang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //bSide hHeight aAngle
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.aAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcCsideKnowHheiAang();
+      calcBangKnowCsideBsideAang();
+      calcYangKnowAangBang();
+      calcAsideKnowBsideAangYang();
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //bSide hHeight yAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.bSide;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcBangKnowHheiBside();
+      calcAangKnowYangBang();
+      calcCsideKnowHheiAang();
+      calcAsideKnowBsideAangYang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+
+    // ==========================================
+    //aSide hHeight aAngle ==ok
+    // ==========================================
+    param1 = ScaleneTriangle.hHeight;
+    param2 = ScaleneTriangle.aSide;
+    param3 = ScaleneTriangle.aAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      calcCsideKnowHheiAang();
+      calcBsideKnowAsideCSideAang();
+      calcBangKnowCsideBsideAang();
+      calcYangKnowAangBang();
+
+      calcPerimKnowAsideBsideCside();
+      calcAreaKnowAsideHhei();
+      calcXsPointKnowAsideCsideAang();
+      calcYsPointKnowCsideAang();
+    }
+    // ==========================================
+    //aSide cSide hHeight
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.hHeight;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+    // ==========================================
+//cSide hHeight aAngle
+    // ==========================================
+    param1 = ScaleneTriangle.cSide;
+    param2 = ScaleneTriangle.aAngle;
+    param3 = ScaleneTriangle.hHeight;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+    // ==========================================
+//cSide hHeight bAngle
+    // ==========================================
+    param1 = ScaleneTriangle.bAngle;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.hHeight;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+//cSide hHeight yAngle
+    // ==========================================
+    param1 = ScaleneTriangle.cSide;
+    param2 = ScaleneTriangle.hHeight;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+    // ==========================================
+    //bSide hHeight bAngle
+    // ==========================================
+    param1 = ScaleneTriangle.bSide;
+    param2 = ScaleneTriangle.hHeight;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+    // ==========================================s
+    //aSide hHeight bAngle
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.hHeight;
+    param3 = ScaleneTriangle.bAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+    // ==========================================
+    //aSide hHeight yAngle
+    // ==========================================
+    param1 = ScaleneTriangle.aSide;
+    param2 = ScaleneTriangle.hHeight;
+    param3 = ScaleneTriangle.yAngle;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+    // ==========================================
+    //bSide cSide hHeight
+    // ==========================================
+    param1 = ScaleneTriangle.bSide;
+    param2 = ScaleneTriangle.cSide;
+    param3 = ScaleneTriangle.hHeight;
+    if (isAvailableThreeParams(param1, param2, param3)) {
+      isNotFormula = true;
+    }
+
+    isNumberNaN();
+
     printElements();
     log.i('end calculate');
   }
 
-  void checkIfNaN() {
+  bool isNumberNaN() {
     if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
-      aSideD = 0;
       aSide.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bSideD)) {
-      bSideD = 0;
-
       bSide.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(cSideD)) {
-      cSideD = 0;
-
       cSide.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
-      hHeightD = 0;
       hHeight.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(areaD)) {
-      areaD = 0;
       area.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(perimeterD)) {
-      perimeterD = 0;
       perimeter.value = startLengthValue;
+      return true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(xSPointD)) {
-      xSPointD = 0;
       xSPoint.value = startLengthValue;
+      return true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(ySPointD)) {
-      ySPointD = 0;
       ySPoint.value = startLengthValue;
+      return true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
-      aAngleD = 0;
       aAngle.value = startAngleValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
-      bAngleD = 0;
       bAngle.value = startAngleValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(yAngleD)) {
-      yAngleD = 0;
       yAngle.value = startAngleValue;
+      return true;
     }
+    return false;
   }
 
   void moveEmptyValueToStartInParameters() {
@@ -1326,14 +1384,22 @@ class ScaleneTriangleController extends GetxController {
 
   void showMessage() {
     double result = 0.0;
-    // если активные углы то сбрасываем один выбор до последнй длины
+
     log.w('start showMessage');
 
-    // если есть пустой параметр
+    if (isNotFormula) {
+      log.w('isNotFormula');
+      showSnack(TranslateHelper.messageFormulaNotFound);
+      isNotFormula = false;
+      return;
+    }
+
+    // если активные углы то сбрасываем один выбор до последнй длины
     if (isActiveThreeParamAngles()) {
       showSnack(TranslateHelper.messageEnterAnyLength);
       return;
     }
+    // если есть пустой параметр
     if (isOnlyThreeParamEmpty()) {
       showSnack(TranslateHelper.enterThreeParameters);
       return;
@@ -1347,10 +1413,10 @@ class ScaleneTriangleController extends GetxController {
       return;
     }
 
-    if (ifMaxNumberEnter()) {
-      showSnack('maximum number');
-      return;
-    }
+    // if (ifMaxNumberEnter()) {
+    //   showSnack('maximum number');
+    //   return;
+    // }
 
     //если активны данные параметры и выбор стороны
     if (isAvailableThreeParams(
@@ -1384,19 +1450,19 @@ class ScaleneTriangleController extends GetxController {
         result = cSideD - bSideD;
         if (!(aSideD > result)) {
           showSnack(
-              'side a must be > (c-b) or a > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Side a must be > (c-b) or a > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = bSideD - cSideD;
         if (!(aSideD > result)) {
           showSnack(
-              'side a must be > (b-c) or a > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Side a must be > (b-c) or a > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = bSideD + cSideD;
         if (!(aSideD < result)) {
           showSnack(
-              'side a must be < (b+c) or a < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Side a must be < (b+c) or a < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1405,22 +1471,72 @@ class ScaleneTriangleController extends GetxController {
         result = cSideD - aSideD;
         if (!(bSideD > result)) {
           showSnack(
-              'side b must be > (c-a) or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Side b must be > (c-a) or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = aSideD - cSideD;
         if (!(bSideD > result)) {
           showSnack(
-              'side b must be > (a-c) or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Side b must be > (a-c) or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = aSideD + cSideD;
         if (!(bSideD < result)) {
           showSnack(
-              'side b must be < (a+c) or b < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Side b must be < (a+c) or b < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
+    }
+    // если доступны данные параметры неважно с каким углом
+    if (isAvailableTwoParams(
+      ScaleneTriangle.bSide,
+      ScaleneTriangle.hHeight,
+    )) {
+      if (isbSide.value) {
+        result = hHeightD;
+        if (!(bSideD > result)) {
+          showSnack(
+              'Side b must be > h or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (ishHeight.value) {
+        result = bSideD;
+        if (!(hHeightD < result)) {
+          showSnack(
+              'Height h must be < b or h < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+    }
+
+    if (isAvailableTwoParams(
+      ScaleneTriangle.cSide,
+      ScaleneTriangle.hHeight,
+    )) {
+      if (iscSide.value) {
+        result = hHeightD;
+        if (!(cSideD > result)) {
+          showSnack(
+              'Side c must be > h or c > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (ishHeight.value) {
+        result = cSideD;
+        if (!(hHeightD < result)) {
+          showSnack(
+              'Height h must be < c or h < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+    }
+
+    if (isNumberNaN()) {
+      log.w('isNumberNaN');
+      showSnack(TranslateHelper.message_calc_error_chang_value);
+      return;
     }
     endSnack();
     // showSnack('OK');

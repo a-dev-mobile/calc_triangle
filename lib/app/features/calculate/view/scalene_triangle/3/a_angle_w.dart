@@ -35,6 +35,7 @@ class AangleWidget extends StatelessWidget {
     c.isaAngle.value = true;
     c.isbAngle.value = false;
     c.isyAngle.value = false;
+    c.showMessage();
   }
 
   //===============

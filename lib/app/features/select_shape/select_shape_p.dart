@@ -30,7 +30,7 @@ class SelectShapePage extends StatelessWidget {
         child: Stack(
           children: [
             GridView.count(
-              crossAxisCount: 1,
+              crossAxisCount: 2,
               children: [
                 InkWell(
                     onTap: () {

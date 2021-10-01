@@ -37,7 +37,12 @@ Map<String, String> en = {
   'message_a_h': 'h must be < a = ',
   'message_b_h': 'b must be > h = ',
   'message_formula_not_found': 'Formula is not found',
+  'message_max_number_entered': 'Max number entered',
+  'message_calc_error_chang_value': 'Calculation error, try changing the value',
+  // 'message_calc_error_chang_value': 'Ошибка в расчете, попробуйте изменить значение',
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',
+
+  
 };

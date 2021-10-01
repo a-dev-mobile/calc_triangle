@@ -35,6 +35,7 @@ class YangleWidget extends StatelessWidget {
     c.isaAngle.value = false;
     c.isbAngle.value = false;
     c.isyAngle.value = true;
+          c.showMessage();
   }
 
   //===============

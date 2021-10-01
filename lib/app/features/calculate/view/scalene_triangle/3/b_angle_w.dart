@@ -35,6 +35,7 @@ class BangleWidget extends StatelessWidget {
     c.isaAngle.value = false;
     c.isbAngle.value = true;
     c.isyAngle.value = false;
+          c.showMessage();
   }
 
   //===============
