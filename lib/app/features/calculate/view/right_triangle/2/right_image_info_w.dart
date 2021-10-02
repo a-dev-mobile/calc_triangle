@@ -4,7 +4,7 @@ import 'package:calc_triangle/app/constants/const_number.dart';
 
 import 'package:flutter/material.dart';
 
-String pathAssestInfo = ConstImageRaster.rightTriangleInfo;
+String pathAssestInfo = ConstAssetsImageRaster.rightTriangleInfo;
 
 class RightTriangleImageInfoWidget extends StatelessWidget {
   const RightTriangleImageInfoWidget({

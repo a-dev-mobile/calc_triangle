@@ -24,7 +24,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'scalene_image_input_w.dart';
-import 'image_info_w.dart';
+import '../../../../../shared_components/image_info_w.dart';
 import 'scalene_numpad_w.dart';
 
 late var c = ScaleneTriangleController.to;

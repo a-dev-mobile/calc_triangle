@@ -9,9 +9,12 @@ class TextTitleDetail extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: AppStyleText.titleText(context),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Text(
+        text,
+        style: AppStyleText.titleText(context),
+      ),
     );
   }
 }

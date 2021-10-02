@@ -14,7 +14,7 @@ import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/y_a
 
 import 'package:flutter/material.dart';
 
-String pathAssestInput = ConstImageRaster.scaleneTriangleInput;
+String pathAssestInput = ConstAssetsImageRaster.scaleneTriangleInput;
 
 class ScaleneTriangleImageInputWidget extends StatelessWidget {
   const ScaleneTriangleImageInputWidget({

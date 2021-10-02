@@ -14,7 +14,7 @@ import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/m_com
 
 import 'package:flutter/material.dart';
 
-String pathAssestInput = ConstImageRaster.rightTriangleInput;
+String pathAssestInput = ConstAssetsImageRaster.rightTriangleInput;
 
 class RightTriangleImageInputWidget extends StatelessWidget {
   const RightTriangleImageInputWidget({Key? key}) : super(key: key);
