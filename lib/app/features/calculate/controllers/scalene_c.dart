@@ -54,8 +54,8 @@ class ScaleneTriangleController extends GetxController {
 /////////////////////////////
   var area = "".obs;
   var perimeter = "".obs;
-  var xSPoint = "";
-  var ySPoint = "";
+  var xSPoint = "".obs;
+  var ySPoint = "".obs;
 /////////////////////////////
   double areaD = 0.0;
   double perimeterD = 0.0;
@@ -63,31 +63,32 @@ class ScaleneTriangleController extends GetxController {
   double ySPointD = 0.0;
 /////////////////////////////
 
-  var mA = "";
-  var mB = "";
-  var mC = "";
+  var mA = "".obs;
+  var mB = "".obs;
+  var mC = "".obs;
   double mAd = 0.0;
   double mBd = 0.0;
   double mCd = 0.0;
 /////////////////////////////
 
-  var lA = "";
-  var lB = "";
-  var lC = "";
+  var lA = "".obs;
+  var lB = "".obs;
+  var lC = "".obs;
   double lAd = 0.0;
   double lBd = 0.0;
   double lCd = 0.0;
-/////////////////////////////
-  var r = "";
-  var xr = "";
-  var yr = "";
+
+  //// Radius of the inscribed circle
+  var r = "".obs;
+  var xr = "".obs;
+  var yr = "".obs;
   double rd = 0.0;
   double xrd = 0.0;
   double yrd = 0.0;
 
-  var R = "";
-  var xR = "";
-  var yR = "";
+  var R = "".obs;
+  var xR = "".obs;
+  var yR = "".obs;
   double Rd = 0.0;
   double xRd = 0.0;
   double yRd = 0.0;
@@ -505,12 +506,12 @@ class ScaleneTriangleController extends GetxController {
   void calcXsPointKnowAsideCsideAang() {
     xSPointD = (aSideD + cSideD * cos(AppConvert.toRadian(aAngleD))) / 3;
 
-    xSPoint = AppUtilsNumber.getFormatNumber(xSPointD, precisionResult);
+    xSPoint.value = AppUtilsNumber.getFormatNumber(xSPointD, precisionResult);
   }
 
   void calcYsPointKnowCsideAang() {
     ySPointD = cSideD * sin(AppConvert.toRadian(aAngleD)) / 3;
-    ySPoint = AppUtilsNumber.getFormatNumber(ySPointD, precisionResult);
+    ySPoint.value = AppUtilsNumber.getFormatNumber(ySPointD, precisionResult);
   }
 
   void calcBangKnowHheiBside() {
@@ -590,8 +591,15 @@ class ScaleneTriangleController extends GetxController {
   void calcSubResultKnowAsideBsideCsideAangl() async {
     calcMedianKnowAsideBsideCside();
     calcBisectorKnowAsideBsideCside();
+    //внут круг
     calcRIncenterKnowAsideBsideCside();
-    calcRCircumcenterKnowBsideAangl();
+    //внеш круг
+    calcRCircumCenterKnowAsideBsideCside();
+    calcXSRCircumCenterKnowAside();
+    calcYSrIncenter();
+    //last
+    calcXSrIncenterKnowAsideAanglBangl();
+    calcYSRCircumCenterKnowRradAside();
   }
 
   void calcMedianKnowAsideBsideCside() {
@@ -602,9 +610,9 @@ class ScaleneTriangleController extends GetxController {
     mCd =
         0.5 * (sqrt(2 * pow(aSideD, 2) + 2 * pow(bSideD, 2) - pow(cSideD, 2)));
 
-    mA = AppUtilsNumber.getFormatNumber(mAd, precisionResult);
-    mB = AppUtilsNumber.getFormatNumber(mBd, precisionResult);
-    mC = AppUtilsNumber.getFormatNumber(mCd, precisionResult);
+    mA.value = AppUtilsNumber.getFormatNumber(mAd, precisionResult);
+    mB.value = AppUtilsNumber.getFormatNumber(mBd, precisionResult);
+    mC.value = AppUtilsNumber.getFormatNumber(mCd, precisionResult);
   }
 
   void calcBisectorKnowAsideBsideCside() {
@@ -623,9 +631,9 @@ class ScaleneTriangleController extends GetxController {
             (cSideD + bSideD + aSideD) *
             (cSideD + bSideD - aSideD))) /
         (cSideD + bSideD);
-    lA = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
-    lB = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
-    lC = AppUtilsNumber.getFormatNumber(lCd, precisionResult);
+    lA.value = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
+    lB.value = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
+    lC.value = AppUtilsNumber.getFormatNumber(lCd, precisionResult);
   }
 
   void calcRIncenterKnowAsideBsideCside() {
@@ -635,19 +643,37 @@ class ScaleneTriangleController extends GetxController {
 
     rd = sqrt(((m - aSideD) * (m - bSideD) * (m - cSideD)) / m);
 
-    r = AppUtilsNumber.getFormatNumber(rd, precisionResult);
+    r.value = AppUtilsNumber.getFormatNumber(rd, precisionResult);
   }
 
-  void calcRCircumcenterKnowBsideAangl() {
-    Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
-    R = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
+  void calcRCircumCenterKnowAsideBsideCside() {
+    // Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
+    Rd = (aSideD * bSideD * cSideD) / (4 * areaD);
+    R.value = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
   }
-  void calcSrIncenterKnowAsideAanglBangl() {
-    
-    
-    
-    Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
-    R = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
+
+  void calcYSrIncenter() {
+    yr.value = r.value;
+  }
+
+  void calcXSRCircumCenterKnowAside() {
+    xRd = aSideD / 2;
+    xR.value = AppUtilsNumber.getFormatNumber(xRd, precisionResult);
+  }
+
+  void calcXSrIncenterKnowAsideAanglBangl() {
+    xrd = (tan(AppConvert.toRadian(bAngleD / 2))) *
+        aSideD /
+        (tan(AppConvert.toRadian(aAngleD / 2)) +
+            tan(AppConvert.toRadian(bAngleD / 2)));
+
+    xr.value = AppUtilsNumber.getFormatNumber(xrd, precisionResult);
+  }
+
+  void calcYSRCircumCenterKnowRradAside() {
+    yRd = sqrt(pow(Rd, 2) - (pow(aSideD, 2) / 4));
+
+    yR.value = AppUtilsNumber.getFormatNumber(yRd, precisionResult);
   }
 
   void calculate() {
@@ -719,7 +745,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -737,7 +763,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-       calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -755,7 +781,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -775,7 +801,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -793,7 +819,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -811,7 +837,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -829,7 +855,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -848,7 +874,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -867,7 +893,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -887,7 +913,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -908,7 +934,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -926,7 +952,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-         calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -963,7 +989,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -982,7 +1008,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1001,7 +1027,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1020,7 +1046,7 @@ class ScaleneTriangleController extends GetxController {
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
 
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1038,7 +1064,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1056,7 +1082,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1075,7 +1101,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1094,7 +1120,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1113,7 +1139,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1131,7 +1157,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1150,7 +1176,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-     calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -1169,7 +1195,7 @@ class ScaleneTriangleController extends GetxController {
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
-           calcSubResultKnowAsideBsideCsideAangl();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
     // ==========================================
     //aSide cSide hHeight
@@ -1283,12 +1309,12 @@ class ScaleneTriangleController extends GetxController {
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(xSPointD)) {
-      xSPoint = startLengthValue;
+      xSPoint.value = startLengthValue;
       return true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(ySPointD)) {
-      ySPoint = startLengthValue;
+      ySPoint.value = startLengthValue;
       return true;
     }
 
@@ -2129,8 +2155,8 @@ class ScaleneTriangleController extends GetxController {
     area.value = startLengthValue;
     perimeter.value = startLengthValue;
 
-    xSPoint = startLengthValue;
-    ySPoint = startLengthValue;
+    xSPoint.value = startLengthValue;
+    ySPoint.value = startLengthValue;
     aSideD = 0;
     bSideD = 0;
     cSideD = 0;
@@ -2157,8 +2183,8 @@ class ScaleneTriangleController extends GetxController {
 
     ySPointD = 0;
     xSPointD = 0;
-    xSPoint = startLengthValue;
-    ySPoint = startLengthValue;
+    xSPoint.value = startLengthValue;
+    ySPoint.value = startLengthValue;
 
     if (!isAvailableOneParam(ScaleneTriangle.aSide)) {
       aSide.value = startAngleValue;

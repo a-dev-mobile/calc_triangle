@@ -30,7 +30,7 @@ class ScaleneDetail extends StatelessWidget {
                   children: const [
                     ImageInfoWidget(
                         patchAsset: ConstAssetsImageRaster.scaleneTriangleInfo),
-                    TextTitleDetail(text: 'Sides and angles'),
+                    TextTitleDetail(text: 'Sides, height and angles'),
                   ],
                 ),
               ),
@@ -59,31 +59,76 @@ class ScaleneDetail extends StatelessWidget {
                     children: const [
                       ImageInfoWidget(
                           patchAsset: ConstAssetsImageRaster.scaleneTriangleS),
-                      TextTitleDetail(text: 'Mediana and Geometric centroid'),
+                      TextTitleDetail(text: 'Mediana and geometric centroid'),
                     ],
                   ),
                 ),
                 content: const MedianaGeometricCentroid()),
-                 StickyHeader(
+            StickyHeader(
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
                     children: const [
                       ImageInfoWidget(
                           patchAsset: ConstAssetsImageRaster.scaleneTriangleSr),
-                      TextTitleDetail(text: 'Bisection and circumscribed circle'),
+                      TextTitleDetail(text: 'Bisection and inscribed circle'),
                     ],
                   ),
                 ),
-                content: const BisectionCircumscribedCircle()),
+                content: const BisectionInscribedCircle()),
+            StickyHeader(
+                header: Container(
+                  color: AppColors.content(context),
+                  child: Column(
+                    children: const [
+                      ImageInfoWidget(
+                          patchAsset: ConstAssetsImageRaster.scaleneTriangleSR),
+                      TextTitleDetail(text: 'Circumscribed circle'),
+                    ],
+                  ),
+                ),
+                content: const CircumscribedCircle()),
           ],
         );
       },
     );
   }
 }
-class BisectionCircumscribedCircle extends StatelessWidget {
-  const BisectionCircumscribedCircle({
+
+class CircumscribedCircle extends StatelessWidget {
+  const CircumscribedCircle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ItemDetail(
+          isActive: false,
+          leading: 'R',
+          subtitle: 'Radius of the circumscribed circle ',
+          title: c.R.value,
+        ),
+        ItemDetail(
+          isActive: false,
+          leading: 'X',
+          subtitle: 'X cordinate of the SR point',
+          title: c.xR.value,
+        ),
+        ItemDetail(
+          isActive: false,
+          leading: 'Y',
+          subtitle: 'Y cordinate of the SR point',
+          title: c.yR.value,
+        ),
+      ],
+    );
+  }
+}
+
+class BisectionInscribedCircle extends StatelessWidget {
+  const BisectionInscribedCircle({
     Key? key,
   }) : super(key: key);
 
@@ -95,31 +140,37 @@ class BisectionCircumscribedCircle extends StatelessWidget {
           isActive: false,
           leading: 'la',
           subtitle: 'Bisection of side a',
-          title: c.lA,
+          title: c.lA.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'lb',
           subtitle: 'Bisection of side b',
-          title: c.lB,
+          title: c.lB.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'lc',
           subtitle: 'Bisection of side c',
-          title: c.lC,
+          title: c.lC.value,
+        ),
+        ItemDetail(
+          isActive: false,
+          leading: 'r',
+          subtitle: 'Radius of the inscribed circle',
+          title: c.r.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'X',
           subtitle: 'X cordinate of the Sr point',
-          title: c.xSPoint,
+          title: c.xr.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'Y',
           subtitle: 'Y cordinate of the Sr point',
-          title: c.ySPoint,
+          title: c.yr.value,
         ),
       ],
     );
@@ -139,31 +190,31 @@ class MedianaGeometricCentroid extends StatelessWidget {
           isActive: false,
           leading: 'ma',
           subtitle: 'Mediana of side a',
-          title: c.mA,
+          title: c.mA.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'mb',
           subtitle: 'Mediana of side b',
-          title: c.mB,
+          title: c.mB.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'mc',
           subtitle: 'Mediana of side c',
-          title: c.mC,
+          title: c.mC.value,
         ),
         ItemDetail(
           isActive: false,
-          leading: 'Xs',
+          leading: 'X',
           subtitle: 'X cordinate of the S point',
-          title: c.xSPoint,
+          title: c.xSPoint.value,
         ),
         ItemDetail(
           isActive: false,
-          leading: 'Ys',
+          leading: 'Y',
           subtitle: 'Y cordinate of the S point',
-          title: c.ySPoint,
+          title: c.ySPoint.value,
         ),
       ],
     );
@@ -221,7 +272,7 @@ class ScaleneSidesAngles extends StatelessWidget {
           isActive: c.isAvailableOneParam(ScaleneTriangle.yAngle),
           leading: 'γ',
           subtitle: 'γ - internal angle in degrees',
-          title: c.aAngle.value,
+          title: c.yAngle.value,
         ),
       ],
     );
