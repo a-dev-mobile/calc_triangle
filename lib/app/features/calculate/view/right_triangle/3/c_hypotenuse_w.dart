@@ -1,10 +1,7 @@
-// ignore_for_file: avoid_print, invalid_use_of_protected_member
-
 import 'dart:math';
 
 import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,21 +24,40 @@ class ChypotenuseWidget extends StatelessWidget {
   final double angle;
   final double minSizeImage;
 
+  // ====change====
+  void onTap() {
+    c.isaCathet.value = false;
+    c.isbCathet.value = false;
+    c.iscHypotenuse.value = true;
+    c.ishHeight.value = false;
+    c.ismCompCside.value = false;
+    c.iskCompCside.value = false;
+    c.isaAngle.value = false;
+    c.isbAngle.value = false;
+
+    c.showMessage();
+  }
+
+  //===============
   @override
   Widget build(BuildContext context) {
     TextStyle styleText;
     bool isActiveInput;
     bool isActiveParam;
+    RightTriangle elementFigure;
+    String activeValue;
     return Transform.translate(
         offset:
             Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
         child: Transform.rotate(
             angle: angle * pi / 180,
             child: Obx(() {
+              // ====change====
+              activeValue = c.cHypotenuse.value;
               isActiveInput = c.iscHypotenuse.value;
-              isActiveParam = c.activeParamMap.value
-                  .containsValue(RightTriangle.cHypotenuse);
-
+              elementFigure = RightTriangle.cHypotenuse;
+              //===============
+              isActiveParam = c.activeParamMap.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {
@@ -51,26 +67,18 @@ class ChypotenuseWidget extends StatelessWidget {
               }
 
               return GestureDetector(
-                onTap: () {
-                  c.isaCathet.value = false;
-                  c.isbCathet.value = false;
-                  c.iscHypotenuse.value = true;
-                  c.ishHeight.value = false;
-                  c.ismCompCside.value = false;
-                  c.iskCompCside.value = false;
-                  c.isaAngle.value = false;
-                  c.isbAngle.value = false;
-                },
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
-                  color: Colors.transparent,
-                  child: Text(
-                    c.cHypotenuse.value,
-                    style: styleText,
-                  ),
-                ),
-              );
+                  onTap: () {
+                    onTap();
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+                    color: Colors.transparent,
+                    child: Text(
+                      activeValue,
+                      style: styleText,
+                    ),
+                  ));
             })));
   }
 }

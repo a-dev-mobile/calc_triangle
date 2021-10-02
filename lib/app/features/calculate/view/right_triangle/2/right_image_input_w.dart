@@ -7,7 +7,8 @@ import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/a_ang
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/a_cathet_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/b_angle_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/b_cathet_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/c_hypotenusea_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/c_hypotenuse_w.dart';
+
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/h_height_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/k_com_c_side_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/m_com_c_side_w.dart';
@@ -62,12 +63,12 @@ class RightTriangleImageInputWidget extends StatelessWidget {
             BangleWidget(
               posX: -20.573,
               posY: 0,
-              minSizeImage: minSize,
+              minSizeImage: minSize, angle: 0,
             ),
             AangleWidget(
               posX: -3.0,
               posY: 23.943,
-              minSizeImage: minSize,
+              minSizeImage: minSize, angle: 0,
             ),
             BcathetWidget(
               angle: -90,
@@ -78,7 +79,7 @@ class RightTriangleImageInputWidget extends StatelessWidget {
             AcathetWidget(
               posX: 0,
               posY: 43.545,
-              minSizeImage: minSize,
+              minSizeImage: minSize, angle: 0,
             ),
             ChypotenuseWidget(
               angle: 45,

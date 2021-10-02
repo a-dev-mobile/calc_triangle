@@ -14,6 +14,7 @@ import 'package:calc_triangle/app/utils/app_utils_map.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
 
+ 
 import 'package:get/get.dart';
 
 enum ScaleneTriangle {
@@ -287,7 +288,7 @@ class ScaleneTriangleController extends GetxController {
     log.w('end click ${keySymbol.value}');
   }
 
-//
+
   void printElements() {
     log.v('''printElements
         ${activeParamMap[1]} ${activeParamMap[2]} ${activeParamMap[3]}
@@ -342,14 +343,7 @@ class ScaleneTriangleController extends GetxController {
       3: ScaleneTriangle.empty,
     };
 
-    // resetValue();
-  }
 
-  void resetLastActiveParam() {
-    activeParamMap[3] = ScaleneTriangle.empty;
-    activeParamMap[4] = ScaleneTriangle.empty;
-
-    // resetValue();
   }
 
   void resetActiveInput() {
@@ -1544,7 +1538,7 @@ class ScaleneTriangleController extends GetxController {
     }
 
     // если активные углы то сбрасываем один выбор до последнй длины
-    if (isActiveThreeParamAngles()) {
+    if (isActiveParamAngles()) {
       showSnack(TranslateHelper.messageEnterAnyLength);
       return;
     }
@@ -1562,10 +1556,6 @@ class ScaleneTriangleController extends GetxController {
       return;
     }
 
-    // if (ifMaxNumberEnter()) {
-    //   showSnack('maximum number');
-    //   return;
-    // }
 
     //если активны данные параметры и выбор стороны
     if (isAvailableThreeParams(
@@ -1724,7 +1714,7 @@ class ScaleneTriangleController extends GetxController {
     return false;
   }
 
-  bool isActiveThreeParamAngles() {
+  bool isActiveParamAngles() {
     bool condition1 = activeParamMap.containsValue(ScaleneTriangle.aAngle);
     bool condition2 = activeParamMap.containsValue(ScaleneTriangle.bAngle);
     bool condition3 = activeParamMap.containsValue(ScaleneTriangle.yAngle);
@@ -2172,6 +2162,18 @@ class ScaleneTriangleController extends GetxController {
     ySPointD = 0;
     xSPointD = 0;
 
+    mA.value = mB.value = mC.value = startLengthValue;
+    mAd = mBd = mCd = 0.0;
+/////////////////////////////
+    lA.value = lB.value = lC.value = startLengthValue;
+    lAd = lBd = lCd = 0.0;
+
+    r.value = xr.value = yr.value = startLengthValue;
+    rd = xrd = yrd = 0.0;
+
+    R.value = xR.value = yR.value = startLengthValue;
+    Rd = xRd = yRd = 0.0;
+
     isDeg.value = true;
   }
 
@@ -2185,6 +2187,18 @@ class ScaleneTriangleController extends GetxController {
     xSPointD = 0;
     xSPoint.value = startLengthValue;
     ySPoint.value = startLengthValue;
+
+    mA.value = mB.value = mC.value = startLengthValue;
+    mAd = mBd = mCd = 0.0;
+/////////////////////////////
+    lA.value = lB.value = lC.value = startLengthValue;
+    lAd = lBd = lCd = 0.0;
+
+    r.value = xr.value = yr.value = startLengthValue;
+    rd = xrd = yrd = 0.0;
+
+    R.value = xR.value = yR.value = startLengthValue;
+    Rd = xRd = yRd = 0.0;
 
     if (!isAvailableOneParam(ScaleneTriangle.aSide)) {
       aSide.value = startAngleValue;

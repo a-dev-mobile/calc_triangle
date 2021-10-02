@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
+import 'package:calc_triangle/app/utils/app_utils_map.dart';
 
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
@@ -45,9 +46,6 @@ class RightTriangleController extends GetxController {
   var aAngle = startAngleValue.obs;
   var bAngle = startAngleValue.obs;
 
-  var area = "".obs;
-  var perimeter = "".obs;
-
   double aCathetD = 0.0;
   double bCathetD = 0.0;
   double cHypotenuseD = 0.0;
@@ -55,8 +53,49 @@ class RightTriangleController extends GetxController {
   double kCompCsideD = 0.0;
   double mCompCsideD = 0.0;
   double aAngleD = 0.0;
-  double bAngleD = 0.0;
+  double bAngleD = 0.0; /////////////////////////////
+  var area = "".obs;
+  var perimeter = "".obs;
+  var xSPoint = "".obs;
+  var ySPoint = "".obs;
+/////////////////////////////
+  double areaD = 0.0;
+  double perimeterD = 0.0;
+  double xSPointD = 0.0;
+  double ySPointD = 0.0;
+/////////////////////////////
 
+  var mA = "".obs;
+  var mB = "".obs;
+  var mC = "".obs;
+  double mAd = 0.0;
+  double mBd = 0.0;
+  double mCd = 0.0;
+/////////////////////////////
+
+  var lA = "".obs;
+  var lB = "".obs;
+  var lC = "".obs;
+  double lAd = 0.0;
+  double lBd = 0.0;
+  double lCd = 0.0;
+
+  //// Radius of the inscribed circle
+  var r = "".obs;
+  var xr = "".obs;
+  var yr = "".obs;
+  double rd = 0.0;
+  double xrd = 0.0;
+  double yrd = 0.0;
+
+  var R = "".obs;
+  var xR = "".obs;
+  var yR = "".obs;
+  double Rd = 0.0;
+  double xRd = 0.0;
+  double yRd = 0.0;
+
+/////////////////////////////
   var isDeg = true.obs;
   var isaAngle = false.obs;
   var isaCathet = false.obs;
@@ -75,7 +114,8 @@ class RightTriangleController extends GetxController {
   var paramLastLenght = RightTriangle.empty;
 
   late int precisionResult;
-
+  String message = "";
+  bool isNotFormula = false;
   @override
   void onInit() {
     clearAll();
@@ -88,7 +128,6 @@ class RightTriangleController extends GetxController {
 
     log.w('start click ${keySymbol.value}');
     printElements();
-
 
     if (keySymbol == Keys.next) {
       nextElement();
@@ -110,7 +149,7 @@ class RightTriangleController extends GetxController {
 
     //если у нас углы в минутах при нажатие любой кнопки далее очищаем ввод
     if (isDeg.isFalse) {
-      resetValue();
+      resetAllValue();
       return;
     }
     if (keySymbol == Keys.clearAll) {
@@ -121,8 +160,8 @@ class RightTriangleController extends GetxController {
 
     if (keySymbol == Keys.backspace) {
       backspace();
-      initValue();
       setActiveParam();
+      initValue();
       calculate();
       showMessage();
 
@@ -130,8 +169,8 @@ class RightTriangleController extends GetxController {
     }
 
     if (ifMaxNumberEnter()) {
-      log.e('return max');
-      showSnack('max');
+      showSnack(TranslateHelper.message_max_number_entered);
+
       return;
     }
 
@@ -231,15 +270,18 @@ class RightTriangleController extends GetxController {
 
       bAngle.value = sumInput + "°";
     }
-    printElements();
+
     log.v('end input');
-    setActiveParam();
-    showMessage();
+    // setActiveParam();
+    // showMessage();
 
     // if (isActiveOneParamEmpty()) return;
 
-    initValue();
     setActiveParam();
+    log.v(
+        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]}  click end active param');
+
+    initValue();
     calculate();
     showMessage();
 
@@ -251,14 +293,14 @@ class RightTriangleController extends GetxController {
     log.v('''printElements
         ${activeParamMap[1]} ${activeParamMap[2]}
 
-        $aCathetD ${aCathet.value} aCathet 
-        $bCathetD ${bCathet.value} bCathet 
-        $cHypotenuseD ${cHypotenuse.value} cHypotenuse 
-        $hHeightD ${hHeight.value} Height
-        $mCompCsideD ${mCompCside.value} mCompCside
-        $kCompCsideD ${kCompCside.value} kCompCside
-        $aAngleD ${aAngle.value} aAngle 
-        $bAngleD ${bAngle.value} bAngle
+        $aCathetD | ${aCathet.value} aCathet 
+        $bCathetD | ${bCathet.value} bCathet 
+        $cHypotenuseD | ${cHypotenuse.value} cHypotenuse 
+        $hHeightD | ${hHeight.value} Height
+        $mCompCsideD | ${mCompCside.value} mCompCside
+        $kCompCsideD | ${kCompCside.value} kCompCside
+        $aAngleD | ${aAngle.value} aAngle 
+        $bAngleD | ${bAngle.value} bAngle
        ''');
   }
 
@@ -302,13 +344,11 @@ class RightTriangleController extends GetxController {
     return false;
   }
 
-  void resetActiveParam() {
+  void resetActiveParams() {
     activeParamMap.value = <int, RightTriangle>{
       1: RightTriangle.empty,
       2: RightTriangle.empty,
     };
-
-    resetValue();
   }
 
   void resetActiveInput() {
@@ -366,8 +406,8 @@ class RightTriangleController extends GetxController {
       }
     } catch (e) {
       log.e('initValue error to double');
-      resetValue();
-      resetActiveParam();
+      resetAllValue();
+      resetActiveParams();
     }
     // }
   }
@@ -548,6 +588,7 @@ class RightTriangleController extends GetxController {
   }
 
   void calculate() {
+    if (isOnlyOneParamEmpty()) return;
     log.i('start calculate');
     printElements();
     RightTriangle activeParm2 = activeParamMap[2]!;
@@ -989,120 +1030,247 @@ class RightTriangleController extends GetxController {
       calcPerimKnowAcatBcatChyp();
     }
 
+    //================================================
+    // TODO  cHyp hHeight //not found formula
+    //================================================
+    param1 = RightTriangle.hHeight;
+    param2 = RightTriangle.cHypotenuse;
+    if (isAvailableTwoParams(param1, param2)) {
+      isNotFormula = true;
+    }
+
+    // ==========================================
+    // bCat mSideC // not found formula
+    // ==========================================
+    param1 = RightTriangle.mCompCside;
+    param2 = RightTriangle.bCathet;
+    if (isAvailableTwoParams(param1, param2)) {
+      isNotFormula = true;
+    }
+    //================================================
+    // aCat kSideC //не могу найти формулу
+    //================================================
+    param1 = RightTriangle.kCompCside;
+    param2 = RightTriangle.aCathet;
+    if (isAvailableTwoParams(param1, param2)) {
+      isNotFormula = true;
+    }
+
 // проверка если цифры не числа
-    checkIfNaN();
+    isNumberNaN();
     printElements();
     log.i('end calculate');
   }
 
-  void checkIfNaN() {
+  bool isNumberNaN() {
     if (ValidationUtils.isNumberNanAndInfinity(aCathetD)) {
       aCathet.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bCathetD)) {
       bCathet.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(cHypotenuseD)) {
       cHypotenuse.value = startLengthValue;
+      return true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(mCompCsideD)) {
       mCompCside.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(kCompCsideD)) {
       kCompCside.value = startLengthValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
+      return true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
       bAngle.value = startAngleValue;
+      return true;
     }
+    return false;
+  }
+
+  void moveEmptyValueToStartInParameters() {
+    activeParamMap.addAll(AppUtilsMap.moveValue(
+            oldMap: activeParamMap,
+            moveValue: RightTriangle.empty,
+            isPositionStart: true)
+        .cast<int, RightTriangle>());
+  }
+
+  void moveValueToEndInParameters(var value) {
+    activeParamMap.addAll(AppUtilsMap.moveValue(
+            oldMap: activeParamMap, moveValue: value, isPositionStart: false)
+        .cast<int, RightTriangle>());
+  }
+
+// если значение при удалении равно 0 то обнуляем активный параметр
+  bool isInputStartValue() {
+    bool activeInput;
+    String valueActiveInput;
+
+    activeInput = isaCathet.value;
+    valueActiveInput = aCathet.value;
+    RightTriangle oldValue;
+    var newValue = RightTriangle.empty;
+
+    if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = RightTriangle.aCathet;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+
+    activeInput = isbCathet.value;
+    valueActiveInput = bCathet.value;
+    if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = RightTriangle.bCathet;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+    activeInput = iscHypotenuse.value;
+    valueActiveInput = cHypotenuse.value;
+    if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = RightTriangle.cHypotenuse;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+
+    activeInput = ishHeight.value;
+    valueActiveInput = hHeight.value;
+    if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = RightTriangle.hHeight;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+    activeInput = ismCompCside.value;
+    valueActiveInput = mCompCside.value;
+    if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = RightTriangle.mCompCside;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+
+    activeInput = iskCompCside.value;
+    valueActiveInput = kCompCside.value;
+    if (activeInput && valueActiveInput == startLengthValue) {
+      oldValue = RightTriangle.kCompCside;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+
+    activeInput = isaAngle.value;
+    valueActiveInput = aAngle.value;
+    if (activeInput && valueActiveInput == startAngleValue) {
+      oldValue = RightTriangle.aAngle;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+
+    activeInput = isbAngle.value;
+    valueActiveInput = bAngle.value;
+    if (activeInput && valueActiveInput == startAngleValue) {
+      oldValue = RightTriangle.bAngle;
+
+      activeParamMap.value = AppUtilsMap.updateValues(
+              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
+          .cast<int, RightTriangle>();
+
+      return true;
+    }
+
+    return false;
   }
 
   void setActiveParam() {
-    log.v(
-        'start active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
+    log.v('1 ${activeParamMap[1]} 2 ${activeParamMap[2]}  start active param');
+
     RightTriangle paramActive = RightTriangle.empty;
 
-    if (isaCathet.value) {
-      if (aCathet.value == startLengthValue) {
-        resetActiveParam();
-        return;
-      }
+    if (isInputStartValue()) return;
 
+    if (isaCathet.value) {
       paramActive = RightTriangle.aCathet;
       paramLastLenght = RightTriangle.aCathet;
     } else if (isbCathet.value) {
-      if (bCathet.value == startLengthValue) {
-        resetActiveParam();
-        return;
-      }
       paramActive = RightTriangle.bCathet;
       paramLastLenght = RightTriangle.bCathet;
     } else if (iscHypotenuse.value) {
-      if (cHypotenuse.value == startLengthValue) {
-        resetActiveParam();
-
-        return;
-      }
-
       paramActive = RightTriangle.cHypotenuse;
       paramLastLenght = RightTriangle.cHypotenuse;
     } else if (ishHeight.value) {
-      if (hHeight.value == startLengthValue) {
-        resetActiveParam();
-        return;
-      }
       paramActive = RightTriangle.hHeight;
       paramLastLenght = RightTriangle.hHeight;
     } else if (ismCompCside.value) {
-      if (mCompCside.value == startLengthValue) {
-        resetActiveParam();
-        return;
-      }
-
       paramActive = RightTriangle.mCompCside;
       paramLastLenght = RightTriangle.mCompCside;
     } else if (iskCompCside.value) {
-      if (kCompCside.value == startLengthValue) {
-        resetActiveParam();
-        return;
-      }
       paramActive = RightTriangle.kCompCside;
       paramLastLenght = RightTriangle.kCompCside;
     } else if (isaAngle.value) {
-      if (aAngle.value == startAngleValue) {
-        resetActiveParam();
-        return;
-      }
       paramActive = RightTriangle.aAngle;
     } else if (isbAngle.value) {
-      if (bAngle.value == startAngleValue) {
-        resetActiveParam();
-        return;
-      }
       paramActive = RightTriangle.bAngle;
     }
+    moveEmptyValueToStartInParameters();
+    //если уже есть данный параметр переместить его наверх
+    if (isAvailableOneParam(paramActive)) {
+      moveValueToEndInParameters(paramActive);
+      return;
+    }
+    //если последний параметр похож на активный
+    if (activeParamMap[2] == paramActive) return;
 
-    activeParamMap[3] = paramActive;
-
-    if (activeParamMap[1] == activeParamMap[2] ||
-        activeParamMap[2] != activeParamMap[3]) {
+    if (activeParamMap[2] != RightTriangle.empty) {
       activeParamMap[1] = activeParamMap[2]!;
-      activeParamMap[2] = activeParamMap[3]!;
     }
 
-// если активные углы то сбрасываем один выбор до последнй длины
-    // if (isActiveParamAngles()) {
-    //   activeParamMap[1] = paramLenght;
-    // }
+    activeParamMap[2] = paramActive;
+  }
 
-    log.v(
-        'end active param ${activeParamMap[1]}  ${activeParamMap[2]} ${activeParamMap[3]}');
+  bool isAvailableOneParam(
+    RightTriangle param1,
+  ) {
+    if (activeParamMap.containsValue(param1)) {
+      return true;
+    }
+    return false;
   }
 
   bool isAvailableTwoParams(
@@ -1116,80 +1284,171 @@ class RightTriangleController extends GetxController {
     return false;
   }
 
-  bool isAvailableOneParam(RightTriangle param1) {
-    if (activeParamMap.containsValue(param1)) {
-      return true;
-    }
-    return false;
-  }
-
   void showMessage() {
-    RightTriangle param1;
-    RightTriangle param2;
+    double result = 0.0;
 
-    log.v('start show message');
+    log.w('start showMessage');
+
+    if (isNotFormula) {
+      log.w('isNotFormula');
+      showSnack(TranslateHelper.messageFormulaNotFound);
+      isNotFormula = false;
+      return;
+    }
+
+    // если активные углы то сбрасываем один выбор до последнй длины
+    if (isActiveParamAngles()) {
+      showSnack(TranslateHelper.messageEnterAnyLength);
+      return;
+    }
 
     // если есть пустой параметр
+    if (isOnlyTwoParamEmpty()) {
+      showSnack(TranslateHelper.enterTwoParameters);
+      return;
+    }
     if (isOnlyOneParamEmpty()) {
       showSnack(TranslateHelper.enterOneParameters);
       return;
     }
 
-    if (isActiveParamAngles()) {
-      showSnack(TranslateHelper.messageEnterAnyLength);
-      return;
-    }
-    if (isActiveTwoParamEmpty()) {
-      showSnack(TranslateHelper.enterTwoParameters);
-      return;
-    }
-
-    if (isAvailableTwoParams(RightTriangle.kCompCside, RightTriangle.bCathet)) {
-      if (!(kCompCsideD < bCathetD)) {
-        showSnack('${TranslateHelper.messageCmoreK}${bCathet.value}');
-        return;
-      }
-    }
-
-    if (isAvailableTwoParams(RightTriangle.mCompCside, RightTriangle.aCathet)) {
-      if (!(aCathetD > mCompCsideD)) {
-        showSnack('${TranslateHelper.messageAmoreM}${mCompCside.value}');
-        return;
-      }
-    }
     if (isAvailableTwoParams(
-        RightTriangle.mCompCside, RightTriangle.cHypotenuse)) {
-      if (!(cHypotenuseD > mCompCsideD)) {
-        showSnack('${TranslateHelper.messageCmoreM}${mCompCside.value}');
-        return;
+      RightTriangle.kCompCside,
+      RightTriangle.bCathet,
+    )) {
+      if (iskCompCside.value) {
+        result = bCathetD;
+        if (!(kCompCsideD < result)) {
+          showSnack(
+              'Component k must be < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (isbCathet.value) {
+        result = kCompCsideD;
+        if (!(bCathetD > result)) {
+          showSnack(
+              'Side b must be > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
       }
     }
 
     if (isAvailableTwoParams(
-        RightTriangle.kCompCside, RightTriangle.cHypotenuse)) {
-      if (!(cHypotenuseD > kCompCsideD)) {
-        showSnack('${TranslateHelper.messageCmoreK}${kCompCside.value}');
-        return;
+      RightTriangle.mCompCside,
+      RightTriangle.aCathet,
+    )) {
+      if (isaCathet.value) {
+        result = mCompCsideD;
+        if (!(aCathetD > result)) {
+          showSnack(
+              'Side a must be > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+
+      if (ismCompCside.value) {
+        result = aCathetD;
+        if (!(mCompCsideD < result)) {
+          showSnack(
+              'Component m must be < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+    }
+    if (isAvailableTwoParams(
+      RightTriangle.mCompCside,
+      RightTriangle.cHypotenuse,
+    )) {
+      if (iscHypotenuse.value) {
+        result = mCompCsideD;
+        if (!(cHypotenuseD > result)) {
+          showSnack(
+              'Side с must be > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (ismCompCside.value) {
+        result = cHypotenuseD;
+        if (!(mCompCsideD < result)) {
+          showSnack(
+              'Component m must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
       }
     }
 
-    if (isAvailableTwoParams(RightTriangle.hHeight, RightTriangle.aCathet)) {
-      if (!(hHeightD < aCathetD)) {
-        showSnack('${TranslateHelper.messageAmoreH}${aCathet.value}');
-        return;
+    if (isAvailableTwoParams(
+      RightTriangle.kCompCside,
+      RightTriangle.cHypotenuse,
+    )) {
+      if (iscHypotenuse.value) {
+        result = kCompCsideD;
+        if (!(cHypotenuseD > result)) {
+          showSnack(
+              'Side с must be > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (iskCompCside.value) {
+        result = cHypotenuseD;
+        if (!(kCompCsideD < result)) {
+          showSnack(
+              'Component k must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
       }
     }
-    if (isAvailableTwoParams(RightTriangle.hHeight, RightTriangle.bCathet)) {
-      if (!(bCathetD > hHeightD)) {
-        showSnack('${TranslateHelper.messageBmoreH}${bCathet.value}');
-        return;
+
+    if (isAvailableTwoParams(
+      RightTriangle.hHeight,
+      RightTriangle.aCathet,
+    )) {
+      if (isaCathet.value) {
+        result = hHeightD;
+        if (!(aCathetD > result)) {
+          showSnack(
+              'Side a must be > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (ishHeight.value) {
+        result = aCathetD;
+        if (!(hHeightD < result)) {
+          showSnack(
+              'Height h must be < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+    }
+    if (isAvailableTwoParams(
+      RightTriangle.hHeight,
+      RightTriangle.bCathet,
+    )) {
+      if (isbCathet.value) {
+        result = hHeightD;
+        if (!(bCathetD > result)) {
+          showSnack(
+              'Side b must be > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (ishHeight.value) {
+        result = bCathetD;
+        if (!(hHeightD < result)) {
+          showSnack(
+              'Height h must be < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
       }
     }
 
 //если гипотенуза меньше
 
-    if (isAvailableTwoParams(RightTriangle.cHypotenuse, RightTriangle.aCathet) ||
-        isAvailableTwoParams(RightTriangle.cHypotenuse, RightTriangle.bCathet)) {
+    if (isAvailableTwoParams(
+            RightTriangle.cHypotenuse, RightTriangle.aCathet) ||
+        isAvailableTwoParams(
+            RightTriangle.cHypotenuse, RightTriangle.bCathet)) {
       if (cHypotenuseD < aCathetD || cHypotenuseD < bCathetD) {
         showSnack(TranslateHelper.messageHypotenuseGreaterCathetus);
 
@@ -1203,33 +1462,9 @@ class RightTriangleController extends GetxController {
 
       return;
     }
-
-    //================================================
-    // TODO  cHyp hHeight //not found formula
-    //================================================
-    param1 = RightTriangle.hHeight;
-    param2 = RightTriangle.cHypotenuse;
-    if (isAvailableTwoParams(param1, param2)) {
-      showSnack(TranslateHelper.messageFormulaNotFound);
-      return;
-    }
-
-    // ==========================================
-    // bCat mSideC // not found formula
-    // ==========================================
-    param1 = RightTriangle.mCompCside;
-    param2 = RightTriangle.bCathet;
-    if (isAvailableTwoParams(param1, param2)) {
-      showSnack(TranslateHelper.messageFormulaNotFound);
-      return;
-    }
-    //================================================
-    // aCat kSideC //не могу найти формулу
-    //================================================
-    param1 = RightTriangle.kCompCside;
-    param2 = RightTriangle.aCathet;
-    if (isAvailableTwoParams(param1, param2)) {
-      showSnack(TranslateHelper.messageFormulaNotFound);
+    if (isNumberNaN()) {
+      log.w('isNumberNaN');
+      showSnack(TranslateHelper.message_calc_error_chang_value);
       return;
     }
 
@@ -1239,6 +1474,7 @@ class RightTriangleController extends GetxController {
 
   bool isAngleOver90(KeySymbol keySymbol) {
     String newInput = keySymbol.value;
+    initValue();
     double sum = 0;
     if (isaAngle.value) {
       sum = double.parse(
@@ -1267,6 +1503,14 @@ class RightTriangleController extends GetxController {
             activeParamMap[2] != RightTriangle.empty ||
         activeParamMap[2] == RightTriangle.empty &&
             activeParamMap[1] != RightTriangle.empty) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isOnlyTwoParamEmpty() {
+    if (activeParamMap[1] == RightTriangle.empty &&
+        activeParamMap[2] == RightTriangle.empty) {
       return true;
     }
     return false;
@@ -1476,6 +1720,9 @@ class RightTriangleController extends GetxController {
 
     initValue();
     setActiveParam();
+    log.v(
+        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]}  longBackspace active param  ');
+
     calculate();
     showMessage();
     restartActiveParamIfZeroValue();
@@ -1491,39 +1738,59 @@ class RightTriangleController extends GetxController {
       newInput = AppUtilsString.removeLastCharacter(oldInput);
       //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
+        aCathetD = 0;
+
         newInput = startLengthValue;
+
+        resetNotActiveValue();
       }
       aCathet.value = newInput;
     } else if (isbCathet.value) {
       oldInput = bCathet.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
-
+      //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
+        bCathetD = 0;
+
         newInput = startLengthValue;
+
+        resetNotActiveValue();
       }
       bCathet.value = newInput;
     } else if (iscHypotenuse.value) {
       oldInput = cHypotenuse.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
-
+      //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
+        cHypotenuseD = 0;
+
         newInput = startLengthValue;
+
+        resetNotActiveValue();
       }
       cHypotenuse.value = newInput;
     } else if (iskCompCside.value) {
       oldInput = kCompCside.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
-
+      //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
+        kCompCsideD = 0;
+
         newInput = startLengthValue;
+
+        resetNotActiveValue();
       }
       kCompCside.value = newInput;
     } else if (ismCompCside.value) {
       oldInput = mCompCside.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
-
+      //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
+        mCompCsideD = 0;
+
         newInput = startLengthValue;
+
+        resetNotActiveValue();
       }
       mCompCside.value = newInput;
     } else if (ishHeight.value) {
@@ -1531,7 +1798,9 @@ class RightTriangleController extends GetxController {
       newInput = AppUtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
+        hHeightD = 0;
         newInput = startLengthValue;
+        resetNotActiveValue();
       }
       hHeight.value = newInput;
     } else if (isaAngle.value) {
@@ -1543,7 +1812,9 @@ class RightTriangleController extends GetxController {
       newInput = AppUtilsString.removeLastCharacter(oldInput);
 
       if (newInput.isEmpty) {
+        aAngleD = 0;
         newInput = startLengthValue;
+        resetNotActiveValue();
       }
       aAngle.value = newInput + '°';
     } else if (isbAngle.value) {
@@ -1554,7 +1825,9 @@ class RightTriangleController extends GetxController {
       }
       newInput = AppUtilsString.removeLastCharacter(oldInput);
       if (newInput.isEmpty) {
+        bAngleD = 0;
         newInput = startLengthValue;
+        resetNotActiveValue();
       }
       bAngle.value = newInput + '°';
     }
@@ -1564,16 +1837,16 @@ class RightTriangleController extends GetxController {
     //устанавливаем начальные значения
     log.v(' start clearAll');
     printElements();
-    resetValue();
+    resetAllValue();
 
     resetActiveInput();
-    resetActiveParam();
+    resetActiveParams();
 
     printElements();
     log.v(' end clearAll');
   }
 
-  void resetValue() {
+  void resetAllValue() {
     //устанавливаем начальные значения
     aCathet.value = startLengthValue;
     bCathet.value = startLengthValue;
@@ -1586,10 +1859,87 @@ class RightTriangleController extends GetxController {
 
     perimeter.value = startLengthValue;
     area.value = startLengthValue;
+    areaD = 0;
+    perimeterD = 0;
 
     aCathetD = bCathetD = cHypotenuseD =
         hHeightD = kCompCsideD = mCompCsideD = bAngleD = aAngleD = 0;
+
+    ySPointD = 0;
+    xSPointD = 0;
+
+    mA.value = mB.value = mC.value = startLengthValue;
+    mAd = mBd = mCd = 0.0;
+/////////////////////////////
+    lA.value = lB.value = lC.value = startLengthValue;
+    lAd = lBd = lCd = 0.0;
+
+    r.value = xr.value = yr.value = startLengthValue;
+    rd = xrd = yrd = 0.0;
+
+    R.value = xR.value = yR.value = startLengthValue;
+    Rd = xRd = yRd = 0.0;
     isDeg.value = true;
+  }
+
+  void resetNotActiveValue() {
+    areaD = 0;
+    perimeterD = 0;
+    area.value = startLengthValue;
+    perimeter.value = startLengthValue;
+
+    ySPointD = 0;
+    xSPointD = 0;
+    xSPoint.value = startLengthValue;
+    ySPoint.value = startLengthValue;
+
+    mA.value = mB.value = mC.value = startLengthValue;
+    mAd = mBd = mCd = 0.0;
+/////////////////////////////
+    lA.value = lB.value = lC.value = startLengthValue;
+    lAd = lBd = lCd = 0.0;
+
+    r.value = xr.value = yr.value = startLengthValue;
+    rd = xrd = yrd = 0.0;
+
+    R.value = xR.value = yR.value = startLengthValue;
+    Rd = xRd = yRd = 0.0;
+
+    if (!isAvailableOneParam(RightTriangle.aCathet)) {
+      aCathet.value = startLengthValue;
+      aCathetD = 0;
+    }
+    if (!isAvailableOneParam(RightTriangle.bCathet)) {
+      bCathet.value = startLengthValue;
+      bCathetD = 0;
+    }
+    if (!isAvailableOneParam(RightTriangle.cHypotenuse)) {
+      cHypotenuse.value = startLengthValue;
+      cHypotenuseD = 0;
+    }
+    if (!isAvailableOneParam(RightTriangle.hHeight)) {
+      hHeight.value = startLengthValue;
+      hHeightD = 0;
+    }
+
+    if (!isAvailableOneParam(RightTriangle.mCompCside)) {
+      mCompCside.value = startLengthValue;
+      mCompCsideD = 0;
+    }
+
+    if (!isAvailableOneParam(RightTriangle.kCompCside)) {
+      kCompCside.value = startLengthValue;
+      kCompCsideD = 0;
+    }
+
+    if (!isAvailableOneParam(RightTriangle.aAngle)) {
+      aAngle.value = startAngleValue;
+      aAngleD = 0;
+    }
+    if (!isAvailableOneParam(RightTriangle.bAngle)) {
+      bAngle.value = startAngleValue;
+      bAngleD = 0;
+    }
   }
 
   void _isNext(bool isNext) {
