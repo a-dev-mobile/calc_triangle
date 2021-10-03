@@ -2,6 +2,42 @@ Map<String, String> en = {
   'about': 'About App',
   'app_name': 'Triangle',
   'app_name_sub': 'Calculations',
+  'right_triangle': 'Right Triangle',
+  'scalene_triangle': 'Scalene Triangle',
+  'isosceles_triangle': 'Isosceles Triangle',
+  'equilateral_triangle': 'Equilateral Triangle',
+  'title_dialog_calculate': 'You\'ll be able to calculate:',
+  'dialog_calculate_righ': '''- sides, heights and angles
+- perimeter and area
+- medians and bisectors, 
+- geometric center coordinates
+- size and coordinates of the center of the inscribed and circumcised circle''',
+
+  'dialog_calculate_scalene': '''sides, heights and angles
+perimeter and area
+medians and bisectors, 
+geometric center coordinates
+size and coordinates of the center of the inscribed and circumcised circle''',
+/* You'll be able to calculate:
+
+sides, heights and angles
+perimeter and area
+medians and bisectors, 
+geometric center coordinates
+size and coordinates of the center of the inscribed and circumcised circle
+
+Вы сможете вычислить:
+
+стороны, высоту и углы
+периметр и площадь
+медианы и биссектрисы, 
+координаты геометрического центра
+размер и координаты центра вписанного и  описанного круга 
+
+
+
+*/
+
   'enter_3_parameters': 'Enter 3 parameters',
   'enter_2_parameters': 'Enter 2 parameters',
   'enter_1_parameters': 'Enter 1 parameter',
@@ -30,12 +66,6 @@ Map<String, String> en = {
   'selected_precision_result': 'Select precision of results: ',
   'message_hypotenuse_greater_cathetus': 'Hypotenuse < cathetus',
   'message_enter_any_length': 'Enter any length',
-  'message_c_k': 'c must be > k = ',
-  'message_c_m': 'c must be > m = ',
-  'message_k_b': 'k must be < b = ',
-  'message_a_m': 'a must be > m = ',
-  'message_a_h': 'h must be < a = ',
-  'message_b_h': 'b must be > h = ',
   'message_formula_not_found': 'Formula is not found',
   'message_max_number_entered': 'Max number entered',
   'message_calc_error_chang_value': 'Calculation error, try changing the value',
@@ -43,6 +73,4 @@ Map<String, String> en = {
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',
-
-  
 };

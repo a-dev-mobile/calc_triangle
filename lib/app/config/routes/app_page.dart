@@ -33,21 +33,23 @@ class AppPage {
     GetPage(
       name: Routes.selectShape,
       page: () => const SelectShapePage(),
-    ),
-    GetPage(
-        name: Routes.calculate,
-        page: () => CalculatePage(),
-        binding: BindingsBuilder(() {
+       binding: BindingsBuilder(() {
 
    Get.lazyPut<RightTriangleController>(() => RightTriangleController());
    Get.lazyPut<ScaleneTriangleController>(() => ScaleneTriangleController());
 
 
-        })),
+        })
+    ),
+    GetPage(
+        name: Routes.calculate,
+        page: () => const CalculatePage(),
+       ),
   
     GetPage(
         name: Routes.setting,
         page: () => const SettingPage(),
+
         binding: BindingsBuilder(() {
           Get.put<SettingContrl>(SettingContrl());
         })),

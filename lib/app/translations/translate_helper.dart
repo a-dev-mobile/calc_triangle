@@ -10,7 +10,8 @@ class TranslateHelper {
     Get.updateLocale(locale);
   }
 
-  static String get rightTriangle => 'right_triangle'.tr;
+  static String get right_triangle => 'right_triangle'.tr;
+  static String get scalene_triangle => 'scalene_triangle'.tr;
   static String get enterThreeParameters => 'enter_3_parameters'.tr;
   static String get enterTwoParameters => 'enter_2_parameters'.tr;
   static String get enterOneParameters => 'enter_1_parameters'.tr;
@@ -48,16 +49,13 @@ class TranslateHelper {
   static String get messageHypotenuseGreaterCathetus =>
       'message_hypotenuse_greater_cathetus'.tr;
 
-  static String get messageCmoreK => 'message_c_k'.tr;
-  static String get messageCmoreM => 'message_c_m'.tr;
-  static String get messageBmoreK => 'message_k_b'.tr;
-  static String get messageAmoreM => 'message_a_m'.tr;
-  static String get messageAmoreH => 'message_a_h'.tr;
-  static String get messageBmoreH => 'message_b_h'.tr;
   static String get messageFormulaNotFound => 'message_formula_not_found'.tr;
   static String get message_max_number_entered => 'message_max_number_entered'.tr;
   static String get message_calc_error_chang_value => 'message_calc_error_chang_value'.tr;
   static String get perimeter => 'perimeter'.tr;
   static String get area => 'area'.tr;
   static String get chooseShape => 'choose_shape'.tr;
+  static String get dialog_calculate_scalene => 'dialog_calculate_scalene'.tr;
+  static String get dialog_calculate_righ => 'dialog_calculate_righ'.tr;
+  static String get title_dialog_calculate => 'title_dialog_calculate'.tr;
 }

@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
                     ? Routes.welcome
                     : Routes.selectShape,
 
-            defaultTransition: Transition.downToUp,
+            defaultTransition: Transition.rightToLeft,
             getPages: AppPage.pages,
             themeMode: GlobalServ.to.isDarkTheme.value
                 ? ThemeMode.dark

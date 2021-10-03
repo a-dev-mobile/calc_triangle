@@ -4,22 +4,10 @@ import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/*
-SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarIconBrightness:
-            isDarkTheme.value ? Brightness.light : Brightness.dark,
-        statusBarColor: isDarkTheme.value
-            ? ConstColor.scaffoldDarkTheme
-            : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: isDarkTheme.value
-            ? Brightness.dark
-            : Brightness.light // Dark == white status bar -- for IOS.
-        ));
-
-*/
 
 ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
+    cardColor: ConstColor.cardBgLight,
       primaryColor: ConstColor.primary,
       scaffoldBackgroundColor: ConstColor.scaffoldLightTheme,
       appBarTheme: AppBarTheme(
@@ -32,8 +20,8 @@ ThemeData lightThemeData(BuildContext context) {
             color: ConstColor.scaffoldDarkTheme,
             fontSize: 20,
           ),
-          color: Colors.transparent,
-          centerTitle: true,
+             color: ConstColor.primary,
+        
           elevation: 0),
       textTheme: Theme.of(context).textTheme.apply(
           fontFamily: 'montserrat', bodyColor: ConstColor.scaffoldDarkTheme,),
@@ -49,6 +37,9 @@ ThemeData darkThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
       primaryColor: ConstColor.primary,
       scaffoldBackgroundColor: ConstColor.scaffoldDarkTheme,
+
+
+    cardColor: ConstColor.cardBgDark,
       appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
               statusBarBrightness: Brightness.dark,
@@ -59,8 +50,8 @@ ThemeData darkThemeData(BuildContext context) {
             color: ConstColor.scaffoldLightTheme,
             fontSize: 20,
           ),
-          color: Colors.transparent,
-          centerTitle: true,
+          color: ConstColor.primary,
+        
           elevation: 0),
       textTheme: Theme.of(context).textTheme.apply(
             fontFamily: 'montserrat',
