@@ -68,8 +68,7 @@ class ScaleneInput extends StatelessWidget {
                     );
             }),
 
-            // child: NumPadRightWidget(),
-            const IconInputInfoWidget(),
+                      const IconInputInfoWidget(),
             DrawerIconWidget(globalkey: _globalKey),
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:calc_triangle/app/config/routes/app_page.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_info_w.dart';
+
 import 'package:calc_triangle/app/shared_components/image_info_w.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
@@ -41,7 +41,7 @@ class SelectShapePage extends StatelessWidget {
                          GlobalServ.to.aciveShape = Shape.rightTriangle;
                       Get.offAllNamed(Routes.calculate);
                     },
-                    child: const RightTriangleImageInfoWidget()),
+                    child:const ImageInfoWidget(patchAsset: ConstAssetsImageRaster.rightTriangleInfo,)),
                 InkWell(
                     onTap: () {
                       logger.i(

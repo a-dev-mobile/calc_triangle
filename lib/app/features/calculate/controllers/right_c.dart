@@ -587,6 +587,113 @@ class RightTriangleController extends GetxController {
         aCathetD + bCathetD + cHypotenuseD, precisionResult);
   }
 
+  void calcSubResultKnowAsideBsideCsideAangl() async {
+    calcYsPointKnowCsideAang();
+    calcXsPointKnowAsideCsideAang();
+    calcMedianKnowAsideBsideCside();
+    calcBisectorKnowAsideBsideCside();
+    //внут круг
+    calcRIncenterKnowAsideBsideCside();
+    //внеш круг
+    calcRCircumCenterKnowChypo();
+    calcXSRCircumCenterKnowAside();
+    calcYSrIncenter();
+    //last
+    calcXSrIncenterKnowAsideAanglBangl();
+    calcYSRCircumCenterKnowRradAside();
+  }
+
+  void calcXsPointKnowAsideCsideAang() {
+    xSPointD = aCathetD/3;
+
+    xSPoint.value = AppUtilsNumber.getFormatNumber(xSPointD, precisionResult);
+  }
+
+  void calcYsPointKnowCsideAang() {
+    ySPointD = bCathetD  / 3;
+    ySPoint.value = AppUtilsNumber.getFormatNumber(ySPointD, precisionResult);
+  }
+
+  void calcMedianKnowAsideBsideCside() {
+    mAd = 0.5 *
+        (sqrt(2 * pow(cHypotenuseD, 2) +
+            2 * pow(bCathetD, 2) -
+            pow(aCathetD, 2)));
+    mBd = 0.5 *
+        (sqrt(2 * pow(cHypotenuseD, 2) +
+            2 * pow(aCathetD, 2) -
+            pow(bCathetD, 2)));
+    mCd = 0.5 *
+        (sqrt(2 * pow(aCathetD, 2) +
+            2 * pow(bCathetD, 2) -
+            pow(cHypotenuseD, 2)));
+
+    mA.value = AppUtilsNumber.getFormatNumber(mAd, precisionResult);
+    mB.value = AppUtilsNumber.getFormatNumber(mBd, precisionResult);
+    mC.value = AppUtilsNumber.getFormatNumber(mCd, precisionResult);
+  }
+
+  void calcBisectorKnowAsideBsideCside() {
+    lCd = (sqrt(aCathetD *
+            bCathetD *
+            (cHypotenuseD + bCathetD + aCathetD) *
+            (aCathetD + bCathetD - cHypotenuseD))) /
+        (aCathetD + bCathetD);
+    lBd = (sqrt(cHypotenuseD *
+            aCathetD *
+            (cHypotenuseD + bCathetD + aCathetD) *
+            (cHypotenuseD + aCathetD - bCathetD))) /
+        (cHypotenuseD + aCathetD);
+    lAd = (sqrt(cHypotenuseD *
+            bCathetD *
+            (cHypotenuseD + bCathetD + aCathetD) *
+            (cHypotenuseD + bCathetD - aCathetD))) /
+        (cHypotenuseD + bCathetD);
+    lA.value = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
+    lB.value = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
+    lC.value = AppUtilsNumber.getFormatNumber(lCd, precisionResult);
+  }
+
+  void calcRIncenterKnowAsideBsideCside() {
+    double m = 0;
+
+    m = (aCathetD + bCathetD + cHypotenuseD) / 2;
+
+    rd = sqrt(((m - aCathetD) * (m - bCathetD) * (m - cHypotenuseD)) / m);
+
+    r.value = AppUtilsNumber.getFormatNumber(rd, precisionResult);
+  }
+
+  void calcRCircumCenterKnowChypo() {
+    // Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
+    Rd = cHypotenuseD / 2;
+    R.value = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
+  }
+
+  void calcYSrIncenter() {
+    yr.value = xr.value;
+  }
+
+  void calcXSRCircumCenterKnowAside() {
+    xRd = aCathetD / 2;
+    xR.value = AppUtilsNumber.getFormatNumber(xRd, precisionResult);
+  }
+
+  void calcXSrIncenterKnowAsideAanglBangl() {
+    xrd = (tan(AppConvert.toRadian(bAngleD / 2))) *
+        aCathetD /
+        (tan(AppConvert.toRadian(aAngleD / 2)) +
+            tan(AppConvert.toRadian(bAngleD / 2)));
+
+    xr.value = AppUtilsNumber.getFormatNumber(xrd, precisionResult);
+  }
+
+  void calcYSRCircumCenterKnowRradAside() {
+    yRd = sqrt(pow(Rd, 2) - (pow(aCathetD, 2) / 4));
+
+    yR.value = AppUtilsNumber.getFormatNumber(yRd, precisionResult);
+  }
+
   void calculate() {
     if (isOnlyOneParamEmpty()) return;
     log.i('start calculate');
@@ -621,6 +728,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -638,6 +746,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -655,6 +764,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -672,6 +782,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -690,6 +801,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -707,6 +819,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
     // ==========================================
     // bCat cHyp ==OK
@@ -723,6 +836,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -740,6 +854,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -757,6 +872,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -775,6 +891,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
     // ==========================================
     // bCat hHeight ==OK
@@ -791,6 +908,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
     // ==========================================
     // cHyp aAng ==OK
@@ -811,6 +929,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     // ==========================================
@@ -832,6 +951,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -849,6 +969,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -866,6 +987,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -885,6 +1007,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -904,6 +1027,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -920,6 +1044,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
     //================================================
     // bAng kSideC ==OK
@@ -936,6 +1061,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -953,6 +1079,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -970,6 +1097,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
     //================================================
     // mSideC kSideC =OK
@@ -992,6 +1120,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -1010,6 +1139,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================
@@ -1028,6 +1158,7 @@ class RightTriangleController extends GetxController {
 
       calcAreaKnowAcatBcat();
       calcPerimKnowAcatBcatChyp();
+      calcSubResultKnowAsideBsideCsideAangl();
     }
 
     //================================================

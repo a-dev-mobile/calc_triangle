@@ -4,6 +4,19 @@ class ConstAssetsImageRaster {
       '$_path/triangle/right_triangle_input.png';
   static const String rightTriangleInfo =
       '$_path/triangle/right_triangle_info.png';
+  static const String rightTriangleS =
+      '$_path/triangle/right_triangle_S.png';
+  static const String rightTriangleSr =
+      '$_path/triangle/right_triangle_Sr.png';
+  static const String rightTriangleSR =
+      '$_path/triangle/right_triangle_S_R.png';
+        static const String rightTriangleAP =
+      '$_path/triangle/right_triangle_ap.png';
+
+
+
+
+
   static const String scaleneTriangleInput =
       '$_path/triangle/scalene_triangle_input.png';
   static const String scaleneTriangleInfo =

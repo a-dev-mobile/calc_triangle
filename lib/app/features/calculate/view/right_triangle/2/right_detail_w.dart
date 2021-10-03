@@ -1,21 +1,20 @@
+
+
 import 'package:calc_triangle/app/config/theme/app_color.dart';
-import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/area_perim.dart';
-import 'package:calc_triangle/app/shared_components/image_info_w.dart';
-import 'package:calc_triangle/app/shared_components/app_widgets.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_title.dart';
+import 'package:calc_triangle/app/shared_components/image_info_w.dart';
+import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-late var c = ScaleneTriangleController.to;
+late var c =RightTriangleController.to;
 
-class ScaleneDetail extends StatelessWidget {
-  const ScaleneDetail({Key? key}) : super(key: key);
+class RightDetail extends StatelessWidget {
+  const RightDetail({Key? key}) : super(key: key);
  
   @override
   Widget build(BuildContext context) {
@@ -29,12 +28,12 @@ class ScaleneDetail extends StatelessWidget {
                 child: Column(
                   children: const [
                     ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.scaleneTriangleInfo),
+                        patchAsset: ConstAssetsImageRaster.rightTriangleInfo),
                     TextTitleDetail(text: 'Sides, height and angles'),
                   ],
                 ),
               ),
-              content: const ScaleneSidesAngles(),
+              content: const RightSidesAngles(),
             ),
             StickyHeader(
               header: Container(
@@ -42,7 +41,7 @@ class ScaleneDetail extends StatelessWidget {
                 child: Column(
                   children: const [
                     ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.scaleneTriangleAP),
+                        patchAsset: ConstAssetsImageRaster.rightTriangleAP),
                     TextTitleDetail(text: 'Area and Perimeter'),
                   ],
                 ),
@@ -58,7 +57,7 @@ class ScaleneDetail extends StatelessWidget {
                   child: Column(
                     children: const [
                       ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleS),
+                          patchAsset: ConstAssetsImageRaster.rightTriangleS),
                       TextTitleDetail(text: 'Mediana and geometric centroid'),
                     ],
                   ),
@@ -70,7 +69,7 @@ class ScaleneDetail extends StatelessWidget {
                   child: Column(
                     children: const [
                       ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleSr),
+                          patchAsset: ConstAssetsImageRaster.rightTriangleSr),
                       TextTitleDetail(text: 'Bisection and inscribed circle'),
                     ],
                   ),
@@ -82,7 +81,7 @@ class ScaleneDetail extends StatelessWidget {
                   child: Column(
                     children: const [
                       ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleSR),
+                          patchAsset: ConstAssetsImageRaster.rightTriangleSR),
                       TextTitleDetail(text: 'Circumscribed circle'),
                     ],
                   ),
@@ -106,10 +105,14 @@ class CircumscribedCircle extends StatelessWidget {
       children: [
         ItemDetail(
           isActive: false,
-          leading: 'R',
-          subtitle: 'Radius of the circumscribed circle ',
-          title: c.R.value,
+       leading: 'R',
+          subtitle: 'Radius / diameter of the circumscribed circle ',
+         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}',
         ),
+
+ 
+
+
         ItemDetail(
           isActive: false,
           leading: 'X',
@@ -157,8 +160,8 @@ class BisectionInscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'r',
-          subtitle: 'Radius of the inscribed circle',
-          title: c.r.value,
+          subtitle: 'Radius / diameter of the inscribed circle',
+          title: 'r${c.r.value} / ⌀${AppUtilsNumber.getFormatNumber(c.rd*2, c.precisionResult)}',
         ),
         ItemDetail(
           isActive: false,
@@ -221,8 +224,8 @@ class MedianaGeometricCentroid extends StatelessWidget {
   }
 }
 
-class ScaleneSidesAngles extends StatelessWidget {
-  const ScaleneSidesAngles({
+class RightSidesAngles extends StatelessWidget {
+  const RightSidesAngles({
     Key? key,
   }) : super(key: key);
 
@@ -233,47 +236,53 @@ class ScaleneSidesAngles extends StatelessWidget {
         // AppWidgets.dividerWelcome(),
 
         ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.aSide),
-          leading: 'a',
-          subtitle: 'a - base of the triangle',
-          title: c.aSide.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.bSide),
-          leading: 'b',
-          subtitle: 'b - sides of the triangle',
-          title: c.bSide.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.cSide),
-          leading: 'c',
-          subtitle: 'c - sides of the triangle',
-          title: c.cSide.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.hHeight),
-          leading: 'h',
-          subtitle: 'h - height of the triangle',
-          title: c.hHeight.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.aAngle),
-          leading: 'α',
-          subtitle: 'α - internal angle in degrees',
-          title: c.aAngle.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.bAngle),
-          leading: 'β',
-          subtitle: 'β - internal angle in degrees',
-          title: c.bAngle.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.yAngle),
-          leading: 'γ',
-          subtitle: 'γ - internal angle in degrees',
-          title: c.yAngle.value,
-        ),
+            isActive: c.isAvailableOneParam(RightTriangle.aCathet),
+            leading: 'a',
+            subtitle: 'a - catheti',
+            title: c.aCathet.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(RightTriangle.bCathet),
+            leading: 'b',
+            subtitle: 'b - catheti',
+            title: c.bCathet.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(RightTriangle.cHypotenuse),
+            leading: 'c',
+            subtitle: 'c - hypotenuse',
+            title: c.cHypotenuse.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(RightTriangle.hHeight),
+            leading: 'h',
+            subtitle: 'h - height of the triangle',
+            title: c.hHeight.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(RightTriangle.aAngle),
+            leading: 'α',
+            subtitle: 'α - acute angles in degrees',
+            title: c.aAngle.value,
+          ), 
+          ItemDetail(
+            isActive: c.isAvailableOneParam(RightTriangle.bAngle),
+            leading: 'β',
+            subtitle: 'β - acute angles in degrees',
+            title: c.bAngle.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(RightTriangle.mCompCside),
+            leading: 'm',
+            subtitle: 'm - components of the c - hypotenuse',
+            title: c.mCompCside.value,
+          ),
+          ItemDetail(
+            isActive: c.isAvailableOneParam(RightTriangle.kCompCside),
+            leading: 'k',
+            subtitle: 'k - components of the c - hypotenuse',
+            title: c.kCompCside.value,
+          ),
       ],
     );
   }
@@ -285,56 +294,75 @@ class ScaleneSidesAngles extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
+
+
+// late var c = RightTriangleController.to;
+
+// class RightDetailInfoWidget extends StatelessWidget {
+//   const RightDetailInfoWidget({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
 //     return SingleChildScrollView(child: Obx(() {
 //       return Column(
 //         children: [
-//           const ScaleneTriangleImageInfoWidget(),
-//           // AppWidgets.dividerWelcome(),
-//           const TextTitleDetail(text: 'Sides and angles'),
 //           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.aSide),
+//             isActive: c.isAvailableOneParam(RightTriangle.aCathet),
 //             leading: 'a',
-//             subtitle: 'a - base of the triangle',
-//             title: c.aSide.value,
+//             subtitle: 'a - catheti',
+//             title: c.aCathet.value,
 //           ),
 //           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.bSide),
+//             isActive: c.isAvailableOneParam(RightTriangle.bCathet),
 //             leading: 'b',
-//             subtitle: 'b - sides of the triangle',
-//             title: c.bSide.value,
+//             subtitle: 'b - catheti',
+//             title: c.bCathet.value,
 //           ),
 //           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.cSide),
+//             isActive: c.isAvailableOneParam(RightTriangle.cHypotenuse),
 //             leading: 'c',
-//             subtitle: 'c - sides of the triangle',
-//             title: c.cSide.value,
+//             subtitle: 'c - hypotenuse',
+//             title: c.cHypotenuse.value,
 //           ),
 //           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.hHeight),
+//             isActive: c.isAvailableOneParam(RightTriangle.hHeight),
 //             leading: 'h',
 //             subtitle: 'h - height of the triangle',
 //             title: c.hHeight.value,
 //           ),
 //           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.aAngle),
+//             isActive: c.isAvailableOneParam(RightTriangle.aAngle),
 //             leading: 'α',
-//             subtitle: 'α - internal angle in degrees',
+//             subtitle: 'α - acute angles in degrees',
 //             title: c.aAngle.value,
-//           ),
+//           ), 
 //           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.bAngle),
+//             isActive: c.isAvailableOneParam(RightTriangle.bAngle),
 //             leading: 'β',
-//             subtitle: 'β - internal angle in degrees',
+//             subtitle: 'β - acute angles in degrees',
 //             title: c.bAngle.value,
 //           ),
 //           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.yAngle),
-//             leading: 'γ',
-//             subtitle: 'γ - internal angle in degrees',
-//             title: c.aAngle.value,
+//             isActive: c.isAvailableOneParam(RightTriangle.mCompCside),
+//             leading: 'm',
+//             subtitle: 'm - components of the c - hypotenuse',
+//             title: c.mCompCside.value,
 //           ),
-
-//           const TextTitleDetail(text: 'Area and Perimeter'),
+//           ItemDetail(
+//             isActive: c.isAvailableOneParam(RightTriangle.kCompCside),
+//             leading: 'k',
+//             subtitle: 'k - components of the c - hypotenuse',
+//             title: c.kCompCside.value,
+//           ),
+//           AppWidgets.dividerWelcome(),
 //           ItemDetail(
 //             isActive: false,
 //             leading: 'A',
@@ -347,22 +375,45 @@ class ScaleneSidesAngles extends StatelessWidget {
 //             subtitle: 'Perimeter',
 //             title: c.perimeter.value,
 //           ),
-
-//           const TextTitleDetail(text: 'Geometric centroid'),
-//           ItemDetail(
-//             isActive: false,
-//             leading: 'Xs',
-//             subtitle: 'X cordinate of the S point',
-//             title: c.xSPoint.value,
-//           ),
-//           ItemDetail(
-//             isActive: false,
-//             leading: 'Ys',
-//             subtitle: 'Y cordinate of the S point',
-//             title: c.ySPoint.value,
-//           ),
 //         ],
 //       );
 //     }));
+//   }
+// }
+
+// class ItemDetail extends StatelessWidget {
+//   const ItemDetail({
+//     Key? key,
+//     required this.leading,
+//     required this.title,
+//     required this.subtitle,
+//     required this.isActive,
+//   }) : super(key: key);
+//   final String leading;
+//   final String title;
+//   final String subtitle;
+//   final bool isActive;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     TextStyle styleLeading;
+//     TextStyle styleTitle;
+
+//     if (isActive) {
+//       styleLeading = AppStyleText.leadingTextDetail(context);
+//       styleTitle = AppStyleTextImage.activeParam(context);
+//     } else {
+//       styleLeading = AppStyleText.leadingTextDetail(context);
+//       styleTitle = AppStyleTextImage.inActive(context);
+//     }
+
+//     return ListTile(
+//       leading: Text(leading, style: styleLeading),
+//       title: Text(title, style: styleTitle),
+//       subtitle: Text(
+//         subtitle,
+//         style: TextStyle(color: AppColors.text(context).withOpacity(0.5)),
+//       ),
+//     );
 //   }
 // }
