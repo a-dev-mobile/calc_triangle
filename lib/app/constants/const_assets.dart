@@ -1,32 +1,25 @@
 class ConstAssetsImageRaster {
-  static const _path = "assets/images/raster";
+  static const _pathScalene = "assets/images/triangle/scalene";
+  static const _pathRight = "assets/images/triangle/right";
   static const String rightTriangleInput =
-      '$_path/triangle/right_triangle_input.png';
+      '$_pathRight/right_triangle_input.webp';
   static const String rightTriangleInfo =
-      '$_path/triangle/right_triangle_info.png';
-  static const String rightTriangleS =
-      '$_path/triangle/right_triangle_S.png';
-  static const String rightTriangleSr =
-      '$_path/triangle/right_triangle_Sr.png';
-  static const String rightTriangleSR =
-      '$_path/triangle/right_triangle_S_R.png';
-        static const String rightTriangleAP =
-      '$_path/triangle/right_triangle_ap.png';
-
-
-
-
+      '$_pathRight/right_triangle_info.webp';
+  static const String rightTriangleS = '$_pathRight/right_triangle_S.webp';
+  static const String rightTriangleSr = '$_pathRight/right_triangle_Sr.webp';
+  static const String rightTriangleSR = '$_pathRight/right_triangle_S_R.webp';
+  static const String rightTriangleAP = '$_pathRight/right_triangle_ap.webp';
 
   static const String scaleneTriangleInput =
-      '$_path/triangle/scalene_triangle_input.png';
+      '$_pathScalene/scalene_triangle_input.webp';
   static const String scaleneTriangleInfo =
-      '$_path/triangle/scalene_triangle_info.png';
+      '$_pathScalene/scalene_triangle_info.webp';
   static const String scaleneTriangleS =
-      '$_path/triangle/scalene_triangle_S.png';
+      '$_pathScalene/scalene_triangle_S.webp';
   static const String scaleneTriangleSr =
-      '$_path/triangle/scalene_triangle_Sr.png';
+      '$_pathScalene/scalene_triangle_Sr.webp';
   static const String scaleneTriangleSR =
-      '$_path/triangle/scalene_triangle_S_R.png';
-        static const String scaleneTriangleAP =
-      '$_path/triangle/scalene_triangle_ap.png';
+      '$_pathScalene/scalene_triangle_S_R.webp';
+  static const String scaleneTriangleAP =
+      '$_pathScalene/scalene_triangle_ap.webp';
 }

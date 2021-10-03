@@ -46,8 +46,9 @@ flutter:
 
   assets:
 
-    - assets/images/raster/
-    - assets/images/raster/triangle/
+    - assets/images/triangle/
+    - assets/images/triangle/right/
+    - assets/images/triangle/scalene/
 
   fonts:
     - family: montserrat
