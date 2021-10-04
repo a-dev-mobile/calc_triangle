@@ -1,5 +1,4 @@
 import 'package:calc_triangle/app/config/theme/app_color.dart';
-import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
 
 import 'package:flutter/material.dart';

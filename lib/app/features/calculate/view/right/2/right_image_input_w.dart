@@ -3,15 +3,14 @@ import 'dart:math';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/a_angle_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/a_cathet_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/b_angle_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/b_cathet_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/c_hypotenuse_w.dart';
-
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/h_height_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/k_com_c_side_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/3/m_com_c_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/a_angle_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/a_cathet_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/b_angle_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/b_cathet_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/c_hypotenuse_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/h_height_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/k_com_c_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/3/m_com_c_side_w.dart';
 
 import 'package:flutter/material.dart';
 

@@ -2269,5 +2269,13 @@ class ScaleneTriangleController extends GetxController {
       // }
       // }
     }
+    
+
+  }
+
+    @override
+  void onClose() {
+    clearAll();
+    super.onClose();
   }
 }

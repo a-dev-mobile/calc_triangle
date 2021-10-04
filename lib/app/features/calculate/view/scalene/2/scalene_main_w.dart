@@ -4,12 +4,8 @@ import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 
 import 'package:calc_triangle/app/constants/const_color.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 
-
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_input_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_numpad_w.dart';
-
+import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
@@ -23,52 +19,56 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'right_detail_w.dart';
+import 'scalene_detail_w.dart';
+import 'scalene_image_input_w.dart';
 
-late var c = RightTriangleController.to;
+import 'scalene_numpad_w.dart';
 
-class RightTriangleMainWidget extends StatelessWidget {
-  const RightTriangleMainWidget({Key? key}) : super(key: key);
+late ScaleneTriangleController c;
+
+class ScaleneMain extends StatelessWidget {
+  const ScaleneMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+    c = ScaleneTriangleController.to;
 
     settingBar();
     return Scaffold(
-
       body: SafeArea(
         child: Stack(
           children: [
-             Obx(() {
+            Obx(() {
               return c.isActiveImageInfo.value
-                  ? const RightDetail()
+                  ? const ScaleneDetail()
                   : Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [              
-                    const RightTriangleImageInputWidget(),
-               
-                //показываем если не инфо
-                Obx(() {
-                  return Visibility(
-                      visible: !c.isActiveImageInfo.value,
-                      child: const AreaAndPerimeterWidget());
-                }),
-                Obx(() {
-                  return Visibility(
-                      visible: !c.isActiveImageInfo.value,
-                      child: const MessageWidget());
-                }),
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const ScaleneTriangleImageInputWidget(),
+                        //показываем если не инфо
+                        Obx(() {
+                          return Visibility(
+                              visible: !c.isActiveImageInfo.value,
+                              child: const AreaAndPerimeterWidget());
+                        }),
+                        Obx(() {
+                          return Visibility(
+                              visible: !c.isActiveImageInfo.value,
+                              child: const MessageWidget());
+                        }),
 
-                 const Expanded(child: NumPadRightWidget()),
-
-                    ],
+                        const Expanded(child: NumPadScaleneWidget()),
+                      ],
                     );
             }),
-     
-            const IconInputInfoWidget(),
 
+            //иконка вверху справа
+            Obx(() {
+              return c.isActiveImageInfo.value
+                  ? const IconInputInfoWidget(icon: Icons.description_outlined)
+                  : const IconInputInfoWidget(icon: Icons.calculate_outlined);
+            })
           ],
         ),
       ),
@@ -79,8 +79,9 @@ class RightTriangleMainWidget extends StatelessWidget {
 class IconInputInfoWidget extends StatelessWidget {
   const IconInputInfoWidget({
     Key? key,
+    required this.icon,
   }) : super(key: key);
-
+  final IconData icon;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -89,12 +90,14 @@ class IconInputInfoWidget extends StatelessWidget {
         child: InkResponse(
           onTap: () {
             c.isActiveImageInfo.value = !(c.isActiveImageInfo.value);
-            logger.i('c.isActiveImageInfo.value ${c.isActiveImageInfo.value}');
           },
-          child: Icon(
-            Icons.change_circle_outlined,
-            size: AppSize.iconSize * 1.2,
-            color: AppColors.text(context),
+          child: Container(
+            color: AppColors.content(context),
+            child: Icon(
+              icon,
+              size: AppSize.iconSize * 1.2,
+              color: AppColors.text(context),
+            ),
           ),
         ));
   }

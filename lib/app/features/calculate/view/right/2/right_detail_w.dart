@@ -3,6 +3,7 @@
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/area_perim.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_title.dart';
@@ -108,7 +109,7 @@ class CircumscribedCircle extends StatelessWidget {
           isActive: false,
        leading: 'R',
           subtitle: 'Radius / diameter of the circumscribed circle ',
-         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}',
+         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, GlobalServ.to.precisionResult.value)}',
         ),
 
  
@@ -162,7 +163,7 @@ class BisectionInscribedCircle extends StatelessWidget {
           isActive: false,
           leading: 'r',
           subtitle: 'Radius / diameter of the inscribed circle',
-          title: 'r${c.r.value} / ⌀${AppUtilsNumber.getFormatNumber(c.rd*2, c.precisionResult)}',
+          title: 'r${c.r.value} / ⌀${AppUtilsNumber.getFormatNumber(c.rd*2, GlobalServ.to.precisionResult.value)}',
         ),
         ItemDetail(
           isActive: false,

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
@@ -604,13 +606,13 @@ class RightTriangleController extends GetxController {
   }
 
   void calcXsPointKnowAsideCsideAang() {
-    xSPointD = aCathetD/3;
+    xSPointD = aCathetD / 3;
 
     xSPoint.value = AppUtilsNumber.getFormatNumber(xSPointD, precisionResult);
   }
 
   void calcYsPointKnowCsideAang() {
-    ySPointD = bCathetD  / 3;
+    ySPointD = bCathetD / 3;
     ySPoint.value = AppUtilsNumber.getFormatNumber(ySPointD, precisionResult);
   }
 
@@ -2109,5 +2111,11 @@ class RightTriangleController extends GetxController {
         isbCathet.value = false;
       }
     }
+  }
+
+  @override
+  void onClose() {
+    clearAll();
+    super.onClose();
   }
 }

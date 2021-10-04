@@ -1,24 +1,18 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
-import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_main_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_input_w.dart';
-import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
-import 'package:calc_triangle/app/features/welcome/welcome_p.dart';
-import 'package:calc_triangle/app/model/calculate_m.dart';
-import 'package:calc_triangle/app/services/global_serv.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/2/right_main_w.dart';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class CalculatePage extends StatefulWidget {
-  const CalculatePage({Key? key}) : super(key: key);
+class CalculateRightPage extends StatefulWidget {
+  const CalculateRightPage({Key? key}) : super(key: key);
 
   @override
-  _CalculatePageState createState() => _CalculatePageState();
+  _CalculateRightPageState createState() => _CalculateRightPageState();
 }
 
-class _CalculatePageState extends State<CalculatePage> {
+class _CalculateRightPageState extends State<CalculateRightPage> {
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
 
@@ -53,18 +47,6 @@ class _CalculatePageState extends State<CalculatePage> {
     _bottomBannerAd.dispose();
   }
 
-  Widget getShapeCalculate() {
-    final Shape shape = GlobalServ.to.aciveShape;
-
-    switch (shape) {
-      case Shape.rightTriangle:
-        return const RightTriangleMainWidget();
-      case Shape.scaleneTriangle:
-        return const ScaleneInput();
-      case Shape.none:
-        return const WelcomePage();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +59,7 @@ class _CalculatePageState extends State<CalculatePage> {
             )
           : null,
       // body: SafeArea(child: RightTriangleInputWidget()),
-      body: SafeArea(child: getShapeCalculate()),
+      body: const SafeArea(child: RightMain()),
     );
   }
 }

@@ -3,14 +3,13 @@ import 'dart:math';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/a_angle_w.dart';
-
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/a_side_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/b_angle_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/b_side_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/c_side_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/h_height_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/3/y_angle_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene/3/a_angle_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene/3/a_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene/3/b_angle_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene/3/b_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene/3/c_side_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene/3/h_height_w.dart';
+import 'package:calc_triangle/app/features/calculate/view/scalene/3/y_angle_w.dart';
 
 import 'package:flutter/material.dart';
 
@@ -86,12 +85,7 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
               posY: -13.39,
               minSizeImage: minSize,
             )
-            // ), AangleWidget(
-            //   angle: -35.485,
-            //   posX: -26.299,
-            //   posY: 25.809,
-            //   minSizeImage: minSize,
-            // ),
+           
           ],
         );
       }),

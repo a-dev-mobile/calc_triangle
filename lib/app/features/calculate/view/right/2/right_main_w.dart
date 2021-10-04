@@ -4,11 +4,8 @@ import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 
 import 'package:calc_triangle/app/constants/const_color.dart';
-
-import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
-
-import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_detail_w.dart';
-
+import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/features/calculate/view/right/2/right_numpad_w.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
@@ -22,32 +19,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'scalene_image_input_w.dart';
-import '../../../../../shared_components/image_info_w.dart';
-import 'scalene_numpad_w.dart';
+import 'right_detail_w.dart';
+import 'right_image_input_w.dart';
 
-late var c = ScaleneTriangleController.to;
-
-class ScaleneInput extends StatelessWidget {
-  const ScaleneInput({Key? key}) : super(key: key);
+late RightTriangleController c;
+class RightMain extends StatelessWidget {
+  const RightMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+       c = RightTriangleController.to;
     settingBar();
-    return Scaffold(
 
+    return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
             Obx(() {
               return c.isActiveImageInfo.value
-                  ? const ScaleneDetail()
+                  ? const RightDetail()
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const ScaleneTriangleImageInputWidget(),
+                        const RightTriangleImageInputWidget(),
+
                         //показываем если не инфо
                         Obx(() {
                           return Visibility(
@@ -60,13 +56,16 @@ class ScaleneInput extends StatelessWidget {
                               child: const MessageWidget());
                         }),
 
-                        const Expanded(child: NumPadScaleneWidget()),
+                        const Expanded(child: NumPadRightWidget()),
                       ],
                     );
             }),
-
-                      const IconInputInfoWidget(),
-
+            //иконка вверху справа
+            Obx(() {
+              return c.isActiveImageInfo.value
+                  ? const IconInputInfoWidget(icon: Icons.description_outlined)
+                  : const IconInputInfoWidget(icon: Icons.calculate_outlined);
+            })
           ],
         ),
       ),
@@ -77,8 +76,9 @@ class ScaleneInput extends StatelessWidget {
 class IconInputInfoWidget extends StatelessWidget {
   const IconInputInfoWidget({
     Key? key,
+    required this.icon,
   }) : super(key: key);
-
+  final IconData icon;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -87,12 +87,14 @@ class IconInputInfoWidget extends StatelessWidget {
         child: InkResponse(
           onTap: () {
             c.isActiveImageInfo.value = !(c.isActiveImageInfo.value);
-            logger.i('c.isActiveImageInfo.value ${c.isActiveImageInfo.value}');
           },
-          child: Icon(
-            Icons.change_circle_outlined,
-            size: AppSize.iconSize * 1.2,
-            color: AppColors.text(context),
+          child: Container(
+            color: AppColors.content(context),
+            child: Icon(              
+              icon,
+              size: AppSize.iconSize * 1.2,
+              color: AppColors.text(context),
+            ),
           ),
         ));
   }
