@@ -35,15 +35,19 @@ class AppPage {
     ),
     GetPage(
         name: Routes.calculateRight,
+        transition: Transition.leftToRight,
         page: () => const CalculateRightPage(),
         binding: BindingsBuilder(() {
-          Get.put<RightTriangleController>(RightTriangleController());
+          Get.put<RightTriangleController>(RightTriangleController(),
+              permanent: true);
         })),
     GetPage(
         name: Routes.calculateScalene,
+        transition: Transition.leftToRight,
         page: () => const CalculateScalenePage(),
         binding: BindingsBuilder(() {
-          Get.put<ScaleneTriangleController>(ScaleneTriangleController());
+          Get.put<ScaleneTriangleController>(ScaleneTriangleController(),
+              permanent: true);
         })),
     GetPage(
         name: Routes.setting,
