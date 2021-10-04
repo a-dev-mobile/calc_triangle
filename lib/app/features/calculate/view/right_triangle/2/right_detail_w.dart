@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/shared_components/detail_info/area_perim.dart'
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_title.dart';
 import 'package:calc_triangle/app/shared_components/image_info_w.dart';
+import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -26,10 +27,10 @@ class RightDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: const [
-                    ImageInfoWidget(
+                  children:[
+                    const ImageInfoWidget(
                         patchAsset: ConstAssetsImageRaster.rightTriangleInfo),
-                    TextTitleDetail(text: 'Sides, height and angles'),
+                    TextTitleDetail(text: TranslateHelper.sides_height_angles),
                   ],
                 ),
               ),

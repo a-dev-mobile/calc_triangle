@@ -6,25 +6,23 @@ Map<String, String> en = {
   'scalene_triangle': 'Scalene Triangle',
   'isosceles_triangle': 'Isosceles Triangle',
   'equilateral_triangle': 'Equilateral Triangle',
-  'title_dialog_calculate': 'You\'ll be able to calculate:',
-  'dialog_calculate_righ': '''- sides, heights and angles
+  'sides_height_angles': 'Sides, height and angles',
+
+
+
+
+  'one_parameters_entered': '1 parameter must be entered',
+  'two_parameters_entered': '2 parameters must be entered',
+  'three_parameters_entered': '3 parameters must be entered',
+  'you_calculate': 'You\'ll be able to calculate:',
+
+  'dialog_calculate': '''- sides, heights and angles
 - perimeter and area
 - medians and bisectors, 
 - geometric center coordinates
 - size and coordinates of the center of the inscribed and circumcised circle''',
 
-  'dialog_calculate_scalene': '''sides, heights and angles
-perimeter and area
-medians and bisectors, 
-geometric center coordinates
-size and coordinates of the center of the inscribed and circumcised circle''',
-/* You'll be able to calculate:
-
-sides, heights and angles
-perimeter and area
-medians and bisectors, 
-geometric center coordinates
-size and coordinates of the center of the inscribed and circumcised circle
+/* 
 
 Вы сможете вычислить:
 
@@ -73,4 +71,5 @@ size and coordinates of the center of the inscribed and circumcised circle
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',
+  'check_result': 'Always check your result',
 };

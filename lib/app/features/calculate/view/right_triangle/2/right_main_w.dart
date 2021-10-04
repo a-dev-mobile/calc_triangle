@@ -10,8 +10,7 @@ import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_image_input_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/right_triangle/2/right_numpad_w.dart';
 
-import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
-import 'package:calc_triangle/app/shared_components/drawer/drawer_w.dart';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
@@ -37,8 +36,7 @@ class RightTriangleMainWidget extends StatelessWidget {
 
     settingBar();
     return Scaffold(
-      key: _globalKey,
-      drawer: const DrawerWidget(),
+
       body: SafeArea(
         child: Stack(
           children: [
@@ -70,7 +68,7 @@ class RightTriangleMainWidget extends StatelessWidget {
             }),
      
             const IconInputInfoWidget(),
-            DrawerIconWidget(globalkey: _globalKey),
+
           ],
         ),
       ),

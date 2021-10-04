@@ -8,6 +8,8 @@ import 'package:calc_triangle/app/shared_components/image_info_w.dart';
 import 'package:calc_triangle/app/shared_components/app_widgets.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_title.dart';
+import 'package:calc_triangle/app/translations/translate_helper.dart';
+import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -27,10 +29,10 @@ class ScaleneDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: const [
-                    ImageInfoWidget(
+                  children: [
+                    const ImageInfoWidget(
                         patchAsset: ConstAssetsImageRaster.scaleneTriangleInfo),
-                    TextTitleDetail(text: 'Sides, height and angles'),
+                    TextTitleDetail(text: TranslateHelper.sides_height_angles),
                   ],
                 ),
               ),
@@ -107,9 +109,15 @@ class CircumscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'R',
-          subtitle: 'Radius of the circumscribed circle ',
-          title: c.R.value,
+          subtitle: 'Radius / diameter of the circumscribed circle ',
+           title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}',
         ),
+
+
+
+        /* /*       subtitle: 'Radius / diameter of the circumscribed circle ',
+         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}', */
+ */
         ItemDetail(
           isActive: false,
           leading: 'X',
@@ -157,9 +165,13 @@ class BisectionInscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'r',
-          subtitle: 'Radius of the inscribed circle',
-          title: c.r.value,
+          subtitle: 'Radius / diameter of the inscribed circle',
+           title: 'r${c.r.value} / ⌀${AppUtilsNumber.getFormatNumber(c.rd*2, c.precisionResult)}', 
         ),
+
+/*       subtitle: 'Radius / diameter of the circumscribed circle ',
+         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}', */
+
         ItemDetail(
           isActive: false,
           leading: 'X',

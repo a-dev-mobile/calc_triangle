@@ -55,7 +55,14 @@ class TranslateHelper {
   static String get perimeter => 'perimeter'.tr;
   static String get area => 'area'.tr;
   static String get chooseShape => 'choose_shape'.tr;
-  static String get dialog_calculate_scalene => 'dialog_calculate_scalene'.tr;
-  static String get dialog_calculate_righ => 'dialog_calculate_righ'.tr;
-  static String get title_dialog_calculate => 'title_dialog_calculate'.tr;
+
+  static String get one_parameter_entered => 'one_parameters_entered'.tr;
+  static String get two_parameters_entered => 'two_parameters_entered'.tr;
+  static String get three_parameters_entered => 'three_parameters_entered'.tr;
+  static String get you_calculate => 'you_calculate'.tr;
+
+  static String get dialog_calculate => 'dialog_calculate'.tr;
+
+  static String get sides_height_angles => 'sides_height_angles'.tr;
+  static String get check_result => 'check_result'.tr;
 }

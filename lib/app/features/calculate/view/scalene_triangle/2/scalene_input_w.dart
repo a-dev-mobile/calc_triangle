@@ -9,8 +9,7 @@ import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart'
 
 import 'package:calc_triangle/app/features/calculate/view/scalene_triangle/2/scalene_detail_w.dart';
 
-import 'package:calc_triangle/app/shared_components/drawer/drawer_icon_w.dart';
-import 'package:calc_triangle/app/shared_components/drawer/drawer_w.dart';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
@@ -34,12 +33,10 @@ class ScaleneInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
     settingBar();
     return Scaffold(
-      key: _globalKey,
-      drawer: const DrawerWidget(),
+
       body: SafeArea(
         child: Stack(
           children: [
@@ -69,7 +66,7 @@ class ScaleneInput extends StatelessWidget {
             }),
 
                       const IconInputInfoWidget(),
-            DrawerIconWidget(globalkey: _globalKey),
+
           ],
         ),
       ),

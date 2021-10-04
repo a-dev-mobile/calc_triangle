@@ -15,9 +15,9 @@ ThemeData lightThemeData(BuildContext context) {
               statusBarBrightness: Brightness.light,
               statusBarIconBrightness: Brightness.dark,
               statusBarColor: ConstColor.scaffoldLightTheme),
-          iconTheme: const IconThemeData(color: ConstColor.scaffoldDarkTheme),
+          iconTheme: const IconThemeData(color: ConstColor.scaffoldLightTheme),
           titleTextStyle: const TextStyle(
-            color: ConstColor.scaffoldDarkTheme,
+            color: ConstColor.scaffoldLightTheme,
             fontSize: 20,
           ),
              color: ConstColor.primary,
@@ -45,9 +45,9 @@ ThemeData darkThemeData(BuildContext context) {
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.light,
               statusBarColor: ConstColor.scaffoldDarkTheme),
-          iconTheme: const IconThemeData(color: ConstColor.scaffoldLightTheme),
+          iconTheme: const IconThemeData(color: ConstColor.scaffoldDarkTheme),
           titleTextStyle: const TextStyle(
-            color: ConstColor.scaffoldLightTheme,
+            color: ConstColor.scaffoldDarkTheme,
             fontSize: 20,
           ),
           color: ConstColor.primary,

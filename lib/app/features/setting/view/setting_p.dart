@@ -28,7 +28,7 @@ class SettingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         
-        title: Text(TranslateHelper.setting),
+        title: Text(TranslateHelper.setting,),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
