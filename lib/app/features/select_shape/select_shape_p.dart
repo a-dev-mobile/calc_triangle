@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 enum Shape {
   rightTriangle,
   scaleneTriangle,
+  isoscelesTriangle,
   none,
 }
 
@@ -29,21 +30,8 @@ class SelectShapePage extends StatelessWidget {
           style: TextStyle(color: AppColors.content(context)),
         ),
         actions: [
-          IconButton(
-              onPressed: () {
-                Get.defaultDialog(
-                    titlePadding: const EdgeInsets.all(16),
-                    contentPadding: const EdgeInsets.all(16),
-                    backgroundColor: AppColors.content(context),
-                    title: TranslateHelper.you_calculate,
-                    content: Text(TranslateHelper.dialog_calculate));
-              },
-              icon: Icon(Icons.info, color: AppColors.content(context))),
-          IconButton(
-              onPressed: () {
-                Get.toNamed(Routes.setting);
-              },
-              icon: Icon(Icons.settings, color: AppColors.content(context)))
+          buildAppBarBtnInfo(context),
+          buildAppBarBtnSetting(context)
         ],
       ),
       body: SafeArea(
@@ -62,6 +50,11 @@ class SelectShapePage extends StatelessWidget {
                 patchAssets1: ConstAssetsImageRaster.scaleneTriangleInfo,
                 enterParameter: TranslateHelper.enterThreeParameters,
               ),
+              CardSelectShapet(
+                title: TranslateHelper.isosceles_triangle,
+                patchAssets1: ConstAssetsImageRaster.isoscelesTriangleInfo,
+                enterParameter: TranslateHelper.enterTwoParameters,
+              ),
             ],
           ),
         ),
@@ -69,6 +62,27 @@ class SelectShapePage extends StatelessWidget {
         //   ],
       ),
     );
+  }
+
+  IconButton buildAppBarBtnSetting(BuildContext context) {
+    return IconButton(
+            onPressed: () {
+              Get.toNamed(Routes.setting);
+            },
+            icon: Icon(Icons.settings, color: AppColors.content(context)));
+  }
+
+  IconButton buildAppBarBtnInfo(BuildContext context) {
+    return IconButton(
+            onPressed: () {
+              Get.defaultDialog(
+                  titlePadding: const EdgeInsets.all(16),
+                  contentPadding: const EdgeInsets.all(16),
+                  backgroundColor: AppColors.content(context),
+                  title: TranslateHelper.you_calculate,
+                  content: Text(TranslateHelper.dialog_calculate));
+            },
+            icon: Icon(Icons.info, color: AppColors.content(context)));
   }
 }
 
@@ -97,6 +111,10 @@ class CardSelectShapet extends StatelessWidget {
             Get.toNamed(Routes.calculateRight);
           } else if (title == TranslateHelper.scalene_triangle) {
             GlobalServ.to.aciveShape = Shape.scaleneTriangle;
+            Get.toNamed(Routes.calculateScalene);
+          }
+          else if (title == TranslateHelper.isosceles_triangle) {
+            GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
             Get.toNamed(Routes.calculateScalene);
           }
         },

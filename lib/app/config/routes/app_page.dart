@@ -51,7 +51,8 @@ class AppPage {
         })),
     GetPage(
         name: Routes.setting,
-        page: () =>  SettingPage(),
+        page: () => SettingPage(),
+        transition: Transition.leftToRight,
         binding: BindingsBuilder(() {
           Get.put<SettingContrl>(SettingContrl());
         })),

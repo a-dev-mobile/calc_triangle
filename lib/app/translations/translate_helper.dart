@@ -12,6 +12,7 @@ class TranslateHelper {
 
   static String get right_triangle => 'right_triangle'.tr;
   static String get scalene_triangle => 'scalene_triangle'.tr;
+  static String get isosceles_triangle => 'isosceles_triangle'.tr;
   static String get enterThreeParameters => 'enter_3_parameters'.tr;
   static String get enterTwoParameters => 'enter_2_parameters'.tr;
   static String get enterOneParameters => 'enter_1_parameters'.tr;
