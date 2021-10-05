@@ -30,10 +30,25 @@ class ConstAssetsImageRaster {
       '$_pathIsosceles/isosceles_triangle_info.webp';
   static const String isoscelesTriangleInput =
       '$_pathIsosceles/isosceles_triangle_input.webp';
-      
+  static const String isoscelesTriangleS =
+      '$_pathIsosceles/isosceles_triangle_S.webp';
+  static const String isoscelesTriangleSr =
+      '$_pathIsosceles/isosceles_triangle_Sr.webp';
+  static const String isoscelesTriangleSR =
+      '$_pathIsosceles/isosceles_triangle_S_R.webp';
+  static const String isoscelesTriangleAP =
+      '$_pathIsosceles/isosceles_triangle_ap.webp';
+
   static const String equilateralTriangleInfo =
       '$_pathEquilateral/equilateral_triangle_info.webp';
-            
+
   static const String equilateralTriangleInput =
       '$_pathEquilateral/equilateral_triangle_input.webp';
+  static const String equilateralTriangleS =
+      '$_pathEquilateral/equilateral_triangle_S.webp';
+  static const String equilateralTriangleSr =
+      '$_pathEquilateral/equilateral_triangle_Sr.webp';
+  static const String equilateralTriangleSR =
+      '$_pathEquilateral/equilateral_triangle_S_R.webp';
+  static const String equilateralTriangleAP = isoscelesTriangleAP;
 }

@@ -37,9 +37,9 @@ class EquilateralTriangleImageInputWidget extends StatelessWidget {
             //all widget text in image
 
             HheightWidget(
-              angle: -45,
-              posX: -18.225,
-              posY: 18.225,
+              angle: -90,
+              posX: -0.801,
+              posY: 6.624,
               minSizeImage: minSize,
             ),
            

@@ -44,7 +44,7 @@ class EquilateralDetail extends StatelessWidget {
                 child: Column(
                   children: const [
                     ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.rightTriangleAP),
+                        patchAsset: ConstAssetsImageRaster.equilateralTriangleAP),
                     TextTitleDetail(text: 'Area and Perimeter'),
                   ],
                 ),
@@ -60,7 +60,7 @@ class EquilateralDetail extends StatelessWidget {
                   child: Column(
                     children: const [
                       ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.rightTriangleS),
+                          patchAsset: ConstAssetsImageRaster.equilateralTriangleS),
                       TextTitleDetail(text: 'Mediana and geometric centroid'),
                     ],
                   ),
@@ -72,7 +72,7 @@ class EquilateralDetail extends StatelessWidget {
                   child: Column(
                     children: const [
                       ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.rightTriangleSr),
+                          patchAsset: ConstAssetsImageRaster.equilateralTriangleSr),
                       TextTitleDetail(text: 'Bisection and inscribed circle'),
                     ],
                   ),
@@ -84,7 +84,7 @@ class EquilateralDetail extends StatelessWidget {
                   child: Column(
                     children: const [
                       ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.rightTriangleSR),
+                          patchAsset: ConstAssetsImageRaster.equilateralTriangleSR),
                       TextTitleDetail(text: 'Circumscribed circle'),
                     ],
                   ),

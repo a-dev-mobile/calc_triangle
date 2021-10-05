@@ -249,11 +249,15 @@ class EquilateralTriangleController extends GetxController {
     // }
   }
 
-  void calcAreaKnowAsideHhei() {
-    areaD = 0.5 * aSideD * hHeightD;
+  void calcAreaKnowAside() {
+    areaD = (sqrt(3)/4)*pow(aSideD,2);
     area.value = AppUtilsNumber.getFormatNumber(areaD, precisionResult);
   }
-
+  void calcAreaKnowhHei() {
+    areaD = (sqrt(3)/3)*pow(hHeightD,2);
+    area.value = AppUtilsNumber.getFormatNumber(areaD, precisionResult);
+  }
+  
   void calcSubResultKnowAsideBsideCsideAangl() async {
     calcMedianKnowAsideBsideCside();
     calcBisectorKnowAsideBsideCside();
@@ -436,7 +440,7 @@ class EquilateralTriangleController extends GetxController {
 
   void setActiveParam() {
     log.v(
-        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} 3 ${activeParamMap[3]} start active param');
+        '1 ${activeParamMap[1]}  start active param');
 
     EquilateralTriangle paramActive = EquilateralTriangle.empty;
 
