@@ -31,8 +31,8 @@ enum RightTriangle {
 
 // late WelcomeController c = Get.find();
 
-class EquilateralTriangleController extends GetxController {
-  static EquilateralTriangleController get to => Get.find<EquilateralTriangleController>();
+class RightTriangleController extends GetxController {
+  static RightTriangleController get to => Get.find<RightTriangleController>();
 
   static const startAngleValue = '0°';
   static const startLengthValue = '0';

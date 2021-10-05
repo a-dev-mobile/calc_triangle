@@ -16,6 +16,7 @@ enum Shape {
   rightTriangle,
   scaleneTriangle,
   isoscelesTriangle,
+  equilateralTriangle,
   none,
 }
 
@@ -118,9 +119,9 @@ class CardSelectShapet extends StatelessWidget {
             GlobalServ.to.aciveShape = Shape.scaleneTriangle;
             Get.toNamed(Routes.calculateScalene);
           }
-          else if (title == TranslateHelper.isosceles_triangle) {
-            GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
-            Get.toNamed(Routes.calculateScalene);
+          else if (title == TranslateHelper.equilateral_triangle) {
+            GlobalServ.to.aciveShape = Shape.equilateralTriangle;
+            Get.toNamed(Routes.calculateEquilateral);
           }
         },
         child: SizedBox(
@@ -153,34 +154,3 @@ class CardSelectShapet extends StatelessWidget {
     );
   }
 }
-
-  
-        
-        // child: Stack(
-        //   children: [
-        //     GridView.count(
-        //       crossAxisCount: 2,
-        //       // children: [
-        //       //   InkWell(
-        //       //       onTap: () {
-        //       //         // SelectShapeController.to.initWidgetControllerPath();
-        //       //         logger.i(
-        //       //             'Get.offAllNamed(Routes.calculate, arguments: Shape.rightTriangle);');
-        //       //         GlobalServ.to.aciveShape = Shape.rightTriangle;
-        //       //         Get.offAllNamed(Routes.calculate);
-        //       //       },
-        //       //       child: const ImageInfoWidget(
-        //       //         patchAsset: ConstAssetsImageRaster.rightTriangleInfo,
-        //       //       )),
-        //       //   InkWell(
-        //       //       onTap: () {
-        //       //         logger.i(
-        //       //             'Get.offAllNamed(Routes.calculate, arguments: Shape.scaleneTriangle);');
-        //       //         GlobalServ.to.aciveShape = Shape.scaleneTriangle;
-        //       //         Get.offAllNamed(Routes.calculate);
-        //       //       },
-        //       //       child: const ImageInfoWidget(
-        //       //         patchAsset: ConstAssetsImageRaster.scaleneTriangleInfo,
-        //       //       )),
-        //       // ],
-        //     ),

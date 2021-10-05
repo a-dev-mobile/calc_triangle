@@ -8,7 +8,7 @@ import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
 import 'package:flutter/material.dart';
 
-var c = EquilateralTriangleController.to;
+var c = RightTriangleController.to;
 
 class NumPadRightWidget extends StatelessWidget {
   const NumPadRightWidget({Key? key}) : super(key: key);

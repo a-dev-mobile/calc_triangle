@@ -1,14 +1,17 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:math';
 
 import 'package:calc_triangle/app/config/theme/app_style.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late var c = RightTriangleController.to;
+late var c = EquilateralTriangleController.to;
 
 class HheightWidget extends StatelessWidget {
   const HheightWidget(
@@ -26,25 +29,21 @@ class HheightWidget extends StatelessWidget {
 
   // ====change====
   void onTap() {
-    c.isaCathet.value = false;
-    c.isbCathet.value = false;
-    c.iscHypotenuse.value = false;
+    c.isaSide.value = false;
+   
     c.ishHeight.value = true;
-    c.ismCompCside.value = false;
-    c.iskCompCside.value = false;
-    c.isaAngle.value = false;
-    c.isbAngle.value = false;
-
-    c.showMessage();
+   
+          c.showMessage();
   }
 
   //===============
   @override
   Widget build(BuildContext context) {
     TextStyle styleText;
+
     bool isActiveInput;
     bool isActiveParam;
-    RightTriangle elementFigure;
+    EquilateralTriangle elementFigure;
     String activeValue;
     return Transform.translate(
         offset:
@@ -55,9 +54,10 @@ class HheightWidget extends StatelessWidget {
               // ====change====
               activeValue = c.hHeight.value;
               isActiveInput = c.ishHeight.value;
-              elementFigure = RightTriangle.hHeight;
+              elementFigure = EquilateralTriangle.hHeight;
               //===============
-              isActiveParam = c.activeParamMap.containsValue(elementFigure);
+              isActiveParam =
+                  c.activeParamMap.value.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {

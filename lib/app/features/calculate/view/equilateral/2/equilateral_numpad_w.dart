@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/config/theme/app_style.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';

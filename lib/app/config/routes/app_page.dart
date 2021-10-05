@@ -1,5 +1,7 @@
+import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
+import 'package:calc_triangle/app/features/calculate/view/equilateral/calculate_equilateral.dart';
 
 import 'package:calc_triangle/app/features/calculate/view/right/calculate_right.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene/calculate_scalene.dart';
@@ -40,7 +42,7 @@ class AppPage {
         transition: Transition.leftToRight,
         page: () => const CalculateRightPage(),
         binding: BindingsBuilder(() {
-          Get.put<EquilateralTriangleController>(EquilateralTriangleController(),
+          Get.put<RightTriangleController>(RightTriangleController(),
               permanent: true);
         })),
     GetPage(
@@ -51,17 +53,15 @@ class AppPage {
           Get.put<ScaleneTriangleController>(ScaleneTriangleController(),
               permanent: true);
         })),
-
-  GetPage(
+    GetPage(
         name: Routes.calculateEquilateral,
         transition: Transition.leftToRight,
         page: () => const CalculateEquilateralPage(),
         binding: BindingsBuilder(() {
-          Get.put<EquilateralTriangleController>(EquilateralTriangleController(),
+          Get.put<EquilateralTriangleController>(
+              EquilateralTriangleController(),
               permanent: true);
         })),
-
-
     GetPage(
         name: Routes.setting,
         page: () => SettingPage(),

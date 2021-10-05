@@ -22,13 +22,13 @@ import 'package:get/get.dart';
 import 'right_detail_w.dart';
 import 'right_image_input_w.dart';
 
-late EquilateralTriangleController c;
+late RightTriangleController c= RightTriangleController.to;
 class RightMain extends StatelessWidget {
   const RightMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-       c = EquilateralTriangleController.to;
+  
     settingBar();
 
     return Scaffold(
