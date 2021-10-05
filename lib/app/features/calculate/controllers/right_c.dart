@@ -673,7 +673,7 @@ class RightTriangleController extends GetxController {
   }
 
   void calcYSrIncenter() {
-    yr.value = xr.value;
+    yr.value = r.value;
   }
 
   void calcXSRCircumCenterKnowAside() {
@@ -682,10 +682,10 @@ class RightTriangleController extends GetxController {
   }
 
   void calcXSrIncenterKnowAsideAanglBangl() {
-    xrd = (tan(AppConvert.toRadian(bAngleD / 2))) *
+    xrd = (tan(AppConvert.toRadian(aAngleD / 2))) *
         aCathetD /
-        (tan(AppConvert.toRadian(aAngleD / 2)) +
-            tan(AppConvert.toRadian(bAngleD / 2)));
+        (tan(AppConvert.toRadian(90 / 2)) +
+            tan(AppConvert.toRadian(aAngleD / 2)));
 
     xr.value = AppUtilsNumber.getFormatNumber(xrd, precisionResult);
   }
