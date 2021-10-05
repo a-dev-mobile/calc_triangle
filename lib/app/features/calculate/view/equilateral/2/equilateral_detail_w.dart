@@ -148,18 +148,7 @@ class BisectionInscribedCircle extends StatelessWidget {
           subtitle: 'Bisection of side a',
           title: c.lA.value,
         ),
-        ItemDetail(
-          isActive: false,
-          leading: 'lb',
-          subtitle: 'Bisection of side b',
-          title: c.lB.value,
-        ), 
-        ItemDetail(
-          isActive: false,
-          leading: 'lc',
-          subtitle: 'Bisection of side c',
-          title: c.lC.value,
-        ),
+      
         ItemDetail(
           isActive: false,
           leading: 'r',
@@ -198,18 +187,7 @@ class MedianaGeometricCentroid extends StatelessWidget {
           subtitle: 'Mediana of side a',
           title: c.mA.value,
         ),
-        ItemDetail(
-          isActive: false,
-          leading: 'mb',
-          subtitle: 'Mediana of side b',
-          title: c.mB.value,
-        ),
-        ItemDetail(
-          isActive: false,
-          leading: 'mc',
-          subtitle: 'Mediana of side c',
-          title: c.mC.value,
-        ),
+       
         ItemDetail(
           isActive: false,
           leading: 'X',

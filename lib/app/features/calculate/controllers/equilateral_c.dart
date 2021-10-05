@@ -194,7 +194,7 @@ class EquilateralTriangleController extends GetxController {
 
   void printElements() {
     log.v('''printElements
-        ${activeParamMap[1]} ${activeParamMap[2]} ${activeParamMap[3]}
+        ${activeParamMap[1]} 
 
         $aSideD | ${aSide.value} aSide 
        
@@ -250,76 +250,79 @@ class EquilateralTriangleController extends GetxController {
   }
 
   void calcAreaKnowAside() {
-    areaD = (sqrt(3)/4)*pow(aSideD,2);
+    areaD = (sqrt(3) / 4) * pow(aSideD, 2);
     area.value = AppUtilsNumber.getFormatNumber(areaD, precisionResult);
   }
-  void calcAreaKnowhHei() {
-    areaD = (sqrt(3)/3)*pow(hHeightD,2);
+
+  void calcAreaKnowHhei() {
+    areaD = (sqrt(3) / 3) * pow(hHeightD, 2);
     area.value = AppUtilsNumber.getFormatNumber(areaD, precisionResult);
   }
-  
-  void calcSubResultKnowAsideBsideCsideAangl() async {
-    calcMedianKnowAsideBsideCside();
-    calcBisectorKnowAsideBsideCside();
-    //внут круг
-    calcRIncenterKnowAsideBsideCside();
-    //внеш круг
-    calcRCircumCenterKnowAsideBsideCside();
-    calcXSRCircumCenterKnowAside();
-    calcYSrIncenter();
-    //last
-    calcXSrIncenterKnowAsideAanglBangl();
-    calcYSRCircumCenterKnowRradAside();
+
+  void calcAsideKnowHhei() {
+    aSideD = ((2 * sqrt(3)) / 3) * hHeightD;
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
+  }
+
+  void calcHheiKnowAside() {
+    hHeightD = (aSideD * sqrt(3)) / 2;
+    hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
+  }
+
+  void calcPerimKnowAside() {
+    perimeterD = 3 * aSideD;
+    perimeter.value =
+        AppUtilsNumber.getFormatNumber(3 * aSideD, precisionResult);
   }
 
   void calcMedianKnowAsideBsideCside() {
-    // mAd =
-    //     0.5 * (sqrt(2 * pow(cSideD, 2) + 2 * pow(bSideD, 2) - pow(aSideD, 2)));
-    // mBd =
-    //     0.5 * (sqrt(2 * pow(cSideD, 2) + 2 * pow(aSideD, 2) - pow(bSideD, 2)));
-    // mCd =
-    //     0.5 * (sqrt(2 * pow(aSideD, 2) + 2 * pow(bSideD, 2) - pow(cSideD, 2)));
+    mAd =
+        0.5 * (sqrt(2 * pow(aSideD, 2) + 2 * pow(aSideD, 2) - pow(aSideD, 2)));
+    mBd =
+        0.5 * (sqrt(2 * pow(aSideD, 2) + 2 * pow(aSideD, 2) - pow(aSideD, 2)));
+    mCd =
+        0.5 * (sqrt(2 * pow(aSideD, 2) + 2 * pow(aSideD, 2) - pow(aSideD, 2)));
 
-    // mA.value = AppUtilsNumber.getFormatNumber(mAd, precisionResult);
-    // mB.value = AppUtilsNumber.getFormatNumber(mBd, precisionResult);
-    // mC.value = AppUtilsNumber.getFormatNumber(mCd, precisionResult);
+    mA.value = AppUtilsNumber.getFormatNumber(mAd, precisionResult);
+    mB.value = AppUtilsNumber.getFormatNumber(mBd, precisionResult);
+    mC.value = AppUtilsNumber.getFormatNumber(mCd, precisionResult);
   }
 
   void calcBisectorKnowAsideBsideCside() {
-    // lBd = (sqrt(aSideD *
-    //         bSideD *
-    //         (cSideD + bSideD + aSideD) *
-    //         (aSideD + bSideD - cSideD))) /
-    //     (aSideD + bSideD);
-    // lCd = (sqrt(cSideD *
-    //         aSideD *
-    //         (cSideD + bSideD + aSideD) *
-    //         (cSideD + aSideD - bSideD))) /
-    //     (cSideD + aSideD);
-    // lAd = (sqrt(cSideD *
-    //         bSideD *
-    //         (cSideD + bSideD + aSideD) *
-    //         (cSideD + bSideD - aSideD))) /
-    //     (cSideD + bSideD);
-    // lA.value = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
-    // lB.value = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
-    // lC.value = AppUtilsNumber.getFormatNumber(lCd, precisionResult);
+    lBd = (sqrt(aSideD *
+            aSideD *
+            (aSideD + aSideD + aSideD) *
+            (aSideD + aSideD - aSideD))) /
+        (aSideD + aSideD);
+    lCd = (sqrt(aSideD *
+            aSideD *
+            (aSideD + aSideD + aSideD) *
+            (aSideD + aSideD - aSideD))) /
+        (aSideD + aSideD);
+    lAd = (sqrt(aSideD *
+            aSideD *
+            (aSideD + aSideD + aSideD) *
+            (aSideD + aSideD - aSideD))) /
+        (aSideD + aSideD);
+    lA.value = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
+    lB.value = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
+    lC.value = AppUtilsNumber.getFormatNumber(lCd, precisionResult);
   }
 
   void calcRIncenterKnowAsideBsideCside() {
-    // double m = 0;
+    double m = 0;
 
-    // m = (aSideD + bSideD + cSideD) / 2;
+    m = (aSideD + aSideD + aSideD) / 2;
 
-    // rd = sqrt(((m - aSideD) * (m - bSideD) * (m - cSideD)) / m);
+    rd = sqrt(((m - aSideD) * (m - aSideD) * (m - aSideD)) / m);
 
-    // r.value = AppUtilsNumber.getFormatNumber(rd, precisionResult);
+    r.value = AppUtilsNumber.getFormatNumber(rd, precisionResult);
   }
 
   void calcRCircumCenterKnowAsideBsideCside() {
-    // // Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
-    // Rd = (aSideD * bSideD * cSideD) / (4 * areaD);
-    // R.value = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
+    // Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
+    Rd = (aSideD * aSideD * aSideD) / (4 * areaD);
+    R.value = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
   }
 
   void calcYSrIncenter() {
@@ -332,12 +335,11 @@ class EquilateralTriangleController extends GetxController {
   }
 
   void calcXSrIncenterKnowAsideAanglBangl() {
-    // xrd = (tan(AppConvert.toRadian(bAngleD / 2))) *
-    //     aSideD /
-    //     (tan(AppConvert.toRadian(aAngleD / 2)) +
-    //         tan(AppConvert.toRadian(bAngleD / 2)));
+    xrd = (tan(AppConvert.toRadian(60 / 2))) *
+        aSideD /
+        (tan(AppConvert.toRadian(60 / 2)) + tan(AppConvert.toRadian(60 / 2)));
 
-    // xr.value = AppUtilsNumber.getFormatNumber(xrd, precisionResult);
+    xr.value = AppUtilsNumber.getFormatNumber(xrd, precisionResult);
   }
 
   void calcYSRCircumCenterKnowRradAside() {
@@ -346,11 +348,69 @@ class EquilateralTriangleController extends GetxController {
     yR.value = AppUtilsNumber.getFormatNumber(yRd, precisionResult);
   }
 
+  calcXsPointKnowAside() {
+    xSPointD = aSideD / 2;
+    xSPoint.value = AppUtilsNumber.getFormatNumber(xSPointD, precisionResult);
+  }
+
+  calcYsPointKnowhHei() {
+    ySPointD = hHeightD / 3;
+    ySPoint.value = AppUtilsNumber.getFormatNumber(ySPointD, precisionResult);
+  }
+
   void calculate() {
     if (isOnlyOneParamEmpty()) return;
     log.i('start calculate');
     printElements();
     EquilateralTriangle param1;
+
+    // ==========================================
+    //hHeight
+    // ==========================================
+    param1 = EquilateralTriangle.hHeight;
+
+    if (isAvailableOneParam(param1)) {
+      calcAsideKnowHhei();
+      calcAreaKnowHhei();
+      calcPerimKnowAside();
+      calcYsPointKnowhHei();
+
+      calcMedianKnowAsideBsideCside();
+      calcBisectorKnowAsideBsideCside();
+      //внут круг
+      calcRIncenterKnowAsideBsideCside();
+      //внеш круг
+      calcRCircumCenterKnowAsideBsideCside();
+      calcXSRCircumCenterKnowAside();
+      calcYSrIncenter();
+      //last
+      calcXSrIncenterKnowAsideAanglBangl();
+      calcYSRCircumCenterKnowRradAside();
+      calcXsPointKnowAside();
+    }
+    // ==========================================
+    //aSide
+    // ==========================================
+    param1 = EquilateralTriangle.aSide;
+
+    if (isAvailableOneParam(param1)) {
+      calcHheiKnowAside();
+      calcAreaKnowHhei();
+      calcPerimKnowAside();
+      calcYsPointKnowhHei();
+      calcXsPointKnowAside();
+      calcMedianKnowAsideBsideCside();
+      calcBisectorKnowAsideBsideCside();
+      //внут круг
+      calcRIncenterKnowAsideBsideCside();
+      //внеш круг
+      calcRCircumCenterKnowAsideBsideCside();
+      calcXSRCircumCenterKnowAside();
+      calcYSrIncenter();
+      //last
+      calcXSrIncenterKnowAsideAanglBangl();
+      calcYSRCircumCenterKnowRradAside();
+    }
 
     isNumberNaN();
 
@@ -439,8 +499,7 @@ class EquilateralTriangleController extends GetxController {
   }
 
   void setActiveParam() {
-    log.v(
-        '1 ${activeParamMap[1]}  start active param');
+    log.v('1 ${activeParamMap[1]}  start active param');
 
     EquilateralTriangle paramActive = EquilateralTriangle.empty;
 
@@ -448,10 +507,8 @@ class EquilateralTriangleController extends GetxController {
 
     if (isaSide.value) {
       paramActive = EquilateralTriangle.aSide;
-      paramLastLenght = EquilateralTriangle.aSide;
     } else if (ishHeight.value) {
       paramActive = EquilateralTriangle.hHeight;
-      paramLastLenght = EquilateralTriangle.hHeight;
     }
 
     moveEmptyValueToStartInParameters();
@@ -460,13 +517,14 @@ class EquilateralTriangleController extends GetxController {
       moveValueToEndInParameters(paramActive);
       return;
     }
-
-//если последний параметр похож на активный
+// //если последний параметр похож на активный
     if (activeParamMap[1] == paramActive) return;
 
-    if (activeParamMap[1] != EquilateralTriangle.empty) {
-      activeParamMap[1] = paramActive;
-    }
+    activeParamMap[1] = paramActive;
+
+//     if (activeParamMap[1] != EquilateralTriangle.empty) {
+//       activeParamMap[1] = paramActive;
+//     }
   }
 
   bool isAvailableOneParam(
@@ -517,6 +575,11 @@ class EquilateralTriangleController extends GetxController {
     if (isNumberNaN()) {
       log.w('isNumberNaN');
       showSnack(TranslateHelper.message_calc_error_chang_value);
+      return;
+    }
+    // если есть пустой параметр
+    if (isOnlyOneParamEmpty()) {
+      showSnack(TranslateHelper.enterOneParameters);
       return;
     }
     endSnack();
@@ -731,42 +794,12 @@ class EquilateralTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
-    if (isNext) {
-      //   if (isaCathet.value) {
-      //     isbCathet.value = true;
-      //     isaCathet.value = false;
-      //   } else if (isbCathet.value) {
-      //     iscHypotenuse.value = true;
-      //     isbCathet.value = false;
-      //   } else if (iscHypotenuse.value) {
-      //     isaAngle.value = true;
-      //     iscHypotenuse.value = false;
-      //   } else if (isaAngle.value) {
-      //     isbAngle.value = true;
-      //     isaAngle.value = false;
-      //   } else if (isbAngle.value) {
-      //     isaCathet.value = true;
-      //     isbAngle.value = false;
-      //   }
-      // } else {
-      //   if (isaCathet.value) {
-      //     isbAngle.value = true;
-      //     isaCathet.value = false;
-      //   } else if (isbAngle.value) {
-      //     isaAngle.value = true;
-      //     isbAngle.value = false;
-      //   } else if (isaAngle.value) {
-      //     iscHypotenuse.value = true;
-      //     isaAngle.value = false;
-      //   } else if (iscHypotenuse.value) {
-      //     isbCathet.value = true;
-      //     iscHypotenuse.value = false;
-      //   } else if (isbCathet.value) {
-      //     isaCathet.value = true;
-      //     isbCathet.value = false;
-      //   }
-      // }
-      // }
+    if (isaSide.value) {
+      ishHeight.value = true;
+      isaSide.value = false;
+    } else if (ishHeight.value) {
+      isaSide.value = true;
+      ishHeight.value = false;
     }
   }
 
