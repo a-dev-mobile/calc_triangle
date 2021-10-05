@@ -51,7 +51,7 @@ class AppPage {
         })),
     GetPage(
         name: Routes.setting,
-        page: () => const SettingPage(),
+        page: () =>  SettingPage(),
         binding: BindingsBuilder(() {
           Get.put<SettingContrl>(SettingContrl());
         })),

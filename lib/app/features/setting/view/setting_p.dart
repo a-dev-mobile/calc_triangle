@@ -14,21 +14,24 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // late WelcomeController c2 = Get.find();
 // late RightTriangleController c3 = Get.find();
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({Key? key}) : super(key: key);
+ SettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
-        title: Text(TranslateHelper.setting,),
+        title: Text(
+          TranslateHelper.setting,
+        ),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -38,92 +41,164 @@ class SettingPage extends StatelessWidget {
             // const Divider(
             //   color: Colors.grey,
             // ),
-            const SizedBox(height: 20),
 
             const ChangeThemeWidget(),
-            AppWidgets.dividerWelcome(),
-
-            Obx(() {
-              return ListTile(
-                onTap: () {
-                  Get.defaultDialog(
-                      backgroundColor: AppColors.content(context),
-                      title: TranslateHelper.language,
-                      content: Column(
-                        children: [
-                          ListTile(
-                            onTap: () {
-                              logger.i('english');
-
-                              GlobalServ.to
-                                  .setStorageLocale(ConstString.localeEn);
-                              TranslateHelper.updateLocale(
-                                  const Locale(ConstString.localeEn));
-                              SettingContrl.to.setEnLocation();
-                              // c3.showMessage();
-                              Get.back();
-                            },
-                            title: Text(
-                              TranslateHelper.languageEn,
-                              style: AppStyleText.titleText(context),
-                            ),
-                          ),
-                          ListTile(
-                            onTap: () {
-                              logger.i('russsss');
-
-                              GlobalServ.to
-                                  .setStorageLocale(ConstString.localeRu);
-                              TranslateHelper.updateLocale(
-                                  const Locale(ConstString.localeRu));
-                              SettingContrl.to.setRusLocation();
-                              // чтобы перевелся
-                              // c3.showMessage();
-                              Navigator.of(context).pop();
-                            },
-                            title: Text(
-                              TranslateHelper.languageRu,
-                              style: AppStyleText.titleText(context),
-                            ),
-                          ),
-                        ],
-                      ));
-                },
-                title: Text(
-                  TranslateHelper.language,
-                  style: AppStyleText.titleText(context),
-                ),
-                subtitle: Text(
-                  GlobalServ.to.appLocale.value == ConstString.localeRu
-                      ? TranslateHelper.languageRu
-                      : TranslateHelper.languageEn,
-                  style: AppStyleText.subText(context),
-                ),
-                trailing: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.grey.shade400,
-                ),
-              );
-            }),
-
-            AppWidgets.dividerWelcome(),
-
+            const SizedBox(height: 10),
             const SettingLaunchScreenWidget(),
-            AppWidgets.dividerWelcome(),
+            const SizedBox(height: 10),
             const SliderPrecisionResultWidget(),
-            AppWidgets.dividerWelcome(),
-            ListTile(
-              onTap: () {
-                AppWidgets.viewDialogExit(context);
-              },
-              title: Text(
-                TranslateHelper.exit,
-                style: AppStyleText.titleText(context),
-              ),
-            ),
+
+            buildLanguage(context),
+
+            buildEmail(context),
+
+            buildRateApp(context),
+
+            buildAboutApp(context),
+
+            buildExit(context),
           ],
         ),
       ),
     );
   }
+
+  ListTile buildEmail(BuildContext context) {
+    return ListTile(
+      title: Text(TranslateHelper.feedback),
+      leading: const Icon(
+        Icons.feedback_outlined,
+      ),
+      onTap: () {
+        launch(emailLaunchUri.toString());
+      },
+    );
+  }
+
+  ListTile buildRateApp(BuildContext context) {
+    return ListTile(
+      title: Text(TranslateHelper.rateApp),
+      leading: const Icon(
+        Icons.star_border_outlined,
+      ),
+      onTap: () {
+        launchURL();
+      },
+    );
+  }
+
+  ListTile buildAboutApp(BuildContext context) {
+    return ListTile(
+      title: Text(TranslateHelper.about),
+      leading: const Icon(
+        Icons.info_outline,
+      ),
+      onTap: () {
+        Get.defaultDialog(
+          title: TranslateHelper.about,
+          backgroundColor: AppColors.content(context),
+          content: Align(
+            alignment: Alignment.topLeft,
+            child: Column(
+              children: [
+                Text(
+                  'App is created using flutter',
+                  style: AppStyleText.subText(context),
+                ),
+                AppWidgets.dividerWelcome(),
+                SizedBox(height: 20.h),
+                Text(
+                  TranslateHelper.check_result,
+                  style: AppStyleText.titleText(context),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  ListTile buildExit(BuildContext context) {
+    return ListTile(
+      leading: const Icon(Icons.exit_to_app),
+      onTap: () {
+        AppWidgets.viewDialogExit(context);
+      },
+      title: Text(
+        TranslateHelper.exit,
+      ),
+    );
+  }
+
+  Obx buildLanguage(BuildContext context) {
+    return Obx(() {
+      return ListTile(
+        onTap: () {
+          Get.defaultDialog(
+              backgroundColor: AppColors.content(context),
+              title: TranslateHelper.language,
+              content: Column(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      logger.i('english');
+
+                      GlobalServ.to.setStorageLocale(ConstString.localeEn);
+                      TranslateHelper.updateLocale(
+                          const Locale(ConstString.localeEn));
+                      SettingContrl.to.setEnLocation();
+                      // c3.showMessage();
+                      Get.back();
+                    },
+                    title: Text(
+                      TranslateHelper.languageEn,
+                      style: AppStyleText.titleText(context),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      GlobalServ.to.setStorageLocale(ConstString.localeRu);
+                      TranslateHelper.updateLocale(
+                          const Locale(ConstString.localeRu));
+                      SettingContrl.to.setRusLocation();
+                      // чтобы перевелся
+                      // c3.showMessage();
+                      Navigator.of(context).pop();
+                    },
+                    title: Text(
+                      TranslateHelper.languageRu,
+                      style: AppStyleText.titleText(context),
+                    ),
+                  ),
+                ],
+              ));
+        },
+        title: Text(
+          TranslateHelper.language,
+          style: AppStyleText.titleText(context),
+        ),
+        subtitle: Text(
+          GlobalServ.to.appLocale.value == ConstString.localeRu
+              ? TranslateHelper.languageRu
+              : TranslateHelper.languageEn,
+          style: AppStyleText.subText(context),
+        ),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.grey.shade400,
+        ),
+      );
+    });
+  }
+
+  final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: ConstString.email,
+      query:
+          '${Uri.encodeComponent('subject')}=${Uri.encodeComponent('${TranslateHelper.feedback} -> ${TranslateHelper.appName}')}');
+
+  void launchURL() async => await canLaunch(ConstString.playStoreUrl)
+      ? await launch(ConstString.playStoreUrl)
+      : throw 'Could not launch ${ConstString.playStoreUrl}';
 }
