@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late RightTriangleController c = RightTriangleController.to;
+late EquilateralTriangleController c = EquilateralTriangleController.to;
 
 class HheightWidget extends StatelessWidget {
   const HheightWidget(

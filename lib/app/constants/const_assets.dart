@@ -2,6 +2,7 @@ class ConstAssetsImageRaster {
   static const _pathScalene = "assets/images/triangle/scalene";
   static const _pathRight = "assets/images/triangle/right";
   static const _pathIsosceles = "assets/images/triangle/isosceles";
+  static const _pathEquilateral = "assets/images/triangle/equilateral";
 
   static const String rightTriangleInput =
       '$_pathRight/right_triangle_input.webp';
@@ -27,4 +28,12 @@ class ConstAssetsImageRaster {
 
   static const String isoscelesTriangleInfo =
       '$_pathIsosceles/isosceles_triangle_info.webp';
+  static const String isoscelesTriangleInput =
+      '$_pathIsosceles/isosceles_triangle_input.webp';
+      
+  static const String equilateralTriangleInfo =
+      '$_pathEquilateral/equilateral_triangle_info.webp';
+            
+  static const String equilateralTriangleInput =
+      '$_pathEquilateral/equilateral_triangle_input.webp';
 }

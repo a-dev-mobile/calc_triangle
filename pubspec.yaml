@@ -50,6 +50,7 @@ flutter:
     - assets/images/triangle/right/
     - assets/images/triangle/scalene/
     - assets/images/triangle/isosceles/
+    - assets/images/triangle/equilateral/
 
   fonts:
     - family: montserrat

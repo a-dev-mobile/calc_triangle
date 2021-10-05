@@ -55,6 +55,11 @@ class SelectShapePage extends StatelessWidget {
                 patchAssets1: ConstAssetsImageRaster.isoscelesTriangleInfo,
                 enterParameter: TranslateHelper.enterTwoParameters,
               ),
+                CardSelectShapet(
+                title: TranslateHelper.equilateral_triangle,
+                patchAssets1: ConstAssetsImageRaster.equilateralTriangleInfo,
+                enterParameter: TranslateHelper.enterOneParameters,
+              ),
             ],
           ),
         ),

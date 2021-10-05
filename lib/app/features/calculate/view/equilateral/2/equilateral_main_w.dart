@@ -4,7 +4,8 @@ import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 
 import 'package:calc_triangle/app/constants/const_color.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
+
 import 'package:calc_triangle/app/features/calculate/view/right/2/right_numpad_w.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
@@ -19,16 +20,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'right_detail_w.dart';
-import 'right_image_input_w.dart';
+import 'equilateral_detail_w.dart';
+import 'equilateral_image_input_w.dart';
 
-late EquilateralTriangleController c;
-class RightMain extends StatelessWidget {
-  const RightMain({Key? key}) : super(key: key);
+var c = EquilateralTriangleController.to;
+class EquilateralMain extends StatelessWidget {
+  const EquilateralMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-       c = EquilateralTriangleController.to;
+   
     settingBar();
 
     return Scaffold(
@@ -37,12 +38,12 @@ class RightMain extends StatelessWidget {
           children: [
             Obx(() {
               return c.isActiveImageInfo.value
-                  ? const RightDetail()
+                  ? const EquilateralDetail()
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const RightTriangleImageInputWidget(),
+                        const EquilateralTriangleImageInputWidget(),
 
                         //показываем если не инфо
                         Obx(() {

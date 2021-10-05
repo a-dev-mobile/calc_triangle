@@ -2,7 +2,8 @@
 
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
+
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/area_perim.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
@@ -15,8 +16,8 @@ import 'package:sticky_headers/sticky_headers.dart';
 
 late var c =EquilateralTriangleController.to;
 
-class RightDetail extends StatelessWidget {
-  const RightDetail({Key? key}) : super(key: key);
+class EquilateralDetail extends StatelessWidget {
+  const EquilateralDetail({Key? key}) : super(key: key);
  
   @override
   Widget build(BuildContext context) {

@@ -18,6 +18,8 @@ abstract class Routes {
 
   static const calculateRight = '/calculateRight';
   static const calculateScalene = '/calculateScalene';
+  static const calculateEquilateral = '/calculateEquilateral';
+  static const calculateIsosceles = '/calculateIsosceles';
   static const setting = '/setting';
 }
 
@@ -38,7 +40,7 @@ class AppPage {
         transition: Transition.leftToRight,
         page: () => const CalculateRightPage(),
         binding: BindingsBuilder(() {
-          Get.put<RightTriangleController>(RightTriangleController(),
+          Get.put<EquilateralTriangleController>(EquilateralTriangleController(),
               permanent: true);
         })),
     GetPage(
@@ -49,6 +51,17 @@ class AppPage {
           Get.put<ScaleneTriangleController>(ScaleneTriangleController(),
               permanent: true);
         })),
+
+  GetPage(
+        name: Routes.calculateEquilateral,
+        transition: Transition.leftToRight,
+        page: () => const CalculateEquilateralPage(),
+        binding: BindingsBuilder(() {
+          Get.put<EquilateralTriangleController>(EquilateralTriangleController(),
+              permanent: true);
+        })),
+
+
     GetPage(
         name: Routes.setting,
         page: () => SettingPage(),

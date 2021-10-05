@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 
 var c = EquilateralTriangleController.to;
 
-class NumPadRightWidget extends StatelessWidget {
-  const NumPadRightWidget({Key? key}) : super(key: key);
+class NumPadEquilateralWidget extends StatelessWidget {
+  const NumPadEquilateralWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
