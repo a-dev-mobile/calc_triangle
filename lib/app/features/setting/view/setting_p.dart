@@ -108,7 +108,9 @@ class SettingPage extends StatelessWidget {
                 AppWidgets.dividerWelcome(),
                 SizedBox(height: 20.h),
                 Text(
+                  
                   TranslateHelper.check_result,
+                  textAlign: TextAlign.center,
                   style: AppStyleText.titleText(context),
                 )
               ],

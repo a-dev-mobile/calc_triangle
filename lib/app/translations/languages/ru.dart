@@ -79,5 +79,5 @@ Map<String, String> ru = {
   'area': 'Площадь',
   'perimeter': 'Периметр',
   'choose_shape': 'Выберите форму',
-  'check_result': 'Всегда проверяйте свой результат'
+  'check_result': 'Всегда проверяйте свой результат!'
 };

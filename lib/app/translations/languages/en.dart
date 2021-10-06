@@ -86,5 +86,5 @@ Map<String, String> en = {
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',
-  'check_result': 'Always check your result',
+  'check_result': 'Always check your result!',
 };
