@@ -24,7 +24,7 @@ class AdHelper {
           : "ca-app-pub-3940256099942544/8691691433";
     } else if (Platform.isIOS) {
       return ConstBool.isDebug
-          ? '	ca-app-pub-3940256099942544/4411468910' //test
+          ? 'ca-app-pub-3940256099942544/4411468910' //test
           : "ca-app-pub-6155876762943258/7549481750";
     } else {
       throw UnsupportedError("Unsupported platform");

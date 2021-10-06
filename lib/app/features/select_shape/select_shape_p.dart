@@ -37,16 +37,18 @@ class _SelectShapePageState extends State<SelectShapePage> {
   void _createInterstitialAd() {
     InterstitialAd.load(
       adUnitId: AdHelper.interstitialAdUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
           _interstitialAd = ad;
           _interstitialLoadAttempts = 0;
+              _interstitialAd!.setImmersiveMode(true);
         },
         onAdFailedToLoad: (LoadAdError error) {
+          print('InterstitialAd failed to load: $error');
           _interstitialLoadAttempts += 1;
           _interstitialAd = null;
-          if (_interstitialLoadAttempts >= maxFailedLoadAttempts) {
+          if (_interstitialLoadAttempts <= maxFailedLoadAttempts) {
             _createInterstitialAd();
           }
         },
@@ -55,17 +57,32 @@ class _SelectShapePageState extends State<SelectShapePage> {
   }
 
   void _showInterstialAd() {
-    if (_interstitialAd != null) {
-      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-          onAdDismissedFullScreenContent: (InterstitialAd ad) {
-        ad.dispose();
-        _createInterstitialAd();
-      }, onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-        ad.dispose();
-        _createInterstitialAd();
-      });
-      _interstitialAd!.show();
+       if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
     }
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _createInterstitialAd();
+      },
+      
+        onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+
+
+
+      );
+     _interstitialAd!.show();
+    _interstitialAd = null;
+    
   }
 
   @override
