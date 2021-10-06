@@ -1,5 +1,3 @@
-
-
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
@@ -14,11 +12,11 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-late var c =EquilateralTriangleController.to;
+late var c = EquilateralTriangleController.to;
 
 class EquilateralDetail extends StatelessWidget {
   const EquilateralDetail({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -29,9 +27,10 @@ class EquilateralDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children:[
+                  children: [
                     const ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.equilateralTriangleInfo),
+                        patchAsset:
+                            ConstAssetsImageRaster.equilateralTriangleInfo),
                     TextTitleDetail(text: TranslateHelper.sides_height_angles),
                   ],
                 ),
@@ -42,10 +41,11 @@ class EquilateralDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: const [
-                    ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.equilateralTriangleAP),
-                    TextTitleDetail(text: 'Area and Perimeter'),
+                  children: [
+                    const ImageInfoWidget(
+                        patchAsset:
+                            ConstAssetsImageRaster.equilateralTriangleAP),
+                    TextTitleDetail(text: TranslateHelper.area_perim),
                   ],
                 ),
               ),
@@ -58,10 +58,12 @@ class EquilateralDetail extends StatelessWidget {
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
-                    children: const [
-                      ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.equilateralTriangleS),
-                      TextTitleDetail(text: 'Mediana and geometric centroid'),
+                    children: [
+                      const ImageInfoWidget(
+                          patchAsset:
+                              ConstAssetsImageRaster.equilateralTriangleS),
+                      TextTitleDetail(
+                          text: TranslateHelper.mediana_geom_centroid),
                     ],
                   ),
                 ),
@@ -70,10 +72,12 @@ class EquilateralDetail extends StatelessWidget {
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
-                    children: const [
-                      ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.equilateralTriangleSr),
-                      TextTitleDetail(text: 'Bisection and inscribed circle'),
+                    children: [
+                      const ImageInfoWidget(
+                          patchAsset:
+                              ConstAssetsImageRaster.equilateralTriangleSr),
+                      TextTitleDetail(
+                          text: TranslateHelper.bisection_inscribed_circle),
                     ],
                   ),
                 ),
@@ -82,10 +86,12 @@ class EquilateralDetail extends StatelessWidget {
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
-                    children: const [
-                      ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.equilateralTriangleSR),
-                      TextTitleDetail(text: 'Circumscribed circle'),
+                    children:  [
+                      const ImageInfoWidget(
+                          patchAsset:
+                              ConstAssetsImageRaster.equilateralTriangleSR),
+                      TextTitleDetail(
+                          text: TranslateHelper.circumscribed_circle),
                     ],
                   ),
                 ),
@@ -108,24 +114,21 @@ class CircumscribedCircle extends StatelessWidget {
       children: [
         ItemDetail(
           isActive: false,
-       leading: 'R',
-          subtitle: 'Radius / diameter of the circumscribed circle ',
-         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, GlobalServ.to.precisionResult.value)}',
+          leading: 'R',
+          subtitle: TranslateHelper.radius_diameter_circumscribed_circle,
+          title:
+              'r ${c.Rcircum.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.Rd * 2, GlobalServ.to.precisionResult.value)}',
         ),
-
- 
-
-
         ItemDetail(
           isActive: false,
           leading: 'X',
-          subtitle: 'X cordinate of the SR point',
+          subtitle: TranslateHelper.x_cord_SR,
           title: c.xR.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'Y',
-          subtitle: 'Y cordinate of the SR point',
+          subtitle: TranslateHelper.y_cord_SR,
           title: c.yR.value,
         ),
       ],
@@ -145,26 +148,26 @@ class BisectionInscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'la',
-          subtitle: 'Bisection of side a',
+ subtitle: '${TranslateHelper.bis_of_side} a',
           title: c.lA.value,
         ),
-      
         ItemDetail(
           isActive: false,
           leading: 'r',
-          subtitle: 'Radius / diameter of the inscribed circle',
-          title: 'r${c.r.value} / ⌀${AppUtilsNumber.getFormatNumber(c.rd*2, GlobalServ.to.precisionResult.value)}',
+          subtitle: TranslateHelper.radius_diameter_inscribed_circle,
+          title:
+              'r ${c.rInscribed.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.rd * 2, GlobalServ.to.precisionResult.value)}',
         ),
         ItemDetail(
           isActive: false,
           leading: 'X',
-          subtitle: 'X cordinate of the Sr point',
+          subtitle: TranslateHelper.x_cord_Sr,
           title: c.xr.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'Y',
-          subtitle: 'Y cordinate of the Sr point',
+          subtitle: TranslateHelper.y_cord_Sr,
           title: c.yr.value,
         ),
       ],
@@ -184,20 +187,19 @@ class MedianaGeometricCentroid extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'ma',
-          subtitle: 'Mediana of side a',
+         subtitle: '${TranslateHelper.med_of_side} a',
           title: c.mA.value,
         ),
-       
         ItemDetail(
           isActive: false,
           leading: 'X',
-          subtitle: 'X cordinate of the S point',
+          subtitle: TranslateHelper.x_cord_S,
           title: c.xSPoint.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'Y',
-          subtitle: 'Y cordinate of the S point',
+          subtitle: TranslateHelper.y_cord_S,
           title: c.ySPoint.value,
         ),
       ],
@@ -217,34 +219,19 @@ class EquilateralSidesAngles extends StatelessWidget {
         // AppWidgets.dividerWelcome(),
 
         ItemDetail(
-            isActive: c.isAvailableOneParam(EquilateralTriangle.aSide),
-            leading: 'a',
-            subtitle: 'a - catheti',
-            title: c.aSide.value,
-          ),
-         
-          ItemDetail(
-            isActive: c.isAvailableOneParam(EquilateralTriangle.hHeight),
-            leading: 'h',
-            subtitle: 'h - height of the triangle',
-            title: c.hHeight.value,
-          ),
-        
+          isActive: c.isAvailableOneParam(EquilateralTriangle.aSide),
+          leading: 'a',
+          subtitle: 'a - ${TranslateHelper.sides_triangle}',
+          title: c.aSide.value,
+        ),
+
+        ItemDetail(
+          isActive: c.isAvailableOneParam(EquilateralTriangle.hHeight),
+          leading: 'h',
+          subtitle: TranslateHelper.h_height_triangle,
+          title: c.hHeight.value,
+        ),
       ],
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

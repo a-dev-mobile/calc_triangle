@@ -1,6 +1,5 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
 import 'package:calc_triangle/app/features/calculate/view/equilateral/2/equilateral_main_w.dart';
-import 'package:calc_triangle/app/features/calculate/view/right/2/right_main_w.dart';
 
 import 'package:flutter/material.dart';
 

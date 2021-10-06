@@ -66,8 +66,8 @@ class SettingPage extends StatelessWidget {
   ListTile buildEmail(BuildContext context) {
     return ListTile(
       title: Text(TranslateHelper.feedback),
-      leading: const Icon(
-        Icons.feedback_outlined,
+      leading: Icon(
+        Icons.feedback_outlined,color: AppColors.contentRevers(context),
       ),
       onTap: () {
         launch(emailLaunchUri.toString());
@@ -78,8 +78,8 @@ class SettingPage extends StatelessWidget {
   ListTile buildRateApp(BuildContext context) {
     return ListTile(
       title: Text(TranslateHelper.rateApp),
-      leading: const Icon(
-        Icons.star_border_outlined,
+      leading: Icon(
+        Icons.star_border_outlined,color: AppColors.contentRevers(context),
       ),
       onTap: () {
         launchURL();
@@ -90,8 +90,8 @@ class SettingPage extends StatelessWidget {
   ListTile buildAboutApp(BuildContext context) {
     return ListTile(
       title: Text(TranslateHelper.about),
-      leading: const Icon(
-        Icons.info_outline,
+      leading:  Icon(
+        Icons.info_outline,color: AppColors.contentRevers(context),
       ),
       onTap: () {
         Get.defaultDialog(
@@ -121,7 +121,7 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildExit(BuildContext context) {
     return ListTile(
-      leading: const Icon(Icons.exit_to_app),
+      leading: Icon(Icons.exit_to_app,color: AppColors.contentRevers(context),),
       onTap: () {
         AppWidgets.viewDialogExit(context);
       },

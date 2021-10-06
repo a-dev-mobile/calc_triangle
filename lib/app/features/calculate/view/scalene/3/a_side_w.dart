@@ -59,7 +59,7 @@ class AsideWidget extends StatelessWidget {
               elementFigure = ScaleneTriangle.aSide;
               //===============
               isActiveParam =
-                  c.activeParamMap.value.containsValue(elementFigure);
+                  c.activeParamMap.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {

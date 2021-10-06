@@ -59,7 +59,7 @@ class HheightWidget extends StatelessWidget {
               elementFigure = ScaleneTriangle.hHeight;
               //===============
               isActiveParam =
-                  c.activeParamMap.value.containsValue(elementFigure);
+                  c.activeParamMap.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {

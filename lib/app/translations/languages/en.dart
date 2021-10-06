@@ -16,9 +16,29 @@ Map<String, String> en = {
 
 
   'sides_height_angles': 'Sides, height and angles',
+  'area_perim': 'Area and Perimeter',
+  'mediana_geom_centroid': 'Mediana and geometric centroid',
+  'bisection_inscribed_circle': 'Bisection and inscribed circle',
+  'circumscribed_circle': 'Circumscribed circle',
+  'radius_diameter_circumscribed_circle': 'Radius / diameter of the circumscribed circle',
+  'radius_diameter_inscribed_circle': 'Radius / diameter of the inscribed circle',
+  'x_cord_SR': 'X cordinate of the SR point',
+  'y_cord_SR': 'Y cordinate of the SR point',
 
-
-
+  'x_cord_Sr': 'X cordinate of the Sr point',
+  'y_cord_Sr': 'Y cordinate of the Sr point',
+  'x_cord_S': 'X cordinate of the S point',
+  'y_cord_S': 'Y cordinate of the S point',
+  'med_of_side': 'Mediana of side',
+  'bis_of_side': 'Bisection of side',
+  'catheti': 'catheti',
+  'h_height_triangle': 'h - height of the triangle',
+  'sides_triangle': 'side of the triangle',
+  'base_triangle': 'base of the triangle',
+  'internal_angle_degrees': 'internal angle',
+  'c_hypotenuse': 'c - hypotenuse',
+  'acute_angles_degrees': 'acute angle',
+  'components_c': 'components of the c - hypotenuse',
 
   'one_parameters_entered': '1 parameter must be entered',
   'two_parameters_entered': '2 parameters must be entered',
@@ -32,9 +52,9 @@ Map<String, String> en = {
 - size and coordinates of the center of the inscribed and circumcised circle''',
 
 
-  'enter_3_parameters': 'Enter 3 parameters',
-  'enter_2_parameters': 'Enter 2 parameters',
-  'enter_1_parameters': 'Enter 1 parameter',
+  'enter_3_parameters': 'Enter: 3 parameters',
+  'enter_2_parameters': 'Enter: 2 parameters',
+  'enter_1_parameters': 'Enter: 1 parameter',
   'rate_app': 'Rate app',
   'feedback': 'Feedback',
   'launch': 'Start',
@@ -63,7 +83,6 @@ Map<String, String> en = {
   'message_formula_not_found': 'Formula is not found',
   'message_max_number_entered': 'Max number entered',
   'message_calc_error_chang_value': 'Calculation error, try changing the value',
-
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',

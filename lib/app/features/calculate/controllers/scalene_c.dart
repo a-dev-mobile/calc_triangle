@@ -79,14 +79,14 @@ class ScaleneTriangleController extends GetxController {
   double lCd = 0.0;
 
   //// Radius of the inscribed circle
-  var r = "".obs;
+  var rInscribed = "".obs;
   var xr = "".obs;
   var yr = "".obs;
   double rd = 0.0;
   double xrd = 0.0;
   double yrd = 0.0;
 
-  var R = "".obs;
+  var Rcircum = "".obs;
   var xR = "".obs;
   var yR = "".obs;
   double Rd = 0.0;
@@ -645,17 +645,17 @@ class ScaleneTriangleController extends GetxController {
 
     rd = sqrt(((m - aSideD) * (m - bSideD) * (m - cSideD)) / m);
 
-    r.value = AppUtilsNumber.getFormatNumber(rd, precisionResult);
+    rInscribed.value = AppUtilsNumber.getFormatNumber(rd, precisionResult);
   }
 
   void calcRCircumCenterKnowAsideBsideCside() {
     // Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
     Rd = (aSideD * bSideD * cSideD) / (4 * areaD);
-    R.value = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
+    Rcircum.value = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
   }
 
   void calcYSrIncenter() {
-    yr.value = r.value;
+    yr.value = rInscribed.value;
   }
 
   void calcXSRCircumCenterKnowAside() {
@@ -2236,10 +2236,10 @@ class ScaleneTriangleController extends GetxController {
     lA.value = lB.value = lC.value = startLengthValue;
     lAd = lBd = lCd = 0.0;
 
-    r.value = xr.value = yr.value = startLengthValue;
+    rInscribed.value = xr.value = yr.value = startLengthValue;
     rd = xrd = yrd = 0.0;
 
-    R.value = xR.value = yR.value = startLengthValue;
+    Rcircum.value = xR.value = yR.value = startLengthValue;
     Rd = xRd = yRd = 0.0;
 
     isDeg.value = true;
@@ -2262,10 +2262,10 @@ class ScaleneTriangleController extends GetxController {
     lA.value = lB.value = lC.value = startLengthValue;
     lAd = lBd = lCd = 0.0;
 
-    r.value = xr.value = yr.value = startLengthValue;
+    rInscribed.value = xr.value = yr.value = startLengthValue;
     rd = xrd = yrd = 0.0;
 
-    R.value = xR.value = yR.value = startLengthValue;
+    Rcircum.value = xR.value = yR.value = startLengthValue;
     Rd = xRd = yRd = 0.0;
 
     if (!isAvailableOneParam(ScaleneTriangle.aSide)) {

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
-import 'package:calc_triangle/app/features/setting/controller/setting_c.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 

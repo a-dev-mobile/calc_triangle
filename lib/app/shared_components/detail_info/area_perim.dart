@@ -1,5 +1,6 @@
 
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
+import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:flutter/material.dart';
 
 class AreaPerimeter extends StatelessWidget {
@@ -16,12 +17,12 @@ class AreaPerimeter extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'P',
-          subtitle: 'Perimeter',
+          subtitle: TranslateHelper.perimeter,
           title: perimeter,
         ), ItemDetail(
           isActive: false,
           leading: 'A',
-          subtitle: 'Area',
+          subtitle: TranslateHelper.area,
           title: area,
         ),
       ],

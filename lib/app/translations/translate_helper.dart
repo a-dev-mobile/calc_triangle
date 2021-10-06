@@ -74,5 +74,30 @@ class TranslateHelper {
   static String get dialog_calculate => 'dialog_calculate'.tr;
 
   static String get sides_height_angles => 'sides_height_angles'.tr;
+  static String get area_perim => 'area_perim'.tr;
+  static String get mediana_geom_centroid => 'mediana_geom_centroid'.tr;
+  static String get bisection_inscribed_circle => 'bisection_inscribed_circle'.tr;
+  static String get circumscribed_circle => 'circumscribed_circle'.tr;
+  static String get radius_diameter_inscribed_circle => 'radius_diameter_inscribed_circle'.tr;
+  static String get radius_diameter_circumscribed_circle => 'radius_diameter_circumscribed_circle'.tr;
+  static String get x_cord_SR => 'x_cord_SR'.tr;
+  static String get y_cord_SR => 'y_cord_SR'.tr;
+   static String get x_cord_Sr => 'x_cord_Sr'.tr;
+  static String get y_cord_Sr => 'y_cord_Sr'.tr;
+     static String get x_cord_S => 'x_cord_S'.tr;
+  static String get y_cord_S => 'y_cord_S'.tr;
+  static String get med_of_side => 'med_of_side'.tr;
+  static String get bis_of_side => 'bis_of_side'.tr;
+  static String get catheti => 'catheti'.tr;
+  static String get h_height_triangle => 'h_height_triangle'.tr;
+  static String get sides_triangle => 'sides_triangle'.tr;
+  static String get base_triangle => 'base_triangle'.tr;
+  static String get  internal_angle_degrees =>  'internal_angle_degrees'.tr;
+  static String get  c_hypotenuse =>  'c_hypotenuse'.tr;
+  static String get  acute_angles_degrees =>  'acute_angles_degrees'.tr;
+  static String get  components_c =>  'components_c'.tr;
+ 
+ 
+ 
   static String get check_result => 'check_result'.tr;
 }

@@ -12,7 +12,6 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
-import 'package:calc_triangle/app/utils/logger.dart';
 
 import 'package:flutter/material.dart';
 

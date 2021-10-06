@@ -14,7 +14,7 @@ late var c = ScaleneTriangleController.to;
 
 class ScaleneDetail extends StatelessWidget {
   const ScaleneDetail({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -38,10 +38,10 @@ class ScaleneDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: const [
-                    ImageInfoWidget(
+                  children: [
+                    const ImageInfoWidget(
                         patchAsset: ConstAssetsImageRaster.scaleneTriangleAP),
-                    TextTitleDetail(text: 'Area and Perimeter'),
+                    TextTitleDetail(text: TranslateHelper.area_perim),
                   ],
                 ),
               ),
@@ -54,10 +54,11 @@ class ScaleneDetail extends StatelessWidget {
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
-                    children: const [
-                      ImageInfoWidget(
+                    children: [
+                      const ImageInfoWidget(
                           patchAsset: ConstAssetsImageRaster.scaleneTriangleS),
-                      TextTitleDetail(text: 'Mediana and geometric centroid'),
+                      TextTitleDetail(
+                          text: TranslateHelper.mediana_geom_centroid),
                     ],
                   ),
                 ),
@@ -66,10 +67,11 @@ class ScaleneDetail extends StatelessWidget {
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
-                    children: const [
-                      ImageInfoWidget(
+                    children: [
+                      const ImageInfoWidget(
                           patchAsset: ConstAssetsImageRaster.scaleneTriangleSr),
-                      TextTitleDetail(text: 'Bisection and inscribed circle'),
+                      TextTitleDetail(
+                          text: TranslateHelper.bisection_inscribed_circle),
                     ],
                   ),
                 ),
@@ -78,10 +80,11 @@ class ScaleneDetail extends StatelessWidget {
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
-                    children: const [
-                      ImageInfoWidget(
+                    children: [
+                      const ImageInfoWidget(
                           patchAsset: ConstAssetsImageRaster.scaleneTriangleSR),
-                      TextTitleDetail(text: 'Circumscribed circle'),
+                      TextTitleDetail(
+                          text: TranslateHelper.circumscribed_circle),
                     ],
                   ),
                 ),
@@ -105,25 +108,22 @@ class CircumscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'R',
-          subtitle: 'Radius / diameter of the circumscribed circle ',
-           title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}',
+          subtitle: TranslateHelper.radius_diameter_circumscribed_circle,
+          title:
+              'r ${c.Rcircum.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.Rd * 2, c.precisionResult)}',
         ),
 
 
-
-        /* /*       subtitle: 'Radius / diameter of the circumscribed circle ',
-         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}', */
- */
         ItemDetail(
           isActive: false,
           leading: 'X',
-          subtitle: 'X cordinate of the SR point',
+          subtitle: TranslateHelper.x_cord_SR,
           title: c.xR.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'Y',
-          subtitle: 'Y cordinate of the SR point',
+          subtitle: TranslateHelper.y_cord_SR,
           title: c.yR.value,
         ),
       ],
@@ -143,41 +143,39 @@ class BisectionInscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'la',
-          subtitle: 'Bisection of side a',
+   subtitle: '${TranslateHelper.bis_of_side} a',
           title: c.lA.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'lb',
-          subtitle: 'Bisection of side b',
+ subtitle: '${TranslateHelper.bis_of_side} b',
           title: c.lB.value,
-        ), 
+        ),
         ItemDetail(
           isActive: false,
           leading: 'lc',
-          subtitle: 'Bisection of side c',
+ subtitle: '${TranslateHelper.bis_of_side} c',
           title: c.lC.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'r',
-          subtitle: 'Radius / diameter of the inscribed circle',
-           title: 'r${c.r.value} / ⌀${AppUtilsNumber.getFormatNumber(c.rd*2, c.precisionResult)}', 
+          subtitle:  TranslateHelper.radius_diameter_inscribed_circle,
+          title:
+              'r ${c.rInscribed.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.rd * 2, c.precisionResult)}',
         ),
-
-/*       subtitle: 'Radius / diameter of the circumscribed circle ',
-         title: 'r${c.R.value} / ⌀${AppUtilsNumber.getFormatNumber(c.Rd*2, c.precisionResult)}', */
 
         ItemDetail(
           isActive: false,
           leading: 'X',
-          subtitle: 'X cordinate of the Sr point',
+          subtitle: TranslateHelper.x_cord_Sr,
           title: c.xr.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'Y',
-          subtitle: 'Y cordinate of the Sr point',
+          subtitle: TranslateHelper.y_cord_Sr,
           title: c.yr.value,
         ),
       ],
@@ -197,31 +195,31 @@ class MedianaGeometricCentroid extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'ma',
-          subtitle: 'Mediana of side a',
+          subtitle: '${TranslateHelper.med_of_side} a',
           title: c.mA.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'mb',
-          subtitle: 'Mediana of side b',
+         subtitle: '${TranslateHelper.med_of_side} b',
           title: c.mB.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'mc',
-          subtitle: 'Mediana of side c',
+       subtitle: '${TranslateHelper.med_of_side} c',
           title: c.mC.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'X',
-          subtitle: 'X cordinate of the S point',
+          subtitle: TranslateHelper.x_cord_S,
           title: c.xSPoint.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'Y',
-          subtitle: 'Y cordinate of the S point',
+          subtitle:TranslateHelper.y_cord_S,
           title: c.ySPoint.value,
         ),
       ],
@@ -243,134 +241,46 @@ class ScaleneSidesAngles extends StatelessWidget {
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.aSide),
           leading: 'a',
-          subtitle: 'a - base of the triangle',
+          subtitle: 'a - ${TranslateHelper.base_triangle}',
           title: c.aSide.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.bSide),
           leading: 'b',
-          subtitle: 'b - sides of the triangle',
+          subtitle: 'b - ${TranslateHelper.sides_triangle}',
           title: c.bSide.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.cSide),
           leading: 'c',
-          subtitle: 'c - sides of the triangle',
+          subtitle: 'c - ${TranslateHelper.sides_triangle}',
           title: c.cSide.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.hHeight),
           leading: 'h',
-          subtitle: 'h - height of the triangle',
+          subtitle:  TranslateHelper.h_height_triangle,
           title: c.hHeight.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.aAngle),
           leading: 'α',
-          subtitle: 'α - internal angle in degrees',
+          subtitle: 'α - ${TranslateHelper.internal_angle_degrees}',
           title: c.aAngle.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.bAngle),
           leading: 'β',
-          subtitle: 'β - internal angle in degrees',
+          subtitle: 'β - ${TranslateHelper.internal_angle_degrees}',
           title: c.bAngle.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.yAngle),
           leading: 'γ',
-          subtitle: 'γ - internal angle in degrees',
+          subtitle: 'γ - ${TranslateHelper.internal_angle_degrees}',
           title: c.yAngle.value,
         ),
       ],
     );
   }
 }
-
-
-
-
-
-
-
-//     return SingleChildScrollView(child: Obx(() {
-//       return Column(
-//         children: [
-//           const ScaleneTriangleImageInfoWidget(),
-//           // AppWidgets.dividerWelcome(),
-//           const TextTitleDetail(text: 'Sides and angles'),
-//           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.aSide),
-//             leading: 'a',
-//             subtitle: 'a - base of the triangle',
-//             title: c.aSide.value,
-//           ),
-//           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.bSide),
-//             leading: 'b',
-//             subtitle: 'b - sides of the triangle',
-//             title: c.bSide.value,
-//           ),
-//           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.cSide),
-//             leading: 'c',
-//             subtitle: 'c - sides of the triangle',
-//             title: c.cSide.value,
-//           ),
-//           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.hHeight),
-//             leading: 'h',
-//             subtitle: 'h - height of the triangle',
-//             title: c.hHeight.value,
-//           ),
-//           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.aAngle),
-//             leading: 'α',
-//             subtitle: 'α - internal angle in degrees',
-//             title: c.aAngle.value,
-//           ),
-//           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.bAngle),
-//             leading: 'β',
-//             subtitle: 'β - internal angle in degrees',
-//             title: c.bAngle.value,
-//           ),
-//           ItemDetail(
-//             isActive: c.isAvailableOneParam(ScaleneTriangle.yAngle),
-//             leading: 'γ',
-//             subtitle: 'γ - internal angle in degrees',
-//             title: c.aAngle.value,
-//           ),
-
-//           const TextTitleDetail(text: 'Area and Perimeter'),
-//           ItemDetail(
-//             isActive: false,
-//             leading: 'A',
-//             subtitle: 'Area',
-//             title: c.area.value,
-//           ),
-//           ItemDetail(
-//             isActive: false,
-//             leading: 'P',
-//             subtitle: 'Perimeter',
-//             title: c.perimeter.value,
-//           ),
-
-//           const TextTitleDetail(text: 'Geometric centroid'),
-//           ItemDetail(
-//             isActive: false,
-//             leading: 'Xs',
-//             subtitle: 'X cordinate of the S point',
-//             title: c.xSPoint.value,
-//           ),
-//           ItemDetail(
-//             isActive: false,
-//             leading: 'Ys',
-//             subtitle: 'Y cordinate of the S point',
-//             title: c.ySPoint.value,
-//           ),
-//         ],
-//       );
-//     }));
-//   }
-// }

@@ -5,7 +5,6 @@ import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
-import 'package:calc_triangle/app/features/setting/controller/setting_c.dart';
 
 
 import 'package:calc_triangle/app/services/global_serv.dart';
