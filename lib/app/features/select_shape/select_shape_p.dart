@@ -1,3 +1,4 @@
+import 'package:calc_triangle/app/admob/ad_helper.dart';
 import 'package:calc_triangle/app/config/routes/app_page.dart';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
@@ -6,10 +7,12 @@ import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
+import 'package:calc_triangle/app/utils/logger.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 enum Shape {
   rightTriangle,
@@ -18,9 +21,66 @@ enum Shape {
   equilateralTriangle,
   none,
 }
+const int maxFailedLoadAttempts = 3;
 
-class SelectShapePage extends StatelessWidget {
+class SelectShapePage extends StatefulWidget {
   const SelectShapePage({Key? key}) : super(key: key);
+
+  @override
+  State<SelectShapePage> createState() => _SelectShapePageState();
+}
+
+class _SelectShapePageState extends State<SelectShapePage> {
+  int _interstitialLoadAttempts = 0;
+  InterstitialAd? _interstitialAd;
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          _interstitialAd = ad;
+          _interstitialLoadAttempts = 0;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          _interstitialLoadAttempts += 1;
+          _interstitialAd = null;
+          if (_interstitialLoadAttempts >= maxFailedLoadAttempts) {
+            _createInterstitialAd();
+          }
+        },
+      ),
+    );
+  }
+
+  void _showInterstialAd() {
+    if (_interstitialAd != null) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+          onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        ad.dispose();
+        _createInterstitialAd();
+      }, onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        ad.dispose();
+        _createInterstitialAd();
+      });
+      _interstitialAd!.show();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _createInterstitialAd();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _interstitialAd?.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +100,11 @@ class SelectShapePage extends StatelessWidget {
                 patchAssets1: ConstAssetsImageRaster.rightTriangleInfo,
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.right_info,
+                onTap: () {
+                  _showInterstialAd();
+                  GlobalServ.to.aciveShape = Shape.rightTriangle;
+                  Get.toNamed(Routes.calculateRight);
+                },
               ),
             ),
             Expanded(
@@ -48,6 +113,11 @@ class SelectShapePage extends StatelessWidget {
                 patchAssets1: ConstAssetsImageRaster.scaleneTriangleInfo,
                 enterParameter: TranslateHelper.enterThreeParameters,
                 info: TranslateHelper.scalene_info,
+                onTap: () {
+                  _showInterstialAd();
+                  GlobalServ.to.aciveShape = Shape.scaleneTriangle;
+                  Get.toNamed(Routes.calculateScalene);
+                },
               ),
             ),
             Expanded(
@@ -56,6 +126,11 @@ class SelectShapePage extends StatelessWidget {
                 patchAssets1: ConstAssetsImageRaster.isoscelesTriangleInfo,
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.isosceles_info,
+                onTap: () {
+                  _showInterstialAd();
+                  GlobalServ.to.aciveShape = Shape.equilateralTriangle;
+                  Get.toNamed(Routes.calculateEquilateral);
+                },
               ),
             ),
             Expanded(
@@ -64,6 +139,11 @@ class SelectShapePage extends StatelessWidget {
                 patchAssets1: ConstAssetsImageRaster.equilateralTriangleInfo,
                 enterParameter: TranslateHelper.enterOneParameters,
                 info: TranslateHelper.equilateral_info,
+                onTap: () {
+                  _showInterstialAd();
+                  GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
+                  Get.toNamed(Routes.calculateIsosceles);
+                },
               ),
             ),
           ],
@@ -103,11 +183,12 @@ class CardSelectShapet extends StatelessWidget {
     required this.patchAssets1,
     required this.enterParameter,
     required this.info,
+    required this.onTap,
   }) : super(key: key);
   final String title;
   final String info;
   final String enterParameter;
-
+  final Function onTap;
   final String patchAssets1;
 
   @override
@@ -117,20 +198,7 @@ class CardSelectShapet extends StatelessWidget {
       elevation: 3,
       child: InkWell(
         onTap: () {
-          //TODO при добавлении нового треугольника изменить
-          if (title == TranslateHelper.right_triangle) {
-            GlobalServ.to.aciveShape = Shape.rightTriangle;
-            Get.toNamed(Routes.calculateRight);
-          } else if (title == TranslateHelper.scalene_triangle) {
-            GlobalServ.to.aciveShape = Shape.scaleneTriangle;
-            Get.toNamed(Routes.calculateScalene);
-          } else if (title == TranslateHelper.equilateral_triangle) {
-            GlobalServ.to.aciveShape = Shape.equilateralTriangle;
-            Get.toNamed(Routes.calculateEquilateral);
-          } else if (title == TranslateHelper.isosceles_triangle) {
-            GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
-            Get.toNamed(Routes.calculateIsosceles);
-          }
+          onTap();
         },
         child: Row(
           children: [

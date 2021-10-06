@@ -16,7 +16,15 @@ import 'app/translations/app_translations.dart';
 
 
 void main() async {
+  /* 
+  с помощью днанного приложения вы сможете расчитать
+  вместо nan error
+  введите известные значения
+  проверяйте в информацию
   
+  
+  
+   */
   // Logger.level = Level.nothing; //TODO on LOG
   WidgetsFlutterBinding.ensureInitialized();
 
