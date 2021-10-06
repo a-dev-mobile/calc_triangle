@@ -1,6 +1,8 @@
 import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/isosceles_c.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
+import 'package:calc_triangle/app/features/calculate/view/Isosceles/calculate_isosceles.dart';
 import 'package:calc_triangle/app/features/calculate/view/equilateral/calculate_equilateral.dart';
 
 import 'package:calc_triangle/app/features/calculate/view/right/calculate_right.dart';
@@ -60,6 +62,15 @@ class AppPage {
         binding: BindingsBuilder(() {
           Get.put<EquilateralTriangleController>(
               EquilateralTriangleController(),
+              permanent: true);
+        })),
+        GetPage(
+        name: Routes.calculateIsosceles,
+        transition: Transition.leftToRight,
+        page: () => const CalculateIsoscelesPage(),
+        binding: BindingsBuilder(() {
+          Get.put<IsoscelesTriangleController>(
+              IsoscelesTriangleController(),
               permanent: true);
         })),
     GetPage(

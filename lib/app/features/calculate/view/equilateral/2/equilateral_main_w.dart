@@ -44,7 +44,7 @@ class EquilateralMain extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const EquilateralTriangleImageInputWidget(),
+                              InteractiveViewer(child: const EquilateralTriangleImageInputWidget()),
 
                         //показываем если не инфо
                         Obx(() {

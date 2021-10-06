@@ -4,8 +4,8 @@ import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 
 import 'package:calc_triangle/app/constants/const_color.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
-import 'package:calc_triangle/app/features/calculate/view/right/2/right_numpad_w.dart';
+
+import 'package:calc_triangle/app/features/calculate/controllers/isosceles_c.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
@@ -18,16 +18,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'right_detail_w.dart';
-import 'right_image_input_w.dart';
+import 'isosceles_detail_w.dart';
+import 'isosceles_image__input_w.dart';
+import 'isosceles_numpad_w.dart';
 
-late RightTriangleController c= RightTriangleController.to;
-class RightMain extends StatelessWidget {
-  const RightMain({Key? key}) : super(key: key);
+var c = IsoscelesTriangleController.to;
+
+class IsoscelesMain extends StatelessWidget {
+  const IsoscelesMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-  
     settingBar();
 
     return Scaffold(
@@ -36,12 +37,13 @@ class RightMain extends StatelessWidget {
           children: [
             Obx(() {
               return c.isActiveImageInfo.value
-                  ? const RightDetail()
+                  ? const IsoscelesDetail()
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                              InteractiveViewer(child: const RightTriangleImageInputWidget()),
+                        InteractiveViewer(
+                            child: const IsoscelesTriangleImageInputWidget()),
 
                         //показываем если не инфо
                         Obx(() {
@@ -55,7 +57,7 @@ class RightMain extends StatelessWidget {
                               child: const MessageWidget());
                         }),
 
-                        const Expanded(child: NumPadRightWidget()),
+                        const Expanded(child: NumPadIsoscelesWidget()),
                       ],
                     );
             }),
@@ -89,7 +91,7 @@ class IconInputInfoWidget extends StatelessWidget {
           },
           child: Container(
             color: AppColors.content(context),
-            child: Icon(              
+            child: Icon(
               icon,
               size: AppSize.iconSize * 1.2,
               color: AppColors.text(context),

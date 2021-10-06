@@ -2058,7 +2058,7 @@ class ScaleneTriangleController extends GetxController {
 // если мы в минутах то переводим углы
     aAngle.value = AppConvert.convertDegToDMS(aAngleD, precisionResult);
     bAngle.value = AppConvert.convertDegToDMS(bAngleD, precisionResult);
-    yAngle.value = AppConvert.convertDegToDMS(bAngleD, precisionResult);
+    yAngle.value = AppConvert.convertDegToDMS(yAngleD, precisionResult);
   }
 
   void clickConvertDeg() {

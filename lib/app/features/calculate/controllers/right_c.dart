@@ -29,7 +29,7 @@ enum RightTriangle {
   empty,
 }
 
-// late WelcomeController c = Get.find();
+
 
 class RightTriangleController extends GetxController {
   static RightTriangleController get to => Get.find<RightTriangleController>();
@@ -1221,6 +1221,15 @@ class RightTriangleController extends GetxController {
       kCompCside.value = startLengthValue;
       return true;
     }
+        if (ValidationUtils.isNumberNanAndInfinity(xSPointD)) {
+      xSPoint.value = startLengthValue;
+      return true;
+    }
+
+    if (ValidationUtils.isNumberNanAndInfinity(ySPointD)) {
+      ySPoint.value = startLengthValue;
+      return true;
+    }
     if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
       return true;
@@ -1992,6 +2001,14 @@ class RightTriangleController extends GetxController {
 
     perimeter.value = startLengthValue;
     area.value = startLengthValue;
+     xSPoint.value = startLengthValue;
+    ySPoint.value = startLengthValue;
+
+  
+    hHeightD = 0;
+
+    aAngleD = 0;
+    bAngleD = 0;
     areaD = 0;
     perimeterD = 0;
 

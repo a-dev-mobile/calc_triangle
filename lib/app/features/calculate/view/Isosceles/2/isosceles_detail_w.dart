@@ -1,19 +1,22 @@
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
-import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
+
+import 'package:calc_triangle/app/features/calculate/controllers/isosceles_c.dart';
+
+import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/area_perim.dart';
-import 'package:calc_triangle/app/shared_components/image_info_w.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_title.dart';
+import 'package:calc_triangle/app/shared_components/image_info_w.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-late var c = ScaleneTriangleController.to;
+late var c = IsoscelesTriangleController.to;
 
-class ScaleneDetail extends StatelessWidget {
-  const ScaleneDetail({Key? key}) : super(key: key);
+class IsoscelesDetail extends StatelessWidget {
+  const IsoscelesDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +30,13 @@ class ScaleneDetail extends StatelessWidget {
                 child: Column(
                   children: [
                     const ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.scaleneTriangleInfo),
+                        patchAsset:
+                            ConstAssetsImageRaster.isoscelesTriangleInfo),
                     TextTitleDetail(text: TranslateHelper.sides_height_angles),
                   ],
                 ),
               ),
-              content: const ScaleneSidesAngles(),
+              content: const IsoscelesSidesAngles(),
             ),
             StickyHeader(
               header: Container(
@@ -40,7 +44,7 @@ class ScaleneDetail extends StatelessWidget {
                 child: Column(
                   children: [
                     const ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.scaleneTriangleAP),
+                        patchAsset: ConstAssetsImageRaster.isoscelesTriangleAP),
                     TextTitleDetail(text: TranslateHelper.area_perim),
                   ],
                 ),
@@ -56,7 +60,8 @@ class ScaleneDetail extends StatelessWidget {
                   child: Column(
                     children: [
                       const ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleS),
+                          patchAsset:
+                              ConstAssetsImageRaster.isoscelesTriangleS),
                       TextTitleDetail(
                           text: TranslateHelper.mediana_geom_centroid),
                     ],
@@ -69,7 +74,8 @@ class ScaleneDetail extends StatelessWidget {
                   child: Column(
                     children: [
                       const ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleSr),
+                          patchAsset:
+                              ConstAssetsImageRaster.isoscelesTriangleSr),
                       TextTitleDetail(
                           text: TranslateHelper.bisection_inscribed_circle),
                     ],
@@ -82,7 +88,8 @@ class ScaleneDetail extends StatelessWidget {
                   child: Column(
                     children: [
                       const ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleSR),
+                          patchAsset:
+                              ConstAssetsImageRaster.isoscelesTriangleSR),
                       TextTitleDetail(
                           text: TranslateHelper.circumscribed_circle),
                     ],
@@ -110,7 +117,7 @@ class CircumscribedCircle extends StatelessWidget {
           leading: 'R',
           subtitle: TranslateHelper.radius_diameter_circumscribed_circle,
           title:
-              'r ${c.Rcircum.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.Rd * 2, c.precisionResult)}',
+              'r ${c.Rcircum.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.Rd * 2, GlobalServ.to.precisionResult.value)}',
         ),
         ItemDetail(
           isActive: false,
@@ -152,16 +159,10 @@ class BisectionInscribedCircle extends StatelessWidget {
         ),
         ItemDetail(
           isActive: false,
-          leading: 'lc',
-          subtitle: '${TranslateHelper.bis_of_side} c',
-          title: c.lC.value,
-        ),
-        ItemDetail(
-          isActive: false,
           leading: 'r',
           subtitle: TranslateHelper.radius_diameter_inscribed_circle,
           title:
-              'r ${c.rInscribed.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.rd * 2, c.precisionResult)}',
+              'r ${c.rInscribed.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.rd * 2, GlobalServ.to.precisionResult.value)}',
         ),
         ItemDetail(
           isActive: false,
@@ -203,12 +204,6 @@ class MedianaGeometricCentroid extends StatelessWidget {
         ),
         ItemDetail(
           isActive: false,
-          leading: 'mc',
-          subtitle: '${TranslateHelper.med_of_side} c',
-          title: c.mC.value,
-        ),
-        ItemDetail(
-          isActive: false,
           leading: 'X',
           subtitle: TranslateHelper.x_cord_S,
           title: c.xSPoint.value,
@@ -224,8 +219,8 @@ class MedianaGeometricCentroid extends StatelessWidget {
   }
 }
 
-class ScaleneSidesAngles extends StatelessWidget {
-  const ScaleneSidesAngles({
+class IsoscelesSidesAngles extends StatelessWidget {
+  const IsoscelesSidesAngles({
     Key? key,
   }) : super(key: key);
 
@@ -236,46 +231,34 @@ class ScaleneSidesAngles extends StatelessWidget {
         // AppWidgets.dividerWelcome(),
 
         ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.aSide),
+          isActive: c.isAvailableOneParam(IsoscelesTriangle.aSide),
           leading: 'a',
-          subtitle: 'a - ${TranslateHelper.base_triangle}',
+          subtitle: 'a - ${TranslateHelper.sides_triangle}',
           title: c.aSide.value,
         ),
         ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.bSide),
+          isActive: c.isAvailableOneParam(IsoscelesTriangle.bSide),
           leading: 'b',
           subtitle: 'b - ${TranslateHelper.sides_triangle}',
           title: c.bSide.value,
         ),
         ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.cSide),
-          leading: 'c',
-          subtitle: 'c - ${TranslateHelper.sides_triangle}',
-          title: c.cSide.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.hHeight),
+          isActive: c.isAvailableOneParam(IsoscelesTriangle.hHeight),
           leading: 'h',
           subtitle: TranslateHelper.h_height_triangle,
           title: c.hHeight.value,
         ),
         ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.aAngle),
+          isActive: c.isAvailableOneParam(IsoscelesTriangle.aAngle),
           leading: 'α',
           subtitle: 'α - ${TranslateHelper.internal_angle_degrees}',
           title: c.aAngle.value,
         ),
         ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.bAngle),
+          isActive: c.isAvailableOneParam(IsoscelesTriangle.bAngle),
           leading: 'β',
           subtitle: 'β - ${TranslateHelper.internal_angle_degrees}',
           title: c.bAngle.value,
-        ),
-        ItemDetail(
-          isActive: c.isAvailableOneParam(ScaleneTriangle.yAngle),
-          leading: 'γ',
-          subtitle: 'γ - ${TranslateHelper.internal_angle_degrees}',
-          title: c.yAngle.value,
         ),
       ],
     );

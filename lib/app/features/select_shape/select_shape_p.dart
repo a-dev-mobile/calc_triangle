@@ -47,7 +47,7 @@ class SelectShapePage extends StatelessWidget {
                 title: TranslateHelper.scalene_triangle,
                 patchAssets1: ConstAssetsImageRaster.scaleneTriangleInfo,
                 enterParameter: TranslateHelper.enterThreeParameters,
-                 info: TranslateHelper.scalene_info,
+                info: TranslateHelper.scalene_info,
               ),
             ),
             Expanded(
@@ -55,7 +55,7 @@ class SelectShapePage extends StatelessWidget {
                 title: TranslateHelper.isosceles_triangle,
                 patchAssets1: ConstAssetsImageRaster.isoscelesTriangleInfo,
                 enterParameter: TranslateHelper.enterTwoParameters,
-                   info: TranslateHelper.isosceles_info,
+                info: TranslateHelper.isosceles_info,
               ),
             ),
             Expanded(
@@ -63,7 +63,7 @@ class SelectShapePage extends StatelessWidget {
                 title: TranslateHelper.equilateral_triangle,
                 patchAssets1: ConstAssetsImageRaster.equilateralTriangleInfo,
                 enterParameter: TranslateHelper.enterOneParameters,
-                   info: TranslateHelper.equilateral_info,
+                info: TranslateHelper.equilateral_info,
               ),
             ),
           ],
@@ -127,6 +127,9 @@ class CardSelectShapet extends StatelessWidget {
           } else if (title == TranslateHelper.equilateral_triangle) {
             GlobalServ.to.aciveShape = Shape.equilateralTriangle;
             Get.toNamed(Routes.calculateEquilateral);
+          } else if (title == TranslateHelper.isosceles_triangle) {
+            GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
+            Get.toNamed(Routes.calculateIsosceles);
           }
         },
         child: Row(
@@ -134,9 +137,9 @@ class CardSelectShapet extends StatelessWidget {
             Expanded(
                 flex: 1,
                 child: Image.asset(
-              patchAssets1,
-              color: AppColors.contentRevers(context),
-            )),
+                  patchAssets1,
+                  color: AppColors.contentRevers(context),
+                )),
             Expanded(
               flex: 2,
               child: Column(
@@ -145,7 +148,8 @@ class CardSelectShapet extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     info,
@@ -153,7 +157,9 @@ class CardSelectShapet extends StatelessWidget {
                       fontSize: 15.sp,
                     ),
                   ),
-                  SizedBox(height: 10.h,),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Text(
                     enterParameter,
                     style: TextStyle(fontSize: 15.sp, color: Colors.grey),

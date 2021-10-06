@@ -16,11 +16,16 @@ class CustomMessageView extends StatelessWidget {
       width: AppUtils.getWidth(context),
       // color: AppColors.contentRevers(context).withOpacity(0.5),
       child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+               SizedBox(
+                width: 10.w,
+              ),
               Icon(
                 Icons.info_outline,
                 color: ConstColor.warninng,
@@ -29,11 +34,21 @@ class CustomMessageView extends StatelessWidget {
               SizedBox(
                 width: 2.w,
               ),
-              Text(
-                message,
-                style:
-                    TextStyle(fontSize: 15.sp, color: AppColors.text(context)),
+              Expanded(
+                child: Text(
+           
+                  message,
+                    textAlign: TextAlign.center,     
+                  maxLines: 2,
+                  style:
+                      TextStyle(  fontSize: 15.sp, color: AppColors.text(context)),
+                ),
+              
+              
               ),
+          
+          
+          
             ],
           ),
         ],
