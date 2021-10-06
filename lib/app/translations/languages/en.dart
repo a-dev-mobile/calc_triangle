@@ -2,10 +2,19 @@ Map<String, String> en = {
   'about': 'About App',
   'app_name': 'Triangle',
   'app_name_sub': 'Calculations',
-  'right_triangle': 'Right Triangle',
-  'scalene_triangle': 'Scalene Triangle',
-  'isosceles_triangle': 'Isosceles Triangle',
-  'equilateral_triangle': 'Equilateral Triangle',
+  'right_triangle':       'Right',
+  'scalene_triangle':     'Scalene',
+  'isosceles_triangle':   'Isosceles',
+  'equilateral_triangle': 'Equilateral',
+
+  'right_info':       'Has a right angle (90°)',
+  'scalene_info':     'No equal sides\nNo equal angles',
+  'isosceles_info':   'Two equal sides\nTwo equal angles',
+  'equilateral_info': 'Three equal sides\nThree equal angles, always 60°',
+
+   
+
+
   'sides_height_angles': 'Sides, height and angles',
 
 
@@ -22,19 +31,6 @@ Map<String, String> en = {
 - geometric center coordinates
 - size and coordinates of the center of the inscribed and circumcised circle''',
 
-/* 
-
-Вы сможете вычислить:
-
-стороны, высоту и углы
-периметр и площадь
-медианы и биссектрисы, 
-координаты геометрического центра
-размер и координаты центра вписанного и  описанного круга 
-
-
-
-*/
 
   'enter_3_parameters': 'Enter 3 parameters',
   'enter_2_parameters': 'Enter 2 parameters',
@@ -67,7 +63,7 @@ Map<String, String> en = {
   'message_formula_not_found': 'Formula is not found',
   'message_max_number_entered': 'Max number entered',
   'message_calc_error_chang_value': 'Calculation error, try changing the value',
-  // 'message_calc_error_chang_value': 'Ошибка в расчете, попробуйте изменить значение',
+
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',

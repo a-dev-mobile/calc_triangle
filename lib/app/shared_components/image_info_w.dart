@@ -3,6 +3,11 @@ import 'package:calc_triangle/app/constants/const_number.dart';
 
 import 'package:flutter/material.dart';
 
+//!asdasdasd
+//asdasasd
+//*asdasasd
+//?asdasasdasasd
+//TODO asdasdasdasasdasasd
 
 
 class ImageInfoWidget extends StatelessWidget {
