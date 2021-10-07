@@ -53,7 +53,12 @@ abstract class AppStyleText {
         fontSize: 15.sp,
         fontWeight: FontWeight.bold);
   }
-
+  static TextStyle textSettingItem(BuildContext context) {
+    return TextStyle(
+        color: AppColors.text(context),
+        fontSize: 15.sp,
+       );
+  }
   static TextStyle subText(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context).withOpacity(0.8), fontSize: 15.sp);

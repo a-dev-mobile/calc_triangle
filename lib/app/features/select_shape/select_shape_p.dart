@@ -152,7 +152,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 onTap: () {
           showAd();
                   GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
-                  Get.toNamed(Routes.calculateEquilateral);
+                  Get.toNamed(Routes.calculateIsosceles);
                 },
               ),
             ),
@@ -165,7 +165,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 onTap: () {
       showAd();
                   GlobalServ.to.aciveShape = Shape.equilateralTriangle;
-                  Get.toNamed(Routes.calculateIsosceles);
+                  Get.toNamed(Routes.calculateEquilateral);
                 },
               ),
             ),

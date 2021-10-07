@@ -131,13 +131,13 @@ class RightTriangleController extends GetxController {
 
     if (keySymbol == Keys.next) {
       nextElement();
-
+    showMessage();
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
-
+    showMessage();
       return;
     }
 
@@ -1771,6 +1771,7 @@ class RightTriangleController extends GetxController {
     // переключение вперед между widgets backspace
 
     _isNext(true);
+
   }
 
   void restartActiveParamIfZeroValue() {
@@ -1854,6 +1855,7 @@ class RightTriangleController extends GetxController {
     // переключение  между widgets
 
     _isNext(false);
+
   }
 
   void convertDMSToDeg() {
@@ -2125,29 +2127,7 @@ class RightTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
-/* 
 
-  void _isNext(bool isNext) {
-    if (isNext) {
-      if (isaSide.value) {
-        isaAngle.value = true;
-        isaSide.value = false;
-      } else if (isaAngle.value) {
-        ishHeight.value = true;
-         isaAngle.value = false;
-      }else if (ishHeight.value) {
-        ishHeight.value = false;
-         isbAngle.value = true;
-      }else if (isbAngle.value) {
-         isbAngle.value = false;
-        isbSide.value = true;
-      }
-      else if (isbSide.value) {
-        isbSide.value = false;
-         isbAngle.value = false;
-      }
-
- */
 
     if (isNext) {
       if (isaSide.value) {

@@ -35,6 +35,8 @@ Map<String, String> en = {
   'h_height_triangle': 'h - height of the triangle',
   'sides_triangle': 'side of the triangle',
   'base_triangle': 'base of the triangle',
+  'base': 'base',
+  'angle': 'angle',
   'internal_angle_degrees': 'internal angle',
   'c_hypotenuse': 'c - hypotenuse',
   'acute_angles_degrees': 'acute angle',
@@ -92,6 +94,8 @@ Always check your result!
   'must_be': 'must be',
   'height': 'height',
   'component': 'component',
+  'thank_you': 'Thank You for choosing our application',
+  'version': 'Version',
  
 
 

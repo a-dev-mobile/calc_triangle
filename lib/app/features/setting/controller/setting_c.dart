@@ -1,5 +1,9 @@
 import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/isosceles_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
+import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:flutter/material.dart';
@@ -8,8 +12,6 @@ import 'package:get/get.dart';
 
 class SettingContrl extends GetxController {
   static SettingContrl get to => Get.find();
-
-
 
   void setRusLocation() {
     GlobalServ.to.appLocale.value = ConstString.localeRu;
@@ -54,11 +56,22 @@ class SettingContrl extends GetxController {
         ));
   }
 
-
   @override
   void onClose() async {
     GlobalServ.to.startIfCloseSetiing();
-    
+
+// todo обновление точности расчета нужно сделать
+//! not work
+    // var c1 = RightTriangleController.to;
+    // var c2 = ScaleneTriangleController.to;
+    // var c3 = EquilateralTriangleController.to;
+    // var c4 = IsoscelesTriangleController.to;
+
+    // c1.calculate();
+    // c2.calculate();
+    // c3.calculate();
+    // c4.calculate();
+
     //сохранил чтобы локально не считывать
     super.onClose();
   }

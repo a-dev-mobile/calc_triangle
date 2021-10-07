@@ -133,12 +133,13 @@ class ScaleneTriangleController extends GetxController {
 
     if (keySymbol == Keys.next) {
       nextElement();
-
+    showMessage();
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
+    showMessage();
 
       return;
     }
@@ -1911,6 +1912,7 @@ class ScaleneTriangleController extends GetxController {
     // переключение вперед между widgets backspace
 
     _isNext(true);
+ 
   }
 
   void restartActiveParamIfZeroValue() {
@@ -2026,6 +2028,7 @@ class ScaleneTriangleController extends GetxController {
     // переключение  между widgets
 
     _isNext(false);
+
   }
 
   void convertDMSToDeg() {

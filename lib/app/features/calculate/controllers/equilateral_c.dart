@@ -116,13 +116,13 @@ class EquilateralTriangleController extends GetxController {
 
     if (keySymbol == Keys.next) {
       nextElement();
-
+    showMessage();
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
-
+    showMessage();
       return;
     }
 
@@ -626,6 +626,7 @@ class EquilateralTriangleController extends GetxController {
     // переключение вперед между widgets backspace
 
     _isNext(true);
+  
   }
 
   void restartActiveParamIfZeroValue() {
@@ -645,6 +646,7 @@ class EquilateralTriangleController extends GetxController {
     // переключение  между widgets
 
     _isNext(false);
+
   }
 
   void longBackspace() {

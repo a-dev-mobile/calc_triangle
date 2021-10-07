@@ -131,13 +131,13 @@ class IsoscelesTriangleController extends GetxController {
 
     if (keySymbol == Keys.next) {
       nextElement();
-
+      showMessage();
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
-
+      showMessage();
       return;
     }
 
@@ -177,6 +177,12 @@ class IsoscelesTriangleController extends GetxController {
     // если две точки возврат
     if (isTwoDecimalPointRightTriangle(keySymbol)) {
       log.e('isTwoDecimalPointRightTriangle');
+
+      return;
+    }
+    if (isAngleOver90And180(keySymbol)) {
+      log.e('isAngleOver90');
+      // showSnack(TranslateHelper.messageAngleOver90);
 
       return;
     }
@@ -358,20 +364,6 @@ class IsoscelesTriangleController extends GetxController {
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
-  void calcBangKnowAsideBSideCside() {
-    // bAngleD = AppConvert.toDegree(acos(
-    //     (pow(aSideD, 2) + pow(bSideD, 2) - pow(cSideD, 2)) /
-    //         (2 * aSideD * bSideD)));
-    bAngle.value = AppUtilsNumber.getFormatNumber(bAngleD, precisionResult);
-  }
-
-  void calcYangKnowAsideBsideCside() {
-    // yAngleD = AppConvert.toDegree(acos(
-    //     (pow(bSideD, 2) + pow(cSideD, 2) - pow(aSideD, 2)) /
-    //         (2 * cSideD * bSideD)));
-    // yAngle.value = AppUtilsNumber.getFormatNumber(yAngleD, precisionResult);
-  }
-
   void calcAangKnowAsideBSide() {
     aAngleD = AppConvert.toDegree(acos(
         (pow(aSideD, 2) + pow(bSideD, 2) - pow(bSideD, 2)) /
@@ -379,34 +371,10 @@ class IsoscelesTriangleController extends GetxController {
     aAngle.value = AppUtilsNumber.getFormatNumber(aAngleD, precisionResult);
   }
 
-  void calcCsideKnowAsideBSideBang() {
-    // cSideD = sqrt(pow(aSideD, 2) +
-    //     pow(bSideD, 2) -
-    //     2 * aSideD * bSideD * cos(AppConvert.toRadian(bAngleD)));
+  void calcBsideKnowAsideAang() {
+    bSideD = aSideD / (2 * cos(AppConvert.toRadian(aAngleD)));
 
-    // cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult);
-  }
-
-  void calcBsideKnowAsideCSideAang() {
-    // bSideD = sqrt(pow(aSideD, 2) +
-    //     pow(cSideD, 2) -
-    //     2 * aSideD * cSideD * cos(AppConvert.toRadian(aAngleD)));
-
-    // bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
-  }
-
-  void calcAsideKnowBsideCSideYang() {
-    // aSideD = sqrt(pow(bSideD, 2) +
-    //     pow(cSideD, 2) -
-    //     2 * bSideD * cSideD * cos(AppConvert.toRadian(yAngleD)));
-
-    // aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
-  }
-
-  void calcCsideKnowAsideYangBang() {
-    // cSideD = (aSideD * sin(AppConvert.toRadian(bAngleD))) /
-    //     sin(AppConvert.toRadian(yAngleD));
-    // cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult);
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
   void calcAreaKnowAsideHhei() {
@@ -438,98 +406,35 @@ class IsoscelesTriangleController extends GetxController {
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
-  void calcBSideKnowBangHhei() {
-    bSideD = hHeightD / sin(AppConvert.toRadian(bAngleD));
+  void calcAangKnowBangl() {
+    aAngleD = (180 - bAngleD) / 2;
+    aAngle.value =
+        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+  }
+
+  void calcBSideKnowAangHhei() {
+    bSideD = hHeightD / sin(AppConvert.toRadian(aAngleD));
     bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
-  void calcYangKnowAsideBsideAang() {
-    // yAngleD = AppConvert.toDegree(
-    //     asin(aSideD * sin(AppConvert.toRadian(aAngleD)) / bSideD));
-    // yAngle.value =
-    // AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
+  void calcASideKnowBsideAang() {
+    aSideD = 2 * bSideD * cos(AppConvert.toRadian(aAngleD));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
   }
 
-  void calcYangKnowAsideCsideBang() {
-    // yAngleD = AppConvert.toDegree(
-    //     asin(aSideD * sin(AppConvert.toRadian(bAngleD)) / cSideD));
-    // yAngle.value =
-    //     AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
+  void calcBSideKnowAsideBang() {
+    bSideD = aSideD / (sqrt((2 - 2 * cos(AppConvert.toRadian(bAngleD)))));
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
-  void calcBangKnowAsideCsideYang() {
-    // bAngleD = AppConvert.toDegree(
-    //     (asin(cSideD * sin(AppConvert.toRadian(yAngleD)) / aSideD)));
-    // bAngle.value =
-    //     AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+  void calcAsideKnowBsideHhei() {
+    aSideD = 2 * (sqrt(pow(bSideD, 2) - pow(hHeightD, 2)));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
   }
 
-  void calcAangKnowAsideBsideYang() {
-    // aAngleD = AppConvert.toDegree(
-    //     asin(bSideD * sin(AppConvert.toRadian(yAngleD)) / aSideD));
-    // aAngle.value =
-    //     AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
-  }
-
-  void calcBangKnowCsideBsideAang() {
-    // bAngleD = AppConvert.toDegree(
-    //     asin(cSideD * sin(AppConvert.toRadian(aAngleD)) / bSideD));
-    // bAngle.value =
-    //     AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
-  }
-
-  void calcAangKnowCsideBsideBang() {
-    // aAngleD = AppConvert.toDegree(
-    //     asin(bSideD * sin(AppConvert.toRadian(bAngleD)) / cSideD));
-    // aAngle.value =
-    //     AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
-  }
-
-  void calcCsideKnowBsideAangBang() {
-    // cSideD = (bSideD *
-    //     sin(AppConvert.toRadian(bAngleD)) /
-    //     sin(AppConvert.toRadian(aAngleD)));
-    // cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult);
-  }
-
-  void calcAsideKnowBsideAangYang() {
-    // aSideD = (bSideD *
-    //     sin(AppConvert.toRadian(yAngleD)) /
-    //     sin(AppConvert.toRadian(aAngleD)));
-    // aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
-  }
-
-  void calcAsideKnowCsideBangYang() {
-    // aSideD = (cSideD *
-    //     sin(AppConvert.toRadian(yAngleD)) /
-    //     sin(AppConvert.toRadian(bAngleD)));
-    // aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
-  }
-
-  void calcCsideKnowHheiAang() {
-    // cSideD = hHeightD / (sin(AppConvert.toRadian(aAngleD)));
-    // cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult);
-  }
-
-  void calcAanglKnowCsideHhei() {
-    // aAngleD = AppConvert.toDegree(asin(hHeightD / cSideD));
-
-    // aAngle.value =
-    //     AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
-  }
-
-  void calcSubResultKnowAsideBsideCsideAangl() async {
-    // calcMedianKnowAsideBsideCside();
-    // calcBisectorKnowAsideBsideCside();
-    // //внут круг
-    // calcRIncenterKnowAsideBsideCside();
-    // //внеш круг
-    // calcRCircumCenterKnowAsideBsideCside();
-    // calcXSRCircumCenterKnowAside();
-    // calcYSrIncenter();
-    // //last
-    // calcXSrIncenterKnowAsideAanglBangl();
-    // calcYSRCircumCenterKnowRradAside();
+  void calcBSideKnowAsideHhei() {
+    bSideD = sqrt(pow(hHeightD, 2) + pow(aSideD, 2) / 4);
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
   void calcMedianKnowAsideBside() {
@@ -602,6 +507,26 @@ class IsoscelesTriangleController extends GetxController {
     yR.value = AppUtilsNumber.getFormatNumber(yRd, precisionResult);
   }
 
+  void subCalc() {
+    calcAreaKnowAsideHhei();
+    calcPerimKnowAsideBside();
+
+    calcXsPointKnowAsideBsideAang();
+    calcYsPointKnowBsideAang();
+
+    calcMedianKnowAsideBside();
+    calcBisectorKnowAsideBside();
+    //внут круг
+    calcRIncenterKnowAsideBside();
+    //внеш круг
+    calcRCircumCenterKnowAsideBside();
+    calcXSRCircumCenterKnowAside();
+    calcYSrIncenter();
+    //last
+    calcXSrKnowXRCircumCenter();
+    calcYSRCircumCenterKnowRradAside();
+  }
+
   void calculate() {
     if (isOnlyTwoParamEmpty()) return;
     log.i('start calculate');
@@ -610,7 +535,7 @@ class IsoscelesTriangleController extends GetxController {
     IsoscelesTriangle param2;
 
     //* ==========================================
-    // aSide bSide
+    // aSide bSide ==ok
     //* ==========================================
     param1 = IsoscelesTriangle.aSide;
     param2 = IsoscelesTriangle.bSide;
@@ -618,42 +543,111 @@ class IsoscelesTriangleController extends GetxController {
       calcHheiKnowAsideBside();
       calcAangKnowAsideBSide();
       calcBangKnowAangl();
-      calcAreaKnowAsideHhei();
-      calcPerimKnowAsideBside();
-
-      calcXsPointKnowAsideBsideAang();
-      calcYsPointKnowBsideAang();
-
-      calcMedianKnowAsideBside();
-      calcBisectorKnowAsideBside();
-      //внут круг
-      calcRIncenterKnowAsideBside();
-      //внеш круг
-      calcRCircumCenterKnowAsideBside();
-      calcXSRCircumCenterKnowAside();
-      calcYSrIncenter();
-      //last
-      calcXSrKnowXRCircumCenter();
-      calcYSRCircumCenterKnowRradAside();
+      subCalc();
+    }
+    //* ==========================================
+    // aSide aAngle ==ok
+    //* ==========================================
+    param1 = IsoscelesTriangle.aSide;
+    param2 = IsoscelesTriangle.aAngle;
+    if (isAvailableTwoParams(param1, param2)) {
+      calcBsideKnowAsideAang();
+      calcHheiKnowAsideBside();
+      calcBangKnowAangl();
+      subCalc();
     }
 
-// aSide aAngle
-// aSide bAngle
-// aSide hHeight
-// bSide aAngle
-// bSide bAngle
-// bSide hHeight
-// aAngle bAngle
-// aAngle hHeight
-// bAngle hHeight
-
     // ==========================================
-    // aAngle bAngle == ok
+    //   aSide bAngle ==ok
     // ==========================================
-    param1 = IsoscelesTriangle.aAngle;
+    param1 = IsoscelesTriangle.aSide;
     param2 = IsoscelesTriangle.bAngle;
-    if (isAvailableTwoParams(param1, param2)) {}
+    if (isAvailableTwoParams(param1, param2)) {
+      calcBSideKnowAsideBang();
+      calcHheiKnowAsideBside();
+      calcAangKnowBangl();
 
+      subCalc();
+    }
+
+    // ==========================================
+    //    aSide hHeight ==ok
+    // ==========================================
+    param1 = IsoscelesTriangle.aSide;
+    param2 = IsoscelesTriangle.hHeight;
+    if (isAvailableTwoParams(param1, param2)) {
+      calcBSideKnowAsideHhei();
+      calcAangKnowAsideBSide();
+      calcBangKnowAangl();
+
+      subCalc();
+    }
+
+    // ==========================================
+    // bSide aAngle ==ok
+    // ==========================================
+    param1 = IsoscelesTriangle.bSide;
+    param2 = IsoscelesTriangle.aAngle;
+    if (isAvailableTwoParams(param1, param2)) {
+      calcASideKnowBsideAang();
+      calcBangKnowAangl();
+      calcHheiKnowAsideBside();
+
+      subCalc();
+    }
+
+    // ==========================================
+    // bSide bAngle == ok
+    // ==========================================
+    param1 = IsoscelesTriangle.bSide;
+    param2 = IsoscelesTriangle.bAngle;
+    if (isAvailableTwoParams(param1, param2)) {
+      calcAangKnowBangl();
+      calcASideKnowBsideAang();
+      calcHheiKnowAsideBside();
+
+      subCalc();
+    }
+
+    // ==========================================
+    // aAngle hHeight == ok
+    // ==========================================
+    param1 = IsoscelesTriangle.hHeight;
+    param2 = IsoscelesTriangle.aAngle;
+    if (isAvailableTwoParams(param1, param2)) {
+      calcBSideKnowAangHhei();
+      calcBangKnowAangl();
+      calcASideKnowBsideAang();
+
+      subCalc();
+    }
+
+    // ==========================================
+    // bSide hHeight ==ok
+    // ==========================================
+    param1 = IsoscelesTriangle.hHeight;
+    param2 = IsoscelesTriangle.bSide;
+    if (isAvailableTwoParams(param1, param2)) {
+      calcAsideKnowBsideHhei();
+      calcAangKnowAsideBSide();
+      calcBangKnowAangl();
+
+      subCalc();
+    }
+
+    // ==========================================
+    //  bAngle hHeight == ok
+    // ==========================================
+    param1 = IsoscelesTriangle.hHeight;
+    param2 = IsoscelesTriangle.bAngle;
+    if (isAvailableTwoParams(param1, param2)) {
+      calcAangKnowBangl();
+      calcBSideKnowAangHhei();
+      calcAsideKnowBsideHhei();
+
+      subCalc();
+    }
+    isNumberNaN();
     printElements();
     log.i('end calculate');
   }
@@ -842,11 +836,7 @@ class IsoscelesTriangleController extends GetxController {
       isNotFormula = false;
       return;
     }
-    if (isNumberNaN()) {
-      log.w('isNumberNaN');
-      showSnack(TranslateHelper.message_calc_error_chang_value);
-      return;
-    }
+
     // если активные углы то сбрасываем один выбор до последнй длины
     if (isActiveParamAngles()) {
       showSnack(TranslateHelper.messageEnterAnyLength);
@@ -866,7 +856,7 @@ class IsoscelesTriangleController extends GetxController {
         IsoscelesTriangle.aSide, IsoscelesTriangle.bSide)) {
       if (isbSide.value) {
         result = aSideD;
-        if (!(bSideD > result)) {
+        if (!(bSideD >= result)) {
           showSnack(
               '${TranslateHelper.side} b ${TranslateHelper.must_be} > a/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
@@ -874,16 +864,64 @@ class IsoscelesTriangleController extends GetxController {
       }
       if (isaSide.value) {
         result = bSideD;
-        if (!(aSideD < result)) {
+        if (!(aSideD <= result)) {
           showSnack(
-              'Base a ${TranslateHelper.must_be} < 2b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.base} a ${TranslateHelper.must_be} < 2b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
     }
 
+    if (isAvailableTwoParams(
+        IsoscelesTriangle.hHeight, IsoscelesTriangle.bSide)) {
+      if (isbSide.value) {
+        result = hHeightD;
+        if (!(bSideD > result)) {
+          showSnack(
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (ishHeight.value) {
+        result = bSideD;
+        if (!(hHeightD < result)) {
+          showSnack(
+              '${TranslateHelper.height} h ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+    }
+    if (isNumberNaN()) {
+      log.w('isNumberNaN');
+      showSnack(TranslateHelper.message_calc_error_chang_value);
+      return;
+    }
     endSnack();
     // showSnack('OK');
+  }
+
+  bool isAngleOver90And180(KeySymbol keySymbol) {
+    String newInput = keySymbol.value;
+    initValue();
+    double sum = 0;
+    if (isaAngle.value) {
+      sum = double.parse(
+          AppUtilsString.removeLastCharacter(aAngle.value) + newInput);
+      if (90 <= sum) {
+        showSnack(
+            '${TranslateHelper.angle} α ${TranslateHelper.must_be} < 90°');
+        return true;
+      }
+    } else if (isbAngle.value) {
+      sum = double.parse(
+          AppUtilsString.removeLastCharacter(bAngle.value) + newInput);
+      if (180 <= sum) {
+        showSnack(
+            '${TranslateHelper.angle} β ${TranslateHelper.must_be} < 180°');
+        return true;
+      }
+    }
+    return false;
   }
 
   bool isActiveParamAngles() {
@@ -1285,13 +1323,12 @@ class IsoscelesTriangleController extends GetxController {
       } else if (isbSide.value) {
         isbSide.value = false;
         isbAngle.value = true;
-      }else if (isbAngle.value) {
+      } else if (isbAngle.value) {
         isbAngle.value = false;
         isaSide.value = true;
       }
-
-      } else {
-        if (isaSide.value) {
+    } else {
+      if (isaSide.value) {
         isbAngle.value = true;
         isaSide.value = false;
       } else if (isbAngle.value) {

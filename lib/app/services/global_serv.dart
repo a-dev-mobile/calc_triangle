@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 import 'package:calc_triangle/app/utils/local_torage.dart';
@@ -17,7 +18,7 @@ class GlobalServ extends GetxService {
 
   //что бы не доставать локально, сохраним в глоб сервисе
 
-  var precisionResult = 3.obs;
+  var precisionResult = ConstNumber.defPrecisionResult.obs;
   late Shape aciveShape;
 // ========================================
 

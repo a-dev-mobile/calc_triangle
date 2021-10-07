@@ -30,6 +30,8 @@ Map<String, String> ru = {
   'h_height_triangle': 'h - высота треугольника',
   'sides_triangle': 'сторона треугольника',
   'base_triangle': 'база треугольника',
+  'base': 'база',
+  'angle': 'угол',
   'internal_angle_degrees': 'внутренний угол',
   'c_hypotenuse': 'c - гипотенуза',
   'acute_angles_degrees': 'острый угол',
@@ -85,4 +87,6 @@ Map<String, String> ru = {
   'must_be': 'должна быть',
   'height': 'высота',
   'component': 'часть',
+  'thank_you': 'Спасибо Вам, что пользуетесь нашим приложением',
+  'version': 'Версия',
 };

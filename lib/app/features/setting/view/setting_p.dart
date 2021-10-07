@@ -23,7 +23,7 @@ import 'package:url_launcher/url_launcher.dart';
 // late RightTriangleController c3 = Get.find();
 
 class SettingPage extends StatelessWidget {
- SettingPage({Key? key}) : super(key: key);
+  SettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +65,14 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildEmail(BuildContext context) {
     return ListTile(
-      title: Text(TranslateHelper.feedback,style: AppStyleText.leadingTextDetail(context),),
+      title: Text(
+        TranslateHelper.feedback,
+        style: AppStyleText.textSettingItem(context),
+      ),
       leading: Icon(
-        Icons.feedback_outlined,color: AppColors.contentRevers(context),size: 25.sp,
+        Icons.feedback_outlined,
+        color: AppColors.contentRevers(context),
+        size: 25.sp,
       ),
       onTap: () {
         launch(emailLaunchUri.toString());
@@ -77,9 +82,14 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildRateApp(BuildContext context) {
     return ListTile(
-      title: Text(TranslateHelper.rateApp,style: AppStyleText.leadingTextDetail(context),),
+      title: Text(
+        TranslateHelper.rateApp,
+        style: AppStyleText.textSettingItem(context),
+      ),
       leading: Icon(
-        Icons.star_border_outlined,color: AppColors.contentRevers(context),size: 25.sp,
+        Icons.star_border_outlined,
+        color: AppColors.contentRevers(context),
+        size: 25.sp,
       ),
       onTap: () {
         launchURL();
@@ -89,29 +99,34 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildAboutApp(BuildContext context) {
     return ListTile(
-      title: Text(TranslateHelper.about,style: AppStyleText.leadingTextDetail(context),),
-      leading:  Icon(
-        Icons.info_outline,color: AppColors.contentRevers(context),size: 25.sp,
+      title: Text(
+        TranslateHelper.about,
+        style: AppStyleText.textSettingItem(context),
+      ),
+      leading: Icon(
+        Icons.info_outline,
+        color: AppColors.contentRevers(context),
+        size: 25.sp,
       ),
       onTap: () {
         Get.defaultDialog(
-          title: TranslateHelper.about,
+          title:
+              '${TranslateHelper.appName}\n${TranslateHelper.version}: v1.1',
           backgroundColor: AppColors.content(context),
           content: Align(
             alignment: Alignment.topLeft,
             child: Column(
               children: [
                 Text(
-                  'App is created using flutter',
+                  TranslateHelper.thank_you, textAlign: TextAlign.center,
                   style: AppStyleText.subText(context),
                 ),
                 AppWidgets.dividerWelcome(),
-                SizedBox(height: 20.h),
-                Text('-------------',
-                  
+             
+                Text(
+                  '\nAutor: Dmitriy Trofimov\ncontact: ${ConstString.email}',
                  
-                  textAlign: TextAlign.center,
-                  style: AppStyleText.titleText(context),
+                  style: AppStyleText.subText(context),
                 )
               ],
             ),
@@ -123,12 +138,17 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildExit(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.exit_to_app,color: AppColors.contentRevers(context),size: 25.sp,),
+      leading: Icon(
+        Icons.exit_to_app,
+        color: AppColors.contentRevers(context),
+        size: 25.sp,
+      ),
       onTap: () {
         AppWidgets.viewDialogExit(context);
       },
       title: Text(
-        TranslateHelper.exit,style: AppStyleText.leadingTextDetail(context),
+        TranslateHelper.exit,
+        style: AppStyleText.textSettingItem(context),
       ),
     );
   }

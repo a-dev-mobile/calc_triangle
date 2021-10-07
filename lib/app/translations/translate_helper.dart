@@ -92,6 +92,7 @@ class TranslateHelper {
   static String get h_height_triangle => 'h_height_triangle'.tr;
   static String get sides_triangle => 'sides_triangle'.tr;
   static String get base_triangle => 'base_triangle'.tr;
+  static String get base => 'base'.tr;
   static String get  internal_angle_degrees =>  'internal_angle_degrees'.tr;
   static String get  c_hypotenuse =>  'c_hypotenuse'.tr;
   static String get  acute_angles_degrees =>  'acute_angles_degrees'.tr;
@@ -104,6 +105,9 @@ class TranslateHelper {
   static String get must_be => 'must_be'.tr;
   static String get height => 'height'.tr;
   static String get component => 'component'.tr;
+  static String get angle => 'angle'.tr;
+  static String get thank_you => 'thank_you'.tr;
+  static String get version => 'version'.tr;
 
 
 }
