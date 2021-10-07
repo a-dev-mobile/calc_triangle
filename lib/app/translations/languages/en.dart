@@ -88,4 +88,12 @@ Always check your result!
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',
 
+  'side': 'side',
+  'must_be': 'must be',
+  'height': 'height',
+  'component': 'component',
+ 
+
+
+
 };

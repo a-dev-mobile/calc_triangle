@@ -275,13 +275,13 @@ class RightSidesAngles extends StatelessWidget {
         ItemDetail(
           isActive: c.isAvailableOneParam(RightTriangle.mCompCside),
           leading: 'm',
-          subtitle: 'm - ${TranslateHelper.components_c}',
+          subtitle: 'm - ${TranslateHelper.component} с',
           title: c.mCompCside.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(RightTriangle.kCompCside),
           leading: 'k',
-          subtitle: 'k - ${TranslateHelper.components_c}',
+          subtitle: 'k - ${TranslateHelper.component} с',
           title: c.kCompCside.value,
         ),
       ],

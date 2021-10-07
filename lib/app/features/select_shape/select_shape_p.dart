@@ -3,6 +3,7 @@ import 'package:calc_triangle/app/config/routes/app_page.dart';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/features/select_shape/controller/select_shape_c.dart';
 
 import 'package:calc_triangle/app/services/global_serv.dart';
 
@@ -42,7 +43,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
         onAdLoaded: (InterstitialAd ad) {
           _interstitialAd = ad;
           _interstitialLoadAttempts = 0;
-              _interstitialAd!.setImmersiveMode(true);
+          _interstitialAd!.setImmersiveMode(true);
         },
         onAdFailedToLoad: (LoadAdError error) {
           print('InterstitialAd failed to load: $error');
@@ -57,11 +58,11 @@ class _SelectShapePageState extends State<SelectShapePage> {
   }
 
   void _showInterstialAd() {
-       if (_interstitialAd == null) {
+    if (_interstitialAd == null) {
       print('Warning: attempt to show interstitial before loaded.');
       return;
     }
-      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -74,15 +75,20 @@ class _SelectShapePageState extends State<SelectShapePage> {
         ad.dispose();
         _createInterstitialAd();
       },
-      
-        onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+    );
 
 
-
-      );
-     _interstitialAd!.show();
+    _interstitialAd!.show();
     _interstitialAd = null;
-    
+  }
+
+  void showAd() {
+    if (SelectShapeController.to.isStartAd) {
+              log.w('start ad');
+      _showInterstialAd();
+    }
+    SelectShapeController.to.incrNumberStartCalc();
   }
 
   @override
@@ -118,7 +124,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.right_info,
                 onTap: () {
-                  _showInterstialAd();
+                  showAd();
                   GlobalServ.to.aciveShape = Shape.rightTriangle;
                   Get.toNamed(Routes.calculateRight);
                 },
@@ -131,7 +137,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterThreeParameters,
                 info: TranslateHelper.scalene_info,
                 onTap: () {
-                  _showInterstialAd();
+                  showAd();
                   GlobalServ.to.aciveShape = Shape.scaleneTriangle;
                   Get.toNamed(Routes.calculateScalene);
                 },
@@ -144,8 +150,8 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.isosceles_info,
                 onTap: () {
-                  _showInterstialAd();
-                  GlobalServ.to.aciveShape = Shape.equilateralTriangle;
+          showAd();
+                  GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
                   Get.toNamed(Routes.calculateEquilateral);
                 },
               ),
@@ -157,8 +163,8 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterOneParameters,
                 info: TranslateHelper.equilateral_info,
                 onTap: () {
-                  _showInterstialAd();
-                  GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
+      showAd();
+                  GlobalServ.to.aciveShape = Shape.equilateralTriangle;
                   Get.toNamed(Routes.calculateIsosceles);
                 },
               ),

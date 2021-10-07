@@ -1442,7 +1442,7 @@ class RightTriangleController extends GetxController {
         result = bSideD;
         if (!(kCompCsideD < result)) {
           showSnack(
-              'Component k must be < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.component} k ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1450,7 +1450,7 @@ class RightTriangleController extends GetxController {
         result = kCompCsideD;
         if (!(bSideD > result)) {
           showSnack(
-              'Side b must be > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Side b ${TranslateHelper.must_be} > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1464,7 +1464,7 @@ class RightTriangleController extends GetxController {
         result = mCompCsideD;
         if (!(aSideD > result)) {
           showSnack(
-              'Side a must be > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} a ${TranslateHelper.must_be} > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1473,7 +1473,7 @@ class RightTriangleController extends GetxController {
         result = aSideD;
         if (!(mCompCsideD < result)) {
           showSnack(
-              'Component m must be < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.component} m ${TranslateHelper.must_be} < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1486,7 +1486,7 @@ class RightTriangleController extends GetxController {
         result = mCompCsideD;
         if (!(cSideD > result)) {
           showSnack(
-              'Side с must be > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} с ${TranslateHelper.must_be} > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1494,7 +1494,7 @@ class RightTriangleController extends GetxController {
         result = cSideD;
         if (!(mCompCsideD < result)) {
           showSnack(
-              'Component m must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.component} m ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1508,7 +1508,7 @@ class RightTriangleController extends GetxController {
         result = kCompCsideD;
         if (!(cSideD > result)) {
           showSnack(
-              'Side с must be > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} с ${TranslateHelper.must_be} > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1516,7 +1516,7 @@ class RightTriangleController extends GetxController {
         result = cSideD;
         if (!(kCompCsideD < result)) {
           showSnack(
-              'Component k must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.component} k ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1530,7 +1530,7 @@ class RightTriangleController extends GetxController {
         result = hHeightD;
         if (!(aSideD > result)) {
           showSnack(
-              'Side a must be > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} a ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1538,7 +1538,7 @@ class RightTriangleController extends GetxController {
         result = aSideD;
         if (!(hHeightD < result)) {
           showSnack(
-              'Height h must be < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.height} h ${TranslateHelper.must_be} < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1551,7 +1551,7 @@ class RightTriangleController extends GetxController {
         result = hHeightD;
         if (!(bSideD > result)) {
           showSnack(
-              'Side b must be > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1559,28 +1559,28 @@ class RightTriangleController extends GetxController {
         result = bSideD;
         if (!(hHeightD < result)) {
           showSnack(
-              'Height h must be < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.height} h ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
     }
- if (isAvailableTwoParams(
+    if (isAvailableTwoParams(
       RightTriangle.hHeight,
       RightTriangle.cSide,
     )) {
       if (iscSide.value) {
-        result = hHeightD*2;
+        result = hHeightD * 2;
         if (!(cSideD >= result)) {
           showSnack(
-              'Side c must be ≥ 2h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} c ${TranslateHelper.must_be} ≥ 2h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
       if (ishHeight.value) {
-        result = cSideD/2;
+        result = cSideD / 2;
         if (!(hHeightD <= result)) {
           showSnack(
-              'Height h must be ≤ с/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.height} h ${TranslateHelper.must_be} ≤ с/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1594,20 +1594,19 @@ class RightTriangleController extends GetxController {
         result = cSideD;
         if (!(aSideD < result)) {
           showSnack(
-              'Side a must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} a ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
       if (iscSide.value) {
-          result = aSideD;
+        result = aSideD;
         if (!(cSideD > result)) {
           showSnack(
-              'Side c must be > a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} c ${TranslateHelper.must_be} > a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
     }
-
 
 //если гипотенуза меньше
     if (isAvailableTwoParams(
@@ -1618,20 +1617,19 @@ class RightTriangleController extends GetxController {
         result = cSideD;
         if (!(bSideD < result)) {
           showSnack(
-              'Side b must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
       if (iscSide.value) {
-          result = bSideD;
+        result = bSideD;
         if (!(cSideD > result)) {
           showSnack(
-              'Side c must be > b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} c ${TranslateHelper.must_be} > b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
     }
-
 
 //если угол больше 90
     if (90 <= aAngleD || 90 <= bAngleD) {
@@ -2127,39 +2125,81 @@ class RightTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
+/* 
+
+  void _isNext(bool isNext) {
     if (isNext) {
       if (isaSide.value) {
-        isbSide.value = true;
-        isaSide.value = false;
-      } else if (isbSide.value) {
-        iscSide.value = true;
-        isbSide.value = false;
-      } else if (iscSide.value) {
         isaAngle.value = true;
-        iscSide.value = false;
+        isaSide.value = false;
       } else if (isaAngle.value) {
-        isbAngle.value = true;
+        ishHeight.value = true;
+         isaAngle.value = false;
+      }else if (ishHeight.value) {
+        ishHeight.value = false;
+         isbAngle.value = true;
+      }else if (isbAngle.value) {
+         isbAngle.value = false;
+        isbSide.value = true;
+      }
+      else if (isbSide.value) {
+        isbSide.value = false;
+         isbAngle.value = false;
+      }
+
+ */
+
+    if (isNext) {
+      if (isaSide.value) {
+        isaAngle.value = true;
+        isaSide.value = false;
+      } else if (isaAngle.value) {
+        ishHeight.value = true;
         isaAngle.value = false;
+      } else if (ishHeight.value) {
+        ishHeight.value = false;
+        isbAngle.value = true;
       } else if (isbAngle.value) {
-        isaSide.value = true;
         isbAngle.value = false;
+        isbSide.value = true;
+      } else if (isbSide.value) {
+        isbSide.value = false;
+        iskCompCside.value = true;
+      } else if (iskCompCside.value) {
+        iskCompCside.value = false;
+        iscSide.value = true;
+      } else if (iscSide.value) {
+        iscSide.value = false;
+        ismCompCside.value = true;
+      } else if (ismCompCside.value) {
+        ismCompCside.value = false;
+        isaSide.value = true;
       }
     } else {
       if (isaSide.value) {
-        isbAngle.value = true;
+        ismCompCside.value = true;
         isaSide.value = false;
-      } else if (isbAngle.value) {
-        isaAngle.value = true;
-        isbAngle.value = false;
-      } else if (isaAngle.value) {
+      } else if (ismCompCside.value) {
         iscSide.value = true;
-        isaAngle.value = false;
+        ismCompCside.value = false;
       } else if (iscSide.value) {
-        isbSide.value = true;
         iscSide.value = false;
+        iskCompCside.value = true;
+      } else if (iskCompCside.value) {
+        iskCompCside.value = false;
+        isbSide.value = true;
       } else if (isbSide.value) {
-        isaSide.value = true;
         isbSide.value = false;
+        isbAngle.value = true;
+      } else if (isbAngle.value) {
+        isbAngle.value = false;
+        ishHeight.value = true;
+      } else if (ishHeight.value) {
+        ishHeight.value = false;
+        isaAngle.value = true;
+      } else if (isaAngle.value) {
+        isaAngle.value = false;
+        isaSide.value = true;
       }
     }
   }

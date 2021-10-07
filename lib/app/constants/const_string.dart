@@ -6,6 +6,7 @@ abstract class ConstString {
   static const String keyIsShowLaunchScreen = 'keyIsShowLaunchScreen';
   static const String keyIsFirstStartApp = 'keyIsFirstStartApp';
   static const String keyLocaleApp = 'keyLocaleApp';
+  static const String keyNumberStartCalc = 'keyNumberStartCalc';
   
   static const String localeRu = 'ru';
   static const String localeEn = 'en';

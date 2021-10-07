@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/features/calculate/view/equilateral/calculate_
 
 import 'package:calc_triangle/app/features/calculate/view/right/calculate_right.dart';
 import 'package:calc_triangle/app/features/calculate/view/scalene/calculate_scalene.dart';
+import 'package:calc_triangle/app/features/select_shape/controller/select_shape_c.dart';
 import 'package:calc_triangle/app/features/select_shape/select_shape_p.dart';
 
 import 'package:calc_triangle/app/features/setting/controller/setting_c.dart';
@@ -37,8 +38,10 @@ class AppPage {
         })),
     GetPage(
       name: Routes.selectShape,
-      page: () => const SelectShapePage(),
-    ),
+      page: () => const SelectShapePage(), binding: BindingsBuilder(() {
+          Get.put<SelectShapeController>(SelectShapeController(),
+              permanent: true);
+        })),
     GetPage(
         name: Routes.calculateRight,
         transition: Transition.leftToRight,

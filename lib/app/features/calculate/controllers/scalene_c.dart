@@ -1336,9 +1336,9 @@ class ScaleneTriangleController extends GetxController {
 
   bool isNumberNaN() {
     bool isNan = false;
-//если углы имеют 180 гр то тоже является ошибкой 
+//если углы имеют 180 гр то тоже является ошибкой
     if (aAngleD == 180 || bAngleD == 180 || yAngleD == 180) {
-       isNan = true;
+      isNan = true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
@@ -1614,20 +1614,20 @@ class ScaleneTriangleController extends GetxController {
         result = aSideD + bSideD;
         if (!(cSideD < result)) {
           showSnack(
-              'side c must be < (a+b) or c < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} c ${TranslateHelper.must_be} < (a+b) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
 
         result = bSideD - aSideD;
         if (!(cSideD > result)) {
           showSnack(
-              'side c must be > (b-a) or c > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} c ${TranslateHelper.must_be} > (b-a) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = aSideD - bSideD;
         if (!(cSideD > result)) {
           showSnack(
-              'side c must be > (a-b) or c > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} c ${TranslateHelper.must_be} > (a-b) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1636,19 +1636,19 @@ class ScaleneTriangleController extends GetxController {
         result = cSideD - bSideD;
         if (!(aSideD > result)) {
           showSnack(
-              'Side a must be > (c-b) or a > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} a ${TranslateHelper.must_be} > (c-b) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = bSideD - cSideD;
         if (!(aSideD > result)) {
           showSnack(
-              'Side a must be > (b-c) or a > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} a ${TranslateHelper.must_be} > (b-c) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = bSideD + cSideD;
         if (!(aSideD < result)) {
           showSnack(
-              'Side a must be < (b+c) or a < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} a ${TranslateHelper.must_be} < (b+c) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1657,19 +1657,19 @@ class ScaleneTriangleController extends GetxController {
         result = cSideD - aSideD;
         if (!(bSideD > result)) {
           showSnack(
-              'Side b must be > (c-a) or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} > (c-a) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = aSideD - cSideD;
         if (!(bSideD > result)) {
           showSnack(
-              'Side b must be > (a-c) or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} > (a-c) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
         result = aSideD + cSideD;
         if (!(bSideD < result)) {
           showSnack(
-              'Side b must be < (a+c) or b < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} < (a+c) = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1683,7 +1683,7 @@ class ScaleneTriangleController extends GetxController {
         result = hHeightD;
         if (!(bSideD > result)) {
           showSnack(
-              'Side b must be > h or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} > h or b > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1691,7 +1691,7 @@ class ScaleneTriangleController extends GetxController {
         result = bSideD;
         if (!(hHeightD < result)) {
           showSnack(
-              'Height h must be < b or h < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.height} h ${TranslateHelper.must_be} < b or h < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1705,7 +1705,7 @@ class ScaleneTriangleController extends GetxController {
         result = hHeightD;
         if (!(cSideD > result)) {
           showSnack(
-              'Side c must be > h or c > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} c ${TranslateHelper.must_be} > h or c > ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -1713,7 +1713,7 @@ class ScaleneTriangleController extends GetxController {
         result = cSideD;
         if (!(hHeightD < result)) {
           showSnack(
-              'Height h must be < c or h < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.height} h ${TranslateHelper.must_be} < c or h < ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
@@ -2280,42 +2280,54 @@ class ScaleneTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
+  
     if (isNext) {
-      //   if (isaCathet.value) {
-      //     isbCathet.value = true;
-      //     isaCathet.value = false;
-      //   } else if (isbCathet.value) {
-      //     iscHypotenuse.value = true;
-      //     isbCathet.value = false;
-      //   } else if (iscHypotenuse.value) {
-      //     isaAngle.value = true;
-      //     iscHypotenuse.value = false;
-      //   } else if (isaAngle.value) {
-      //     isbAngle.value = true;
-      //     isaAngle.value = false;
-      //   } else if (isbAngle.value) {
-      //     isaCathet.value = true;
-      //     isbAngle.value = false;
-      //   }
-      // } else {
-      //   if (isaCathet.value) {
-      //     isbAngle.value = true;
-      //     isaCathet.value = false;
-      //   } else if (isbAngle.value) {
-      //     isaAngle.value = true;
-      //     isbAngle.value = false;
-      //   } else if (isaAngle.value) {
-      //     iscHypotenuse.value = true;
-      //     isaAngle.value = false;
-      //   } else if (iscHypotenuse.value) {
-      //     isbCathet.value = true;
-      //     iscHypotenuse.value = false;
-      //   } else if (isbCathet.value) {
-      //     isaCathet.value = true;
-      //     isbCathet.value = false;
-      //   }
-      // }
-      // }
+      if (isaSide.value) {
+        isbAngle.value = true;
+        isaSide.value = false;
+      } else if (isbAngle.value) {
+        isaAngle.value = true;
+        isbAngle.value = false;
+      } else if (isaAngle.value) {
+        ishHeight.value = true;
+        isaAngle.value = false;
+      } else if (ishHeight.value) {
+        ishHeight.value = false;
+        iscSide.value = true;
+      } else if (iscSide.value) {
+        iscSide.value = false;
+        isbSide.value = true;
+      } else if (isbSide.value) {
+        isyAngle.value = true;
+        isbSide.value = false;
+      } else if (isyAngle.value) {
+        isyAngle.value = false;
+        isaSide.value = true;
+      }
+    } else {
+          if (isaSide.value) {
+        isyAngle.value = true;
+        isaSide.value = false;
+      } else if (isyAngle.value) {
+        isbSide.value = true;
+        isyAngle.value = false;
+      } else if (isbSide.value) {
+        iscSide.value = true;
+        isbSide.value = false;
+      } else if (iscSide.value) {
+        ishHeight.value = true;
+        iscSide.value = false;
+      } else if (ishHeight.value) {
+        ishHeight.value = false;
+        isaAngle.value = true;
+      } else if (isaAngle.value) {
+        isbAngle.value = true;
+        isaAngle.value = false;
+      } else if (isbAngle.value) {
+        isbAngle.value = false;
+        isaSide.value = true;
+      }
+    
     }
   }
 

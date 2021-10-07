@@ -95,9 +95,15 @@ class TranslateHelper {
   static String get  internal_angle_degrees =>  'internal_angle_degrees'.tr;
   static String get  c_hypotenuse =>  'c_hypotenuse'.tr;
   static String get  acute_angles_degrees =>  'acute_angles_degrees'.tr;
-  static String get  components_c =>  'components_c'.tr;
+  
  
  
  
   static String get check_result => 'check_result'.tr;
+  static String get side => 'side'.tr;
+  static String get must_be => 'must_be'.tr;
+  static String get height => 'height'.tr;
+  static String get component => 'component'.tr;
+
+
 }

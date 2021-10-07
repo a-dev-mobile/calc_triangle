@@ -654,40 +654,36 @@ class IsoscelesTriangleController extends GetxController {
     param2 = IsoscelesTriangle.bAngle;
     if (isAvailableTwoParams(param1, param2)) {}
 
-
     printElements();
     log.i('end calculate');
   }
 
   bool isNumberNaN() {
-        bool isNan = false;
+    bool isNan = false;
     if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
       aSide.value = startLengthValue;
- isNan =  true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bSideD)) {
       bSide.value = startLengthValue;
-     isNan =  true;
+      isNan = true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
-    isNan =  true;
+      isNan = true;
     }
-   
-
-   
 
     if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
-      isNan =  true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
       bAngle.value = startAngleValue;
-    isNan =  true;
+      isNan = true;
     }
 
-    return  isNan;
+    return isNan;
   }
 
   void moveEmptyValueToStartInParameters() {
@@ -872,20 +868,19 @@ class IsoscelesTriangleController extends GetxController {
         result = aSideD;
         if (!(bSideD > result)) {
           showSnack(
-              'Side b must be > a/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              '${TranslateHelper.side} b ${TranslateHelper.must_be} > a/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
-            if (isaSide.value) {
+      if (isaSide.value) {
         result = bSideD;
         if (!(aSideD < result)) {
           showSnack(
-              'Base a must be < 2b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+              'Base a ${TranslateHelper.must_be} < 2b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
     }
-
 
     endSnack();
     // showSnack('OK');
@@ -1278,41 +1273,40 @@ class IsoscelesTriangleController extends GetxController {
 
   void _isNext(bool isNext) {
     if (isNext) {
-      //   if (isaCathet.value) {
-      //     isbCathet.value = true;
-      //     isaCathet.value = false;
-      //   } else if (isbCathet.value) {
-      //     iscHypotenuse.value = true;
-      //     isbCathet.value = false;
-      //   } else if (iscHypotenuse.value) {
-      //     isaAngle.value = true;
-      //     iscHypotenuse.value = false;
-      //   } else if (isaAngle.value) {
-      //     isbAngle.value = true;
-      //     isaAngle.value = false;
-      //   } else if (isbAngle.value) {
-      //     isaCathet.value = true;
-      //     isbAngle.value = false;
-      //   }
-      // } else {
-      //   if (isaCathet.value) {
-      //     isbAngle.value = true;
-      //     isaCathet.value = false;
-      //   } else if (isbAngle.value) {
-      //     isaAngle.value = true;
-      //     isbAngle.value = false;
-      //   } else if (isaAngle.value) {
-      //     iscHypotenuse.value = true;
-      //     isaAngle.value = false;
-      //   } else if (iscHypotenuse.value) {
-      //     isbCathet.value = true;
-      //     iscHypotenuse.value = false;
-      //   } else if (isbCathet.value) {
-      //     isaCathet.value = true;
-      //     isbCathet.value = false;
-      //   }
-      // }
-      // }
+      if (isaSide.value) {
+        isaAngle.value = true;
+        isaSide.value = false;
+      } else if (isaAngle.value) {
+        isaAngle.value = false;
+        ishHeight.value = true;
+      } else if (ishHeight.value) {
+        ishHeight.value = false;
+        isbSide.value = true;
+      } else if (isbSide.value) {
+        isbSide.value = false;
+        isbAngle.value = true;
+      }else if (isbAngle.value) {
+        isbAngle.value = false;
+        isaSide.value = true;
+      }
+
+      } else {
+        if (isaSide.value) {
+        isbAngle.value = true;
+        isaSide.value = false;
+      } else if (isbAngle.value) {
+        isbAngle.value = false;
+        isbSide.value = true;
+      } else if (isbSide.value) {
+        ishHeight.value = true;
+        isbSide.value = false;
+      } else if (ishHeight.value) {
+        ishHeight.value = false;
+        isaAngle.value = true;
+      } else if (isaAngle.value) {
+        isaAngle.value = false;
+        isaSide.value = true;
+      }
     }
   }
 

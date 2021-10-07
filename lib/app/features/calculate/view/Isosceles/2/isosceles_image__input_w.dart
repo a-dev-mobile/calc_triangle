@@ -39,7 +39,7 @@ class IsoscelesTriangleImageInputWidget extends StatelessWidget {
 
             HheightWidget(
               angle: -90,
-              posX: -1.201,
+              posX: -2.5,
               posY: 14,
               minSizeImage: minSize,
             ),
@@ -51,14 +51,14 @@ class IsoscelesTriangleImageInputWidget extends StatelessWidget {
               angle: 0,
             ),
             BsideWidget(
-              posX: 26.819,
+              posX: 25.319,
               posY: -7.219,
               minSizeImage: minSize,
               angle: 61.675,
             ),
             AangleWidget(
-              posX: 18.89,
-              posY: 18.89,
+              posX: 13,
+              posY: 22.5,
               minSizeImage: minSize,
               angle: -61.675,
             ),

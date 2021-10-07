@@ -81,4 +81,8 @@ Map<String, String> ru = {
   'perimeter': 'Периметр',
   'choose_shape': 'Выберите форму',
 
+  'side': 'сторона',
+  'must_be': 'должна быть',
+  'height': 'высота',
+  'component': 'часть',
 };
