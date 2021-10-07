@@ -65,9 +65,9 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildEmail(BuildContext context) {
     return ListTile(
-      title: Text(TranslateHelper.feedback),
+      title: Text(TranslateHelper.feedback,style: AppStyleText.leadingTextDetail(context),),
       leading: Icon(
-        Icons.feedback_outlined,color: AppColors.contentRevers(context),
+        Icons.feedback_outlined,color: AppColors.contentRevers(context),size: 25.sp,
       ),
       onTap: () {
         launch(emailLaunchUri.toString());
@@ -77,9 +77,9 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildRateApp(BuildContext context) {
     return ListTile(
-      title: Text(TranslateHelper.rateApp),
+      title: Text(TranslateHelper.rateApp,style: AppStyleText.leadingTextDetail(context),),
       leading: Icon(
-        Icons.star_border_outlined,color: AppColors.contentRevers(context),
+        Icons.star_border_outlined,color: AppColors.contentRevers(context),size: 25.sp,
       ),
       onTap: () {
         launchURL();
@@ -89,9 +89,9 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildAboutApp(BuildContext context) {
     return ListTile(
-      title: Text(TranslateHelper.about),
+      title: Text(TranslateHelper.about,style: AppStyleText.leadingTextDetail(context),),
       leading:  Icon(
-        Icons.info_outline,color: AppColors.contentRevers(context),
+        Icons.info_outline,color: AppColors.contentRevers(context),size: 25.sp,
       ),
       onTap: () {
         Get.defaultDialog(
@@ -107,9 +107,9 @@ class SettingPage extends StatelessWidget {
                 ),
                 AppWidgets.dividerWelcome(),
                 SizedBox(height: 20.h),
-                Text(
+                Text('-------------',
                   
-                  TranslateHelper.check_result,
+                 
                   textAlign: TextAlign.center,
                   style: AppStyleText.titleText(context),
                 )
@@ -123,12 +123,12 @@ class SettingPage extends StatelessWidget {
 
   ListTile buildExit(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.exit_to_app,color: AppColors.contentRevers(context),),
+      leading: Icon(Icons.exit_to_app,color: AppColors.contentRevers(context),size: 25.sp,),
       onTap: () {
         AppWidgets.viewDialogExit(context);
       },
       title: Text(
-        TranslateHelper.exit,
+        TranslateHelper.exit,style: AppStyleText.leadingTextDetail(context),
       ),
     );
   }

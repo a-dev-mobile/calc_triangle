@@ -237,22 +237,22 @@ class RightSidesAngles extends StatelessWidget {
         // AppWidgets.dividerWelcome(),
 
         ItemDetail(
-          isActive: c.isAvailableOneParam(RightTriangle.aCathet),
+          isActive: c.isAvailableOneParam(RightTriangle.aSide),
           leading: 'a',
           subtitle: 'a - ${TranslateHelper.catheti}',
-          title: c.aCathet.value,
+          title: c.aSide.value,
         ),
         ItemDetail(
-          isActive: c.isAvailableOneParam(RightTriangle.bCathet),
+          isActive: c.isAvailableOneParam(RightTriangle.bSide),
           leading: 'b',
           subtitle: 'b - ${TranslateHelper.catheti}',
-          title: c.bCathet.value,
+          title: c.bSide.value,
         ),
         ItemDetail(
-          isActive: c.isAvailableOneParam(RightTriangle.cHypotenuse),
+          isActive: c.isAvailableOneParam(RightTriangle.cSide),
           leading: 'c',
           subtitle: TranslateHelper.c_hypotenuse,
-          title: c.cHypotenuse.value,
+          title: c.cSide.value,
         ),
         ItemDetail(
           isActive: c.isAvailableOneParam(RightTriangle.hHeight),

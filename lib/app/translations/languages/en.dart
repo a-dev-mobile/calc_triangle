@@ -40,21 +40,22 @@ Map<String, String> en = {
   'acute_angles_degrees': 'acute angle',
   'components_c': 'components of the c - hypotenuse',
 
-  'one_parameters_entered': '1 parameter must be entered',
-  'two_parameters_entered': '2 parameters must be entered',
-  'three_parameters_entered': '3 parameters must be entered',
-  'you_calculate': 'You\'ll be able to calculate:',
 
-  'dialog_calculate': '''- sides, heights and angles
+  'you_calculate': 'With this app you will be able to calculate:',
+
+  'dialog_calculate': '''- sides, height and angles
 - perimeter and area
 - medians and bisectors, 
 - geometric center coordinates
-- size and coordinates of the center of the inscribed and circumcised circle''',
+- size and coordinates of the center of the inscribed and circumcised circle
+---
+Always check your result!
+''',
 
 
-  'enter_3_parameters': 'Enter: 3 parameters',
-  'enter_2_parameters': 'Enter: 2 parameters',
-  'enter_1_parameters': 'Enter: 1 parameter',
+  'enter_3_parameters': 'Enter known 3 values',
+  'enter_2_parameters': 'Enter known 2 values',
+  'enter_1_parameters': 'Enter known 1 values',
   'rate_app': 'Rate app',
   'feedback': 'Feedback',
   'launch': 'Start',
@@ -62,7 +63,7 @@ Map<String, String> en = {
   'setting': 'Setting',
   'home': 'Home',
   'share_app': 'Share App',
-  'share_details': 'See the application of the calculation of Right Triangles',
+  'share_details': 'See the application of the calculation of Triangles',
   'exit': 'Exit',
   'exit_warning': 'Are you sure you want to exit app?',
   'warning': 'Attention!',
@@ -82,9 +83,9 @@ Map<String, String> en = {
   'message_enter_any_length': 'Enter any length',
   'message_formula_not_found': 'Formula is not found',
   'message_max_number_entered': 'Max number entered',
-  'message_calc_error_chang_value': 'Calculation error, try changing the value',
+  'message_calc_error_chang_value': 'Error in calculations, try changing the value',
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',
-  'check_result': 'Always check your result!',
+
 };

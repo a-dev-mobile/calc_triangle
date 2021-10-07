@@ -654,55 +654,40 @@ class IsoscelesTriangleController extends GetxController {
     param2 = IsoscelesTriangle.bAngle;
     if (isAvailableTwoParams(param1, param2)) {}
 
-    isNumberNaN();
 
     printElements();
     log.i('end calculate');
   }
 
   bool isNumberNaN() {
+        bool isNan = false;
     if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
       aSide.value = startLengthValue;
-      return true;
+ isNan =  true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bSideD)) {
       bSide.value = startLengthValue;
-      return true;
+     isNan =  true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
-      return true;
+    isNan =  true;
     }
-    if (ValidationUtils.isNumberNanAndInfinity(areaD)) {
-      area.value = startLengthValue;
-      return true;
-    }
-    if (ValidationUtils.isNumberNanAndInfinity(perimeterD)) {
-      perimeter.value = startLengthValue;
-      return true;
-    }
+   
 
-    if (ValidationUtils.isNumberNanAndInfinity(xSPointD)) {
-      xSPoint.value = startLengthValue;
-      return true;
-    }
-
-    if (ValidationUtils.isNumberNanAndInfinity(ySPointD)) {
-      ySPoint.value = startLengthValue;
-      return true;
-    }
+   
 
     if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
-      return true;
+      isNan =  true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
       bAngle.value = startAngleValue;
-      return true;
+    isNan =  true;
     }
 
-    return false;
+    return  isNan;
   }
 
   void moveEmptyValueToStartInParameters() {
@@ -861,7 +846,11 @@ class IsoscelesTriangleController extends GetxController {
       isNotFormula = false;
       return;
     }
-
+    if (isNumberNaN()) {
+      log.w('isNumberNaN');
+      showSnack(TranslateHelper.message_calc_error_chang_value);
+      return;
+    }
     // если активные углы то сбрасываем один выбор до последнй длины
     if (isActiveParamAngles()) {
       showSnack(TranslateHelper.messageEnterAnyLength);
@@ -897,11 +886,7 @@ class IsoscelesTriangleController extends GetxController {
       }
     }
 
-    if (isNumberNaN()) {
-      log.w('isNumberNaN');
-      showSnack(TranslateHelper.message_calc_error_chang_value);
-      return;
-    }
+
     endSnack();
     // showSnack('OK');
   }

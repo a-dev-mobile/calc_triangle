@@ -26,9 +26,9 @@ class BcathetWidget extends StatelessWidget {
 
   // ====change====
   void onTap() {
-    c.isaCathet.value = false;
-    c.isbCathet.value = true;
-    c.iscHypotenuse.value = false;
+    c.isaSide.value = false;
+    c.isbSide.value = true;
+    c.iscSide.value = false;
     c.ishHeight.value = false;
     c.ismCompCside.value = false;
     c.iskCompCside.value = false;
@@ -53,9 +53,9 @@ class BcathetWidget extends StatelessWidget {
             angle: angle * pi / 180,
             child: Obx(() {
               // ====change====
-              activeValue = c.bCathet.value;
-              isActiveInput = c.isbCathet.value;
-              elementFigure = RightTriangle.bCathet;
+              activeValue = c.bSide.value;
+              isActiveInput = c.isbSide.value;
+              elementFigure = RightTriangle.bSide;
               //===============
               isActiveParam = c.activeParamMap.containsValue(elementFigure);
               if (isActiveInput) {

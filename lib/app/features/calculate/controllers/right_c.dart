@@ -18,9 +18,9 @@ import 'dart:math';
 import 'package:get/get.dart';
 
 enum RightTriangle {
-  aCathet,
-  bCathet,
-  cHypotenuse,
+  aSide,
+  bSide,
+  cSide,
   hHeight,
   kCompCside,
   mCompCside,
@@ -28,8 +28,6 @@ enum RightTriangle {
   bAngle,
   empty,
 }
-
-
 
 class RightTriangleController extends GetxController {
   static RightTriangleController get to => Get.find<RightTriangleController>();
@@ -39,18 +37,18 @@ class RightTriangleController extends GetxController {
 
   var activeParamMap = <int, RightTriangle>{}.obs;
 
-  var aCathet = startLengthValue.obs;
-  var bCathet = startLengthValue.obs;
-  var cHypotenuse = startLengthValue.obs;
+  var aSide = startLengthValue.obs;
+  var bSide = startLengthValue.obs;
+  var cSide = startLengthValue.obs;
   var hHeight = startLengthValue.obs;
   var kCompCside = startLengthValue.obs;
   var mCompCside = startLengthValue.obs;
   var aAngle = startAngleValue.obs;
   var bAngle = startAngleValue.obs;
 
-  double aCathetD = 0.0;
-  double bCathetD = 0.0;
-  double cHypotenuseD = 0.0;
+  double aSideD = 0.0;
+  double bSideD = 0.0;
+  double cSideD = 0.0;
   double hHeightD = 0.0;
   double kCompCsideD = 0.0;
   double mCompCsideD = 0.0;
@@ -100,10 +98,10 @@ class RightTriangleController extends GetxController {
 /////////////////////////////
   var isDeg = true.obs;
   var isaAngle = false.obs;
-  var isaCathet = false.obs;
+  var isaSide = false.obs;
   var isbAngle = false.obs;
-  var isbCathet = false.obs;
-  var iscHypotenuse = false.obs;
+  var isbSide = false.obs;
+  var iscSide = false.obs;
   var ishHeight = false.obs;
   var iskCompCside = false.obs;
   var ismCompCside = false.obs;
@@ -172,7 +170,6 @@ class RightTriangleController extends GetxController {
 
     if (ifMaxNumberEnter()) {
       showSnack(TranslateHelper.message_max_number_entered);
-
       return;
     }
 
@@ -193,8 +190,8 @@ class RightTriangleController extends GetxController {
     String oldInput;
     String sumInput;
     log.v('start input');
-    if (isaCathet.value) {
-      oldInput = aCathet.value;
+    if (isaSide.value) {
+      oldInput = aSide.value;
 
       // при вводе удаляю стартовый символ
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
@@ -202,23 +199,23 @@ class RightTriangleController extends GetxController {
       sumInput = oldInput + newInput;
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      aCathet.value = sumInput;
-    } else if (isbCathet.value) {
-      oldInput = bCathet.value;
+      aSide.value = sumInput;
+    } else if (isbSide.value) {
+      oldInput = bSide.value;
 
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
-      bCathet.value = sumInput;
-    } else if (iscHypotenuse.value) {
-      oldInput = cHypotenuse.value;
+      bSide.value = sumInput;
+    } else if (iscSide.value) {
+      oldInput = cSide.value;
 
       oldInput == startLengthValue ? oldInput = '' : oldInput = oldInput;
       sumInput = oldInput + newInput;
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
-      cHypotenuse.value = sumInput;
+      cSide.value = sumInput;
     } else if (ishHeight.value) {
       oldInput = hHeight.value;
       // при вводе удаляю стартовый символ
@@ -295,9 +292,9 @@ class RightTriangleController extends GetxController {
     log.v('''printElements
         ${activeParamMap[1]} ${activeParamMap[2]}
 
-        $aCathetD | ${aCathet.value} aCathet 
-        $bCathetD | ${bCathet.value} bCathet 
-        $cHypotenuseD | ${cHypotenuse.value} cHypotenuse 
+        $aSideD | ${aSide.value} aCathet 
+        $bSideD | ${bSide.value} bCathet 
+        $cSideD | ${cSide.value} cHypotenuse 
         $hHeightD | ${hHeight.value} Height
         $mCompCsideD | ${mCompCside.value} mCompCside
         $kCompCsideD | ${kCompCside.value} kCompCside
@@ -307,17 +304,16 @@ class RightTriangleController extends GetxController {
   }
 
   bool isTwoDecimalPointRightTriangle(KeySymbol keySymbol) {
-    if (isaCathet.value) {
-      if (ValidationUtils.isTwoDecimalPoint(aCathet.value + keySymbol.value)) {
+    if (isaSide.value) {
+      if (ValidationUtils.isTwoDecimalPoint(aSide.value + keySymbol.value)) {
         return true;
       }
-    } else if (isbCathet.value) {
-      if (ValidationUtils.isTwoDecimalPoint(bCathet.value + keySymbol.value)) {
+    } else if (isbSide.value) {
+      if (ValidationUtils.isTwoDecimalPoint(bSide.value + keySymbol.value)) {
         return true;
       }
-    } else if (iscHypotenuse.value) {
-      if (ValidationUtils.isTwoDecimalPoint(
-          cHypotenuse.value + keySymbol.value)) {
+    } else if (iscSide.value) {
+      if (ValidationUtils.isTwoDecimalPoint(cSide.value + keySymbol.value)) {
         return true;
       }
     } else if (ishHeight.value) {
@@ -355,9 +351,9 @@ class RightTriangleController extends GetxController {
 
   void resetActiveInput() {
 //начальное значение при запуске
-    isaCathet.value = true;
-    isbCathet.value = false;
-    iscHypotenuse.value = false;
+    isaSide.value = true;
+    isbSide.value = false;
+    iscSide.value = false;
     ishHeight.value = false;
     iskCompCside.value = false;
     ismCompCside.value = false;
@@ -374,16 +370,16 @@ class RightTriangleController extends GetxController {
 
     // if (isValueChange()) {
     try {
-      if (activeParamMap.containsValue(RightTriangle.aCathet)) {
-        aCathetD = double.parse(aCathet.value);
+      if (activeParamMap.containsValue(RightTriangle.aSide)) {
+        aSideD = double.parse(aSide.value);
       }
 
-      if (activeParamMap.containsValue(RightTriangle.bCathet)) {
-        bCathetD = double.parse(bCathet.value);
+      if (activeParamMap.containsValue(RightTriangle.bSide)) {
+        bSideD = double.parse(bSide.value);
       }
 
-      if (activeParamMap.containsValue(RightTriangle.cHypotenuse)) {
-        cHypotenuseD = double.parse(cHypotenuse.value);
+      if (activeParamMap.containsValue(RightTriangle.cSide)) {
+        cSideD = double.parse(cSide.value);
       }
 
       if (activeParamMap.containsValue(RightTriangle.hHeight)) {
@@ -415,11 +411,11 @@ class RightTriangleController extends GetxController {
   }
 
   void calcMKCompCsideKnowAcatAangChypo() {
-    mCompCsideD = aCathetD * cos(AppConvert.toRadian(aAngleD));
+    mCompCsideD = aSideD * cos(AppConvert.toRadian(aAngleD));
     mCompCside.value =
         AppUtilsNumber.getFormatNumber(mCompCsideD, precisionResult);
 
-    kCompCsideD = cHypotenuseD - mCompCsideD;
+    kCompCsideD = cSideD - mCompCsideD;
     kCompCside.value =
         AppUtilsNumber.getFormatNumber(kCompCsideD, precisionResult);
   }
@@ -437,100 +433,99 @@ class RightTriangleController extends GetxController {
   }
 
   void calchHeightKnowAcatAangl() {
-    hHeightD = aCathetD * sin(AppConvert.toRadian(aAngleD));
+    hHeightD = aSideD * sin(AppConvert.toRadian(aAngleD));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
   void calcBangKnowBcatChypo() {
-    bAngleD = AppConvert.toDegree(acos(bCathetD / cHypotenuseD));
+    bAngleD = AppConvert.toDegree(acos(bSideD / cSideD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
   void calcBangKnowAcatBcatChypo() {
     bAngleD = AppConvert.toDegree(acos(
-        (pow(bCathetD, 2) + pow(cHypotenuseD, 2) - pow(aCathetD, 2)) /
-            (2 * bCathetD * cHypotenuseD)));
+        (pow(bSideD, 2) + pow(cSideD, 2) - pow(aSideD, 2)) /
+            (2 * bSideD * cSideD)));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
   void calcChypoKnowAcatBcat() {
-    cHypotenuseD = sqrt(pow(aCathetD, 2) + pow(bCathetD, 2));
-    cHypotenuse.value =
-        AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
+    cSideD = sqrt(pow(aSideD, 2) + pow(bSideD, 2));
+    cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult);
   }
 
   void calcBcatKnowChypAcat() {
-    bCathetD = sqrt(pow(cHypotenuseD, 2) - pow(aCathetD, 2));
-    bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+    bSideD = sqrt(pow(cSideD, 2) - pow(aSideD, 2));
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
   void calcAcatKnowChypBcat() {
-    aCathetD = sqrt(pow(cHypotenuseD, 2) - pow(bCathetD, 2));
-    aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+    aSideD = sqrt(pow(cSideD, 2) - pow(bSideD, 2));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
   }
 
   void calcBcatKnowAcatAang() {
-    bCathetD = aCathetD * tan(AppConvert.toRadian(aAngleD));
-    bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+    bSideD = aSideD * tan(AppConvert.toRadian(aAngleD));
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
   void calcBcatKnowAcatBang() {
-    bCathetD = aCathetD / tan(AppConvert.toRadian(bAngleD));
-    bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+    bSideD = aSideD / tan(AppConvert.toRadian(bAngleD));
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
   void calcAcatKnowBcatAang() {
-    aCathetD = bCathetD / tan(AppConvert.toRadian(aAngleD));
-    aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+    aSideD = bSideD / tan(AppConvert.toRadian(aAngleD));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
   }
 
   void calcAangKnowHheiAcat() {
-    aAngleD = AppConvert.toDegree(asin(hHeightD / aCathetD));
+    aAngleD = AppConvert.toDegree(asin(hHeightD / aSideD));
     aAngle.value =
         AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
   }
 
   void calcBangKnowHheibcat() {
-    bAngleD = AppConvert.toDegree(asin(hHeightD / bCathetD));
+    bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
 
   void calcAcatKnowBcatBang() {
-    aCathetD = bCathetD * tan(AppConvert.toRadian(bAngleD));
-    aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+    aSideD = bSideD * tan(AppConvert.toRadian(bAngleD));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
   }
 
   void calcBcatKnowChypKcomp() {
-    bCathetD = sqrt(cHypotenuseD * kCompCsideD);
-    bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+    bSideD = sqrt(cSideD * kCompCsideD);
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
   void calcAcatKnowChypMcomp() {
-    aCathetD = sqrt(cHypotenuseD * mCompCsideD);
-    aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+    aSideD = sqrt(cSideD * mCompCsideD);
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
   }
 
   void calcHheiKnowBcatKcomp() {
-    hHeightD = sqrt(pow(bCathetD, 2) - pow(kCompCsideD, 2));
+    hHeightD = sqrt(pow(bSideD, 2) - pow(kCompCsideD, 2));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
   void calcHheiKnowBcatMcomp() {
-    hHeightD = sqrt(pow(bCathetD, 2) - pow(mCompCsideD, 2));
+    hHeightD = sqrt(pow(bSideD, 2) - pow(mCompCsideD, 2));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
   void calcHheiKnowAcatMcomp() {
-    hHeightD = sqrt(pow(aCathetD, 2) - pow(mCompCsideD, 2));
+    hHeightD = sqrt(pow(aSideD, 2) - pow(mCompCsideD, 2));
     hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
   }
 
   void calcBangKnowHheiBcat() {
     // ok
-    bAngleD = AppConvert.toDegree(asin(hHeightD / bCathetD));
+    bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
     bAngle.value =
         AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
   }
@@ -548,23 +543,23 @@ class RightTriangleController extends GetxController {
   }
 
   void calcAcatKnowHheiAang() {
-    aCathetD = hHeightD / (sin(AppConvert.toRadian(aAngleD)));
-    aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+    aSideD = hHeightD / (sin(AppConvert.toRadian(aAngleD)));
+    aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
   }
 
   void calcBcatKnowHheiBang() {
-    bCathetD = hHeightD / (sin(AppConvert.toRadian(bAngleD)));
-    bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+    bSideD = hHeightD / (sin(AppConvert.toRadian(bAngleD)));
+    bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
   }
 
   void calcMcompKnowChypKcomp() {
-    mCompCsideD = cHypotenuseD - kCompCsideD;
+    mCompCsideD = cSideD - kCompCsideD;
     mCompCside.value =
         AppUtilsNumber.getFormatNumber(mCompCsideD, precisionResult);
   }
 
   void calcKcompKnowChypMcomp() {
-    kCompCsideD = cHypotenuseD - mCompCsideD;
+    kCompCsideD = cSideD - mCompCsideD;
     kCompCside.value =
         AppUtilsNumber.getFormatNumber(kCompCsideD, precisionResult);
   }
@@ -580,13 +575,13 @@ class RightTriangleController extends GetxController {
   }
 
   void calcAreaKnowAcatBcat() {
-    area.value = AppUtilsNumber.getFormatNumber(
-        0.5 * aCathetD * bCathetD, precisionResult);
+    area.value =
+        AppUtilsNumber.getFormatNumber(0.5 * aSideD * bSideD, precisionResult);
   }
 
   void calcPerimKnowAcatBcatChyp() {
     perimeter.value = AppUtilsNumber.getFormatNumber(
-        aCathetD + bCathetD + cHypotenuseD, precisionResult);
+        aSideD + bSideD + cSideD, precisionResult);
   }
 
   void calcSubResultKnowAsideBsideCsideAangl() async {
@@ -606,29 +601,23 @@ class RightTriangleController extends GetxController {
   }
 
   void calcXsPointKnowAsideCsideAang() {
-    xSPointD = aCathetD / 3;
+    xSPointD = aSideD / 3;
 
     xSPoint.value = AppUtilsNumber.getFormatNumber(xSPointD, precisionResult);
   }
 
   void calcYsPointKnowCsideAang() {
-    ySPointD = bCathetD / 3;
+    ySPointD = bSideD / 3;
     ySPoint.value = AppUtilsNumber.getFormatNumber(ySPointD, precisionResult);
   }
 
   void calcMedianKnowAsideBsideCside() {
-    mAd = 0.5 *
-        (sqrt(2 * pow(cHypotenuseD, 2) +
-            2 * pow(bCathetD, 2) -
-            pow(aCathetD, 2)));
-    mBd = 0.5 *
-        (sqrt(2 * pow(cHypotenuseD, 2) +
-            2 * pow(aCathetD, 2) -
-            pow(bCathetD, 2)));
-    mCd = 0.5 *
-        (sqrt(2 * pow(aCathetD, 2) +
-            2 * pow(bCathetD, 2) -
-            pow(cHypotenuseD, 2)));
+    mAd =
+        0.5 * (sqrt(2 * pow(cSideD, 2) + 2 * pow(bSideD, 2) - pow(aSideD, 2)));
+    mBd =
+        0.5 * (sqrt(2 * pow(cSideD, 2) + 2 * pow(aSideD, 2) - pow(bSideD, 2)));
+    mCd =
+        0.5 * (sqrt(2 * pow(aSideD, 2) + 2 * pow(bSideD, 2) - pow(cSideD, 2)));
 
     mA.value = AppUtilsNumber.getFormatNumber(mAd, precisionResult);
     mB.value = AppUtilsNumber.getFormatNumber(mBd, precisionResult);
@@ -636,21 +625,21 @@ class RightTriangleController extends GetxController {
   }
 
   void calcBisectorKnowAsideBsideCside() {
-    lCd = (sqrt(aCathetD *
-            bCathetD *
-            (cHypotenuseD + bCathetD + aCathetD) *
-            (aCathetD + bCathetD - cHypotenuseD))) /
-        (aCathetD + bCathetD);
-    lBd = (sqrt(cHypotenuseD *
-            aCathetD *
-            (cHypotenuseD + bCathetD + aCathetD) *
-            (cHypotenuseD + aCathetD - bCathetD))) /
-        (cHypotenuseD + aCathetD);
-    lAd = (sqrt(cHypotenuseD *
-            bCathetD *
-            (cHypotenuseD + bCathetD + aCathetD) *
-            (cHypotenuseD + bCathetD - aCathetD))) /
-        (cHypotenuseD + bCathetD);
+    lCd = (sqrt(aSideD *
+            bSideD *
+            (cSideD + bSideD + aSideD) *
+            (aSideD + bSideD - cSideD))) /
+        (aSideD + bSideD);
+    lBd = (sqrt(cSideD *
+            aSideD *
+            (cSideD + bSideD + aSideD) *
+            (cSideD + aSideD - bSideD))) /
+        (cSideD + aSideD);
+    lAd = (sqrt(cSideD *
+            bSideD *
+            (cSideD + bSideD + aSideD) *
+            (cSideD + bSideD - aSideD))) /
+        (cSideD + bSideD);
     lA.value = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
     lB.value = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
     lC.value = AppUtilsNumber.getFormatNumber(lCd, precisionResult);
@@ -659,16 +648,16 @@ class RightTriangleController extends GetxController {
   void calcRIncenterKnowAsideBsideCside() {
     double m = 0;
 
-    m = (aCathetD + bCathetD + cHypotenuseD) / 2;
+    m = (aSideD + bSideD + cSideD) / 2;
 
-    rd = sqrt(((m - aCathetD) * (m - bCathetD) * (m - cHypotenuseD)) / m);
+    rd = sqrt(((m - aSideD) * (m - bSideD) * (m - cSideD)) / m);
 
     rInscribed.value = AppUtilsNumber.getFormatNumber(rd, precisionResult);
   }
 
   void calcRCircumCenterKnowChypo() {
     // Rd = bSideD / 2 * (sin(AppConvert.toRadian(aAngleD)));
-    Rd = cHypotenuseD / 2;
+    Rd = cSideD / 2;
     Rcircum.value = AppUtilsNumber.getFormatNumber(Rd, precisionResult);
   }
 
@@ -677,13 +666,13 @@ class RightTriangleController extends GetxController {
   }
 
   void calcXSRCircumCenterKnowAside() {
-    xRd = aCathetD / 2;
+    xRd = aSideD / 2;
     xR.value = AppUtilsNumber.getFormatNumber(xRd, precisionResult);
   }
 
   void calcXSrIncenterKnowAsideAanglBangl() {
     xrd = (tan(AppConvert.toRadian(aAngleD / 2))) *
-        aCathetD /
+        aSideD /
         (tan(AppConvert.toRadian(90 / 2)) +
             tan(AppConvert.toRadian(aAngleD / 2)));
 
@@ -691,7 +680,7 @@ class RightTriangleController extends GetxController {
   }
 
   void calcYSRCircumCenterKnowRradAside() {
-    yRd = sqrt(pow(Rd, 2) - (pow(aCathetD, 2) / 4));
+    yRd = sqrt(pow(Rd, 2) - (pow(aSideD, 2) / 4));
 
     yR.value = AppUtilsNumber.getFormatNumber(yRd, precisionResult);
   }
@@ -718,8 +707,8 @@ class RightTriangleController extends GetxController {
     // ==========================================
     // aCat bCat ==OK
     // ==========================================
-    param1 = RightTriangle.aCathet;
-    param2 = RightTriangle.bCathet;
+    param1 = RightTriangle.aSide;
+    param2 = RightTriangle.bSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcChypoKnowAcatBcat();
       calcBangKnowBcatChypo();
@@ -736,8 +725,8 @@ class RightTriangleController extends GetxController {
     // ==========================================
     // aCat cHyp ==OK
     // ==========================================
-    param1 = RightTriangle.aCathet;
-    param2 = RightTriangle.cHypotenuse;
+    param1 = RightTriangle.aSide;
+    param2 = RightTriangle.cSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcBcatKnowChypAcat();
       calcBangKnowBcatChypo();
@@ -755,7 +744,7 @@ class RightTriangleController extends GetxController {
     // aCat aAng ==OK
     // ==========================================
     param1 = RightTriangle.aAngle;
-    param2 = RightTriangle.aCathet;
+    param2 = RightTriangle.aSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcBangleKnowAang();
       calcBcatKnowAcatAang();
@@ -773,7 +762,7 @@ class RightTriangleController extends GetxController {
     // aCat bAng ==OK
     // ==========================================
     param1 = RightTriangle.bAngle;
-    param2 = RightTriangle.aCathet;
+    param2 = RightTriangle.aSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcBcatKnowAcatBang();
       calcChypoKnowAcatBcat();
@@ -791,7 +780,7 @@ class RightTriangleController extends GetxController {
     // aCat mSideC ==OK
     //================================================
     param1 = RightTriangle.mCompCside;
-    param2 = RightTriangle.aCathet;
+    param2 = RightTriangle.aSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcHheiKnowAcatMcomp();
       calcAangKnowHheiAcat();
@@ -810,7 +799,7 @@ class RightTriangleController extends GetxController {
     // aCat hHeight ==OK
     //================================================
     param1 = RightTriangle.hHeight;
-    param2 = RightTriangle.aCathet;
+    param2 = RightTriangle.aSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcAangKnowHheiAcat();
       calcBangleKnowAang();
@@ -826,8 +815,8 @@ class RightTriangleController extends GetxController {
     // ==========================================
     // bCat cHyp ==OK
     // ==========================================
-    param1 = RightTriangle.bCathet;
-    param2 = RightTriangle.cHypotenuse;
+    param1 = RightTriangle.bSide;
+    param2 = RightTriangle.cSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcAcatKnowChypBcat();
       calcBangKnowBcatChypo();
@@ -845,7 +834,7 @@ class RightTriangleController extends GetxController {
     // bCat aAng ==OK
     // ==========================================
     param1 = RightTriangle.aAngle;
-    param2 = RightTriangle.bCathet;
+    param2 = RightTriangle.bSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcAcatKnowBcatAang();
       calcChypoKnowAcatBcat();
@@ -863,7 +852,7 @@ class RightTriangleController extends GetxController {
     // bCat bAng ==OK
     // ==========================================
     param1 = RightTriangle.bAngle;
-    param2 = RightTriangle.bCathet;
+    param2 = RightTriangle.bSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcAcatKnowBcatBang();
       calcChypoKnowAcatBcat();
@@ -881,7 +870,7 @@ class RightTriangleController extends GetxController {
     // bCat kSideC ==OK
     // ==========================================
     param1 = RightTriangle.kCompCside;
-    param2 = RightTriangle.bCathet;
+    param2 = RightTriangle.bSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcHheiKnowBcatKcomp();
       calcBangKnowHheiBcat();
@@ -898,7 +887,7 @@ class RightTriangleController extends GetxController {
     // ==========================================
     // bCat hHeight ==OK
     // ==========================================
-    param1 = RightTriangle.bCathet;
+    param1 = RightTriangle.bSide;
     param2 = RightTriangle.hHeight;
     if (isAvailableTwoParams(param1, param2)) {
       calcBangKnowHheibcat();
@@ -916,13 +905,13 @@ class RightTriangleController extends GetxController {
     // cHyp aAng ==OK
     // ==========================================
     param1 = RightTriangle.aAngle;
-    param2 = RightTriangle.cHypotenuse;
+    param2 = RightTriangle.cSide;
     if (isAvailableTwoParams(param1, param2)) {
-      aCathetD = cHypotenuseD * cos(AppConvert.toRadian(aAngleD));
-      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+      aSideD = cSideD * cos(AppConvert.toRadian(aAngleD));
+      aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
 
-      bCathetD = cHypotenuseD * sin(AppConvert.toRadian(aAngleD));
-      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+      bSideD = cSideD * sin(AppConvert.toRadian(aAngleD));
+      bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
 
       calcBangleKnowAang();
 
@@ -938,13 +927,13 @@ class RightTriangleController extends GetxController {
     // cHyp bAng ==OK
     // ==========================================
     param1 = RightTriangle.bAngle;
-    param2 = RightTriangle.cHypotenuse;
+    param2 = RightTriangle.cSide;
     if (isAvailableTwoParams(param1, param2)) {
-      aCathetD = cHypotenuseD * sin(AppConvert.toRadian(bAngleD));
-      aCathet.value = AppUtilsNumber.getFormatNumber(aCathetD, precisionResult);
+      aSideD = cSideD * sin(AppConvert.toRadian(bAngleD));
+      aSide.value = AppUtilsNumber.getFormatNumber(aSideD, precisionResult);
 
-      bCathetD = cHypotenuseD * cos(AppConvert.toRadian(bAngleD));
-      bCathet.value = AppUtilsNumber.getFormatNumber(bCathetD, precisionResult);
+      bSideD = cSideD * cos(AppConvert.toRadian(bAngleD));
+      bSide.value = AppUtilsNumber.getFormatNumber(bSideD, precisionResult);
 
       calcAangKnowBang();
 
@@ -960,7 +949,7 @@ class RightTriangleController extends GetxController {
     // cHyp mSideC ==OK
     //================================================
     param1 = RightTriangle.mCompCside;
-    param2 = RightTriangle.cHypotenuse;
+    param2 = RightTriangle.cSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcKcompKnowChypMcomp();
       calcAcatKnowChypMcomp();
@@ -978,7 +967,7 @@ class RightTriangleController extends GetxController {
     // cHyp kSideC ==OK
     //================================================
     param1 = RightTriangle.kCompCside;
-    param2 = RightTriangle.cHypotenuse;
+    param2 = RightTriangle.cSide;
     if (isAvailableTwoParams(param1, param2)) {
       calcMcompKnowChypKcomp();
       calcAcatKnowChypMcomp();
@@ -1110,9 +1099,8 @@ class RightTriangleController extends GetxController {
       hHeightD = sqrt(mCompCsideD * kCompCsideD);
       hHeight.value = AppUtilsNumber.getFormatNumber(hHeightD, precisionResult);
 
-      cHypotenuseD = kCompCsideD + mCompCsideD;
-      cHypotenuse.value =
-          AppUtilsNumber.getFormatNumber(cHypotenuseD, precisionResult);
+      cSideD = kCompCsideD + mCompCsideD;
+      cSide.value = AppUtilsNumber.getFormatNumber(cSideD, precisionResult);
 
       calcAcatKnowChypMcomp();
       calcBcatKnowChypKcomp();
@@ -1167,7 +1155,7 @@ class RightTriangleController extends GetxController {
     // TODO  cHyp hHeight //not found formula
     //================================================
     param1 = RightTriangle.hHeight;
-    param2 = RightTriangle.cHypotenuse;
+    param2 = RightTriangle.cSide;
     if (isAvailableTwoParams(param1, param2)) {
       isNotFormula = true;
     }
@@ -1176,7 +1164,7 @@ class RightTriangleController extends GetxController {
     // bCat mSideC // not found formula
     // ==========================================
     param1 = RightTriangle.mCompCside;
-    param2 = RightTriangle.bCathet;
+    param2 = RightTriangle.bSide;
     if (isAvailableTwoParams(param1, param2)) {
       isNotFormula = true;
     }
@@ -1184,61 +1172,53 @@ class RightTriangleController extends GetxController {
     // aCat kSideC //не могу найти формулу
     //================================================
     param1 = RightTriangle.kCompCside;
-    param2 = RightTriangle.aCathet;
+    param2 = RightTriangle.aSide;
     if (isAvailableTwoParams(param1, param2)) {
       isNotFormula = true;
     }
-
-// проверка если цифры не числа
     isNumberNaN();
+
     printElements();
     log.i('end calculate');
   }
 
   bool isNumberNaN() {
-    if (ValidationUtils.isNumberNanAndInfinity(aCathetD)) {
-      aCathet.value = startLengthValue;
-      return true;
+    bool isNan = false;
+    if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
+      aSide.value = startLengthValue;
+      isNan = true;
     }
-    if (ValidationUtils.isNumberNanAndInfinity(bCathetD)) {
-      bCathet.value = startLengthValue;
-      return true;
+    if (ValidationUtils.isNumberNanAndInfinity(bSideD)) {
+      bSide.value = startLengthValue;
+      isNan = true;
     }
-    if (ValidationUtils.isNumberNanAndInfinity(cHypotenuseD)) {
-      cHypotenuse.value = startLengthValue;
-      return true;
+    if (ValidationUtils.isNumberNanAndInfinity(cSideD)) {
+      cSide.value = startLengthValue;
+      isNan = true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
-      return true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(mCompCsideD)) {
       mCompCside.value = startLengthValue;
-      return true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(kCompCsideD)) {
       kCompCside.value = startLengthValue;
-      return true;
-    }
-        if (ValidationUtils.isNumberNanAndInfinity(xSPointD)) {
-      xSPoint.value = startLengthValue;
-      return true;
+      isNan = true;
     }
 
-    if (ValidationUtils.isNumberNanAndInfinity(ySPointD)) {
-      ySPoint.value = startLengthValue;
-      return true;
-    }
     if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
-      return true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
       bAngle.value = startAngleValue;
-      return true;
+      isNan = true;
     }
-    return false;
+    return isNan;
   }
 
   void moveEmptyValueToStartInParameters() {
@@ -1260,13 +1240,13 @@ class RightTriangleController extends GetxController {
     bool activeInput;
     String valueActiveInput;
 
-    activeInput = isaCathet.value;
-    valueActiveInput = aCathet.value;
+    activeInput = isaSide.value;
+    valueActiveInput = aSide.value;
     RightTriangle oldValue;
     var newValue = RightTriangle.empty;
 
     if (activeInput && valueActiveInput == startLengthValue) {
-      oldValue = RightTriangle.aCathet;
+      oldValue = RightTriangle.aSide;
 
       activeParamMap.value = AppUtilsMap.updateValues(
               oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
@@ -1275,10 +1255,10 @@ class RightTriangleController extends GetxController {
       return true;
     }
 
-    activeInput = isbCathet.value;
-    valueActiveInput = bCathet.value;
+    activeInput = isbSide.value;
+    valueActiveInput = bSide.value;
     if (activeInput && valueActiveInput == startLengthValue) {
-      oldValue = RightTriangle.bCathet;
+      oldValue = RightTriangle.bSide;
 
       activeParamMap.value = AppUtilsMap.updateValues(
               oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
@@ -1286,10 +1266,10 @@ class RightTriangleController extends GetxController {
 
       return true;
     }
-    activeInput = iscHypotenuse.value;
-    valueActiveInput = cHypotenuse.value;
+    activeInput = iscSide.value;
+    valueActiveInput = cSide.value;
     if (activeInput && valueActiveInput == startLengthValue) {
-      oldValue = RightTriangle.cHypotenuse;
+      oldValue = RightTriangle.cSide;
 
       activeParamMap.value = AppUtilsMap.updateValues(
               oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
@@ -1367,15 +1347,15 @@ class RightTriangleController extends GetxController {
 
     if (isInputStartValue()) return;
 
-    if (isaCathet.value) {
-      paramActive = RightTriangle.aCathet;
-      paramLastLenght = RightTriangle.aCathet;
-    } else if (isbCathet.value) {
-      paramActive = RightTriangle.bCathet;
-      paramLastLenght = RightTriangle.bCathet;
-    } else if (iscHypotenuse.value) {
-      paramActive = RightTriangle.cHypotenuse;
-      paramLastLenght = RightTriangle.cHypotenuse;
+    if (isaSide.value) {
+      paramActive = RightTriangle.aSide;
+      paramLastLenght = RightTriangle.aSide;
+    } else if (isbSide.value) {
+      paramActive = RightTriangle.bSide;
+      paramLastLenght = RightTriangle.bSide;
+    } else if (iscSide.value) {
+      paramActive = RightTriangle.cSide;
+      paramLastLenght = RightTriangle.cSide;
     } else if (ishHeight.value) {
       paramActive = RightTriangle.hHeight;
       paramLastLenght = RightTriangle.hHeight;
@@ -1456,19 +1436,19 @@ class RightTriangleController extends GetxController {
 
     if (isAvailableTwoParams(
       RightTriangle.kCompCside,
-      RightTriangle.bCathet,
+      RightTriangle.bSide,
     )) {
       if (iskCompCside.value) {
-        result = bCathetD;
+        result = bSideD;
         if (!(kCompCsideD < result)) {
           showSnack(
               'Component k must be < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
-      if (isbCathet.value) {
+      if (isbSide.value) {
         result = kCompCsideD;
-        if (!(bCathetD > result)) {
+        if (!(bSideD > result)) {
           showSnack(
               'Side b must be > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
@@ -1478,11 +1458,11 @@ class RightTriangleController extends GetxController {
 
     if (isAvailableTwoParams(
       RightTriangle.mCompCside,
-      RightTriangle.aCathet,
+      RightTriangle.aSide,
     )) {
-      if (isaCathet.value) {
+      if (isaSide.value) {
         result = mCompCsideD;
-        if (!(aCathetD > result)) {
+        if (!(aSideD > result)) {
           showSnack(
               'Side a must be > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
@@ -1490,7 +1470,7 @@ class RightTriangleController extends GetxController {
       }
 
       if (ismCompCside.value) {
-        result = aCathetD;
+        result = aSideD;
         if (!(mCompCsideD < result)) {
           showSnack(
               'Component m must be < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
@@ -1500,18 +1480,18 @@ class RightTriangleController extends GetxController {
     }
     if (isAvailableTwoParams(
       RightTriangle.mCompCside,
-      RightTriangle.cHypotenuse,
+      RightTriangle.cSide,
     )) {
-      if (iscHypotenuse.value) {
+      if (iscSide.value) {
         result = mCompCsideD;
-        if (!(cHypotenuseD > result)) {
+        if (!(cSideD > result)) {
           showSnack(
               'Side с must be > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
       if (ismCompCside.value) {
-        result = cHypotenuseD;
+        result = cSideD;
         if (!(mCompCsideD < result)) {
           showSnack(
               'Component m must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
@@ -1522,18 +1502,18 @@ class RightTriangleController extends GetxController {
 
     if (isAvailableTwoParams(
       RightTriangle.kCompCside,
-      RightTriangle.cHypotenuse,
+      RightTriangle.cSide,
     )) {
-      if (iscHypotenuse.value) {
+      if (iscSide.value) {
         result = kCompCsideD;
-        if (!(cHypotenuseD > result)) {
+        if (!(cSideD > result)) {
           showSnack(
               'Side с must be > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
       if (iskCompCside.value) {
-        result = cHypotenuseD;
+        result = cSideD;
         if (!(kCompCsideD < result)) {
           showSnack(
               'Component k must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
@@ -1544,18 +1524,18 @@ class RightTriangleController extends GetxController {
 
     if (isAvailableTwoParams(
       RightTriangle.hHeight,
-      RightTriangle.aCathet,
+      RightTriangle.aSide,
     )) {
-      if (isaCathet.value) {
+      if (isaSide.value) {
         result = hHeightD;
-        if (!(aCathetD > result)) {
+        if (!(aSideD > result)) {
           showSnack(
               'Side a must be > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
       if (ishHeight.value) {
-        result = aCathetD;
+        result = aSideD;
         if (!(hHeightD < result)) {
           showSnack(
               'Height h must be < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
@@ -1565,18 +1545,18 @@ class RightTriangleController extends GetxController {
     }
     if (isAvailableTwoParams(
       RightTriangle.hHeight,
-      RightTriangle.bCathet,
+      RightTriangle.bSide,
     )) {
-      if (isbCathet.value) {
+      if (isbSide.value) {
         result = hHeightD;
-        if (!(bCathetD > result)) {
+        if (!(bSideD > result)) {
           showSnack(
               'Side b must be > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
           return;
         }
       }
       if (ishHeight.value) {
-        result = bCathetD;
+        result = bSideD;
         if (!(hHeightD < result)) {
           showSnack(
               'Height h must be < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
@@ -1584,19 +1564,74 @@ class RightTriangleController extends GetxController {
         }
       }
     }
-
-//если гипотенуза меньше
-
-    if (isAvailableTwoParams(
-            RightTriangle.cHypotenuse, RightTriangle.aCathet) ||
-        isAvailableTwoParams(
-            RightTriangle.cHypotenuse, RightTriangle.bCathet)) {
-      if (cHypotenuseD < aCathetD || cHypotenuseD < bCathetD) {
-        showSnack(TranslateHelper.messageHypotenuseGreaterCathetus);
-
-        return;
+ if (isAvailableTwoParams(
+      RightTriangle.hHeight,
+      RightTriangle.cSide,
+    )) {
+      if (iscSide.value) {
+        result = hHeightD*2;
+        if (!(cSideD >= result)) {
+          showSnack(
+              'Side c must be ≥ 2h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (ishHeight.value) {
+        result = cSideD/2;
+        if (!(hHeightD <= result)) {
+          showSnack(
+              'Height h must be ≤ с/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
       }
     }
+//если гипотенуза меньше
+    if (isAvailableTwoParams(
+      RightTriangle.aSide,
+      RightTriangle.cSide,
+    )) {
+      if (isaSide.value) {
+        result = cSideD;
+        if (!(aSideD < result)) {
+          showSnack(
+              'Side a must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (iscSide.value) {
+          result = aSideD;
+        if (!(cSideD > result)) {
+          showSnack(
+              'Side c must be > a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+    }
+
+
+//если гипотенуза меньше
+    if (isAvailableTwoParams(
+      RightTriangle.bSide,
+      RightTriangle.cSide,
+    )) {
+      if (isbSide.value) {
+        result = cSideD;
+        if (!(bSideD < result)) {
+          showSnack(
+              'Side b must be < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+      if (iscSide.value) {
+          result = bSideD;
+        if (!(cSideD > result)) {
+          showSnack(
+              'Side c must be > b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+          return;
+        }
+      }
+    }
+
 
 //если угол больше 90
     if (90 <= aAngleD || 90 <= bAngleD) {
@@ -1681,18 +1716,18 @@ class RightTriangleController extends GetxController {
 
   bool ifMaxNumberEnter() {
     String value;
-    if (isaCathet.value) {
-      value = aCathet.value;
+    if (isaSide.value) {
+      value = aSide.value;
       if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
         return true;
       }
-    } else if (isbCathet.value) {
-      value = bCathet.value;
+    } else if (isbSide.value) {
+      value = bSide.value;
       if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
         return true;
       }
-    } else if (iscHypotenuse.value) {
-      value = cHypotenuse.value;
+    } else if (iscSide.value) {
+      value = cSide.value;
       if (isMaxNumberInput(value) || isMaxNumberAfterPoint(value)) {
         return true;
       }
@@ -1741,33 +1776,33 @@ class RightTriangleController extends GetxController {
   }
 
   void restartActiveParamIfZeroValue() {
-    if (activeParamMap[1] == RightTriangle.aCathet &&
-        aCathet.value == startLengthValue) {
+    if (activeParamMap[1] == RightTriangle.aSide &&
+        aSide.value == startLengthValue) {
       activeParamMap[1] = RightTriangle.empty;
     }
 
-    if (activeParamMap[2] == RightTriangle.aCathet &&
-        aCathet.value == startLengthValue) {
+    if (activeParamMap[2] == RightTriangle.aSide &&
+        aSide.value == startLengthValue) {
       activeParamMap[2] = RightTriangle.empty;
     }
 
-    if (activeParamMap[1] == RightTriangle.bCathet &&
-        bCathet.value == startLengthValue) {
+    if (activeParamMap[1] == RightTriangle.bSide &&
+        bSide.value == startLengthValue) {
       activeParamMap[1] = RightTriangle.empty;
     }
 
-    if (activeParamMap[2] == RightTriangle.bCathet &&
-        bCathet.value == startLengthValue) {
+    if (activeParamMap[2] == RightTriangle.bSide &&
+        bSide.value == startLengthValue) {
       activeParamMap[2] = RightTriangle.empty;
     }
 
-    if (activeParamMap[1] == RightTriangle.cHypotenuse &&
-        cHypotenuse.value == startLengthValue) {
+    if (activeParamMap[1] == RightTriangle.cSide &&
+        cSide.value == startLengthValue) {
       activeParamMap[1] = RightTriangle.empty;
     }
 
-    if (activeParamMap[2] == RightTriangle.cHypotenuse &&
-        cHypotenuse.value == startLengthValue) {
+    if (activeParamMap[2] == RightTriangle.cSide &&
+        cSide.value == startLengthValue) {
       activeParamMap[2] = RightTriangle.empty;
     }
 
@@ -1842,12 +1877,12 @@ class RightTriangleController extends GetxController {
 
   void longBackspace() {
 // взависимости от активного ввода
-    if (isaCathet.value) {
-      aCathet.value = startLengthValue;
-    } else if (isbCathet.value) {
-      bCathet.value = startLengthValue;
-    } else if (iscHypotenuse.value) {
-      cHypotenuse.value = startLengthValue;
+    if (isaSide.value) {
+      aSide.value = startLengthValue;
+    } else if (isbSide.value) {
+      bSide.value = startLengthValue;
+    } else if (iscSide.value) {
+      cSide.value = startLengthValue;
     } else if (ishHeight.value) {
       hHeight.value = startLengthValue;
     } else if (ismCompCside.value) {
@@ -1875,42 +1910,42 @@ class RightTriangleController extends GetxController {
     String newInput;
 
 // взависимости от активного ввода
-    if (isaCathet.value) {
-      oldInput = aCathet.value;
+    if (isaSide.value) {
+      oldInput = aSide.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
       //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
-        aCathetD = 0;
+        aSideD = 0;
 
         newInput = startLengthValue;
 
         resetNotActiveValue();
       }
-      aCathet.value = newInput;
-    } else if (isbCathet.value) {
-      oldInput = bCathet.value;
+      aSide.value = newInput;
+    } else if (isbSide.value) {
+      oldInput = bSide.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
       //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
-        bCathetD = 0;
+        bSideD = 0;
 
         newInput = startLengthValue;
 
         resetNotActiveValue();
       }
-      bCathet.value = newInput;
-    } else if (iscHypotenuse.value) {
-      oldInput = cHypotenuse.value;
+      bSide.value = newInput;
+    } else if (iscSide.value) {
+      oldInput = cSide.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
       //если пусто устанавливаем стартовое значение
       if (newInput.isEmpty) {
-        cHypotenuseD = 0;
+        cSideD = 0;
 
         newInput = startLengthValue;
 
         resetNotActiveValue();
       }
-      cHypotenuse.value = newInput;
+      cSide.value = newInput;
     } else if (iskCompCside.value) {
       oldInput = kCompCside.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
@@ -1990,9 +2025,9 @@ class RightTriangleController extends GetxController {
 
   void resetAllValue() {
     //устанавливаем начальные значения
-    aCathet.value = startLengthValue;
-    bCathet.value = startLengthValue;
-    cHypotenuse.value = startLengthValue;
+    aSide.value = startLengthValue;
+    bSide.value = startLengthValue;
+    cSide.value = startLengthValue;
     hHeight.value = startLengthValue;
     kCompCside.value = startLengthValue;
     mCompCside.value = startLengthValue;
@@ -2001,10 +2036,9 @@ class RightTriangleController extends GetxController {
 
     perimeter.value = startLengthValue;
     area.value = startLengthValue;
-     xSPoint.value = startLengthValue;
+    xSPoint.value = startLengthValue;
     ySPoint.value = startLengthValue;
 
-  
     hHeightD = 0;
 
     aAngleD = 0;
@@ -2012,8 +2046,8 @@ class RightTriangleController extends GetxController {
     areaD = 0;
     perimeterD = 0;
 
-    aCathetD = bCathetD = cHypotenuseD =
-        hHeightD = kCompCsideD = mCompCsideD = bAngleD = aAngleD = 0;
+    aSideD = bSideD =
+        cSideD = hHeightD = kCompCsideD = mCompCsideD = bAngleD = aAngleD = 0;
 
     ySPointD = 0;
     xSPointD = 0;
@@ -2055,17 +2089,17 @@ class RightTriangleController extends GetxController {
     Rcircum.value = xR.value = yR.value = startLengthValue;
     Rd = xRd = yRd = 0.0;
 
-    if (!isAvailableOneParam(RightTriangle.aCathet)) {
-      aCathet.value = startLengthValue;
-      aCathetD = 0;
+    if (!isAvailableOneParam(RightTriangle.aSide)) {
+      aSide.value = startLengthValue;
+      aSideD = 0;
     }
-    if (!isAvailableOneParam(RightTriangle.bCathet)) {
-      bCathet.value = startLengthValue;
-      bCathetD = 0;
+    if (!isAvailableOneParam(RightTriangle.bSide)) {
+      bSide.value = startLengthValue;
+      bSideD = 0;
     }
-    if (!isAvailableOneParam(RightTriangle.cHypotenuse)) {
-      cHypotenuse.value = startLengthValue;
-      cHypotenuseD = 0;
+    if (!isAvailableOneParam(RightTriangle.cSide)) {
+      cSide.value = startLengthValue;
+      cSideD = 0;
     }
     if (!isAvailableOneParam(RightTriangle.hHeight)) {
       hHeight.value = startLengthValue;
@@ -2094,38 +2128,38 @@ class RightTriangleController extends GetxController {
 
   void _isNext(bool isNext) {
     if (isNext) {
-      if (isaCathet.value) {
-        isbCathet.value = true;
-        isaCathet.value = false;
-      } else if (isbCathet.value) {
-        iscHypotenuse.value = true;
-        isbCathet.value = false;
-      } else if (iscHypotenuse.value) {
+      if (isaSide.value) {
+        isbSide.value = true;
+        isaSide.value = false;
+      } else if (isbSide.value) {
+        iscSide.value = true;
+        isbSide.value = false;
+      } else if (iscSide.value) {
         isaAngle.value = true;
-        iscHypotenuse.value = false;
+        iscSide.value = false;
       } else if (isaAngle.value) {
         isbAngle.value = true;
         isaAngle.value = false;
       } else if (isbAngle.value) {
-        isaCathet.value = true;
+        isaSide.value = true;
         isbAngle.value = false;
       }
     } else {
-      if (isaCathet.value) {
+      if (isaSide.value) {
         isbAngle.value = true;
-        isaCathet.value = false;
+        isaSide.value = false;
       } else if (isbAngle.value) {
         isaAngle.value = true;
         isbAngle.value = false;
       } else if (isaAngle.value) {
-        iscHypotenuse.value = true;
+        iscSide.value = true;
         isaAngle.value = false;
-      } else if (iscHypotenuse.value) {
-        isbCathet.value = true;
-        iscHypotenuse.value = false;
-      } else if (isbCathet.value) {
-        isaCathet.value = true;
-        isbCathet.value = false;
+      } else if (iscSide.value) {
+        isbSide.value = true;
+        iscSide.value = false;
+      } else if (isbSide.value) {
+        isaSide.value = true;
+        isbSide.value = false;
       }
     }
   }

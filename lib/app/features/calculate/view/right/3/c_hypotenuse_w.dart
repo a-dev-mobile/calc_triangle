@@ -26,9 +26,9 @@ class ChypotenuseWidget extends StatelessWidget {
 
   // ====change====
   void onTap() {
-    c.isaCathet.value = false;
-    c.isbCathet.value = false;
-    c.iscHypotenuse.value = true;
+    c.isaSide.value = false;
+    c.isbSide.value = false;
+    c.iscSide.value = true;
     c.ishHeight.value = false;
     c.ismCompCside.value = false;
     c.iskCompCside.value = false;
@@ -53,9 +53,9 @@ class ChypotenuseWidget extends StatelessWidget {
             angle: angle * pi / 180,
             child: Obx(() {
               // ====change====
-              activeValue = c.cHypotenuse.value;
-              isActiveInput = c.iscHypotenuse.value;
-              elementFigure = RightTriangle.cHypotenuse;
+              activeValue = c.cSide.value;
+              isActiveInput = c.iscSide.value;
+              elementFigure = RightTriangle.cSide;
               //===============
               isActiveParam = c.activeParamMap.containsValue(elementFigure);
               if (isActiveInput) {

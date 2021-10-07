@@ -419,34 +419,17 @@ class EquilateralTriangleController extends GetxController {
   }
 
   bool isNumberNaN() {
+     bool isNan = false;
     if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
       aSide.value = startLengthValue;
-      return true;
+  isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
-      return true;
+ isNan = true;
     }
-    if (ValidationUtils.isNumberNanAndInfinity(areaD)) {
-      area.value = startLengthValue;
-      return true;
-    }
-    if (ValidationUtils.isNumberNanAndInfinity(perimeterD)) {
-      perimeter.value = startLengthValue;
-      return true;
-    }
-
-    if (ValidationUtils.isNumberNanAndInfinity(xSPointD)) {
-      xSPoint.value = startLengthValue;
-      return true;
-    }
-
-    if (ValidationUtils.isNumberNanAndInfinity(ySPointD)) {
-      ySPoint.value = startLengthValue;
-      return true;
-    }
-
-    return false;
+    
+    return  isNan;
   }
 
   void moveEmptyValueToStartInParameters() {
@@ -571,14 +554,15 @@ class EquilateralTriangleController extends GetxController {
       return;
     }
 
-    if (isNumberNaN()) {
-      log.w('isNumberNaN');
-      showSnack(TranslateHelper.message_calc_error_chang_value);
-      return;
-    }
+
     // если есть пустой параметр
     if (isOnlyOneParamEmpty()) {
       showSnack(TranslateHelper.enterOneParameters);
+      return;
+    }
+        if (isNumberNaN()) {
+      log.w('isNumberNaN');
+      showSnack(TranslateHelper.message_calc_error_chang_value);
       return;
     }
     endSnack();

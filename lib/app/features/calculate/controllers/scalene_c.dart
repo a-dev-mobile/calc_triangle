@@ -33,6 +33,7 @@ class ScaleneTriangleController extends GetxController {
 
   static const startAngleValue = '0°';
   static const startLengthValue = '0';
+  static const ifErrorValue = '0';
 
   var activeParamMap = <int, ScaleneTriangle>{}.obs;
 
@@ -162,7 +163,6 @@ class ScaleneTriangleController extends GetxController {
     if (keySymbol == Keys.backspace) {
       backspace();
       setActiveParam();
-
       initValue();
       calculate();
       showMessage();
@@ -1200,8 +1200,6 @@ class ScaleneTriangleController extends GetxController {
       calcSubResultKnowAsideBsideCsideAangl();
     }
 
-   
-
     // ==========================================
     //aSide cSide hHeight ==ok
     // ==========================================
@@ -1221,8 +1219,6 @@ class ScaleneTriangleController extends GetxController {
       calcSubResultKnowAsideBsideCsideAangl();
       // isNotFormula = true;
     }
-
-  
 
     // ==========================================
 //cSide hHeight bAngle == ok
@@ -1272,15 +1268,13 @@ class ScaleneTriangleController extends GetxController {
       calcCsideKnowAsideBSideBang();
       calcAangKnowAsideBSideCside();
       calcYangKnowAangBang();
-     
-      
+
       calcPerimKnowAsideBsideCside();
       calcAreaKnowAsideHhei();
       calcXsPointKnowAsideCsideAang();
       calcYsPointKnowCsideAang();
       calcSubResultKnowAsideBsideCsideAangl();
     }
-
 
     // ==========================================
     //bSide cSide hHeight ==ok
@@ -1311,7 +1305,7 @@ class ScaleneTriangleController extends GetxController {
       isNotFormula = true;
     }
 
- // ==========================================
+    // ==========================================
     //bSide hHeight bAngle
     // ==========================================
     param1 = ScaleneTriangle.bSide;
@@ -1321,7 +1315,7 @@ class ScaleneTriangleController extends GetxController {
       isNotFormula = true;
     }
 
-      // ==========================================
+    // ==========================================
 //cSide hHeight aAngle
     // ==========================================
     param1 = ScaleneTriangle.cSide;
@@ -1329,15 +1323,10 @@ class ScaleneTriangleController extends GetxController {
     param3 = ScaleneTriangle.hHeight;
     if (isAvailableThreeParams(param1, param2, param3)) {
       isNotFormula = true;
-    
+
       // calcCsideKnowHheiAang();
 
-      
     }
-
-
-
-
 
     isNumberNaN();
 
@@ -1346,54 +1335,44 @@ class ScaleneTriangleController extends GetxController {
   }
 
   bool isNumberNaN() {
+    bool isNan = false;
+//если углы имеют 180 гр то тоже является ошибкой 
+    if (aAngleD == 180 || bAngleD == 180 || yAngleD == 180) {
+       isNan = true;
+    }
+
     if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
       aSide.value = startLengthValue;
-      return true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(bSideD)) {
       bSide.value = startLengthValue;
-      return true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(cSideD)) {
       cSide.value = startLengthValue;
-      return true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
-      return true;
-    }
-    if (ValidationUtils.isNumberNanAndInfinity(areaD)) {
-      area.value = startLengthValue;
-      return true;
-    }
-    if (ValidationUtils.isNumberNanAndInfinity(perimeterD)) {
-      perimeter.value = startLengthValue;
-      return true;
-    }
-
-    if (ValidationUtils.isNumberNanAndInfinity(xSPointD)) {
-      xSPoint.value = startLengthValue;
-      return true;
-    }
-
-    if (ValidationUtils.isNumberNanAndInfinity(ySPointD)) {
-      ySPoint.value = startLengthValue;
-      return true;
+      isNan = true;
     }
 
     if (ValidationUtils.isNumberNanAndInfinity(aAngleD)) {
       aAngle.value = startAngleValue;
-      return true;
+      isNan = true;
     }
+
     if (ValidationUtils.isNumberNanAndInfinity(bAngleD)) {
       bAngle.value = startAngleValue;
-      return true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(yAngleD)) {
       yAngle.value = startAngleValue;
-      return true;
+      isNan = true;
     }
-    return false;
+
+    return isNan;
   }
 
   void moveEmptyValueToStartInParameters() {
@@ -1745,6 +1724,7 @@ class ScaleneTriangleController extends GetxController {
       showSnack(TranslateHelper.message_calc_error_chang_value);
       return;
     }
+
     endSnack();
     // showSnack('OK');
   }
@@ -2210,8 +2190,8 @@ class ScaleneTriangleController extends GetxController {
     bAngle.value = startAngleValue;
     yAngle.value = startAngleValue;
 
-    area.value = startLengthValue;
     perimeter.value = startLengthValue;
+    area.value = startLengthValue;
 
     xSPoint.value = startLengthValue;
     ySPoint.value = startLengthValue;

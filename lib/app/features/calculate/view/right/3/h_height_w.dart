@@ -26,9 +26,9 @@ class HheightWidget extends StatelessWidget {
 
   // ====change====
   void onTap() {
-    c.isaCathet.value = false;
-    c.isbCathet.value = false;
-    c.iscHypotenuse.value = false;
+    c.isaSide.value = false;
+    c.isbSide.value = false;
+    c.iscSide.value = false;
     c.ishHeight.value = true;
     c.ismCompCside.value = false;
     c.iskCompCside.value = false;

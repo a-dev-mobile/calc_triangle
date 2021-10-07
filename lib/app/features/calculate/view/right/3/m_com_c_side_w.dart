@@ -26,9 +26,9 @@ class McompCside extends StatelessWidget {
 
   // ====change====
   void onTap() {
-    c.isaCathet.value = false;
-    c.isbCathet.value = false;
-    c.iscHypotenuse.value = false;
+    c.isaSide.value = false;
+    c.isbSide.value = false;
+    c.iscSide.value = false;
     c.ishHeight.value = false;
     c.ismCompCside.value = true;
     c.iskCompCside.value = false;
