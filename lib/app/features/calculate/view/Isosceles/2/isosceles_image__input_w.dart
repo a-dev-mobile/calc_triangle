@@ -45,7 +45,7 @@ class IsoscelesTriangleImageInputWidget extends StatelessWidget {
             ),
 
             AsideWidget(
-              posX: 0,
+              posX: -3,
               posY: 43.545,
               minSizeImage: minSize,
               angle: 0,

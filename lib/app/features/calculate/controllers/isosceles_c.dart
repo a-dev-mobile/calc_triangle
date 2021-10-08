@@ -19,9 +19,9 @@ import 'package:get/get.dart';
 enum IsoscelesTriangle {
   aSide,
   bSide,
+  hHeight,
   aAngle,
   bAngle,
-  hHeight,
 
   empty,
 }

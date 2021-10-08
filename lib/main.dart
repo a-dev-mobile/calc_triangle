@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:logger/logger.dart';
 
 import 'app/config/routes/app_page.dart';
 import 'app/config/theme/light_dark_theme.dart';
@@ -26,7 +27,7 @@ void main() async {
   
   
    */
-  // Logger.level = Level.nothing; //TODO on LOG
+  Logger.level = Level.nothing; //TODO on LOG
   WidgetsFlutterBinding.ensureInitialized();
 
   MobileAds.instance.initialize();

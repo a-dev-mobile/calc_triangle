@@ -46,7 +46,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
           _interstitialAd!.setImmersiveMode(true);
         },
         onAdFailedToLoad: (LoadAdError error) {
-          print('InterstitialAd failed to load: $error');
+   
           _interstitialLoadAttempts += 1;
           _interstitialAd = null;
           if (_interstitialLoadAttempts <= maxFailedLoadAttempts) {
@@ -59,25 +59,24 @@ class _SelectShapePageState extends State<SelectShapePage> {
 
   void _showInterstialAd() {
     if (_interstitialAd == null) {
-      print('Warning: attempt to show interstitial before loaded.');
+      log.i('Warning: attempt to show interstitial before loaded.');
       return;
     }
     _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) =>
-          print('ad onAdShowedFullScreenContent.'),
+          log.i('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
+         log.i('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
         _createInterstitialAd();
       },
       onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
+         log.i('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
         _createInterstitialAd();
       },
-      onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
+      onAdImpression: (InterstitialAd ad) =>   log.i('$ad impression occurred.'),
     );
-
 
     _interstitialAd!.show();
     _interstitialAd = null;
@@ -85,7 +84,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
 
   void showAd() {
     if (SelectShapeController.to.isStartAd) {
-              log.w('start ad');
+      log.w('start ad');
       _showInterstialAd();
     }
     SelectShapeController.to.incrNumberStartCalc();
@@ -150,7 +149,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.isosceles_info,
                 onTap: () {
-          showAd();
+                  showAd();
                   GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
                   Get.toNamed(Routes.calculateIsosceles);
                 },
@@ -163,7 +162,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterOneParameters,
                 info: TranslateHelper.equilateral_info,
                 onTap: () {
-      showAd();
+                  showAd();
                   GlobalServ.to.aciveShape = Shape.equilateralTriangle;
                   Get.toNamed(Routes.calculateEquilateral);
                 },
@@ -234,7 +233,7 @@ class CardSelectShapet extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
