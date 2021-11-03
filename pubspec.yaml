@@ -5,7 +5,7 @@ description: Flutter project calculating the sides in a right triangle
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.1.0+5
+version: 1.2.0+6
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
