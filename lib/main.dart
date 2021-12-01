@@ -17,17 +17,8 @@ import 'app/translations/app_translations.dart';
 
 
 void main() async {
-  /* 
-  с помощью днанного приложения вы сможете расчитать
-  вместо nan error
-  введите известные значения
-  проверяйте в информацию
-  ошибка в расчетах изменить текст
-  
-  
-  
-   */
-  Logger.level = Level.nothing; //TODO on LOG
+
+  // Logger.level = Level.nothing; //TODO on LOG
   WidgetsFlutterBinding.ensureInitialized();
 
   MobileAds.instance.initialize();
