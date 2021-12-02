@@ -44,7 +44,7 @@ class AppPage {
         })),
     GetPage(
         name: Routes.calculateRight,
-        transition: Transition.leftToRight,
+       
         page: () => const CalculateRightPage(),
         binding: BindingsBuilder(() {
           Get.put<RightTriangleController>(RightTriangleController(),
@@ -52,7 +52,7 @@ class AppPage {
         })),
     GetPage(
         name: Routes.calculateScalene,
-        transition: Transition.leftToRight,
+       
         page: () => const CalculateScalenePage(),
         binding: BindingsBuilder(() {
           Get.put<ScaleneTriangleController>(ScaleneTriangleController(),
@@ -60,7 +60,7 @@ class AppPage {
         })),
     GetPage(
         name: Routes.calculateEquilateral,
-        transition: Transition.leftToRight,
+    
         page: () => const CalculateEquilateralPage(),
         binding: BindingsBuilder(() {
           Get.put<EquilateralTriangleController>(
@@ -69,7 +69,7 @@ class AppPage {
         })),
         GetPage(
         name: Routes.calculateIsosceles,
-        transition: Transition.leftToRight,
+      
         page: () => const CalculateIsoscelesPage(),
         binding: BindingsBuilder(() {
           Get.put<IsoscelesTriangleController>(
@@ -79,7 +79,7 @@ class AppPage {
     GetPage(
         name: Routes.setting,
         page: () => SettingPage(),
-        transition: Transition.leftToRight,
+
         binding: BindingsBuilder(() {
           Get.put<SettingContrl>(SettingContrl());
         })),

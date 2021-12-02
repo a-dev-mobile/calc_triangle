@@ -118,7 +118,7 @@ abstract class AppStyleButton {
     return TextStyle(
       // color: AppColors.text(context),
       // backgroundColor: AppColors.content(context),
-      fontSize: 35.sp,
+      fontSize: 25.sp,
       letterSpacing: 8,
       fontWeight: FontWeight.bold,
     );
