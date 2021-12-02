@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
@@ -52,7 +54,12 @@ class SettingPage extends StatelessWidget {
 
             buildEmail(context),
 
+Visibility(child: 
+
             buildRateApp(context),
+            visible: !Platform.isIOS,
+            
+            ),
 
             buildAboutApp(context),
 
@@ -111,7 +118,7 @@ class SettingPage extends StatelessWidget {
       onTap: () {
         Get.defaultDialog(
           title:
-              '${TranslateHelper.appName}\n${TranslateHelper.version}: v1.1',
+              '${TranslateHelper.appName}\n${TranslateHelper.version}: v1.2.0',
           backgroundColor: AppColors.content(context),
           content: Align(
             alignment: Alignment.topLeft,
