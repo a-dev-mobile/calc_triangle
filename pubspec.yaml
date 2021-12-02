@@ -70,7 +70,7 @@ flutter:
  
 flutter_native_splash:
 
-  color: "#000000"
+  color: "#ffffff"
   image: "assets/icon/launch_dark_screen_400.png"
   # background_image: "assets/icon/launch_dark_screen.png"
 
