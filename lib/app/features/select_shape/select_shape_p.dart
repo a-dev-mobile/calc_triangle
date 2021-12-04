@@ -2,6 +2,7 @@ import 'package:calc_triangle/app/admob/ad_helper.dart';
 import 'package:calc_triangle/app/config/routes/app_page.dart';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
+import 'package:calc_triangle/app/constants/const_bool.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/features/select_shape/controller/select_shape_c.dart';
 
@@ -123,7 +124,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.right_info,
                 onTap: () {
-                  showAd();
+                  if(ConstBool.isShowAd) showAd();
                   GlobalServ.to.aciveShape = Shape.rightTriangle;
                   Get.toNamed(Routes.calculateRight);
                 },

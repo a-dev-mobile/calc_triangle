@@ -54,12 +54,7 @@ class SettingPage extends StatelessWidget {
 
             buildEmail(context),
 
-Visibility(child: 
-
             buildRateApp(context),
-            visible: !Platform.isIOS,
-            
-            ),
 
             buildAboutApp(context),
 
@@ -125,14 +120,13 @@ Visibility(child:
             child: Column(
               children: [
                 Text(
-                  TranslateHelper.thank_you, textAlign: TextAlign.center,
+                  TranslateHelper.thank_you,
+                  textAlign: TextAlign.center,
                   style: AppStyleText.subText(context),
                 ),
                 AppWidgets.dividerWelcome(),
-             
                 Text(
                   '\nAutor: Dmitriy Trofimov\ncontact: ${ConstString.email}',
-                 
                   style: AppStyleText.subText(context),
                 )
               ],
@@ -227,7 +221,12 @@ Visibility(child:
       query:
           '${Uri.encodeComponent('subject')}=${Uri.encodeComponent('${TranslateHelper.feedback} -> ${TranslateHelper.appName}')}');
 
-  void launchURL() async => await canLaunch(ConstString.playStoreUrl)
-      ? await launch(ConstString.playStoreUrl)
-      : throw 'Could not launch ${ConstString.playStoreUrl}';
+  void launchURL() async {
+    String url =
+        Platform.isIOS ? ConstString.appStoreUrl : ConstString.playStoreUrl;
+
+    await canLaunch(url)
+        ? await launch(url)
+        : throw 'Could not launch ${ConstString.playStoreUrl}';
+  }
 }

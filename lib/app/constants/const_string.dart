@@ -7,7 +7,7 @@ abstract class ConstString {
   static const String keyIsFirstStartApp = 'keyIsFirstStartApp';
   static const String keyLocaleApp = 'keyLocaleApp';
   static const String keyNumberStartCalc = 'keyNumberStartCalc';
-  
+
   static const String localeRu = 'ru';
   static const String localeEn = 'en';
 
@@ -15,6 +15,8 @@ abstract class ConstString {
   static const String degMinSecConvert = "☺°☺′☺″";
   static const String email = 'a.dev.mobile@gmail.com';
 
-  static var playStoreUrl =
+  static const appStoreUrl = 'https://apps.apple.com/app/id1598378708';
+
+  static const playStoreUrl =
       'http://play.google.com/store/apps/details?id=a.dev.calc_triangle';
 }

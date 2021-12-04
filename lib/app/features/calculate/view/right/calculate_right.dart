@@ -1,4 +1,5 @@
 import 'package:calc_triangle/app/admob/ad_helper.dart';
+import 'package:calc_triangle/app/constants/const_bool.dart';
 import 'package:calc_triangle/app/features/calculate/view/right/2/right_main_w.dart';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _CalculateRightPageState extends State<CalculateRightPage> {
         },
       ),
     );
-    _bottomBannerAd.load();
+    if(ConstBool.isShowAd)    _bottomBannerAd.load();
   }
 
   @override
