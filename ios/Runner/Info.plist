@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-6155876762943258~3467934779</string>
+	<string>ca-app-pub-6155876762943258~4070771326</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>https</string>
