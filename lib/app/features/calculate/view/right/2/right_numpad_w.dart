@@ -3,9 +3,6 @@ import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
-
-
-
 import 'package:flutter/material.dart';
 
 var c = RightTriangleController.to;

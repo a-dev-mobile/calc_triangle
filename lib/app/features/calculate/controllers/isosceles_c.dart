@@ -232,7 +232,7 @@ class IsoscelesTriangleController extends GetxController {
       // если начинается ввод с точки
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      aAngle.value = sumInput + "°";
+      aAngle.value = "$sumInput°";
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -244,7 +244,7 @@ class IsoscelesTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      bAngle.value = sumInput + "°";
+      bAngle.value = "$sumInput°";
     }
 
     log.v('end input');
@@ -403,13 +403,13 @@ class IsoscelesTriangleController extends GetxController {
   void calcBangKnowAangl() {
     bAngleD = 180 - 2 * aAngleD;
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcAangKnowBangl() {
     aAngleD = (180 - bAngleD) / 2;
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calcBSideKnowAangHhei() {
@@ -1189,7 +1189,7 @@ class IsoscelesTriangleController extends GetxController {
         newInput = startLengthValue;
         resetNotActiveValue();
       }
-      aAngle.value = newInput + '°';
+      aAngle.value = '$newInput°';
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -1202,7 +1202,7 @@ class IsoscelesTriangleController extends GetxController {
         newInput = startLengthValue;
         resetNotActiveValue();
       }
-      bAngle.value = newInput + '°';
+      bAngle.value = '$newInput°';
     }
   }
 

@@ -6,7 +6,6 @@ import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
 
-
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/app_widgets.dart';
 import 'package:calc_triangle/app/shared_components/change_theme_w.dart';
@@ -14,13 +13,11 @@ import 'package:calc_triangle/app/shared_components/setting_launch_screen_w.dart
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
-
 import 'package:calc_triangle/app/utils/local_torage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -63,7 +60,7 @@ class WelcomePage extends StatelessWidget {
             ),
             //SizedBox(height: 0.1.sh,),
             SizedBox(
-                width: 0.8.sw, height: 0.04.sh, child: const WelcomeBtnStart()),
+                width: 0.8.sw, height: 0.05.sh, child: const WelcomeBtnStart()),
             const Spacer(),
           ],
         ),
@@ -101,7 +98,6 @@ class SliderPrecisionResultWidget extends StatelessWidget {
           precision = '0.00000';
           break;
         case 0:
-
         default:
           precision = '0';
       }
@@ -115,14 +111,12 @@ class SliderPrecisionResultWidget extends StatelessWidget {
             ]),
           ),
           Slider(
-              value:GlobalServ.to.precisionResult.value.toDouble(),
-             
+              value: GlobalServ.to.precisionResult.value.toDouble(),
               min: 0,
               divisions: 5,
               max: 5,
               onChanged: (double value) {
-               
-               GlobalServ.to.precisionResult.value = value.toInt();
+                GlobalServ.to.precisionResult.value = value.toInt();
               }),
         ],
       );

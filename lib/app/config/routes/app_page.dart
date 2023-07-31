@@ -37,14 +37,14 @@ class AppPage {
           Get.put<SettingContrl>(SettingContrl());
         })),
     GetPage(
-      name: Routes.selectShape,
-      page: () => const SelectShapePage(), binding: BindingsBuilder(() {
+        name: Routes.selectShape,
+        page: () => const SelectShapePage(),
+        binding: BindingsBuilder(() {
           Get.put<SelectShapeController>(SelectShapeController(),
               permanent: true);
         })),
     GetPage(
         name: Routes.calculateRight,
-       
         page: () => const CalculateRightPage(),
         binding: BindingsBuilder(() {
           Get.put<RightTriangleController>(RightTriangleController(),
@@ -52,7 +52,6 @@ class AppPage {
         })),
     GetPage(
         name: Routes.calculateScalene,
-       
         page: () => const CalculateScalenePage(),
         binding: BindingsBuilder(() {
           Get.put<ScaleneTriangleController>(ScaleneTriangleController(),
@@ -60,26 +59,22 @@ class AppPage {
         })),
     GetPage(
         name: Routes.calculateEquilateral,
-    
         page: () => const CalculateEquilateralPage(),
         binding: BindingsBuilder(() {
           Get.put<EquilateralTriangleController>(
               EquilateralTriangleController(),
               permanent: true);
         })),
-        GetPage(
+    GetPage(
         name: Routes.calculateIsosceles,
-      
         page: () => const CalculateIsoscelesPage(),
         binding: BindingsBuilder(() {
-          Get.put<IsoscelesTriangleController>(
-              IsoscelesTriangleController(),
+          Get.put<IsoscelesTriangleController>(IsoscelesTriangleController(),
               permanent: true);
         })),
     GetPage(
         name: Routes.setting,
         page: () => SettingPage(),
-
         binding: BindingsBuilder(() {
           Get.put<SettingContrl>(SettingContrl());
         })),

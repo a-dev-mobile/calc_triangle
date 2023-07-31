@@ -45,7 +45,6 @@ class ScaleneMain extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InteractiveViewer(
-                          
                             child: const ScaleneTriangleImageInputWidget()),
                         //показываем если не инфо
                         Obx(() {

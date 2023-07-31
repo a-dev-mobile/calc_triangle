@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late var c = ScaleneTriangleController.to;
+var c = ScaleneTriangleController.to;
 
 class YangleWidget extends StatelessWidget {
   const YangleWidget(
@@ -35,7 +35,7 @@ class YangleWidget extends StatelessWidget {
     c.isaAngle.value = false;
     c.isbAngle.value = false;
     c.isyAngle.value = true;
-          c.showMessage();
+    c.showMessage();
   }
 
   //===============

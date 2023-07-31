@@ -12,7 +12,7 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-late var c = EquilateralTriangleController.to;
+var c = EquilateralTriangleController.to;
 
 class EquilateralDetail extends StatelessWidget {
   const EquilateralDetail({Key? key}) : super(key: key);
@@ -86,7 +86,7 @@ class EquilateralDetail extends StatelessWidget {
                 header: Container(
                   color: AppColors.content(context),
                   child: Column(
-                    children:  [
+                    children: [
                       const ImageInfoWidget(
                           patchAsset:
                               ConstAssetsImageRaster.equilateralTriangleSR),
@@ -148,7 +148,7 @@ class BisectionInscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'la',
- subtitle: '${TranslateHelper.bis_of_side} a',
+          subtitle: '${TranslateHelper.bis_of_side} a',
           title: c.lA.value,
         ),
         ItemDetail(
@@ -187,7 +187,7 @@ class MedianaGeometricCentroid extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'ma',
-         subtitle: '${TranslateHelper.med_of_side} a',
+          subtitle: '${TranslateHelper.med_of_side} a',
           title: c.mA.value,
         ),
         ItemDetail(

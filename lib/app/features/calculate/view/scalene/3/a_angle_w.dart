@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late var c = ScaleneTriangleController.to;
+var c = ScaleneTriangleController.to;
 
 class AangleWidget extends StatelessWidget {
   const AangleWidget(
@@ -58,8 +58,7 @@ class AangleWidget extends StatelessWidget {
               isActiveInput = c.isaAngle.value;
               elementFigure = ScaleneTriangle.aAngle;
               //===============
-              isActiveParam =
-                  c.activeParamMap.containsValue(elementFigure);
+              isActiveParam = c.activeParamMap.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {

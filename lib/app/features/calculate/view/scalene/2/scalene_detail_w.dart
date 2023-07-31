@@ -10,7 +10,7 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-late var c = ScaleneTriangleController.to;
+var c = ScaleneTriangleController.to;
 
 class ScaleneDetail extends StatelessWidget {
   const ScaleneDetail({Key? key}) : super(key: key);

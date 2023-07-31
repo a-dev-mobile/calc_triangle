@@ -11,7 +11,7 @@ abstract class ConstColor {
 
   static const Color cardBgDark = Color(0xFF272727);
   static const Color cardBgLight = Color(0xFFffffff);
-  
+
   static const Color warninng = Color(0xFFF3BB1C);
   static const Color error = Color(0xFFF03738);
 }

@@ -6,7 +6,6 @@ import 'package:calc_triangle/app/constants/const_number.dart';
 import 'package:calc_triangle/app/features/calculate/view/equilateral/3/a_side_w.dart';
 import 'package:calc_triangle/app/features/calculate/view/equilateral/3/h_height_w.dart';
 
-
 import 'package:flutter/material.dart';
 
 String pathAssestInput = ConstAssetsImageRaster.equilateralTriangleInput;
@@ -22,7 +21,6 @@ class EquilateralTriangleImageInputWidget extends StatelessWidget {
       width: size.width,
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
-
 
         return Stack(
           alignment: Alignment.center,
@@ -42,13 +40,13 @@ class EquilateralTriangleImageInputWidget extends StatelessWidget {
               posY: 6.624,
               minSizeImage: minSize,
             ),
-           
+
             AsideWidget(
               posX: 0,
               posY: 43.545,
-              minSizeImage: minSize, angle: 0,
+              minSizeImage: minSize,
+              angle: 0,
             ),
-         
           ],
         );
       }),

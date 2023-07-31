@@ -13,7 +13,7 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-late var c = IsoscelesTriangleController.to;
+var c = IsoscelesTriangleController.to;
 
 class IsoscelesDetail extends StatelessWidget {
   const IsoscelesDetail({Key? key}) : super(key: key);

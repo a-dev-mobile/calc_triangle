@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:calc_triangle/app/config/theme/app_style.dart';
@@ -10,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late var c = ScaleneTriangleController.to;
+var c = ScaleneTriangleController.to;
 
 class AsideWidget extends StatelessWidget {
   const AsideWidget(
@@ -58,8 +56,7 @@ class AsideWidget extends StatelessWidget {
               isActiveInput = c.isaSide.value;
               elementFigure = ScaleneTriangle.aSide;
               //===============
-              isActiveParam =
-                  c.activeParamMap.containsValue(elementFigure);
+              isActiveParam = c.activeParamMap.containsValue(elementFigure);
               if (isActiveInput) {
                 styleText = AppStyleTextImage.activeInput(context);
               } else if (isActiveParam) {

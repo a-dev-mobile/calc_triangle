@@ -11,7 +11,7 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-late var c = RightTriangleController.to;
+var c = RightTriangleController.to;
 
 class RightDetail extends StatelessWidget {
   const RightDetail({Key? key}) : super(key: key);
@@ -109,7 +109,7 @@ class CircumscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'R',
-          subtitle:  TranslateHelper.radius_diameter_circumscribed_circle,
+          subtitle: TranslateHelper.radius_diameter_circumscribed_circle,
           title:
               'r ${c.Rcircum.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.Rd * 2, GlobalServ.to.precisionResult.value)}',
         ),
@@ -142,25 +142,25 @@ class BisectionInscribedCircle extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'la',
- subtitle: '${TranslateHelper.bis_of_side} a',
+          subtitle: '${TranslateHelper.bis_of_side} a',
           title: c.lA.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'lb',
- subtitle: '${TranslateHelper.bis_of_side} b',
+          subtitle: '${TranslateHelper.bis_of_side} b',
           title: c.lB.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'lc',
- subtitle: '${TranslateHelper.bis_of_side} c',
+          subtitle: '${TranslateHelper.bis_of_side} c',
           title: c.lC.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'r',
-          subtitle:  TranslateHelper.radius_diameter_inscribed_circle,
+          subtitle: TranslateHelper.radius_diameter_inscribed_circle,
           title:
               'r ${c.rInscribed.value} / ⌀ ${AppUtilsNumber.getFormatNumber(c.rd * 2, GlobalServ.to.precisionResult.value)}',
         ),
@@ -199,13 +199,13 @@ class MedianaGeometricCentroid extends StatelessWidget {
         ItemDetail(
           isActive: false,
           leading: 'mb',
-           subtitle: '${TranslateHelper.med_of_side} b',
+          subtitle: '${TranslateHelper.med_of_side} b',
           title: c.mB.value,
         ),
         ItemDetail(
           isActive: false,
           leading: 'mc',
-       subtitle: '${TranslateHelper.med_of_side} c',
+          subtitle: '${TranslateHelper.med_of_side} c',
           title: c.mC.value,
         ),
         ItemDetail(
@@ -257,7 +257,7 @@ class RightSidesAngles extends StatelessWidget {
         ItemDetail(
           isActive: c.isAvailableOneParam(RightTriangle.hHeight),
           leading: 'h',
-          subtitle:  TranslateHelper.h_height_triangle,
+          subtitle: TranslateHelper.h_height_triangle,
           title: c.hHeight.value,
         ),
         ItemDetail(
@@ -288,18 +288,3 @@ class RightSidesAngles extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

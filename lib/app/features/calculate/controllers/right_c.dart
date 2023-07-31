@@ -131,13 +131,13 @@ class RightTriangleController extends GetxController {
 
     if (keySymbol == Keys.next) {
       nextElement();
-    showMessage();
+      showMessage();
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
-    showMessage();
+      showMessage();
       return;
     }
 
@@ -255,7 +255,7 @@ class RightTriangleController extends GetxController {
       // если начинается ввод с точки
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      aAngle.value = sumInput + "°";
+      aAngle.value = "$sumInput°";
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -267,7 +267,7 @@ class RightTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      bAngle.value = sumInput + "°";
+      bAngle.value = "$sumInput°";
     }
 
     log.v('end input');
@@ -423,13 +423,13 @@ class RightTriangleController extends GetxController {
   void calcBangleKnowAang() {
     bAngleD = 90 - aAngleD;
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcAangKnowBang() {
     aAngleD = 90 - bAngleD;
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calchHeightKnowAcatAangl() {
@@ -440,7 +440,7 @@ class RightTriangleController extends GetxController {
   void calcBangKnowBcatChypo() {
     bAngleD = AppConvert.toDegree(acos(bSideD / cSideD));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcBangKnowAcatBcatChypo() {
@@ -448,7 +448,7 @@ class RightTriangleController extends GetxController {
         (pow(bSideD, 2) + pow(cSideD, 2) - pow(aSideD, 2)) /
             (2 * bSideD * cSideD)));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcChypoKnowAcatBcat() {
@@ -484,13 +484,13 @@ class RightTriangleController extends GetxController {
   void calcAangKnowHheiAcat() {
     aAngleD = AppConvert.toDegree(asin(hHeightD / aSideD));
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calcBangKnowHheibcat() {
     bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcAcatKnowBcatBang() {
@@ -527,19 +527,19 @@ class RightTriangleController extends GetxController {
     // ok
     bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcAangKnowHheiMcomp() {
     aAngleD = AppConvert.toDegree(atan(hHeightD / mCompCsideD));
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calcBangKnowHheiKcomp() {
     bAngleD = AppConvert.toDegree(atan(hHeightD / kCompCsideD));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcAcatKnowHheiAang() {
@@ -1771,7 +1771,6 @@ class RightTriangleController extends GetxController {
     // переключение вперед между widgets backspace
 
     _isNext(true);
-
   }
 
   void restartActiveParamIfZeroValue() {
@@ -1855,7 +1854,6 @@ class RightTriangleController extends GetxController {
     // переключение  между widgets
 
     _isNext(false);
-
   }
 
   void convertDMSToDeg() {
@@ -1993,7 +1991,7 @@ class RightTriangleController extends GetxController {
         newInput = startLengthValue;
         resetNotActiveValue();
       }
-      aAngle.value = newInput + '°';
+      aAngle.value = '$newInput°';
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -2006,7 +2004,7 @@ class RightTriangleController extends GetxController {
         newInput = startLengthValue;
         resetNotActiveValue();
       }
-      bAngle.value = newInput + '°';
+      bAngle.value = '$newInput°';
     }
   }
 
@@ -2127,8 +2125,6 @@ class RightTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
-
-
     if (isNext) {
       if (isaSide.value) {
         isaAngle.value = true;

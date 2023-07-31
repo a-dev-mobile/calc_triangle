@@ -1,7 +1,5 @@
 import 'package:calc_triangle/app/constants/const_color.dart';
 
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -53,12 +51,14 @@ abstract class AppStyleText {
         fontSize: 15.sp,
         fontWeight: FontWeight.bold);
   }
+
   static TextStyle textSettingItem(BuildContext context) {
     return TextStyle(
-        color: AppColors.text(context),
-        fontSize: 15.sp,
-       );
+      color: AppColors.text(context),
+      fontSize: 15.sp,
+    );
   }
+
   static TextStyle subText(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context).withOpacity(0.8), fontSize: 15.sp);
@@ -68,16 +68,12 @@ abstract class AppStyleText {
     return TextStyle(color: AppColors.text(context), fontSize: 26.sp);
   }
 
-
   static TextStyle leadingTextDetail(BuildContext context) {
     return TextStyle(
         color: AppColors.text(context),
         fontSize: 20.sp,
         fontWeight: FontWeight.bold);
   }
-
-
-
 }
 
 abstract class AppStyleTextImage {

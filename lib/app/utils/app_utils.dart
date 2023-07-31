@@ -61,7 +61,7 @@ abstract class AppUtilsString {
 
   static String addZeroIsFirstDecimal(String text) {
     if (AppUtilsString.getFirstCharacter(text) == '.') {
-      return text = '0' + text;
+      return text = '0$text';
     } else {
       return text;
     }
@@ -95,13 +95,10 @@ class AppUtilsNumber {
       if (newString.isEmpty) {
         mainResult = s[0];
       } else {
-        mainResult = s[0] + "." + newString;
+        mainResult = "${s[0]}.$newString";
       }
     }
 
     return mainResult;
   }
 }
-
-
-

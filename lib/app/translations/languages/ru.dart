@@ -2,15 +2,15 @@ Map<String, String> ru = {
   'about': 'О приложении',
   'app_name': 'Треугольник',
   'app_name_sub': 'Расчет',
-  'right_triangle':       'Прямоугольный',
-  'scalene_triangle':     'Разносторонний',
-  'isosceles_triangle':   'Равнобедренный',
+  'right_triangle': 'Прямоугольный',
+  'scalene_triangle': 'Разносторонний',
+  'isosceles_triangle': 'Равнобедренный',
   'equilateral_triangle': 'Равносторонний',
-  'right_info':       'Имеет прямой угол (90°)',
-  'scalene_info':     'Нет равных сторон\nНет равных углов',
-  'isosceles_info':   'Две равные стороны\nДва равных угла',
+  'right_info': 'Имеет прямой угол (90°)',
+  'scalene_info': 'Нет равных сторон\nНет равных углов',
+  'isosceles_info': 'Две равные стороны\nДва равных угла',
   'equilateral_info': 'Три равные стороны\nТри равных угла, всегда 60°',
- 'sides_height_angles': 'Стороны, высота и углы',
+  'sides_height_angles': 'Стороны, высота и углы',
   'area_perim': 'Площадь и периметер',
   'mediana_geom_centroid': 'Медиана и геометрический центр',
   'bisection_inscribed_circle': 'Биссектриса и вписываемый круг',
@@ -19,7 +19,6 @@ Map<String, String> ru = {
   'radius_diameter_inscribed_circle': 'Радиус / диаметр вписываемого круга',
   'x_cord_SR': 'X координата точки SR',
   'y_cord_SR': 'Y координата точки SR',
-
   'x_cord_Sr': 'X координата точки Sr',
   'y_cord_Sr': 'Y координата точки Sr',
   'x_cord_S': 'X координата точки S',
@@ -36,10 +35,7 @@ Map<String, String> ru = {
   'c_hypotenuse': 'c - гипотенуза',
   'acute_angles_degrees': 'острый угол',
   'components_c': 'компонент гипотенузы',
-
-
   'you_calculate': 'С помощью этого приложения вы сможете рассчитать:',
-
   'dialog_calculate': '''-стороны, высоту и углы
 -периметр и площадь
 -медианы и биссектрисы, 
@@ -49,8 +45,8 @@ Map<String, String> ru = {
 Всегда проверяйте свой результат!
 ''',
   'enter_3_parameters': 'Введите известные 3 значения',
-  'enter_2_parameters':  'Введите известные 2 значения',
-  'enter_1_parameters':  'Введите известное 1 значение',
+  'enter_2_parameters': 'Введите известные 2 значения',
+  'enter_1_parameters': 'Введите известное 1 значение',
   'rate_app': 'Оценить',
   'feedback': 'Обратная связь',
   'launch': 'Запуск',
@@ -78,11 +74,11 @@ Map<String, String> ru = {
   'message_enter_any_length': 'Введите любую длину',
   'message_formula_not_found': 'Формула не найдена',
   'message_max_number_entered': 'Максимальное введенное число',
-  'message_calc_error_chang_value': 'Ошибка в расчетах, попробуйте изменить значение',
+  'message_calc_error_chang_value':
+      'Ошибка в расчетах, попробуйте изменить значение',
   'area': 'Площадь',
   'perimeter': 'Периметр',
   'choose_shape': 'Выберите форму',
-
   'side': 'сторона',
   'must_be': 'должна быть',
   'height': 'высота',

@@ -2,29 +2,25 @@ Map<String, String> en = {
   'about': 'About App',
   'app_name': 'Triangle',
   'app_name_sub': 'Calculations',
-  'right_triangle':       'Right',
-  'scalene_triangle':     'Scalene',
-  'isosceles_triangle':   'Isosceles',
+  'right_triangle': 'Right',
+  'scalene_triangle': 'Scalene',
+  'isosceles_triangle': 'Isosceles',
   'equilateral_triangle': 'Equilateral',
-
-  'right_info':       'Has a right angle (90°)',
-  'scalene_info':     'No equal sides\nNo equal angles',
-  'isosceles_info':   'Two equal sides\nTwo equal angles',
+  'right_info': 'Has a right angle (90°)',
+  'scalene_info': 'No equal sides\nNo equal angles',
+  'isosceles_info': 'Two equal sides\nTwo equal angles',
   'equilateral_info': 'Three equal sides\nThree equal angles, always 60°',
-
-   
-
-
   'sides_height_angles': 'Sides, height and angles',
   'area_perim': 'Area and Perimeter',
   'mediana_geom_centroid': 'Mediana and geometric centroid',
   'bisection_inscribed_circle': 'Bisection and inscribed circle',
   'circumscribed_circle': 'Circumscribed circle',
-  'radius_diameter_circumscribed_circle': 'Radius / diameter of the circumscribed circle',
-  'radius_diameter_inscribed_circle': 'Radius / diameter of the inscribed circle',
+  'radius_diameter_circumscribed_circle':
+      'Radius / diameter of the circumscribed circle',
+  'radius_diameter_inscribed_circle':
+      'Radius / diameter of the inscribed circle',
   'x_cord_SR': 'X cordinate of the SR point',
   'y_cord_SR': 'Y cordinate of the SR point',
-
   'x_cord_Sr': 'X cordinate of the Sr point',
   'y_cord_Sr': 'Y cordinate of the Sr point',
   'x_cord_S': 'X cordinate of the S point',
@@ -41,10 +37,7 @@ Map<String, String> en = {
   'c_hypotenuse': 'c - hypotenuse',
   'acute_angles_degrees': 'acute angle',
   'components_c': 'components of the c - hypotenuse',
-
-
   'you_calculate': 'With this app you will be able to calculate:',
-
   'dialog_calculate': '''- sides, height and angles
 - perimeter and area
 - medians and bisectors, 
@@ -53,8 +46,6 @@ Map<String, String> en = {
 ---
 Always check your result!
 ''',
-
-
   'enter_3_parameters': 'Enter known 3 values',
   'enter_2_parameters': 'Enter known 2 values',
   'enter_1_parameters': 'Enter known 1 values',
@@ -85,19 +76,15 @@ Always check your result!
   'message_enter_any_length': 'Enter any length',
   'message_formula_not_found': 'Formula is not found',
   'message_max_number_entered': 'Max number entered',
-  'message_calc_error_chang_value': 'Error in calculations, try changing the value',
+  'message_calc_error_chang_value':
+      'Error in calculations, try changing the value',
   'area': 'Area',
   'perimeter': 'Perimeter',
   'choose_shape': 'Choose shape',
-
   'side': 'side',
   'must_be': 'must be',
   'height': 'height',
   'component': 'component',
   'thank_you': 'Thank You for choosing our application',
   'version': 'Version',
- 
-
-
-
 };

@@ -7,5 +7,3 @@ var logger = Logger(
 var log = Logger(
   printer: PrettyPrinter(methodCount: 0),
 );
-
-

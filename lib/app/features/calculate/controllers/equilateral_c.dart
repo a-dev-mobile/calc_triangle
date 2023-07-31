@@ -116,13 +116,13 @@ class EquilateralTriangleController extends GetxController {
 
     if (keySymbol == Keys.next) {
       nextElement();
-    showMessage();
+      showMessage();
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
-    showMessage();
+      showMessage();
       return;
     }
 
@@ -419,17 +419,17 @@ class EquilateralTriangleController extends GetxController {
   }
 
   bool isNumberNaN() {
-     bool isNan = false;
+    bool isNan = false;
     if (ValidationUtils.isNumberNanAndInfinity(aSideD)) {
       aSide.value = startLengthValue;
-  isNan = true;
+      isNan = true;
     }
     if (ValidationUtils.isNumberNanAndInfinity(hHeightD)) {
       hHeight.value = startLengthValue;
- isNan = true;
+      isNan = true;
     }
-    
-    return  isNan;
+
+    return isNan;
   }
 
   void moveEmptyValueToStartInParameters() {
@@ -544,7 +544,6 @@ class EquilateralTriangleController extends GetxController {
   }
 
   void showMessage() {
-
     log.w('start showMessage');
 
     if (isNotFormula) {
@@ -554,13 +553,12 @@ class EquilateralTriangleController extends GetxController {
       return;
     }
 
-
     // если есть пустой параметр
     if (isOnlyOneParamEmpty()) {
       showSnack(TranslateHelper.enterOneParameters);
       return;
     }
-        if (isNumberNaN()) {
+    if (isNumberNaN()) {
       log.w('isNumberNaN');
       showSnack(TranslateHelper.message_calc_error_chang_value);
       return;
@@ -626,7 +624,6 @@ class EquilateralTriangleController extends GetxController {
     // переключение вперед между widgets backspace
 
     _isNext(true);
-  
   }
 
   void restartActiveParamIfZeroValue() {
@@ -646,7 +643,6 @@ class EquilateralTriangleController extends GetxController {
     // переключение  между widgets
 
     _isNext(false);
-
   }
 
   void longBackspace() {

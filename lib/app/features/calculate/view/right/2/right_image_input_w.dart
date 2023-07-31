@@ -28,7 +28,6 @@ class RightTriangleImageInputWidget extends StatelessWidget {
       child: LayoutBuilder(builder: (context, constraints) {
         var minSize = min(constraints.maxWidth, constraints.maxHeight);
 
-
         return Stack(
           alignment: Alignment.center,
           children: [
@@ -62,12 +61,14 @@ class RightTriangleImageInputWidget extends StatelessWidget {
             BangleWidget(
               posX: -20.573,
               posY: 0,
-              minSizeImage: minSize, angle: 0,
+              minSizeImage: minSize,
+              angle: 0,
             ),
             AangleWidget(
               posX: -3.0,
               posY: 23.943,
-              minSizeImage: minSize, angle: 0,
+              minSizeImage: minSize,
+              angle: 0,
             ),
             BcathetWidget(
               angle: -90,
@@ -78,7 +79,8 @@ class RightTriangleImageInputWidget extends StatelessWidget {
             AcathetWidget(
               posX: 0,
               posY: 43.545,
-              minSizeImage: minSize, angle: 0,
+              minSizeImage: minSize,
+              angle: 0,
             ),
             ChypotenuseWidget(
               angle: 45,

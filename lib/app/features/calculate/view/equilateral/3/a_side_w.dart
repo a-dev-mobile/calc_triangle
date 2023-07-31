@@ -5,13 +5,12 @@ import 'dart:math';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-late var c = EquilateralTriangleController.to;
+var c = EquilateralTriangleController.to;
 
 class AsideWidget extends StatelessWidget {
   const AsideWidget(
@@ -30,9 +29,9 @@ class AsideWidget extends StatelessWidget {
   // ====change====
   void onTap() {
     c.isaSide.value = true;
-   
+
     c.ishHeight.value = false;
-  
+
     c.showMessage();
   }
 

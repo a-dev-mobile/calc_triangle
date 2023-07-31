@@ -14,16 +14,17 @@ class CustomMessageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: AppUtils.getWidth(context),
+      height: AppUtils.getHeight(context) * 0.06,
       // color: AppColors.contentRevers(context).withOpacity(0.5),
       child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               SizedBox(
+              SizedBox(
                 width: 10.w,
               ),
               Icon(
@@ -36,24 +37,17 @@ class CustomMessageView extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-           
                   message,
-                    textAlign: TextAlign.center,     
+                  textAlign: TextAlign.center,
                   maxLines: 2,
-                  style:
-                      TextStyle(  fontSize: 15.sp, color: AppColors.text(context)),
+                  style: TextStyle(
+                      fontSize: 15.sp, color: AppColors.text(context)),
                 ),
-              
-              
               ),
-          
-          
-          
             ],
           ),
         ],
       ),
-      height: AppUtils.getHeight(context) * 0.06,
     );
   }
 }

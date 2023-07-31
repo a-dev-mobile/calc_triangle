@@ -41,7 +41,6 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
             ),
             //all widget text in image
 
-         
             AsideWidget(
               angle: 0,
               posX: -4.711,
@@ -60,14 +59,14 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
               posY: -3.719,
               minSizeImage: minSize,
             ),
-          
-               HheightWidget(
+
+            HheightWidget(
               angle: -90,
               posX: -16.503,
               posY: 7.051,
               minSizeImage: minSize,
             ),
-              AangleWidget(
+            AangleWidget(
               angle: 54.341,
               posX: -22.37,
               posY: 22.748,
@@ -85,7 +84,6 @@ class ScaleneTriangleImageInputWidget extends StatelessWidget {
               posY: -13.39,
               minSizeImage: minSize,
             )
-           
           ],
         );
       }),

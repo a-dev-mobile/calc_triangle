@@ -7,14 +7,11 @@ import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
 import 'package:calc_triangle/app/features/calculate/view/equilateral/2/equilateral_numpad_w.dart';
 
-
-
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
-
 
 import 'package:flutter/material.dart';
 
@@ -25,12 +22,12 @@ import 'equilateral_detail_w.dart';
 import 'equilateral_image_input_w.dart';
 
 var c = EquilateralTriangleController.to;
+
 class EquilateralMain extends StatelessWidget {
   const EquilateralMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-   
     settingBar();
 
     return Scaffold(
@@ -44,7 +41,8 @@ class EquilateralMain extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                              InteractiveViewer(child: const EquilateralTriangleImageInputWidget()),
+                        InteractiveViewer(
+                            child: const EquilateralTriangleImageInputWidget()),
 
                         //показываем если не инфо
                         Obx(() {
@@ -92,7 +90,7 @@ class IconInputInfoWidget extends StatelessWidget {
           },
           child: Container(
             color: AppColors.content(context),
-            child: Icon(              
+            child: Icon(
               icon,
               size: AppSize.iconSize * 1.2,
               color: AppColors.text(context),

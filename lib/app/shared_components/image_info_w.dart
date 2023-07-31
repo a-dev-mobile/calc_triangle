@@ -3,9 +3,6 @@ import 'package:calc_triangle/app/constants/const_number.dart';
 
 import 'package:flutter/material.dart';
 
-
-
-
 class ImageInfoWidget extends StatelessWidget {
   const ImageInfoWidget({
     Key? key,

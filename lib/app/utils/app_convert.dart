@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:calc_triangle/app/utils/app_utils.dart';
 
-class AppConvert{
-
-
+class AppConvert {
   static String convertStringToDouble(String strAmount) {
     try {
       double.tryParse(strAmount);
@@ -14,7 +12,6 @@ class AppConvert{
       return "0";
     }
   }
-
 
   static double toRadian(double degree) {
     return degree * (pi / 180);
@@ -36,9 +33,7 @@ class AppConvert{
     dmsList = dmsList[1].split('″');
     double sec = double.parse(dmsList[0]);
 
-    return AppUtilsNumber.getFormatNumber(
-            deg + (min / 60) + (sec / 3600), precisionResults) +
-        "°";
+    return "${AppUtilsNumber.getFormatNumber(deg + (min / 60) + (sec / 3600), precisionResults)}°";
   }
 
   static String convertDegToDMS(double degree, int precisionResults) {
@@ -46,7 +41,8 @@ class AppConvert{
 
     int m = ((degree - d) * 60).toInt();
 
-    String s = AppUtilsNumber.getFormatNumber((degree - d - m / 60) * 3600, precisionResults);
+    String s = AppUtilsNumber.getFormatNumber(
+        (degree - d - m / 60) * 3600, precisionResults);
 
     return '$d°$m′$s″';
   }

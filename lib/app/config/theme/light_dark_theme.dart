@@ -4,10 +4,9 @@ import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
-    cardColor: ConstColor.cardBgLight,
+      cardColor: ConstColor.cardBgLight,
       primaryColor: ConstColor.primary,
       scaffoldBackgroundColor: ConstColor.scaffoldLightTheme,
       appBarTheme: AppBarTheme(
@@ -20,13 +19,13 @@ ThemeData lightThemeData(BuildContext context) {
             color: ConstColor.scaffoldLightTheme,
             fontSize: 20,
           ),
-             color: ConstColor.primary,
-        
+          color: ConstColor.primary,
           elevation: 0),
       textTheme: Theme.of(context).textTheme.apply(
-          fontFamily: 'montserrat', bodyColor: ConstColor.scaffoldDarkTheme,),
+            fontFamily: 'montserrat',
+            bodyColor: ConstColor.scaffoldDarkTheme,
+          ),
       colorScheme: const ColorScheme.light(
-        
         primary: ConstColor.primary,
         secondary: ConstColor.secondary,
         error: ConstColor.error,
@@ -37,9 +36,7 @@ ThemeData darkThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
       primaryColor: ConstColor.primary,
       scaffoldBackgroundColor: ConstColor.scaffoldDarkTheme,
-
-
-    cardColor: ConstColor.cardBgDark,
+      cardColor: ConstColor.cardBgDark,
       appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
               statusBarBrightness: Brightness.dark,
@@ -51,7 +48,6 @@ ThemeData darkThemeData(BuildContext context) {
             fontSize: 20,
           ),
           color: ConstColor.primary,
-        
           elevation: 0),
       textTheme: Theme.of(context).textTheme.apply(
             fontFamily: 'montserrat',
@@ -64,20 +60,15 @@ ThemeData darkThemeData(BuildContext context) {
       ));
 }
 
-
- void settingBar(){
-
-
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarIconBrightness:
-            GlobalServ.to.isDarkTheme() ? Brightness.light : Brightness.dark,
-        statusBarColor: GlobalServ.to.isDarkTheme()
-            ? ConstColor.scaffoldDarkTheme
-            : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: GlobalServ.to.isDarkTheme()
-            ? Brightness.dark
-            : Brightness.light // Dark == white status bar -- for IOS.
-        ));
-
-
+void settingBar() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarIconBrightness:
+          GlobalServ.to.isDarkTheme() ? Brightness.light : Brightness.dark,
+      statusBarColor: GlobalServ.to.isDarkTheme()
+          ? ConstColor.scaffoldDarkTheme
+          : ConstColor.scaffoldLightTheme, // Color for Android
+      statusBarBrightness: GlobalServ.to.isDarkTheme()
+          ? Brightness.dark
+          : Brightness.light // Dark == white status bar -- for IOS.
+      ));
 }

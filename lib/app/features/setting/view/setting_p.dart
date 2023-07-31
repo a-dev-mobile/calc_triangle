@@ -113,7 +113,7 @@ class SettingPage extends StatelessWidget {
       onTap: () {
         Get.defaultDialog(
           title:
-              '${TranslateHelper.appName}\n${TranslateHelper.version}: v1.2.0',
+              '${TranslateHelper.appName}\n${TranslateHelper.version}: v2.0.0',
           backgroundColor: AppColors.content(context),
           content: Align(
             alignment: Alignment.topLeft,

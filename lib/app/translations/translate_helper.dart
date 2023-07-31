@@ -20,8 +20,6 @@ class TranslateHelper {
   static String get isosceles_info => 'isosceles_info'.tr;
   static String get equilateral_info => 'equilateral_info'.tr;
 
-
-
   static String get enterThreeParameters => 'enter_3_parameters'.tr;
   static String get enterTwoParameters => 'enter_2_parameters'.tr;
   static String get enterOneParameters => 'enter_1_parameters'.tr;
@@ -60,8 +58,10 @@ class TranslateHelper {
       'message_hypotenuse_greater_cathetus'.tr;
 
   static String get messageFormulaNotFound => 'message_formula_not_found'.tr;
-  static String get message_max_number_entered => 'message_max_number_entered'.tr;
-  static String get message_calc_error_chang_value => 'message_calc_error_chang_value'.tr;
+  static String get message_max_number_entered =>
+      'message_max_number_entered'.tr;
+  static String get message_calc_error_chang_value =>
+      'message_calc_error_chang_value'.tr;
   static String get perimeter => 'perimeter'.tr;
   static String get area => 'area'.tr;
   static String get chooseShape => 'choose_shape'.tr;
@@ -76,15 +76,18 @@ class TranslateHelper {
   static String get sides_height_angles => 'sides_height_angles'.tr;
   static String get area_perim => 'area_perim'.tr;
   static String get mediana_geom_centroid => 'mediana_geom_centroid'.tr;
-  static String get bisection_inscribed_circle => 'bisection_inscribed_circle'.tr;
+  static String get bisection_inscribed_circle =>
+      'bisection_inscribed_circle'.tr;
   static String get circumscribed_circle => 'circumscribed_circle'.tr;
-  static String get radius_diameter_inscribed_circle => 'radius_diameter_inscribed_circle'.tr;
-  static String get radius_diameter_circumscribed_circle => 'radius_diameter_circumscribed_circle'.tr;
+  static String get radius_diameter_inscribed_circle =>
+      'radius_diameter_inscribed_circle'.tr;
+  static String get radius_diameter_circumscribed_circle =>
+      'radius_diameter_circumscribed_circle'.tr;
   static String get x_cord_SR => 'x_cord_SR'.tr;
   static String get y_cord_SR => 'y_cord_SR'.tr;
-   static String get x_cord_Sr => 'x_cord_Sr'.tr;
+  static String get x_cord_Sr => 'x_cord_Sr'.tr;
   static String get y_cord_Sr => 'y_cord_Sr'.tr;
-     static String get x_cord_S => 'x_cord_S'.tr;
+  static String get x_cord_S => 'x_cord_S'.tr;
   static String get y_cord_S => 'y_cord_S'.tr;
   static String get med_of_side => 'med_of_side'.tr;
   static String get bis_of_side => 'bis_of_side'.tr;
@@ -93,13 +96,10 @@ class TranslateHelper {
   static String get sides_triangle => 'sides_triangle'.tr;
   static String get base_triangle => 'base_triangle'.tr;
   static String get base => 'base'.tr;
-  static String get  internal_angle_degrees =>  'internal_angle_degrees'.tr;
-  static String get  c_hypotenuse =>  'c_hypotenuse'.tr;
-  static String get  acute_angles_degrees =>  'acute_angles_degrees'.tr;
-  
- 
- 
- 
+  static String get internal_angle_degrees => 'internal_angle_degrees'.tr;
+  static String get c_hypotenuse => 'c_hypotenuse'.tr;
+  static String get acute_angles_degrees => 'acute_angles_degrees'.tr;
+
   static String get check_result => 'check_result'.tr;
   static String get side => 'side'.tr;
   static String get must_be => 'must_be'.tr;
@@ -108,6 +108,4 @@ class TranslateHelper {
   static String get angle => 'angle'.tr;
   static String get thank_you => 'thank_you'.tr;
   static String get version => 'version'.tr;
-
-
 }

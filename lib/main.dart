@@ -1,4 +1,3 @@
-
 import 'package:calc_triangle/app/services/global_serv.dart';
 
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:logger/logger.dart';
 
 import 'app/config/routes/app_page.dart';
@@ -14,14 +12,10 @@ import 'app/config/theme/light_dark_theme.dart';
 import 'app/constants/const_string.dart';
 import 'app/translations/app_translations.dart';
 
-
-
 void main() async {
-
-   Logger.level = Level.nothing; //TODO on LOG
+  Logger.level = Level.nothing; //TODO on LOG
   WidgetsFlutterBinding.ensureInitialized();
 
-  MobileAds.instance.initialize();
   Get.putAsync<GlobalServ>(() async => GlobalServ());
 
   SystemChrome.setPreferredOrientations(
@@ -39,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: const Size(360, 800),
-        builder: () {
+        builder: (_, child) {
           return GetMaterialApp(
             navigatorKey: MyApp.materialKey,
 
@@ -58,7 +52,7 @@ class MyApp extends StatelessWidget {
             theme: lightThemeData(context),
             darkTheme: darkThemeData(context),
             translations: AppTranslation(),
-            locale: GlobalServ.to.appLocale() == ConstString.localeRu
+            locale: GlobalServ.to.appLocale.value == ConstString.localeRu
                 ? const Locale(ConstString.localeRu)
                 : const Locale(ConstString.localeEn),
 

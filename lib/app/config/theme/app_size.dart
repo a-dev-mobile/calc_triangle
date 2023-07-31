@@ -7,30 +7,30 @@ abstract class AppSize {
   static const _default = 16.0;
 
   static double fontSizeButton(BuildContext context) {
-    return Theme.of(context).textTheme.button?.fontSize ?? _default;
+    return Theme.of(context).textTheme.labelLarge?.fontSize ?? _default;
   }
 
   static double fontSizeHeadline6(BuildContext context) {
-    return Theme.of(context).textTheme.headline6?.fontSize ?? _default;
+    return Theme.of(context).textTheme.titleLarge?.fontSize ?? _default;
   }
 
   static double fontSizeHeadline5(BuildContext context) {
-    return Theme.of(context).textTheme.headline5?.fontSize ?? _default;
+    return Theme.of(context).textTheme.headlineSmall?.fontSize ?? _default;
   }
 
   static double fontSizeHeadline4(BuildContext context) {
-    return Theme.of(context).textTheme.headline4?.fontSize ?? _default;
+    return Theme.of(context).textTheme.headlineMedium?.fontSize ?? _default;
   }
 
   static double fontSizeHeadline3(BuildContext context) {
-    return Theme.of(context).textTheme.headline3?.fontSize ?? _default;
+    return Theme.of(context).textTheme.displaySmall?.fontSize ?? _default;
   }
 
   static double fontSizeBodyText1(BuildContext context) {
-    return Theme.of(context).textTheme.bodyText1?.fontSize ?? _default;
+    return Theme.of(context).textTheme.bodyLarge?.fontSize ?? _default;
   }
 
   static double fontSizeBodyText2(BuildContext context) {
-    return Theme.of(context).textTheme.bodyText2?.fontSize ?? _default;
+    return Theme.of(context).textTheme.bodyMedium?.fontSize ?? _default;
   }
 }

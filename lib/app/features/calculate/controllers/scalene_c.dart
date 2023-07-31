@@ -133,13 +133,13 @@ class ScaleneTriangleController extends GetxController {
 
     if (keySymbol == Keys.next) {
       nextElement();
-    showMessage();
+      showMessage();
       return;
     }
 
     if (keySymbol == Keys.prev) {
       prevElement();
-    showMessage();
+      showMessage();
 
       return;
     }
@@ -243,7 +243,7 @@ class ScaleneTriangleController extends GetxController {
       // если начинается ввод с точки
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      aAngle.value = sumInput + "°";
+      aAngle.value = "$sumInput°";
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -255,7 +255,7 @@ class ScaleneTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      bAngle.value = sumInput + "°";
+      bAngle.value = "$sumInput°";
     } else if (isyAngle.value) {
       oldInput = yAngle.value;
 
@@ -267,7 +267,7 @@ class ScaleneTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      yAngle.value = sumInput + "°";
+      yAngle.value = "$sumInput°";
     }
 
     log.v('end input');
@@ -404,21 +404,21 @@ class ScaleneTriangleController extends GetxController {
     yAngleD = 180 - aAngleD - bAngleD;
 
     yAngle.value =
-        AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(yAngleD, precisionResult)}°";
   }
 
   void calcAangKnowYangBang() {
     aAngleD = 180 - yAngleD - bAngleD;
 
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calcBangKnowYangAang() {
     bAngleD = 180 - yAngleD - aAngleD;
 
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcHheiKnowCsideAang() {
@@ -508,7 +508,7 @@ class ScaleneTriangleController extends GetxController {
   void calcBangKnowHheiBside() {
     bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcBSideKnowBangHhei() {
@@ -520,42 +520,42 @@ class ScaleneTriangleController extends GetxController {
     yAngleD = AppConvert.toDegree(
         asin(aSideD * sin(AppConvert.toRadian(aAngleD)) / bSideD));
     yAngle.value =
-        AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(yAngleD, precisionResult)}°";
   }
 
   void calcYangKnowAsideCsideBang() {
     yAngleD = AppConvert.toDegree(
         asin(aSideD * sin(AppConvert.toRadian(bAngleD)) / cSideD));
     yAngle.value =
-        AppUtilsNumber.getFormatNumber(yAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(yAngleD, precisionResult)}°";
   }
 
   void calcBangKnowAsideCsideYang() {
     bAngleD = AppConvert.toDegree(
         (asin(cSideD * sin(AppConvert.toRadian(yAngleD)) / aSideD)));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcAangKnowAsideBsideYang() {
     aAngleD = AppConvert.toDegree(
         asin(bSideD * sin(AppConvert.toRadian(yAngleD)) / aSideD));
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calcBangKnowCsideBsideAang() {
     bAngleD = AppConvert.toDegree(
         asin(cSideD * sin(AppConvert.toRadian(aAngleD)) / bSideD));
     bAngle.value =
-        AppUtilsNumber.getFormatNumber(bAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
   }
 
   void calcAangKnowCsideBsideBang() {
     aAngleD = AppConvert.toDegree(
         asin(bSideD * sin(AppConvert.toRadian(bAngleD)) / cSideD));
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calcCsideKnowBsideAangBang() {
@@ -588,7 +588,7 @@ class ScaleneTriangleController extends GetxController {
     aAngleD = AppConvert.toDegree(asin(hHeightD / cSideD));
 
     aAngle.value =
-        AppUtilsNumber.getFormatNumber(aAngleD, precisionResult) + "°";
+        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
   }
 
   void calcSubResultKnowAsideBsideCsideAangl() async {
@@ -1326,7 +1326,6 @@ class ScaleneTriangleController extends GetxController {
       isNotFormula = true;
 
       // calcCsideKnowHheiAang();
-
     }
 
     isNumberNaN();
@@ -1912,7 +1911,6 @@ class ScaleneTriangleController extends GetxController {
     // переключение вперед между widgets backspace
 
     _isNext(true);
- 
   }
 
   void restartActiveParamIfZeroValue() {
@@ -2028,7 +2026,6 @@ class ScaleneTriangleController extends GetxController {
     // переключение  между widgets
 
     _isNext(false);
-
   }
 
   void convertDMSToDeg() {
@@ -2138,7 +2135,7 @@ class ScaleneTriangleController extends GetxController {
         newInput = startLengthValue;
         resetNotActiveValue();
       }
-      aAngle.value = newInput + '°';
+      aAngle.value = '$newInput°';
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -2151,7 +2148,7 @@ class ScaleneTriangleController extends GetxController {
         newInput = startLengthValue;
         resetNotActiveValue();
       }
-      bAngle.value = newInput + '°';
+      bAngle.value = '$newInput°';
     } else if (isyAngle.value) {
       oldInput = yAngle.value;
 
@@ -2164,7 +2161,7 @@ class ScaleneTriangleController extends GetxController {
         newInput = startLengthValue;
         resetNotActiveValue();
       }
-      yAngle.value = newInput + '°';
+      yAngle.value = '$newInput°';
     }
   }
 
@@ -2283,7 +2280,6 @@ class ScaleneTriangleController extends GetxController {
   }
 
   void _isNext(bool isNext) {
-  
     if (isNext) {
       if (isaSide.value) {
         isbAngle.value = true;
@@ -2308,7 +2304,7 @@ class ScaleneTriangleController extends GetxController {
         isaSide.value = true;
       }
     } else {
-          if (isaSide.value) {
+      if (isaSide.value) {
         isyAngle.value = true;
         isaSide.value = false;
       } else if (isyAngle.value) {
@@ -2330,7 +2326,6 @@ class ScaleneTriangleController extends GetxController {
         isbAngle.value = false;
         isaSide.value = true;
       }
-    
     }
   }
 

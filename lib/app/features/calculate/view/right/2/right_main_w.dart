@@ -21,13 +21,13 @@ import 'package:get/get.dart';
 import 'right_detail_w.dart';
 import 'right_image_input_w.dart';
 
-late RightTriangleController c= RightTriangleController.to;
+RightTriangleController c = RightTriangleController.to;
+
 class RightMain extends StatelessWidget {
   const RightMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-  
     settingBar();
 
     return Scaffold(
@@ -41,7 +41,8 @@ class RightMain extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                              InteractiveViewer(child: const RightTriangleImageInputWidget()),
+                        InteractiveViewer(
+                            child: const RightTriangleImageInputWidget()),
 
                         //показываем если не инфо
                         Obx(() {
@@ -89,7 +90,7 @@ class IconInputInfoWidget extends StatelessWidget {
           },
           child: Container(
             color: AppColors.content(context),
-            child: Icon(              
+            child: Icon(
               icon,
               size: AppSize.iconSize * 1.2,
               color: AppColors.text(context),

@@ -6,12 +6,12 @@ abstract class AppColors {
   }
 
   static Color text(BuildContext context) {
-    Color color = Theme.of(context).textTheme.bodyText1?.color ?? Colors.red;
+    Color color = Theme.of(context).textTheme.bodyLarge?.color ?? Colors.red;
     return color;
   }
 
   static Color contentRevers(BuildContext context) {
-    Color color = Theme.of(context).textTheme.bodyText1?.color ?? Colors.red;
+    Color color = Theme.of(context).textTheme.bodyLarge?.color ?? Colors.red;
     return color;
   }
   // static Color contentReverse = AppUtils.isDark

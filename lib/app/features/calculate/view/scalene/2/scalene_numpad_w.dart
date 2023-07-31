@@ -3,13 +3,9 @@ import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart'
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
-
-
-
-
 import 'package:flutter/material.dart';
 
-late var c = ScaleneTriangleController.to;
+var c = ScaleneTriangleController.to;
 
 class NumPadScaleneWidget extends StatelessWidget {
   const NumPadScaleneWidget({Key? key}) : super(key: key);
