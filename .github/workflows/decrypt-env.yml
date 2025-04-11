@@ -1,70 +1,51 @@
-name: Decrypt and Use ENV File
+name: Flutter Build APK
 
 on:
-  # Можно запускать вручную из интерфейса GitHub
   workflow_dispatch:
-  # И/или при пуше в main ветку
   push:
     branches: [ master ]
 
 jobs:
-  decrypt-and-use-env:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # Шаг 1: Получаем код из репозитория
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Шаг 2: Расшифровываем файл .env
       - name: Decrypt .env file
         run: |
           mkdir -p $HOME/secrets
           gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.ENV_FILE_PASSPHRASE }}" \
           --output $HOME/secrets/.env .env.gpg
-          echo "Файл .env успешно расшифрован"
-          
-      # Шаг 3: Загружаем переменные из .env в среду выполнения и в GITHUB_ENV
+
       - name: Load environment variables
         run: |
           if [ -f "$HOME/secrets/.env" ]; then
-            echo "Загружаем переменные из .env файла"
-            # Читаем переменные из .env и добавляем их в GITHUB_ENV
             while IFS= read -r line || [ -n "$line" ]; do
-              # Пропускаем пустые строки и комментарии
               if [[ ! -z "$line" && ! "$line" =~ ^[[:space:]]*# ]]; then
-                # Добавляем переменную в GITHUB_ENV
                 echo "$line" >> $GITHUB_ENV
               fi
             done < "$HOME/secrets/.env"
-            echo "Переменные окружения успешно загружены"
           else
             echo "Ошибка: Файл .env не найден!"
             exit 1
           fi
 
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.2'
+          channel: 'stable'
+          cache: true
 
-      # Шаг 5: Вывод всех переменных окружения из .env файла
-      - name: Print all environment variables
-        run: |
-          echo "Вывод всех переменных окружения из .env файла:"
-          if [ -f "$HOME/secrets/.env" ]; then
-            cat $HOME/secrets/.env
-          else
-            echo "Ошибка: Файл .env не найден!"
-            # exit 1
-          fi
-          
-      # Шаг 6: Пример использования переменных в другой задаче
-      - name: Example task with environment variables
-        run: |
-          # Пример использования переменных
-          echo "Выполняем задачу с использованием переменных окружения"
-          echo "Значение DB_PASSWORD: $DB_PASSWORD"
-          echo "Значение API_KEY: $API_KEY"
-          # Здесь ваш код для работы с переменными окружения
-          
-      # Дополнительный шаг: вывод всех переменных окружения в системе
-      - name: Print all system environment variables
-        run: |
-          echo "Вывод всех переменных окружения в системе:"
-          env
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
