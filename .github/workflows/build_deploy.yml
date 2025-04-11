@@ -3,7 +3,7 @@ name: Flutter Build APK
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -40,8 +40,8 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.2'
-          channel: 'stable'
+          flutter-version: "3.29.2"
+          channel: "stable"
           cache: true
 
       - name: Flutter pub get
@@ -55,3 +55,35 @@ jobs:
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Get commit info
+        id: commit-info
+        run: |
+          echo "message=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+          echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "date=$(git log -1 --format=%cd --date=format:'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
+
+      - name: Upload APK to release folder
+        id: upload-release
+        run: |
+          # Создаем папку для релизов, если её нет
+          mkdir -p releases
+          # Копируем APK в папку releases с именем, содержащим commit hash
+          cp build/app/outputs/flutter-apk/app-release.apk releases/app-${{ steps.commit-info.outputs.sha }}.apk
+          # Устанавливаем имя файла для использования в дальнейших шагах
+          echo "filename=app-${{ steps.commit-info.outputs.sha }}.apk" >> $GITHUB_OUTPUT
+
+      - name: Send Telegram notification with APK
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: markdown
+          message: |
+            🚀 *Новая сборка приложения*
+
+            Repo: ${{ github.repository }}
+            Commit: `${{ steps.commit-info.outputs.sha }}`
+            Дата: ${{ steps.commit-info.outputs.date }}
+            Сообщение: ${{ steps.commit-info.outputs.message }}
+          document: build/app/outputs/flutter-apk/app-release.apk
