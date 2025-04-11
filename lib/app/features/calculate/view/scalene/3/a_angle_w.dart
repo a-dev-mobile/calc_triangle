@@ -10,16 +10,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
-var c = ScaleneTriangleController.to;
+ScaleneTriangleController c = ScaleneTriangleController.to;
 
 class AangleWidget extends StatelessWidget {
-  const AangleWidget(
-      {Key? key,
-      required this.posX,
-      required this.posY,
-      required this.angle,
-      required this.minSizeImage})
-      : super(key: key);
+  const AangleWidget({
+    required this.posX,
+    required this.posY,
+    required this.angle,
+    required this.minSizeImage,
+    super.key,
+  });
 
   final double posX;
   final double posY;
@@ -48,38 +48,36 @@ class AangleWidget extends StatelessWidget {
     ScaleneTriangle elementFigure;
     String activeValue;
     return Transform.translate(
-        offset:
-            Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
-        child: Transform.rotate(
-            angle: angle * pi / 180,
-            child: Obx(() {
-              // ====change====
-              activeValue = c.aAngle.value;
-              isActiveInput = c.isaAngle.value;
-              elementFigure = ScaleneTriangle.aAngle;
-              //===============
-              isActiveParam = c.activeParamMap.containsValue(elementFigure);
-              if (isActiveInput) {
-                styleText = AppStyleTextImage.activeInput(context);
-              } else if (isActiveParam) {
-                styleText = AppStyleTextImage.activeParam(context);
-              } else {
-                styleText = AppStyleTextImage.inActive(context);
-              }
+      offset: Offset((posX / 100) * minSizeImage, (posY / 100) * minSizeImage),
+      child: Transform.rotate(
+        angle: angle * pi / 180,
+        child: Obx(() {
+          // ====change====
+          activeValue = c.aAngle.value;
+          isActiveInput = c.isaAngle.value;
+          elementFigure = ScaleneTriangle.aAngle;
+          //===============
+          isActiveParam = c.activeParamMap.containsValue(elementFigure);
+          if (isActiveInput) {
+            styleText = AppStyleTextImage.activeInput(context);
+          } else if (isActiveParam) {
+            styleText = AppStyleTextImage.activeParam(context);
+          } else {
+            styleText = AppStyleTextImage.inActive(context);
+          }
 
-              return GestureDetector(
-                  onTap: () {
-                    onTap();
-                  },
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
-                    color: Colors.transparent,
-                    child: Text(
-                      activeValue,
-                      style: styleText,
-                    ),
-                  ));
-            })));
+          return GestureDetector(
+            onTap: () {
+              onTap();
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.h),
+              color: Colors.transparent,
+              child: Text(activeValue, style: styleText),
+            ),
+          );
+        }),
+      ),
+    );
   }
 }

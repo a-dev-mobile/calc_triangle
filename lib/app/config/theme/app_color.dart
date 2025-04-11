@@ -14,6 +14,7 @@ abstract class AppColors {
     Color color = Theme.of(context).textTheme.bodyLarge?.color ?? Colors.red;
     return color;
   }
+
   // static Color contentReverse = AppUtils.isDark
   //     ? ConstColor.scaffoldDarkTheme
   //     : ConstColor.scaffoldLightTheme;

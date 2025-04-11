@@ -7,39 +7,41 @@ class AppUtilsMap {
       .cast<int, RightTriangle>();
      */
 
-  static Map<int, dynamic> updateValues(
-      {required Map<int, dynamic> oldMap,
-      required var oldValue,
-      required var newValue}) {
-    Map<int, dynamic> newMap = {}..addAll(oldMap);
-    List<int> keyList = [];
+  static Map<int, dynamic> updateValues({
+    required Map<int, dynamic> oldMap,
+    required var oldValue,
+    required var newValue,
+  }) {
+    Map<int, dynamic> newMap = <int, dynamic>{}..addAll(oldMap);
+    List<int> keyList = <int>[];
 
-    for (var e in oldMap.entries) {
+    for (MapEntry<int, dynamic> e in oldMap.entries) {
       if (e.value == oldValue) {
         keyList.add(e.key);
       }
     }
-    for (var key in keyList) {
+    for (int key in keyList) {
       newMap[key] = newValue;
     }
     return newMap;
   }
 
-  static Map<int, dynamic> moveValue(
-      {required Map<int, dynamic> oldMap,
-      required var moveValue,
-      required bool isPositionStart}) {
+  static Map<int, dynamic> moveValue({
+    required Map<int, dynamic> oldMap,
+    required var moveValue,
+    required bool isPositionStart,
+  }) {
     // if (!oldMap.containsValue(moveValue) || oldMap.isEmpty) {
     //   throw Exception(
     //       "{{{{{{{{{{ map empty or not contains value = $moveValue }}}}}}}}}}");
     // }
 
-    Map<int, dynamic> mapWithoutMoveValue = {};
-    List<int> keyListMoveValue = [];
+    Map<int, dynamic> mapWithoutMoveValue = <int, dynamic>{};
+    List<int> keyListMoveValue = <int>[];
 
     int i = 1;
 
-    for (var e in oldMap.entries) {
+    for (MapEntry<int, dynamic> e in oldMap.entries) {
       if (e.value == moveValue) {
         keyListMoveValue.add(e.key);
       } else {
@@ -47,24 +49,24 @@ class AppUtilsMap {
         i++;
       }
     }
-    Map<int, dynamic> mapWithMoveValue = {};
+    Map<int, dynamic> mapWithMoveValue = <int, dynamic>{};
     i = 1;
 
     if (isPositionStart) {
-      for (var key in keyListMoveValue) {
+      for (int key in keyListMoveValue) {
         mapWithMoveValue[i] = moveValue;
         i++;
       }
-      for (var e in mapWithoutMoveValue.entries) {
+      for (MapEntry<int, dynamic> e in mapWithoutMoveValue.entries) {
         mapWithMoveValue[i] = e.value;
         i++;
       }
     } else {
-      for (var e in mapWithoutMoveValue.entries) {
+      for (MapEntry<int, dynamic> e in mapWithoutMoveValue.entries) {
         mapWithMoveValue[i] = e.value;
         i++;
       }
-      for (var key in keyListMoveValue) {
+      for (int key in keyListMoveValue) {
         mapWithMoveValue[i] = moveValue;
         i++;
       }

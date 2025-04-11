@@ -39,36 +39,28 @@ class SettingContrl extends GetxController {
   }
 
   void setThemeAppBar() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarIconBrightness: GlobalServ.to.isDarkTheme.value
-            ? Brightness.light
-            : Brightness.dark,
-        statusBarColor: GlobalServ.to.isDarkTheme.value
-            ? ConstColor.scaffoldDarkTheme
-            : ConstColor.scaffoldLightTheme, // Color for Android
-        statusBarBrightness: GlobalServ.to.isDarkTheme.value
-            ? Brightness.dark
-            : Brightness.light // Dark == white status bar -- for IOS.
-        ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        statusBarIconBrightness:
+            GlobalServ.to.isDarkTheme.value
+                ? Brightness.light
+                : Brightness.dark,
+        statusBarColor:
+            GlobalServ.to.isDarkTheme.value
+                ? ConstColor.scaffoldDarkTheme
+                : ConstColor.scaffoldLightTheme, // Color for Android
+        statusBarBrightness:
+            GlobalServ.to.isDarkTheme.value
+                ? Brightness.dark
+                : Brightness.light, // Dark == white status bar -- for IOS.
+      ),
+    );
   }
 
   @override
   void onClose() async {
-    GlobalServ.to.startIfCloseSetiing();
-
-// todo обновление точности расчета нужно сделать
-//! not work
-    // var c1 = RightTriangleController.to;
-    // var c2 = ScaleneTriangleController.to;
-    // var c3 = EquilateralTriangleController.to;
-    // var c4 = IsoscelesTriangleController.to;
-
-    // c1.calculate();
-    // c2.calculate();
-    // c3.calculate();
-    // c4.calculate();
-
-    //сохранил чтобы локально не считывать
+    // Save all settings when closing settings page
+    GlobalServ.to.saveAllSettings();
     super.onClose();
   }
 }

@@ -1,29 +1,192 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
-
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
-linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at
-  # https://dart-lang.github.io/linter/lints/index.html.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
-  rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
+  exclude:
+    # Build and Tools
+    - "build/**"
+    - "scripts/**"
+    - ".dart_tool/**"
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+    # Tests and Coverage
+    - "test/**.mocks.dart"
+    - ".test_coverage.dart"
+    - "coverage/**"
+
+    # Generated Files
+    - "**.g.dart"
+    - "**.gql.dart"
+    - "**.freezed.dart"
+    - "**.config.dart"
+    - "**.mocks.dart"
+    - "**.gen.dart"
+    - "**.pb.dart"
+    - "**.pbenum.dart"
+    - "**.pbjson.dart"
+    - "lib/localization/generated/**"
+    - "lib/constants/pubspec.yaml.g.dart"
+
+    # Assets and Platform-specific
+    - "assets/**"
+    - "ios/**"
+    - "android/**"
+    - "web/**"
+    - "macos/**"
+    - "windows/**"
+    - "linux/**"
+
+    # Development Tools
+    - ".fvm/**"
+
+linter:
+  rules:
+    # Error Prevention
+    - avoid_print
+    - avoid_empty_else
+    - avoid_relative_lib_imports
+    - avoid_type_to_string
+    - avoid_types_as_parameter_names
+    - avoid_web_libraries_in_flutter
+    - cancel_subscriptions
+    - close_sinks
+
+    # Style and Formatting
+    - always_declare_return_types
+    - always_put_control_body_on_new_line
+    - always_put_required_named_parameters_first
+    - always_specify_types
+    - annotate_overrides
+    - avoid_implementing_value_types
+    - camel_case_types
+    - directives_ordering
+    - eol_at_end_of_file
+    - prefer_single_quotes
+    - sort_child_properties_last
+    - unawaited_futures
+
+    # Performance
+    - avoid_unnecessary_containers
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+
+    # Flutter Specific
+    - sized_box_for_whitespace
+    - use_full_hex_values_for_flutter_colors
+    - use_key_in_widget_constructors
+
+dart_code_metrics:
+  extends:
+    - recommended
+  metrics:
+    cyclomatic-complexity: 20
+    number-of-parameters: 4
+    maximum-nesting-level: 5
+    source-lines-of-code: 50
+    maintainability-index: 50
+    halstead-volume: 150
+    weight-of-class: 0.33
+    number-of-methods: 10
+    lines-of-code: 100
+    technical-debt:
+      threshold: 1
+      todo-cost: 161
+      ignore-cost: 320
+      ignore-for-file-cost: 396
+      as-dynamic-cost: 322
+      deprecated-annotations-cost: 37
+      file-too-many-lines-cost: 100
+      no-test-cost: 489
+
+  formatter:
+    indent: 2
+    line-length: 100
+    cascading-widget-extensions: true
+
+  rules:
+    # New Common Rules 1.26.0+
+    - avoid-commented-out-code
+    - avoid-future-ignore
+    - prefer-switch-expression
+    - avoid-unnecessary-continue
+    - no-empty-string
+    - avoid-continue
+    - pattern-fields-ordering
+    - use-existing-destructuring
+    - prefer-class-destructuring
+    - prefer-static-method
+    - avoid-if-with-many-branches
+    - prefer-commenting-future-delayed
+    - avoid-complex-arithmetic-expressions
+
+    # New Flutter Rules 1.26.0+
+    - prefer-spacing
+    - use-closest-build-context
+    - prefer-transform-over-container
+    - prefer-align-over-container
+
+    # Code Quality
+    - avoid-dynamic: false
+    - avoid-passing-async-when-sync-expected
+    - avoid-redundant-async
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-unused-parameters
+    - newline-before-return
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-trailing-comma
+    - prefer-conditional-expressions
+
+    # Flutter Best Practices
+    - avoid-returning-widgets
+    - avoid-unnecessary-setstate
+    - prefer-extracting-callbacks
+    - avoid-missing-image-alt
+    - prefer-const-border-radius
+    - prefer-correct-edge-insets-constructor
+    - avoid-shrink-wrap-in-lists
+    - avoid-unnecessary-stateful-widgets
+
+    # Additional Rules from Common Set
+    - avoid-global-state
+    - avoid-non-null-assertion: false
+    - avoid-throw-in-catch-block
+    - prefer-first
+    - prefer-last
+    - prefer-match-file-name
+
+    # Bloc Specific Rules
+    - avoid-bloc-public-fields
+    - avoid-bloc-public-methods
+    - avoid-cubits: false
+    - avoid-duplicate-bloc-event-handlers
+    - avoid-empty-build-when
+    - avoid-existing-instances-in-bloc-provider
+    - avoid-instantiating-in-bloc-value-provider
+    - avoid-passing-bloc-to-bloc
+    - avoid-passing-build-context-to-blocs
+    - avoid-returning-value-from-cubit-methods
+    # используем BlocIgnoreEmitAfterClosed
+    - check-is-not-closed-after-async-gap: false
+    - emit-new-bloc-state-instances
+    - handle-bloc-event-subclasses
+    - prefer-bloc-event-suffix
+    - prefer-bloc-extensions
+    - prefer-bloc-state-suffix
+    - prefer-correct-bloc-provider
+    - prefer-immutable-bloc-events
+    - prefer-immutable-bloc-state
+    - prefer-multi-bloc-provider
+    - prefer-sealed-bloc-events
+    - prefer-sealed-bloc-state
+
+  exclude:
+    - test/**
+    - "**.g.dart"
+    - "**.freezed.dart"
+    - "**.config.dart"
+    - "**.mocks.dart"
+    - lib/localization/generated/**

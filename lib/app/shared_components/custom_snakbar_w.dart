@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomMessageView extends StatelessWidget {
-  const CustomMessageView({Key? key, required this.message}) : super(key: key);
+  const CustomMessageView({required this.message, super.key});
   final String message;
 
   @override
@@ -19,29 +19,27 @@ class CustomMessageView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 10.w,
-              ),
+            children: <Widget>[
+              SizedBox(width: 10.w),
               Icon(
                 Icons.info_outline,
                 color: ConstColor.warninng,
                 size: AppSize.iconSize,
               ),
-              SizedBox(
-                width: 2.w,
-              ),
+              SizedBox(width: 2.w),
               Expanded(
                 child: Text(
                   message,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: TextStyle(
-                      fontSize: 15.sp, color: AppColors.text(context)),
+                    fontSize: 15.sp,
+                    color: AppColors.text(context),
+                  ),
                 ),
               ),
             ],

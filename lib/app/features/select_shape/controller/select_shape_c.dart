@@ -34,11 +34,14 @@ class SelectShapeController extends GetxController {
 
   Future<void> firstStartApp() async {
     if (GlobalServ.to.isFirstStartApp) {
-      LocalStorage()
-          .setItemInt(ConstString.keyNumberStartCalc, numberStartCalc);
+      LocalStorage().setItemInt(
+        ConstString.keyNumberStartCalc,
+        numberStartCalc,
+      );
     } else {
-      numberStartCalc =
-          await LocalStorage().getItemInt(ConstString.keyNumberStartCalc);
+      numberStartCalc = await LocalStorage().getItemInt(
+        ConstString.keyNumberStartCalc,
+      );
     }
   }
 }

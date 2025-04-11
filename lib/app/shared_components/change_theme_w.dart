@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ChangeThemeWidget extends StatelessWidget {
-  const ChangeThemeWidget({Key? key}) : super(key: key);
+  const ChangeThemeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,50 +21,60 @@ class ChangeThemeWidget extends StatelessWidget {
       String theme =
           isDark ? TranslateHelper.darkTheme : TranslateHelper.lightTheme;
 
-      return Column(children: [
-        SizedBox(height: 20.h),
-        RichText(
-          text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
-            TextSpan(
-                text: TranslateHelper.selectTheme,
-                style: AppStyleText.titleText(context)),
-            TextSpan(text: theme, style: AppStyleText.subText(context))
-          ]),
-        ),
-        SizedBox(height: 20.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CircleButton(
+      return Column(
+        children: <Widget>[
+          SizedBox(height: 20.h),
+          RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: <InlineSpan>[
+                TextSpan(
+                  text: TranslateHelper.selectTheme,
+                  style: AppStyleText.titleText(context),
+                ),
+                TextSpan(text: theme, style: AppStyleText.subText(context)),
+              ],
+            ),
+          ),
+          SizedBox(height: 20.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              CircleButton(
                 onTap: () {
                   SettingContrl.to.setDarkTheme();
                 },
                 color: ConstColor.scaffoldDarkTheme,
-                icon: isDark
-                    ? AppStyleButton.iconActiveTheme(context)
-                    : AppStyleButton.iconNotActiveTheme(context)),
-            CircleButton(
+                icon:
+                    isDark
+                        ? AppStyleButton.iconActiveTheme(context)
+                        : AppStyleButton.iconNotActiveTheme(context),
+              ),
+              CircleButton(
                 onTap: () {
                   SettingContrl.to.setLightTheme();
                 },
                 color: ConstColor.scaffoldLightTheme,
-                icon: !isDark
-                    ? AppStyleButton.iconActiveTheme(context)
-                    : AppStyleButton.iconNotActiveTheme(context)),
-          ],
-        ),
-      ]);
+                icon:
+                    !isDark
+                        ? AppStyleButton.iconActiveTheme(context)
+                        : AppStyleButton.iconNotActiveTheme(context),
+              ),
+            ],
+          ),
+        ],
+      );
     });
   }
 }
 
 class CircleButton extends StatelessWidget {
   const CircleButton({
-    Key? key,
     required this.onTap,
     required this.color,
     required this.icon,
-  }) : super(key: key);
+    super.key,
+  });
   final Function() onTap;
   final Color color;
   final Widget icon;
@@ -77,10 +87,13 @@ class CircleButton extends StatelessWidget {
         width: 50.r,
         height: 50.r,
         decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-            border: Border.all(
-                color: AppColors.contentRevers(context), width: 3.r)),
+          color: color,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: AppColors.contentRevers(context),
+            width: 3.r,
+          ),
+        ),
         child: icon,
       ),
     );

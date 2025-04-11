@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class ItemDetail extends StatelessWidget {
   const ItemDetail({
-    Key? key,
     required this.leading,
     required this.title,
     required this.subtitle,
     required this.isActive,
-  }) : super(key: key);
+    super.key,
+  });
   final String leading;
   final String title;
   final String subtitle;

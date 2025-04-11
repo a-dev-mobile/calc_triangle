@@ -22,7 +22,7 @@ enum Shape {
 const int maxFailedLoadAttempts = 3;
 
 class SelectShapePage extends StatefulWidget {
-  const SelectShapePage({Key? key}) : super(key: key);
+  const SelectShapePage({super.key});
 
   @override
   State<SelectShapePage> createState() => _SelectShapePageState();
@@ -39,11 +39,14 @@ class _SelectShapePageState extends State<SelectShapePage> {
           TranslateHelper.appName,
           style: TextStyle(color: AppColors.content(context)),
         ),
-        actions: [buildAppBarBtnInfo(context), buildAppBarBtnSetting(context)],
+        actions: <Widget>[
+          buildAppBarBtnInfo(context),
+          buildAppBarBtnSetting(context),
+        ],
       ),
       body: SafeArea(
         child: Column(
-          children: [
+          children: <Widget>[
             Expanded(
               child: CardSelectShapet(
                 title: TranslateHelper.right_triangle,
@@ -51,7 +54,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.right_info,
                 onTap: () {
-                  GlobalServ.to.aciveShape = Shape.rightTriangle;
+                  GlobalServ.to.saveActiveShape(Shape.rightTriangle);
                   Get.toNamed(Routes.calculateRight);
                 },
               ),
@@ -63,7 +66,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterThreeParameters,
                 info: TranslateHelper.scalene_info,
                 onTap: () {
-                  GlobalServ.to.aciveShape = Shape.scaleneTriangle;
+                  GlobalServ.to.saveActiveShape(Shape.scaleneTriangle);
                   Get.toNamed(Routes.calculateScalene);
                 },
               ),
@@ -75,7 +78,7 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterTwoParameters,
                 info: TranslateHelper.isosceles_info,
                 onTap: () {
-                  GlobalServ.to.aciveShape = Shape.isoscelesTriangle;
+                  GlobalServ.to.saveActiveShape(Shape.isoscelesTriangle);
                   Get.toNamed(Routes.calculateIsosceles);
                 },
               ),
@@ -87,50 +90,51 @@ class _SelectShapePageState extends State<SelectShapePage> {
                 enterParameter: TranslateHelper.enterOneParameters,
                 info: TranslateHelper.equilateral_info,
                 onTap: () {
-                  GlobalServ.to.aciveShape = Shape.equilateralTriangle;
+                  GlobalServ.to.saveActiveShape(Shape.equilateralTriangle);
                   Get.toNamed(Routes.calculateEquilateral);
                 },
               ),
             ),
           ],
         ),
-
-        //   ],
       ),
     );
   }
 
   IconButton buildAppBarBtnSetting(BuildContext context) {
     return IconButton(
-        onPressed: () {
-          Get.toNamed(Routes.setting);
-        },
-        icon: Icon(Icons.settings, color: AppColors.content(context)));
+      onPressed: () {
+        Get.toNamed(Routes.setting);
+      },
+      icon: Icon(Icons.settings, color: AppColors.content(context)),
+    );
   }
 
   IconButton buildAppBarBtnInfo(BuildContext context) {
     return IconButton(
-        onPressed: () {
-          Get.defaultDialog(
-              titlePadding: const EdgeInsets.all(16),
-              contentPadding: const EdgeInsets.all(16),
-              backgroundColor: AppColors.content(context),
-              title: TranslateHelper.you_calculate,
-              content: Text(TranslateHelper.dialog_calculate));
-        },
-        icon: Icon(Icons.announcement, color: AppColors.content(context)));
+      onPressed: () {
+        Get.defaultDialog(
+          titlePadding: const EdgeInsets.all(16),
+          contentPadding: const EdgeInsets.all(16),
+          backgroundColor: AppColors.content(context),
+          title: TranslateHelper.you_calculate,
+          content: Text(TranslateHelper.dialog_calculate),
+        );
+      },
+      icon: Icon(Icons.announcement, color: AppColors.content(context)),
+    );
   }
 }
 
 class CardSelectShapet extends StatelessWidget {
   const CardSelectShapet({
-    Key? key,
     required this.title,
     required this.patchAssets1,
     required this.enterParameter,
     required this.info,
     required this.onTap,
-  }) : super(key: key);
+    super.key,
+  });
   final String title;
   final String info;
   final String enterParameter;
@@ -147,33 +151,29 @@ class CardSelectShapet extends StatelessWidget {
           onTap();
         },
         child: Row(
-          children: [
+          children: <Widget>[
             Expanded(
-                flex: 1,
-                child: Image.asset(
-                  patchAssets1,
-                  color: AppColors.contentRevers(context),
-                )),
+              flex: 1,
+              child: Image.asset(
+                patchAssets1,
+                color: AppColors.contentRevers(context),
+              ),
+            ),
             Expanded(
               flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   Text(
                     title,
-                    style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    info,
                     style: TextStyle(
-                      fontSize: 15.sp,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                  Text(info, style: TextStyle(fontSize: 15.sp)),
+                  SizedBox(height: 10.h),
                   Text(
                     enterParameter,
                     style: TextStyle(fontSize: 15.sp, color: Colors.grey),
@@ -181,7 +181,6 @@ class CardSelectShapet extends StatelessWidget {
                 ],
               ),
             ),
-            // Align(alignment: Alignment.topCenter, child: Icon(Icons.info_outline,color: AppColors.contentRevers(context),))
           ],
         ),
       ),

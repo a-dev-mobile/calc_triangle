@@ -12,25 +12,26 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-var c = EquilateralTriangleController.to;
+EquilateralTriangleController c = EquilateralTriangleController.to;
 
 class EquilateralDetail extends StatelessWidget {
-  const EquilateralDetail({Key? key}) : super(key: key);
+  const EquilateralDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         return Column(
-          children: [
+          children: <Widget>[
             StickyHeader(
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     const ImageInfoWidget(
-                        patchAsset:
-                            ConstAssetsImageRaster.equilateralTriangleInfo),
+                      patchAsset:
+                          ConstAssetsImageRaster.equilateralTriangleInfo,
+                    ),
                     TextTitleDetail(text: TranslateHelper.sides_height_angles),
                   ],
                 ),
@@ -41,10 +42,10 @@ class EquilateralDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     const ImageInfoWidget(
-                        patchAsset:
-                            ConstAssetsImageRaster.equilateralTriangleAP),
+                      patchAsset: ConstAssetsImageRaster.equilateralTriangleAP,
+                    ),
                     TextTitleDetail(text: TranslateHelper.area_perim),
                   ],
                 ),
@@ -55,47 +56,51 @@ class EquilateralDetail extends StatelessWidget {
               ),
             ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset:
-                              ConstAssetsImageRaster.equilateralTriangleS),
-                      TextTitleDetail(
-                          text: TranslateHelper.mediana_geom_centroid),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.equilateralTriangleS,
+                    ),
+                    TextTitleDetail(
+                      text: TranslateHelper.mediana_geom_centroid,
+                    ),
+                  ],
                 ),
-                content: const MedianaGeometricCentroid()),
+              ),
+              content: const MedianaGeometricCentroid(),
+            ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset:
-                              ConstAssetsImageRaster.equilateralTriangleSr),
-                      TextTitleDetail(
-                          text: TranslateHelper.bisection_inscribed_circle),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.equilateralTriangleSr,
+                    ),
+                    TextTitleDetail(
+                      text: TranslateHelper.bisection_inscribed_circle,
+                    ),
+                  ],
                 ),
-                content: const BisectionInscribedCircle()),
+              ),
+              content: const BisectionInscribedCircle(),
+            ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset:
-                              ConstAssetsImageRaster.equilateralTriangleSR),
-                      TextTitleDetail(
-                          text: TranslateHelper.circumscribed_circle),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.equilateralTriangleSR,
+                    ),
+                    TextTitleDetail(text: TranslateHelper.circumscribed_circle),
+                  ],
                 ),
-                content: const CircumscribedCircle()),
+              ),
+              content: const CircumscribedCircle(),
+            ),
           ],
         );
       },
@@ -104,14 +109,12 @@ class EquilateralDetail extends StatelessWidget {
 }
 
 class CircumscribedCircle extends StatelessWidget {
-  const CircumscribedCircle({
-    Key? key,
-  }) : super(key: key);
+  const CircumscribedCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'R',
@@ -137,14 +140,12 @@ class CircumscribedCircle extends StatelessWidget {
 }
 
 class BisectionInscribedCircle extends StatelessWidget {
-  const BisectionInscribedCircle({
-    Key? key,
-  }) : super(key: key);
+  const BisectionInscribedCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'la',
@@ -176,14 +177,12 @@ class BisectionInscribedCircle extends StatelessWidget {
 }
 
 class MedianaGeometricCentroid extends StatelessWidget {
-  const MedianaGeometricCentroid({
-    Key? key,
-  }) : super(key: key);
+  const MedianaGeometricCentroid({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'ma',
@@ -208,16 +207,13 @@ class MedianaGeometricCentroid extends StatelessWidget {
 }
 
 class EquilateralSidesAngles extends StatelessWidget {
-  const EquilateralSidesAngles({
-    Key? key,
-  }) : super(key: key);
+  const EquilateralSidesAngles({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         // AppWidgets.dividerWelcome(),
-
         ItemDetail(
           isActive: c.isAvailableOneParam(EquilateralTriangle.aSide),
           leading: 'a',

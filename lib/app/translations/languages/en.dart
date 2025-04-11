@@ -1,4 +1,4 @@
-Map<String, String> en = {
+Map<String, String> en = <String, String>{
   'about': 'About App',
   'app_name': 'Triangle',
   'app_name_sub': 'Calculations',

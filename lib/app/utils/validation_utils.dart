@@ -5,12 +5,13 @@ class ValidationUtils {
     }
 
     RegExp regExp = RegExp(
-        r"^[\w!#$%&’*+/=?`{|}~^-]+(?:\.[\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]+$");
+      r'^[\w!#$%&’*+/=?`{|}~^-]+(?:\.[\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]+$',
+    );
     return regExp.hasMatch(email);
   }
 
   static bool isTwoDecimalPoint(String text) {
-    var i = text.split('.').length;
+    int i = text.split('.').length;
     if (i > 2) {
       return true;
     } else {
@@ -19,7 +20,7 @@ class ValidationUtils {
   }
 
   static bool isListNanAndInfinity(List<double> listDouble) {
-    for (var item in listDouble) {
+    for (double item in listDouble) {
       if (isNumberNanAndInfinity(item)) {
         return true;
       }

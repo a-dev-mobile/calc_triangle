@@ -1,8 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
@@ -11,38 +13,31 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/utils/app_utils_map.dart';
+import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
 
 import 'package:get/get.dart';
 
-enum IsoscelesTriangle {
-  aSide,
-  bSide,
-  hHeight,
-  aAngle,
-  bAngle,
-
-  empty,
-}
+enum IsoscelesTriangle { aSide, bSide, hHeight, aAngle, bAngle, empty }
 
 class IsoscelesTriangleController extends GetxController {
   static IsoscelesTriangleController get to =>
       Get.find<IsoscelesTriangleController>();
 
-  static const startAngleValue = '0°';
-  static const startLengthValue = '0';
+  static const String startAngleValue = '0°';
+  static const String startLengthValue = '0';
 
-  var activeParamMap = <int, IsoscelesTriangle>{}.obs;
+  RxMap<int, IsoscelesTriangle> activeParamMap = <int, IsoscelesTriangle>{}.obs;
 
-  var aSide = startLengthValue.obs;
-  var bSide = startLengthValue.obs;
+  RxString aSide = startLengthValue.obs;
+  RxString bSide = startLengthValue.obs;
 
-  var hHeight = startLengthValue.obs;
-  var aAngle = startAngleValue.obs;
-  var bAngle = startAngleValue.obs;
+  RxString hHeight = startLengthValue.obs;
+  RxString aAngle = startAngleValue.obs;
+  RxString bAngle = startAngleValue.obs;
 
-/////////////////////////////
+  /////////////////////////////
   double aSideD = 0.0;
   double bSideD = 0.0;
 
@@ -50,78 +45,71 @@ class IsoscelesTriangleController extends GetxController {
   double aAngleD = 0.0;
   double bAngleD = 0.0;
 
-/////////////////////////////
-  var area = "".obs;
-  var perimeter = "".obs;
-  var xSPoint = "".obs;
-  var ySPoint = "".obs;
-/////////////////////////////
+  /////////////////////////////
+  RxString area = ''.obs;
+  RxString perimeter = ''.obs;
+  RxString xSPoint = ''.obs;
+  RxString ySPoint = ''.obs;
+  /////////////////////////////
   double areaD = 0.0;
   double perimeterD = 0.0;
   double xSPointD = 0.0;
   double ySPointD = 0.0;
-/////////////////////////////
+  /////////////////////////////
 
-  var mA = "".obs;
-  var mB = "".obs;
-  var mC = "".obs;
+  RxString mA = ''.obs;
+  RxString mB = ''.obs;
+  RxString mC = ''.obs;
   double mAd = 0.0;
   double mBd = 0.0;
   double mCd = 0.0;
-/////////////////////////////
+  /////////////////////////////
 
-  var lA = "".obs;
-  var lB = "".obs;
-  var lC = "".obs;
+  RxString lA = ''.obs;
+  RxString lB = ''.obs;
+  RxString lC = ''.obs;
   double lAd = 0.0;
   double lBd = 0.0;
   double lCd = 0.0;
 
   //// Radius of the inscribed circle
-  var rInscribed = "".obs;
-  var xr = "".obs;
-  var yr = "".obs;
+  RxString rInscribed = ''.obs;
+  RxString xr = ''.obs;
+  RxString yr = ''.obs;
   double rd = 0.0;
   double xrd = 0.0;
   double yrd = 0.0;
 
-  var Rcircum = "".obs;
-  var xR = "".obs;
-  var yR = "".obs;
+  RxString Rcircum = ''.obs;
+  RxString xR = ''.obs;
+  RxString yR = ''.obs;
   double Rd = 0.0;
   double xRd = 0.0;
   double yRd = 0.0;
 
-/////////////////////////////
+  /////////////////////////////
 
-  var isDeg = true.obs;
+  RxBool isDeg = true.obs;
 
-  var isaAngle = false.obs;
-  var isbAngle = false.obs;
+  RxBool isaAngle = false.obs;
+  RxBool isbAngle = false.obs;
 
-  var isaSide = false.obs;
-  var isbSide = false.obs;
+  RxBool isaSide = false.obs;
+  RxBool isbSide = false.obs;
 
-  var ishHeight = false.obs;
+  RxBool ishHeight = false.obs;
 
-  var isActiveSnackBar = false.obs;
-  var messageSnackBar = ''.obs;
-  var isActiveImageInfo = false.obs;
+  RxBool isActiveSnackBar = false.obs;
+  RxString messageSnackBar = ''.obs;
+  RxBool isActiveImageInfo = false.obs;
 
   //что  бы не сбрасывать в методе
-  var paramLastLenght = IsoscelesTriangle.empty;
+  IsoscelesTriangle paramLastLenght = IsoscelesTriangle.empty;
 
   late int precisionResult;
 
-  String message = "";
+  String message = '';
   bool isNotFormula = false;
-
-  @override
-  void onInit() {
-    clearAll();
-    showMessage();
-    super.onInit();
-  }
 
   void clickKey(KeySymbol keySymbol) {
     precisionResult = GlobalServ.to.precisionResult.value;
@@ -232,7 +220,7 @@ class IsoscelesTriangleController extends GetxController {
       // если начинается ввод с точки
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      aAngle.value = "$sumInput°";
+      aAngle.value = '$sumInput°';
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -244,7 +232,7 @@ class IsoscelesTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      bAngle.value = "$sumInput°";
+      bAngle.value = '$sumInput°';
     }
 
     log.v('end input');
@@ -255,7 +243,8 @@ class IsoscelesTriangleController extends GetxController {
 
     setActiveParam();
     log.v(
-        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} 3 ${activeParamMap[3]} click end active param');
+      '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} 3 ${activeParamMap[3]} click end active param',
+    );
 
     initValue();
     calculate();
@@ -312,7 +301,7 @@ class IsoscelesTriangleController extends GetxController {
   }
 
   void resetActiveInput() {
-//начальное значение при запуске
+    //начальное значение при запуске
     isaSide.value = true;
     isbSide.value = false;
 
@@ -343,13 +332,15 @@ class IsoscelesTriangleController extends GetxController {
       }
 
       if (activeParamMap.containsValue(IsoscelesTriangle.aAngle)) {
-        aAngleD =
-            double.parse(AppUtilsString.removeLastCharacter(aAngle.value));
+        aAngleD = double.parse(
+          AppUtilsString.removeLastCharacter(aAngle.value),
+        );
       }
 
       if (activeParamMap.containsValue(IsoscelesTriangle.bAngle)) {
-        bAngleD =
-            double.parse(AppUtilsString.removeLastCharacter(bAngle.value));
+        bAngleD = double.parse(
+          AppUtilsString.removeLastCharacter(bAngle.value),
+        );
       }
     } catch (e) {
       log.e('initValue error to double');
@@ -365,9 +356,12 @@ class IsoscelesTriangleController extends GetxController {
   }
 
   void calcAangKnowAsideBSide() {
-    aAngleD = AppConvert.toDegree(acos(
+    aAngleD = AppConvert.toDegree(
+      acos(
         (pow(aSideD, 2) + pow(bSideD, 2) - pow(bSideD, 2)) /
-            (2 * aSideD * bSideD)));
+            (2 * aSideD * bSideD),
+      ),
+    );
     aAngle.value = AppUtilsNumber.getFormatNumber(aAngleD, precisionResult);
   }
 
@@ -385,8 +379,10 @@ class IsoscelesTriangleController extends GetxController {
   void calcPerimKnowAsideBside() {
     perimeterD = aSideD + bSideD + bSideD;
 
-    perimeter.value =
-        AppUtilsNumber.getFormatNumber(perimeterD, precisionResult);
+    perimeter.value = AppUtilsNumber.getFormatNumber(
+      perimeterD,
+      precisionResult,
+    );
   }
 
   void calcXsPointKnowAsideBsideAang() {
@@ -403,13 +399,13 @@ class IsoscelesTriangleController extends GetxController {
   void calcBangKnowAangl() {
     bAngleD = 180 - 2 * aAngleD;
     bAngle.value =
-        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°';
   }
 
   void calcAangKnowBangl() {
     aAngleD = (180 - bAngleD) / 2;
     aAngle.value =
-        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°';
   }
 
   void calcBSideKnowAangHhei() {
@@ -451,20 +447,29 @@ class IsoscelesTriangleController extends GetxController {
   }
 
   void calcBisectorKnowAsideBside() {
-    lBd = (sqrt(aSideD *
-            bSideD *
-            (bSideD + bSideD + aSideD) *
-            (aSideD + bSideD - bSideD))) /
+    lBd =
+        (sqrt(
+          aSideD *
+              bSideD *
+              (bSideD + bSideD + aSideD) *
+              (aSideD + bSideD - bSideD),
+        )) /
         (aSideD + bSideD);
-    lCd = (sqrt(bSideD *
-            aSideD *
-            (bSideD + bSideD + aSideD) *
-            (bSideD + aSideD - bSideD))) /
+    lCd =
+        (sqrt(
+          bSideD *
+              aSideD *
+              (bSideD + bSideD + aSideD) *
+              (bSideD + aSideD - bSideD),
+        )) /
         (bSideD + aSideD);
-    lAd = (sqrt(bSideD *
-            bSideD *
-            (bSideD + bSideD + aSideD) *
-            (bSideD + bSideD - aSideD))) /
+    lAd =
+        (sqrt(
+          bSideD *
+              bSideD *
+              (bSideD + bSideD + aSideD) *
+              (bSideD + bSideD - aSideD),
+        )) /
         (bSideD + bSideD);
     lA.value = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
     lB.value = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
@@ -681,20 +686,26 @@ class IsoscelesTriangleController extends GetxController {
   }
 
   void moveEmptyValueToStartInParameters() {
-    activeParamMap.addAll(AppUtilsMap.moveValue(
-            oldMap: activeParamMap,
-            moveValue: IsoscelesTriangle.empty,
-            isPositionStart: true)
-        .cast<int, IsoscelesTriangle>());
+    activeParamMap.addAll(
+      AppUtilsMap.moveValue(
+        oldMap: activeParamMap,
+        moveValue: IsoscelesTriangle.empty,
+        isPositionStart: true,
+      ).cast<int, IsoscelesTriangle>(),
+    );
   }
 
   void moveValueToEndInParameters(var value) {
-    activeParamMap.addAll(AppUtilsMap.moveValue(
-            oldMap: activeParamMap, moveValue: value, isPositionStart: false)
-        .cast<int, IsoscelesTriangle>());
+    activeParamMap.addAll(
+      AppUtilsMap.moveValue(
+        oldMap: activeParamMap,
+        moveValue: value,
+        isPositionStart: false,
+      ).cast<int, IsoscelesTriangle>(),
+    );
   }
 
-// если значение при удалении равно 0 то обнуляем активный параметр
+  // если значение при удалении равно 0 то обнуляем активный параметр
   bool isInputStartValue() {
     bool activeInput;
     String valueActiveInput;
@@ -702,14 +713,17 @@ class IsoscelesTriangleController extends GetxController {
     activeInput = isaSide.value;
     valueActiveInput = aSide.value;
     IsoscelesTriangle oldValue;
-    var newValue = IsoscelesTriangle.empty;
+    IsoscelesTriangle newValue = IsoscelesTriangle.empty;
 
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = IsoscelesTriangle.aSide;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, IsoscelesTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, IsoscelesTriangle>();
 
       return true;
     }
@@ -719,9 +733,12 @@ class IsoscelesTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = IsoscelesTriangle.bSide;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, IsoscelesTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, IsoscelesTriangle>();
 
       return true;
     }
@@ -731,9 +748,12 @@ class IsoscelesTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = IsoscelesTriangle.hHeight;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, IsoscelesTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, IsoscelesTriangle>();
 
       return true;
     }
@@ -743,9 +763,12 @@ class IsoscelesTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startAngleValue) {
       oldValue = IsoscelesTriangle.aAngle;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, IsoscelesTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, IsoscelesTriangle>();
 
       return true;
     }
@@ -755,9 +778,12 @@ class IsoscelesTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startAngleValue) {
       oldValue = IsoscelesTriangle.bAngle;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, IsoscelesTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, IsoscelesTriangle>();
 
       return true;
     }
@@ -767,7 +793,8 @@ class IsoscelesTriangleController extends GetxController {
 
   void setActiveParam() {
     log.v(
-        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} 3 ${activeParamMap[3]} start active param');
+      '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} 3 ${activeParamMap[3]} start active param',
+    );
 
     IsoscelesTriangle paramActive = IsoscelesTriangle.empty;
 
@@ -795,7 +822,7 @@ class IsoscelesTriangleController extends GetxController {
       return;
     }
 
-//если последний параметр похож на активный
+    //если последний параметр похож на активный
     if (activeParamMap[2] == paramActive) return;
 
     if (activeParamMap[2] != IsoscelesTriangle.empty) {
@@ -805,9 +832,7 @@ class IsoscelesTriangleController extends GetxController {
     activeParamMap[2] = paramActive;
   }
 
-  bool isAvailableOneParam(
-    IsoscelesTriangle param1,
-  ) {
+  bool isAvailableOneParam(IsoscelesTriangle param1) {
     if (activeParamMap.containsValue(param1)) {
       return true;
     }
@@ -853,12 +878,15 @@ class IsoscelesTriangleController extends GetxController {
     }
 
     if (isAvailableTwoParams(
-        IsoscelesTriangle.aSide, IsoscelesTriangle.bSide)) {
+      IsoscelesTriangle.aSide,
+      IsoscelesTriangle.bSide,
+    )) {
       if (isbSide.value) {
         result = aSideD;
         if (!(bSideD >= result)) {
           showSnack(
-              '${TranslateHelper.side} b ${TranslateHelper.must_be} > a/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} b ${TranslateHelper.must_be} > a/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -866,19 +894,23 @@ class IsoscelesTriangleController extends GetxController {
         result = bSideD;
         if (!(aSideD <= result)) {
           showSnack(
-              '${TranslateHelper.base} a ${TranslateHelper.must_be} < 2b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.base} a ${TranslateHelper.must_be} < 2b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
 
     if (isAvailableTwoParams(
-        IsoscelesTriangle.hHeight, IsoscelesTriangle.bSide)) {
+      IsoscelesTriangle.hHeight,
+      IsoscelesTriangle.bSide,
+    )) {
       if (isbSide.value) {
         result = hHeightD;
         if (!(bSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} b ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} b ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -886,7 +918,8 @@ class IsoscelesTriangleController extends GetxController {
         result = bSideD;
         if (!(hHeightD < result)) {
           showSnack(
-              '${TranslateHelper.height} h ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.height} h ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -906,18 +939,22 @@ class IsoscelesTriangleController extends GetxController {
     double sum = 0;
     if (isaAngle.value) {
       sum = double.parse(
-          AppUtilsString.removeLastCharacter(aAngle.value) + newInput);
+        AppUtilsString.removeLastCharacter(aAngle.value) + newInput,
+      );
       if (90 <= sum) {
         showSnack(
-            '${TranslateHelper.angle} α ${TranslateHelper.must_be} < 90°');
+          '${TranslateHelper.angle} α ${TranslateHelper.must_be} < 90°',
+        );
         return true;
       }
     } else if (isbAngle.value) {
       sum = double.parse(
-          AppUtilsString.removeLastCharacter(bAngle.value) + newInput);
+        AppUtilsString.removeLastCharacter(bAngle.value) + newInput,
+      );
       if (180 <= sum) {
         showSnack(
-            '${TranslateHelper.angle} β ${TranslateHelper.must_be} < 180°');
+          '${TranslateHelper.angle} β ${TranslateHelper.must_be} < 180°',
+        );
         return true;
       }
     }
@@ -975,7 +1012,9 @@ class IsoscelesTriangleController extends GetxController {
 
   bool isMaxNumberAfterPoint(String value) {
     return ValidationUtils.isMoreAccuracy(
-        value, ConstNumber.maxNumberAfterPoint);
+      value,
+      ConstNumber.maxNumberAfterPoint,
+    );
   }
 
   bool isMaxNumberInput(String value) {
@@ -1044,7 +1083,7 @@ class IsoscelesTriangleController extends GetxController {
       activeParamMap[2] = IsoscelesTriangle.empty;
     }
 
-//===============================================
+    //===============================================
     if (activeParamMap[1] == IsoscelesTriangle.bSide &&
         bSide.value == startLengthValue) {
       activeParamMap[1] = IsoscelesTriangle.empty;
@@ -1055,7 +1094,7 @@ class IsoscelesTriangleController extends GetxController {
       activeParamMap[2] = IsoscelesTriangle.empty;
     }
 
-//===============================================
+    //===============================================
     if (activeParamMap[1] == IsoscelesTriangle.hHeight &&
         hHeight.value == startLengthValue) {
       activeParamMap[1] = IsoscelesTriangle.empty;
@@ -1066,7 +1105,7 @@ class IsoscelesTriangleController extends GetxController {
       activeParamMap[2] = IsoscelesTriangle.empty;
     }
 
-//===============================================
+    //===============================================
     if (activeParamMap[1] == IsoscelesTriangle.aAngle &&
         aAngle.value == startAngleValue) {
       activeParamMap[1] = IsoscelesTriangle.empty;
@@ -1077,7 +1116,7 @@ class IsoscelesTriangleController extends GetxController {
       activeParamMap[2] = IsoscelesTriangle.empty;
     }
 
-//===============================================
+    //===============================================
 
     if (activeParamMap[1] == IsoscelesTriangle.bAngle &&
         bAngle.value == startAngleValue) {
@@ -1089,7 +1128,7 @@ class IsoscelesTriangleController extends GetxController {
       activeParamMap[2] = IsoscelesTriangle.empty;
     }
 
-//===============================================
+    //===============================================
   }
 
   void prevElement() {
@@ -1104,7 +1143,7 @@ class IsoscelesTriangleController extends GetxController {
   }
 
   void convertDegToDMS() {
-// если мы в минутах то переводим углы
+    // если мы в минутах то переводим углы
     aAngle.value = AppConvert.convertDegToDMS(aAngleD, precisionResult);
     bAngle.value = AppConvert.convertDegToDMS(bAngleD, precisionResult);
   }
@@ -1116,7 +1155,7 @@ class IsoscelesTriangleController extends GetxController {
   }
 
   void longBackspace() {
-// взависимости от активного ввода
+    // взависимости от активного ввода
     if (isaSide.value) {
       aSide.value = startLengthValue;
     } else if (isbSide.value) {
@@ -1132,7 +1171,8 @@ class IsoscelesTriangleController extends GetxController {
     initValue();
     setActiveParam();
     log.v(
-        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} longBackspace active param  ');
+      '1 ${activeParamMap[1]} 2 ${activeParamMap[2]} longBackspace active param  ',
+    );
 
     calculate();
     showMessage();
@@ -1143,7 +1183,7 @@ class IsoscelesTriangleController extends GetxController {
     String oldInput;
     String newInput;
 
-// взависимости от активного ввода
+    // взависимости от активного ввода
     if (isaSide.value) {
       oldInput = aSide.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
@@ -1250,7 +1290,7 @@ class IsoscelesTriangleController extends GetxController {
 
     mA.value = mB.value = mC.value = startLengthValue;
     mAd = mBd = mCd = 0.0;
-/////////////////////////////
+    /////////////////////////////
     lA.value = lB.value = lC.value = startLengthValue;
     lAd = lBd = lCd = 0.0;
 
@@ -1276,7 +1316,7 @@ class IsoscelesTriangleController extends GetxController {
 
     mA.value = mB.value = mC.value = startLengthValue;
     mAd = mBd = mCd = 0.0;
-/////////////////////////////
+    /////////////////////////////
     lA.value = lB.value = lC.value = startLengthValue;
     lAd = lBd = lCd = 0.0;
 
@@ -1347,9 +1387,104 @@ class IsoscelesTriangleController extends GetxController {
     }
   }
 
+  void saveValues() {
+    try {
+      Map<String, dynamic> values = <String, dynamic>{
+        'aSide': aSide.value,
+        'bSide': bSide.value,
+        'hHeight': hHeight.value,
+        'aAngle': aAngle.value,
+        'bAngle': bAngle.value,
+        'activeASide': isaSide.value,
+        'activeBSide': isbSide.value,
+        'activeHHeight': ishHeight.value,
+        'activeAAngle': isaAngle.value,
+        'activeBAngle': isbAngle.value,
+        'isDeg': isDeg.value,
+        'isActiveImageInfo': isActiveImageInfo.value,
+        'activeParamMap': activeParamMap.map(
+          (int key, IsoscelesTriangle value) =>
+              MapEntry(key.toString(), value.index),
+        ),
+      };
+      LocalStorage().setItemString(
+        ConstString.keyIsoscelesTriangleValues,
+        json.encode(values),
+      );
+      log.i('Saved isosceles triangle values and active parameters');
+    } catch (e) {
+      log.e('Error saving isosceles triangle values: $e');
+    }
+  }
+
+  void restoreValues() async {
+    try {
+      Map<String, dynamic> values = await LocalStorage().getJsonMap(
+        ConstString.keyIsoscelesTriangleValues,
+      );
+
+      // Only restore if values exist
+      if (values.isNotEmpty) {
+        // Restore input values
+        aSide.value = values['aSide'] ?? startLengthValue;
+        bSide.value = values['bSide'] ?? startLengthValue;
+        hHeight.value = values['hHeight'] ?? startLengthValue;
+        aAngle.value = values['aAngle'] ?? startAngleValue;
+        bAngle.value = values['bAngle'] ?? startAngleValue;
+
+        // Restore active state
+        isaSide.value = values['activeASide'] ?? false;
+        isbSide.value = values['activeBSide'] ?? false;
+        ishHeight.value = values['activeHHeight'] ?? false;
+        isaAngle.value = values['activeAAngle'] ?? false;
+        isbAngle.value = values['activeBAngle'] ?? false;
+        isDeg.value = values['isDeg'] ?? true;
+        isActiveImageInfo.value = values['isActiveImageInfo'] ?? false;
+
+        // Restore active parameter map
+        if (values.containsKey('activeParamMap')) {
+          try {
+            Map<String, dynamic> savedMap = Map<String, dynamic>.from(
+              values['activeParamMap'],
+            );
+            activeParamMap.clear();
+            savedMap.forEach((String key, value) {
+              int keyInt = int.parse(key);
+              int valueInt = value is int ? value : int.parse(value.toString());
+              if (valueInt < IsoscelesTriangle.values.length) {
+                activeParamMap[keyInt] = IsoscelesTriangle.values[valueInt];
+              }
+            });
+          } catch (e) {
+            log.e('Error restoring active parameters: $e');
+            // Fall back to default parameter setup
+            resetActiveParams();
+          }
+        }
+
+        // Initialize values and recalculate
+        initValue();
+        calculate();
+        log.i('Restored isosceles triangle values and active parameters');
+      }
+    } catch (e) {
+      log.e('Error in restoreValues: $e');
+      resetAllValue();
+    }
+  }
+
+  // Modify onInit and onClose methods
+  @override
+  void onInit() {
+    clearAll();
+    restoreValues(); // Add this line
+    showMessage();
+    super.onInit();
+  }
+
   @override
   void onClose() {
-    clearAll();
+    saveValues(); // Add this line
     super.onClose();
   }
 }

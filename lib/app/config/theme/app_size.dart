@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppSize {
-  static var iconSize = 30.sp;
+  static double iconSize = 30.sp;
 
-  static const _default = 16.0;
+  static const double _default = 16.0;
 
   static double fontSizeButton(BuildContext context) {
     return Theme.of(context).textTheme.labelLarge?.fontSize ?? _default;

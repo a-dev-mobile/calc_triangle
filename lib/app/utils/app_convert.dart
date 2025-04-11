@@ -9,7 +9,7 @@ class AppConvert {
 
       return double.parse(strAmount).toString();
     } catch (e) {
-      return "0";
+      return '0';
     }
   }
 
@@ -26,14 +26,14 @@ class AppConvert {
       return 'error';
     }
 
-    var dmsList = dms.split('°');
+    List<String> dmsList = dms.split('°');
     double deg = double.parse(dmsList[0]);
     dmsList = dmsList[1].split('′');
     double min = double.parse(dmsList[0]);
     dmsList = dmsList[1].split('″');
     double sec = double.parse(dmsList[0]);
 
-    return "${AppUtilsNumber.getFormatNumber(deg + (min / 60) + (sec / 3600), precisionResults)}°";
+    return '${AppUtilsNumber.getFormatNumber(deg + (min / 60) + (sec / 3600), precisionResults)}°';
   }
 
   static String convertDegToDMS(double degree, int precisionResults) {
@@ -42,7 +42,9 @@ class AppConvert {
     int m = ((degree - d) * 60).toInt();
 
     String s = AppUtilsNumber.getFormatNumber(
-        (degree - d - m / 60) * 3600, precisionResults);
+      (degree - d - m / 60) * 3600,
+      precisionResults,
+    );
 
     return '$d°$m′$s″';
   }

@@ -3,17 +3,13 @@ import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:flutter/material.dart';
 
 class AreaPerimeter extends StatelessWidget {
-  const AreaPerimeter({
-    Key? key,
-    required this.perimeter,
-    required this.area,
-  }) : super(key: key);
+  const AreaPerimeter({required this.perimeter, required this.area, super.key});
   final String perimeter;
   final String area;
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'P',

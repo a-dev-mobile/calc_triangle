@@ -1,14 +1,13 @@
 name: calc_triangle
 description: Flutter project calculating the sides in a right triangle
 
+publish_to: "none"
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-
-version: 2.0.0+7
+version: 2.1.0+9
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.7.0
 
 
 dependencies:
@@ -17,26 +16,25 @@ dependencies:
 
 
 
-  cupertino_icons: ^1.0.5
-  flutter_screenutil: ^5.8.4
+  cupertino_icons: ^1.0.8
+  flutter_screenutil: ^5.9.3
 
-  get: ^4.6.5
+  get: ^4.7.2
 
-  logger: ^2.0.1
+  logger: ^2.5.0
   #share: ^2.0.4
-  url_launcher: ^6.1.12
-  shared_preferences: ^2.2.0
-  sticky_headers: ^0.3.0+2
+  url_launcher: ^6.3.1
+  shared_preferences: ^2.5.2
+  sticky_headers: ^0.3.0
 
-
+dependency_overrides:
+  win32: ^5.1.1  
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.13.1"
-  flutter_native_splash: ^2.3.1
-
-
-  flutter_lints: ^2.0.2
+  flutter_launcher_icons: "^0.14.3"
+  flutter_native_splash: ^2.4.5
+  flutter_lints: ^5.0.0
 
 
 flutter:
@@ -67,73 +65,40 @@ flutter:
         - asset: fonts/montserrat_mediumitalic.ttf
           style: italic
  
-flutter_native_splash:
-
-  color: "#ffffff"
-  image: "assets/icon/launch_dark_screen_400.png"
-  # background_image: "assets/icon/launch_dark_screen.png"
-
-  # color_dark: "#000000"
-  # image_dark: assets/icon/launch_dark_screen_400.png
-  #background_image_dark: "assets/dark-background.png"
-
-  android: true
-  ios: true
-  web: false
 
  
-  # fullscreen: true
- # android_gravity can be one of the following Android Gravity (see 
-  # https://developer.android.com/reference/android/view/Gravity): bottom, center, 
-  # center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal,
-  # fill_vertical, left, right, start, or top.
-  #android_gravity: center
 
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
+
+flutter_launcher_icons:
+  android: true
   image_path: "assets/icon/icon.png"
-  remove_alpha_ios: true
+  adaptive_icon_background: "#E0F2F1" # белый фон для адаптивной иконки
+  adaptive_icon_foreground: "assets/icon/icon.png" # используем ту же иконку как передний план
+  min_sdk_android: 21
+  adaptive_icon_foreground_inset: 30 # отступ 20% от каждого края
   
 
-
-
-
-
-
-
-  # The position of the splash images can be set with android_gravity, ios_content_mode, and
-  # web_image_mode parameters.  All default to center.
-  #
-  # android_gravity can be one of the following Android Gravity (see 
-  # https://developer.android.com/reference/android/view/Gravity): bottom, center, 
-  # center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal,
-  # fill_vertical, left, right, start, or top.
-  #android_gravity: center
-  #
-  # ios_content_mode can be one of the following iOS UIView.ContentMode (see 
-  # https://developer.apple.com/documentation/uikit/uiview/contentmode): scaleToFill, 
-  # scaleAspectFit, scaleAspectFill, center, top, bottom, left, right, topLeft, topRight, 
-  # bottomLeft, or bottomRight.
-  #ios_content_mode: center
-  #
-  # web_image_mode can be one of the following modes: center, contain, stretch, and cover.
-  #web_image_mode: center
-
-  # To hide the notification bar, use the fullscreen parameter.  Has no affect in web since web 
-  # has no notification bar.  Defaults to false.
-  # NOTE: Unlike Android, iOS will not automatically show the notification bar when the app loads.
-  #       To show the notification bar, add the following code to your Flutter app:
-  #       WidgetsFlutterBinding.ensureInitialized();
-  #       SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  #fullscreen: true
+flutter_native_splash:
+  # Основные настройки
+  color: "#102A27"  # Темный фон для splash screen
+  image: "assets/icon/icon_a12.png"  # Иконка для splash
   
-  # If you have changed the name(s) of your info.plist file(s), you can specify the filename(s) 
-  # with the info_plist_files parameter.  Remove only the # characters in the three lines below,
-  # do not remove any spaces:
-  #info_plist_files:
-  #  - 'ios/Runner/Info-Debug.plist'
-  #  - 'ios/Runner/Info-Release.plist'
+  # Отключаем для платформ, которые не используем
+  android: true
+  ios: false
+  web: false
 
-  # To enable support for Android 12, set the following parameter to true.  Defaults to false.
-  #android12: true
+  # Полноэкранный режим
+  fullscreen: true
+  
+  # Настройки для Android 12+
+  android_12:
+    image: "assets/icon/icon_a12.png"  # Специальная иконка для Android 12
+    color: "#102A27"  # Цвет фона для Android 12+
+    icon_background_color: "#E0F2F1"  # Цвет фона иконки (белый)
+  
+  # Настройка позиционирования изображения
+  android_gravity: center
+
+
+

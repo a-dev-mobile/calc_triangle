@@ -3,7 +3,7 @@ import 'package:calc_triangle/app/features/calculate/view/equilateral/2/equilate
 import 'package:flutter/material.dart';
 
 class CalculateEquilateralPage extends StatefulWidget {
-  const CalculateEquilateralPage({Key? key}) : super(key: key);
+  const CalculateEquilateralPage({super.key});
 
   @override
   _CalculateEquilateralPageState createState() =>

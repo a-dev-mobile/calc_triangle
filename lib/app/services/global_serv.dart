@@ -11,79 +11,107 @@ import 'package:get/get.dart';
 class GlobalServ extends GetxService {
   static GlobalServ get to => Get.find();
 
-  var isDarkTheme = false.obs;
-  var isFirstStartApp = false;
-  var appLocale = ConstString.localeEn.obs;
-  var isShowLaunchScreen = false.obs;
+  RxBool isDarkTheme = false.obs;
+  // Keep this for backward compatibility but it's not used anymore
+  bool isFirstStartApp = false;
+  RxString appLocale = ConstString.localeEn.obs;
+  // Keep isShowLaunchScreen for backward compatibility with SettingLaunchScreenWidget
+  RxBool isShowLaunchScreen = false.obs;
 
-  //что бы не доставать локально, сохраним в глоб сервисе
-
-  var precisionResult = ConstNumber.defPrecisionResult.obs;
+  // Precision for calculations
+  RxInt precisionResult = ConstNumber.defPrecisionResult.obs;
   late Shape aciveShape;
-// ========================================
+  // ========================================
+  Rx<Shape> activeShape = Shape.none.obs;
+
+  // Add these methods
+  void saveActiveShape(Shape shape) {
+    activeShape.value = shape;
+    LocalStorage().setItemInt(ConstString.keyActiveShape, shape.index);
+    log.i('Saved active shape: $shape');
+  }
+
+  void restoreActiveShape() async {
+    bool exists = await LocalStorage().isNull(ConstString.keyActiveShape);
+    if (!exists) {
+      int shapeIndex = await LocalStorage().getItemInt(
+        ConstString.keyActiveShape,
+      );
+      if (shapeIndex >= 0 && shapeIndex < Shape.values.length) {
+        activeShape.value = Shape.values[shapeIndex];
+        log.i('Restored active shape: ${activeShape.value}');
+      }
+    }
+  }
 
   void setStorageIsDarkTheme(bool isDark) async {
     isDarkTheme.value = isDark;
+    LocalStorage().setItemBool(ConstString.keyIsDarkTheme, isDark);
   }
 
-// ========================================
+  // ========================================
   void setDefaultLocale() {
-    appLocale.value = Platform.localeName == 'ru_RU'
-        ? ConstString.localeRu
-        : ConstString.localeEn;
+    appLocale.value =
+        Platform.localeName == 'ru_RU'
+            ? ConstString.localeRu
+            : ConstString.localeEn;
   }
 
   void setStorageLocale(String locale) {
     appLocale.value = locale;
+    LocalStorage().setItemString(ConstString.keyLocaleApp, locale);
   }
 
-// ========================================
-  void setNonFirstStartApp() async {
-    isFirstStartApp = false;
+  // ========================================
+  void setPrecisionResult(int precision) {
+    precisionResult.value = precision;
+    LocalStorage().setItemInt(ConstString.keyPrecisionResult, precision);
   }
 
-// ========================================
-
-  void changeShowLaunchScreen() {
-    isShowLaunchScreen.value = !isShowLaunchScreen.value;
-  }
-
+  // Keep this method for backwards compatibility
   void startIfCloseSetiing() async {
-    LocalStorage().setItemBool(ConstString.keyIsShowLaunchScreen,
-        GlobalServ.to.isShowLaunchScreen.value);
-    LocalStorage()
-        .setItemString(ConstString.keyLocaleApp, GlobalServ.to.appLocale.value);
-    LocalStorage().setItemBool(
-        ConstString.keyIsDarkTheme, GlobalServ.to.isDarkTheme.value);
+    saveAllSettings();
+  }
+
+  // Updates all settings in storage
+  void saveAllSettings() {
+    LocalStorage().setItemString(ConstString.keyLocaleApp, appLocale.value);
+    LocalStorage().setItemBool(ConstString.keyIsDarkTheme, isDarkTheme.value);
     LocalStorage().setItemInt(
-        ConstString.keyPrecisionResult, GlobalServ.to.precisionResult.value);
+      ConstString.keyPrecisionResult,
+      precisionResult.value,
+    );
   }
 
   @override
   void onInit() async {
     logger.d('onInit global service');
 
-    bool isNullFirstStartApp =
-        await LocalStorage().isNull(ConstString.keyIsFirstStartApp);
+    // Always treat as not first start
+    isFirstStartApp = false;
 
-    // если первый запуск
-    if (isNullFirstStartApp) {
-      isFirstStartApp = true;
-      isShowLaunchScreen.value = false;
-      isDarkTheme.value = false;
-      setDefaultLocale();
-    } else {
-      // устанавливаем если не первый запуск
-      isFirstStartApp = false;
-      isShowLaunchScreen.value =
-          await LocalStorage().getItemBool(ConstString.keyIsShowLaunchScreen);
-      appLocale.value =
-          await LocalStorage().getItemString(ConstString.keyLocaleApp);
-      isDarkTheme.value =
-          await LocalStorage().getItemBool(ConstString.keyIsDarkTheme);
-      precisionResult.value =
-          await LocalStorage().getItemInt(ConstString.keyPrecisionResult);
-    }
+    // Restore active shape
+    restoreActiveShape();
+
+    String locale = await LocalStorage().getItemString(
+      ConstString.keyLocaleApp,
+      Platform.localeName == 'ru_RU'
+          ? ConstString.localeRu
+          : ConstString.localeEn,
+    );
+    appLocale.value = locale;
+
+    bool isDark = await LocalStorage().getItemBool(
+      ConstString.keyIsDarkTheme,
+      false,
+    );
+    isDarkTheme.value = isDark;
+
+    int precision = await LocalStorage().getItemInt(
+      ConstString.keyPrecisionResult,
+      ConstNumber.defPrecisionResult,
+    );
+    precisionResult.value = precision;
 
     super.onInit();
   }

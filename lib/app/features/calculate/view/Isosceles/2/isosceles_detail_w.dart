@@ -13,25 +13,25 @@ import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-var c = IsoscelesTriangleController.to;
+IsoscelesTriangleController c = IsoscelesTriangleController.to;
 
 class IsoscelesDetail extends StatelessWidget {
-  const IsoscelesDetail({Key? key}) : super(key: key);
+  const IsoscelesDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         return Column(
-          children: [
+          children: <Widget>[
             StickyHeader(
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     const ImageInfoWidget(
-                        patchAsset:
-                            ConstAssetsImageRaster.isoscelesTriangleInfo),
+                      patchAsset: ConstAssetsImageRaster.isoscelesTriangleInfo,
+                    ),
                     TextTitleDetail(text: TranslateHelper.sides_height_angles),
                   ],
                 ),
@@ -42,9 +42,10 @@ class IsoscelesDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     const ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.isoscelesTriangleAP),
+                      patchAsset: ConstAssetsImageRaster.isoscelesTriangleAP,
+                    ),
                     TextTitleDetail(text: TranslateHelper.area_perim),
                   ],
                 ),
@@ -55,47 +56,51 @@ class IsoscelesDetail extends StatelessWidget {
               ),
             ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset:
-                              ConstAssetsImageRaster.isoscelesTriangleS),
-                      TextTitleDetail(
-                          text: TranslateHelper.mediana_geom_centroid),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.isoscelesTriangleS,
+                    ),
+                    TextTitleDetail(
+                      text: TranslateHelper.mediana_geom_centroid,
+                    ),
+                  ],
                 ),
-                content: const MedianaGeometricCentroid()),
+              ),
+              content: const MedianaGeometricCentroid(),
+            ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset:
-                              ConstAssetsImageRaster.isoscelesTriangleSr),
-                      TextTitleDetail(
-                          text: TranslateHelper.bisection_inscribed_circle),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.isoscelesTriangleSr,
+                    ),
+                    TextTitleDetail(
+                      text: TranslateHelper.bisection_inscribed_circle,
+                    ),
+                  ],
                 ),
-                content: const BisectionInscribedCircle()),
+              ),
+              content: const BisectionInscribedCircle(),
+            ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset:
-                              ConstAssetsImageRaster.isoscelesTriangleSR),
-                      TextTitleDetail(
-                          text: TranslateHelper.circumscribed_circle),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.isoscelesTriangleSR,
+                    ),
+                    TextTitleDetail(text: TranslateHelper.circumscribed_circle),
+                  ],
                 ),
-                content: const CircumscribedCircle()),
+              ),
+              content: const CircumscribedCircle(),
+            ),
           ],
         );
       },
@@ -104,14 +109,12 @@ class IsoscelesDetail extends StatelessWidget {
 }
 
 class CircumscribedCircle extends StatelessWidget {
-  const CircumscribedCircle({
-    Key? key,
-  }) : super(key: key);
+  const CircumscribedCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'R',
@@ -137,14 +140,12 @@ class CircumscribedCircle extends StatelessWidget {
 }
 
 class BisectionInscribedCircle extends StatelessWidget {
-  const BisectionInscribedCircle({
-    Key? key,
-  }) : super(key: key);
+  const BisectionInscribedCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'la',
@@ -182,14 +183,12 @@ class BisectionInscribedCircle extends StatelessWidget {
 }
 
 class MedianaGeometricCentroid extends StatelessWidget {
-  const MedianaGeometricCentroid({
-    Key? key,
-  }) : super(key: key);
+  const MedianaGeometricCentroid({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'ma',
@@ -220,16 +219,13 @@ class MedianaGeometricCentroid extends StatelessWidget {
 }
 
 class IsoscelesSidesAngles extends StatelessWidget {
-  const IsoscelesSidesAngles({
-    Key? key,
-  }) : super(key: key);
+  const IsoscelesSidesAngles({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         // AppWidgets.dividerWelcome(),
-
         ItemDetail(
           isActive: c.isAvailableOneParam(IsoscelesTriangle.aSide),
           leading: 'a',

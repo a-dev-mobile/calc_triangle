@@ -20,7 +20,6 @@
 .classpath
 .project
 .settings/
-# .vscode/*
 # Flutter repo-specific
 /bin/cache/
 /bin/mingit/
@@ -60,11 +59,11 @@ unlinked_spec.ds
 **/android/captures/
 **/android/gradlew
 **/android/gradlew.bat
-**/android/local.properties
+**/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 **/android/.idea/
-*.jks
+
 # iOS/XCode related
 **/ios/**/*.mode1v3
 **/ios/**/*.mode2v3
@@ -113,8 +112,10 @@ app.*.map.json
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
-!.vscode/extensions.json
-!.vscode/launch.json
-!.idea/codeStyles/
-!.idea/dictionaries/
-!.idea/runConfigurations/
+.vscode/*
+
+artifact/*.aab
+makefile
+*.jks
+
+**/android/key.properties

@@ -3,7 +3,7 @@ import 'package:calc_triangle/app/features/calculate/view/right/2/right_main_w.d
 import 'package:flutter/material.dart';
 
 class CalculateRightPage extends StatefulWidget {
-  const CalculateRightPage({Key? key}) : super(key: key);
+  const CalculateRightPage({super.key});
 
   @override
   _CalculateRightPageState createState() => _CalculateRightPageState();

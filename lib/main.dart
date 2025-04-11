@@ -18,46 +18,47 @@ void main() async {
 
   Get.putAsync<GlobalServ>(() async => GlobalServ());
 
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
     runApp(const MyApp());
   });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   static GlobalKey<NavigatorState> materialKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 800),
-        builder: (_, child) {
-          return GetMaterialApp(
-            navigatorKey: MyApp.materialKey,
+      designSize: const Size(360, 800),
+      builder: (_, Widget? child) {
+        return GetMaterialApp(
+          navigatorKey: MyApp.materialKey,
 
-            //если первый запуск то запускаем в дальнейшем взависимости от настроек
-            initialRoute: GlobalServ.to.isFirstStartApp
-                ? Routes.welcome
-                : GlobalServ.to.isShowLaunchScreen.value
-                    ? Routes.welcome
-                    : Routes.selectShape,
+          // Always start with select shape screen
+          initialRoute: Routes.selectShape,
 
-            defaultTransition: Transition.rightToLeft,
-            getPages: AppPage.pages,
-            themeMode: GlobalServ.to.isDarkTheme.value
-                ? ThemeMode.dark
-                : ThemeMode.light,
-            theme: lightThemeData(context),
-            darkTheme: darkThemeData(context),
-            translations: AppTranslation(),
-            locale: GlobalServ.to.appLocale.value == ConstString.localeRu
-                ? const Locale(ConstString.localeRu)
-                : const Locale(ConstString.localeEn),
+          defaultTransition: Transition.rightToLeft,
+          getPages: AppPage.pages,
+          themeMode:
+              GlobalServ.to.isDarkTheme.value
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+          theme: lightThemeData(context),
+          darkTheme: darkThemeData(context),
+          translations: AppTranslation(),
+          locale:
+              GlobalServ.to.appLocale.value == ConstString.localeRu
+                  ? const Locale(ConstString.localeRu)
+                  : const Locale(ConstString.localeEn),
 
-            debugShowCheckedModeBanner: false,
-          );
-        });
+          debugShowCheckedModeBanner: false,
+        );
+      },
+    );
   }
 }

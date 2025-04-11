@@ -7,18 +7,12 @@ class KeySymbol {
 
   const KeySymbol(this.value);
 
-  static final List<KeySymbol> _functions = [
+  static final List<KeySymbol> _functions = <KeySymbol>[
     Keys.clearAll,
     Keys.backspace,
   ];
-  static final List<KeySymbol> _choice = [
-    Keys.next,
-    Keys.prev,
-  ];
-  static final List<KeySymbol> _convert = [
-    Keys.deg,
-    Keys.degMinSec,
-  ];
+  static final List<KeySymbol> _choice = <KeySymbol>[Keys.next, Keys.prev];
+  static final List<KeySymbol> _convert = <KeySymbol>[Keys.deg, Keys.degMinSec];
   @override
   String toString() => value;
 
@@ -29,9 +23,10 @@ class KeySymbol {
 
   bool get isInteger => !isChoice && !isFunction && !isConvert;
 
-  KeyType get type => isFunction
-      ? KeyType.function
-      : (isChoice
-          ? KeyType.choice
-          : (isConvert ? KeyType.convert : KeyType.integer));
+  KeyType get type =>
+      isFunction
+          ? KeyType.function
+          : (isChoice
+              ? KeyType.choice
+              : (isConvert ? KeyType.convert : KeyType.integer));
 }

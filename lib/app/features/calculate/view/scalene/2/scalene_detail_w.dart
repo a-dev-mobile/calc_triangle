@@ -2,32 +2,33 @@ import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/constants/const_assets.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/area_perim.dart';
-import 'package:calc_triangle/app/shared_components/image_info_w.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_item.dart';
 import 'package:calc_triangle/app/shared_components/detail_info/detail_title.dart';
+import 'package:calc_triangle/app/shared_components/image_info_w.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
-var c = ScaleneTriangleController.to;
+ScaleneTriangleController c = ScaleneTriangleController.to;
 
 class ScaleneDetail extends StatelessWidget {
-  const ScaleneDetail({Key? key}) : super(key: key);
+  const ScaleneDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         return Column(
-          children: [
+          children: <Widget>[
             StickyHeader(
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     const ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.scaleneTriangleInfo),
+                      patchAsset: ConstAssetsImageRaster.scaleneTriangleInfo,
+                    ),
                     TextTitleDetail(text: TranslateHelper.sides_height_angles),
                   ],
                 ),
@@ -38,9 +39,10 @@ class ScaleneDetail extends StatelessWidget {
               header: Container(
                 color: AppColors.content(context),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     const ImageInfoWidget(
-                        patchAsset: ConstAssetsImageRaster.scaleneTriangleAP),
+                      patchAsset: ConstAssetsImageRaster.scaleneTriangleAP,
+                    ),
                     TextTitleDetail(text: TranslateHelper.area_perim),
                   ],
                 ),
@@ -51,44 +53,51 @@ class ScaleneDetail extends StatelessWidget {
               ),
             ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleS),
-                      TextTitleDetail(
-                          text: TranslateHelper.mediana_geom_centroid),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.scaleneTriangleS,
+                    ),
+                    TextTitleDetail(
+                      text: TranslateHelper.mediana_geom_centroid,
+                    ),
+                  ],
                 ),
-                content: const MedianaGeometricCentroid()),
+              ),
+              content: const MedianaGeometricCentroid(),
+            ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleSr),
-                      TextTitleDetail(
-                          text: TranslateHelper.bisection_inscribed_circle),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.scaleneTriangleSr,
+                    ),
+                    TextTitleDetail(
+                      text: TranslateHelper.bisection_inscribed_circle,
+                    ),
+                  ],
                 ),
-                content: const BisectionInscribedCircle()),
+              ),
+              content: const BisectionInscribedCircle(),
+            ),
             StickyHeader(
-                header: Container(
-                  color: AppColors.content(context),
-                  child: Column(
-                    children: [
-                      const ImageInfoWidget(
-                          patchAsset: ConstAssetsImageRaster.scaleneTriangleSR),
-                      TextTitleDetail(
-                          text: TranslateHelper.circumscribed_circle),
-                    ],
-                  ),
+              header: Container(
+                color: AppColors.content(context),
+                child: Column(
+                  children: <Widget>[
+                    const ImageInfoWidget(
+                      patchAsset: ConstAssetsImageRaster.scaleneTriangleSR,
+                    ),
+                    TextTitleDetail(text: TranslateHelper.circumscribed_circle),
+                  ],
                 ),
-                content: const CircumscribedCircle()),
+              ),
+              content: const CircumscribedCircle(),
+            ),
           ],
         );
       },
@@ -97,14 +106,12 @@ class ScaleneDetail extends StatelessWidget {
 }
 
 class CircumscribedCircle extends StatelessWidget {
-  const CircumscribedCircle({
-    Key? key,
-  }) : super(key: key);
+  const CircumscribedCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'R',
@@ -130,14 +137,12 @@ class CircumscribedCircle extends StatelessWidget {
 }
 
 class BisectionInscribedCircle extends StatelessWidget {
-  const BisectionInscribedCircle({
-    Key? key,
-  }) : super(key: key);
+  const BisectionInscribedCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'la',
@@ -181,14 +186,12 @@ class BisectionInscribedCircle extends StatelessWidget {
 }
 
 class MedianaGeometricCentroid extends StatelessWidget {
-  const MedianaGeometricCentroid({
-    Key? key,
-  }) : super(key: key);
+  const MedianaGeometricCentroid({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         ItemDetail(
           isActive: false,
           leading: 'ma',
@@ -225,16 +228,13 @@ class MedianaGeometricCentroid extends StatelessWidget {
 }
 
 class ScaleneSidesAngles extends StatelessWidget {
-  const ScaleneSidesAngles({
-    Key? key,
-  }) : super(key: key);
+  const ScaleneSidesAngles({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         // AppWidgets.dividerWelcome(),
-
         ItemDetail(
           isActive: c.isAvailableOneParam(ScaleneTriangle.aSide),
           leading: 'a',

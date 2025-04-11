@@ -5,19 +5,19 @@ import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
 
 import 'package:flutter/material.dart';
 
-var c = EquilateralTriangleController.to;
+EquilateralTriangleController c = EquilateralTriangleController.to;
 
 class NumPadEquilateralWidget extends StatelessWidget {
-  const NumPadEquilateralWidget({Key? key}) : super(key: key);
+  const NumPadEquilateralWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               CalculatorKey(symbol: Keys.seven),
               CalculatorKey(symbol: Keys.eight),
               CalculatorKey(symbol: Keys.nine),
@@ -28,7 +28,7 @@ class NumPadEquilateralWidget extends StatelessWidget {
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               CalculatorKey(symbol: Keys.four),
               CalculatorKey(symbol: Keys.five),
               CalculatorKey(symbol: Keys.six),
@@ -39,7 +39,7 @@ class NumPadEquilateralWidget extends StatelessWidget {
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               CalculatorKey(symbol: Keys.one),
               CalculatorKey(symbol: Keys.two),
               CalculatorKey(symbol: Keys.three),
@@ -50,7 +50,7 @@ class NumPadEquilateralWidget extends StatelessWidget {
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               CalculatorKey(symbol: Keys.clearAll),
               CalculatorKey(symbol: Keys.zero),
               CalculatorKey(symbol: Keys.decimal),
@@ -64,10 +64,7 @@ class NumPadEquilateralWidget extends StatelessWidget {
 }
 
 class CalculatorKey extends StatelessWidget {
-  const CalculatorKey({
-    Key? key,
-    required this.symbol,
-  }) : super(key: key);
+  const CalculatorKey({required this.symbol, super.key});
 
   final KeySymbol symbol;
 

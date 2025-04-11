@@ -1,20 +1,20 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:calc_triangle/app/constants/const_number.dart';
+import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key.dart';
 import 'package:calc_triangle/app/shared_components/numpad/key_symbol.dart';
-
 import 'package:calc_triangle/app/translations/translate_helper.dart';
-
 import 'package:calc_triangle/app/utils/app_convert.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:calc_triangle/app/utils/app_utils_map.dart';
-
+import 'package:calc_triangle/app/utils/local_torage.dart';
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:calc_triangle/app/utils/validation_utils.dart';
-
-import 'dart:math';
 import 'package:get/get.dart';
 
 enum RightTriangle {
@@ -32,19 +32,19 @@ enum RightTriangle {
 class RightTriangleController extends GetxController {
   static RightTriangleController get to => Get.find<RightTriangleController>();
 
-  static const startAngleValue = '0°';
-  static const startLengthValue = '0';
+  static const String startAngleValue = '0°';
+  static const String startLengthValue = '0';
 
-  var activeParamMap = <int, RightTriangle>{}.obs;
+  RxMap<int, RightTriangle> activeParamMap = <int, RightTriangle>{}.obs;
 
-  var aSide = startLengthValue.obs;
-  var bSide = startLengthValue.obs;
-  var cSide = startLengthValue.obs;
-  var hHeight = startLengthValue.obs;
-  var kCompCside = startLengthValue.obs;
-  var mCompCside = startLengthValue.obs;
-  var aAngle = startAngleValue.obs;
-  var bAngle = startAngleValue.obs;
+  RxString aSide = startLengthValue.obs;
+  RxString bSide = startLengthValue.obs;
+  RxString cSide = startLengthValue.obs;
+  RxString hHeight = startLengthValue.obs;
+  RxString kCompCside = startLengthValue.obs;
+  RxString mCompCside = startLengthValue.obs;
+  RxString aAngle = startAngleValue.obs;
+  RxString bAngle = startAngleValue.obs;
 
   double aSideD = 0.0;
   double bSideD = 0.0;
@@ -54,74 +54,68 @@ class RightTriangleController extends GetxController {
   double mCompCsideD = 0.0;
   double aAngleD = 0.0;
   double bAngleD = 0.0; /////////////////////////////
-  var area = "".obs;
-  var perimeter = "".obs;
-  var xSPoint = "".obs;
-  var ySPoint = "".obs;
-/////////////////////////////
+  RxString area = ''.obs;
+  RxString perimeter = ''.obs;
+  RxString xSPoint = ''.obs;
+  RxString ySPoint = ''.obs;
+  /////////////////////////////
   double areaD = 0.0;
   double perimeterD = 0.0;
   double xSPointD = 0.0;
   double ySPointD = 0.0;
-/////////////////////////////
+  /////////////////////////////
 
-  var mA = "".obs;
-  var mB = "".obs;
-  var mC = "".obs;
+  RxString mA = ''.obs;
+  RxString mB = ''.obs;
+  RxString mC = ''.obs;
   double mAd = 0.0;
   double mBd = 0.0;
   double mCd = 0.0;
-/////////////////////////////
+  /////////////////////////////
 
-  var lA = "".obs;
-  var lB = "".obs;
-  var lC = "".obs;
+  RxString lA = ''.obs;
+  RxString lB = ''.obs;
+  RxString lC = ''.obs;
   double lAd = 0.0;
   double lBd = 0.0;
   double lCd = 0.0;
 
   //// Radius of the inscribed circle
-  var rInscribed = "".obs;
-  var xr = "".obs;
-  var yr = "".obs;
+  RxString rInscribed = ''.obs;
+  RxString xr = ''.obs;
+  RxString yr = ''.obs;
   double rd = 0.0;
   double xrd = 0.0;
   double yrd = 0.0;
 
-  var Rcircum = "".obs;
-  var xR = "".obs;
-  var yR = "".obs;
+  RxString Rcircum = ''.obs;
+  RxString xR = ''.obs;
+  RxString yR = ''.obs;
   double Rd = 0.0;
   double xRd = 0.0;
   double yRd = 0.0;
 
-/////////////////////////////
-  var isDeg = true.obs;
-  var isaAngle = false.obs;
-  var isaSide = false.obs;
-  var isbAngle = false.obs;
-  var isbSide = false.obs;
-  var iscSide = false.obs;
-  var ishHeight = false.obs;
-  var iskCompCside = false.obs;
-  var ismCompCside = false.obs;
+  /////////////////////////////
+  RxBool isDeg = true.obs;
+  RxBool isaAngle = false.obs;
+  RxBool isaSide = false.obs;
+  RxBool isbAngle = false.obs;
+  RxBool isbSide = false.obs;
+  RxBool iscSide = false.obs;
+  RxBool ishHeight = false.obs;
+  RxBool iskCompCside = false.obs;
+  RxBool ismCompCside = false.obs;
 
-  var isActiveSnackBar = false.obs;
-  var messageSnackBar = ''.obs;
-  var isActiveImageInfo = false.obs;
+  RxBool isActiveSnackBar = false.obs;
+  RxString messageSnackBar = ''.obs;
+  RxBool isActiveImageInfo = false.obs;
 
   //что  бы не сбрасывать в методе
-  var paramLastLenght = RightTriangle.empty;
+  RightTriangle paramLastLenght = RightTriangle.empty;
 
   late int precisionResult;
-  String message = "";
+  String message = '';
   bool isNotFormula = false;
-  @override
-  void onInit() {
-    clearAll();
-    showMessage();
-    super.onInit();
-  }
 
   void clickKey(KeySymbol keySymbol) {
     precisionResult = GlobalServ.to.precisionResult.value;
@@ -255,7 +249,7 @@ class RightTriangleController extends GetxController {
       // если начинается ввод с точки
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      aAngle.value = "$sumInput°";
+      aAngle.value = '$sumInput°';
     } else if (isbAngle.value) {
       oldInput = bAngle.value;
 
@@ -267,7 +261,7 @@ class RightTriangleController extends GetxController {
 
       sumInput = AppUtilsString.addZeroIsFirstDecimal(sumInput);
 
-      bAngle.value = "$sumInput°";
+      bAngle.value = '$sumInput°';
     }
 
     log.v('end input');
@@ -278,7 +272,8 @@ class RightTriangleController extends GetxController {
 
     setActiveParam();
     log.v(
-        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]}  click end active param');
+      '1 ${activeParamMap[1]} 2 ${activeParamMap[2]}  click end active param',
+    );
 
     initValue();
     calculate();
@@ -322,12 +317,14 @@ class RightTriangleController extends GetxController {
       }
     } else if (ismCompCside.value) {
       if (ValidationUtils.isTwoDecimalPoint(
-          mCompCside.value + keySymbol.value)) {
+        mCompCside.value + keySymbol.value,
+      )) {
         return true;
       }
     } else if (iskCompCside.value) {
       if (ValidationUtils.isTwoDecimalPoint(
-          kCompCside.value + keySymbol.value)) {
+        kCompCside.value + keySymbol.value,
+      )) {
         return true;
       }
     } else if (isaAngle.value) {
@@ -350,7 +347,7 @@ class RightTriangleController extends GetxController {
   }
 
   void resetActiveInput() {
-//начальное значение при запуске
+    //начальное значение при запуске
     isaSide.value = true;
     isbSide.value = false;
     iscSide.value = false;
@@ -394,13 +391,15 @@ class RightTriangleController extends GetxController {
       }
 
       if (activeParamMap.containsValue(RightTriangle.aAngle)) {
-        aAngleD =
-            double.parse(AppUtilsString.removeLastCharacter(aAngle.value));
+        aAngleD = double.parse(
+          AppUtilsString.removeLastCharacter(aAngle.value),
+        );
       }
 
       if (activeParamMap.containsValue(RightTriangle.bAngle)) {
-        bAngleD =
-            double.parse(AppUtilsString.removeLastCharacter(bAngle.value));
+        bAngleD = double.parse(
+          AppUtilsString.removeLastCharacter(bAngle.value),
+        );
       }
     } catch (e) {
       log.e('initValue error to double');
@@ -412,24 +411,28 @@ class RightTriangleController extends GetxController {
 
   void calcMKCompCsideKnowAcatAangChypo() {
     mCompCsideD = aSideD * cos(AppConvert.toRadian(aAngleD));
-    mCompCside.value =
-        AppUtilsNumber.getFormatNumber(mCompCsideD, precisionResult);
+    mCompCside.value = AppUtilsNumber.getFormatNumber(
+      mCompCsideD,
+      precisionResult,
+    );
 
     kCompCsideD = cSideD - mCompCsideD;
-    kCompCside.value =
-        AppUtilsNumber.getFormatNumber(kCompCsideD, precisionResult);
+    kCompCside.value = AppUtilsNumber.getFormatNumber(
+      kCompCsideD,
+      precisionResult,
+    );
   }
 
   void calcBangleKnowAang() {
     bAngleD = 90 - aAngleD;
     bAngle.value =
-        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°';
   }
 
   void calcAangKnowBang() {
     aAngleD = 90 - bAngleD;
     aAngle.value =
-        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°';
   }
 
   void calchHeightKnowAcatAangl() {
@@ -440,15 +443,18 @@ class RightTriangleController extends GetxController {
   void calcBangKnowBcatChypo() {
     bAngleD = AppConvert.toDegree(acos(bSideD / cSideD));
     bAngle.value =
-        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°';
   }
 
   void calcBangKnowAcatBcatChypo() {
-    bAngleD = AppConvert.toDegree(acos(
+    bAngleD = AppConvert.toDegree(
+      acos(
         (pow(bSideD, 2) + pow(cSideD, 2) - pow(aSideD, 2)) /
-            (2 * bSideD * cSideD)));
+            (2 * bSideD * cSideD),
+      ),
+    );
     bAngle.value =
-        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°';
   }
 
   void calcChypoKnowAcatBcat() {
@@ -484,13 +490,13 @@ class RightTriangleController extends GetxController {
   void calcAangKnowHheiAcat() {
     aAngleD = AppConvert.toDegree(asin(hHeightD / aSideD));
     aAngle.value =
-        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°';
   }
 
   void calcBangKnowHheibcat() {
     bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
     bAngle.value =
-        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°';
   }
 
   void calcAcatKnowBcatBang() {
@@ -527,19 +533,19 @@ class RightTriangleController extends GetxController {
     // ok
     bAngleD = AppConvert.toDegree(asin(hHeightD / bSideD));
     bAngle.value =
-        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°';
   }
 
   void calcAangKnowHheiMcomp() {
     aAngleD = AppConvert.toDegree(atan(hHeightD / mCompCsideD));
     aAngle.value =
-        "${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(aAngleD, precisionResult)}°';
   }
 
   void calcBangKnowHheiKcomp() {
     bAngleD = AppConvert.toDegree(atan(hHeightD / kCompCsideD));
     bAngle.value =
-        "${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°";
+        '${AppUtilsNumber.getFormatNumber(bAngleD, precisionResult)}°';
   }
 
   void calcAcatKnowHheiAang() {
@@ -554,14 +560,18 @@ class RightTriangleController extends GetxController {
 
   void calcMcompKnowChypKcomp() {
     mCompCsideD = cSideD - kCompCsideD;
-    mCompCside.value =
-        AppUtilsNumber.getFormatNumber(mCompCsideD, precisionResult);
+    mCompCside.value = AppUtilsNumber.getFormatNumber(
+      mCompCsideD,
+      precisionResult,
+    );
   }
 
   void calcKcompKnowChypMcomp() {
     kCompCsideD = cSideD - mCompCsideD;
-    kCompCside.value =
-        AppUtilsNumber.getFormatNumber(kCompCsideD, precisionResult);
+    kCompCside.value = AppUtilsNumber.getFormatNumber(
+      kCompCsideD,
+      precisionResult,
+    );
   }
 
   void calchHeightKnowAangMcomp() {
@@ -575,13 +585,17 @@ class RightTriangleController extends GetxController {
   }
 
   void calcAreaKnowAcatBcat() {
-    area.value =
-        AppUtilsNumber.getFormatNumber(0.5 * aSideD * bSideD, precisionResult);
+    area.value = AppUtilsNumber.getFormatNumber(
+      0.5 * aSideD * bSideD,
+      precisionResult,
+    );
   }
 
   void calcPerimKnowAcatBcatChyp() {
     perimeter.value = AppUtilsNumber.getFormatNumber(
-        aSideD + bSideD + cSideD, precisionResult);
+      aSideD + bSideD + cSideD,
+      precisionResult,
+    );
   }
 
   void calcSubResultKnowAsideBsideCsideAangl() async {
@@ -625,20 +639,29 @@ class RightTriangleController extends GetxController {
   }
 
   void calcBisectorKnowAsideBsideCside() {
-    lCd = (sqrt(aSideD *
-            bSideD *
-            (cSideD + bSideD + aSideD) *
-            (aSideD + bSideD - cSideD))) /
+    lCd =
+        (sqrt(
+          aSideD *
+              bSideD *
+              (cSideD + bSideD + aSideD) *
+              (aSideD + bSideD - cSideD),
+        )) /
         (aSideD + bSideD);
-    lBd = (sqrt(cSideD *
-            aSideD *
-            (cSideD + bSideD + aSideD) *
-            (cSideD + aSideD - bSideD))) /
+    lBd =
+        (sqrt(
+          cSideD *
+              aSideD *
+              (cSideD + bSideD + aSideD) *
+              (cSideD + aSideD - bSideD),
+        )) /
         (cSideD + aSideD);
-    lAd = (sqrt(cSideD *
-            bSideD *
-            (cSideD + bSideD + aSideD) *
-            (cSideD + bSideD - aSideD))) /
+    lAd =
+        (sqrt(
+          cSideD *
+              bSideD *
+              (cSideD + bSideD + aSideD) *
+              (cSideD + bSideD - aSideD),
+        )) /
         (cSideD + bSideD);
     lA.value = AppUtilsNumber.getFormatNumber(lAd, precisionResult);
     lB.value = AppUtilsNumber.getFormatNumber(lBd, precisionResult);
@@ -671,7 +694,8 @@ class RightTriangleController extends GetxController {
   }
 
   void calcXSrIncenterKnowAsideAanglBangl() {
-    xrd = (tan(AppConvert.toRadian(aAngleD / 2))) *
+    xrd =
+        (tan(AppConvert.toRadian(aAngleD / 2))) *
         aSideD /
         (tan(AppConvert.toRadian(90 / 2)) +
             tan(AppConvert.toRadian(aAngleD / 2)));
@@ -1222,20 +1246,26 @@ class RightTriangleController extends GetxController {
   }
 
   void moveEmptyValueToStartInParameters() {
-    activeParamMap.addAll(AppUtilsMap.moveValue(
-            oldMap: activeParamMap,
-            moveValue: RightTriangle.empty,
-            isPositionStart: true)
-        .cast<int, RightTriangle>());
+    activeParamMap.addAll(
+      AppUtilsMap.moveValue(
+        oldMap: activeParamMap,
+        moveValue: RightTriangle.empty,
+        isPositionStart: true,
+      ).cast<int, RightTriangle>(),
+    );
   }
 
   void moveValueToEndInParameters(var value) {
-    activeParamMap.addAll(AppUtilsMap.moveValue(
-            oldMap: activeParamMap, moveValue: value, isPositionStart: false)
-        .cast<int, RightTriangle>());
+    activeParamMap.addAll(
+      AppUtilsMap.moveValue(
+        oldMap: activeParamMap,
+        moveValue: value,
+        isPositionStart: false,
+      ).cast<int, RightTriangle>(),
+    );
   }
 
-// если значение при удалении равно 0 то обнуляем активный параметр
+  // если значение при удалении равно 0 то обнуляем активный параметр
   bool isInputStartValue() {
     bool activeInput;
     String valueActiveInput;
@@ -1243,14 +1273,17 @@ class RightTriangleController extends GetxController {
     activeInput = isaSide.value;
     valueActiveInput = aSide.value;
     RightTriangle oldValue;
-    var newValue = RightTriangle.empty;
+    RightTriangle newValue = RightTriangle.empty;
 
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = RightTriangle.aSide;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1260,9 +1293,12 @@ class RightTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = RightTriangle.bSide;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1271,9 +1307,12 @@ class RightTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = RightTriangle.cSide;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1283,9 +1322,12 @@ class RightTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = RightTriangle.hHeight;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1294,9 +1336,12 @@ class RightTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = RightTriangle.mCompCside;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1306,9 +1351,12 @@ class RightTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startLengthValue) {
       oldValue = RightTriangle.kCompCside;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1318,9 +1366,12 @@ class RightTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startAngleValue) {
       oldValue = RightTriangle.aAngle;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1330,9 +1381,12 @@ class RightTriangleController extends GetxController {
     if (activeInput && valueActiveInput == startAngleValue) {
       oldValue = RightTriangle.bAngle;
 
-      activeParamMap.value = AppUtilsMap.updateValues(
-              oldMap: activeParamMap, oldValue: oldValue, newValue: newValue)
-          .cast<int, RightTriangle>();
+      activeParamMap.value =
+          AppUtilsMap.updateValues(
+            oldMap: activeParamMap,
+            oldValue: oldValue,
+            newValue: newValue,
+          ).cast<int, RightTriangle>();
 
       return true;
     }
@@ -1386,19 +1440,14 @@ class RightTriangleController extends GetxController {
     activeParamMap[2] = paramActive;
   }
 
-  bool isAvailableOneParam(
-    RightTriangle param1,
-  ) {
+  bool isAvailableOneParam(RightTriangle param1) {
     if (activeParamMap.containsValue(param1)) {
       return true;
     }
     return false;
   }
 
-  bool isAvailableTwoParams(
-    RightTriangle param1,
-    RightTriangle param2,
-  ) {
+  bool isAvailableTwoParams(RightTriangle param1, RightTriangle param2) {
     if (activeParamMap.containsValue(param1) &&
         activeParamMap.containsValue(param2)) {
       return true;
@@ -1434,15 +1483,13 @@ class RightTriangleController extends GetxController {
       return;
     }
 
-    if (isAvailableTwoParams(
-      RightTriangle.kCompCside,
-      RightTriangle.bSide,
-    )) {
+    if (isAvailableTwoParams(RightTriangle.kCompCside, RightTriangle.bSide)) {
       if (iskCompCside.value) {
         result = bSideD;
         if (!(kCompCsideD < result)) {
           showSnack(
-              '${TranslateHelper.component} k ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.component} k ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1450,21 +1497,20 @@ class RightTriangleController extends GetxController {
         result = kCompCsideD;
         if (!(bSideD > result)) {
           showSnack(
-              'Side b ${TranslateHelper.must_be} > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            'Side b ${TranslateHelper.must_be} > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
 
-    if (isAvailableTwoParams(
-      RightTriangle.mCompCside,
-      RightTriangle.aSide,
-    )) {
+    if (isAvailableTwoParams(RightTriangle.mCompCside, RightTriangle.aSide)) {
       if (isaSide.value) {
         result = mCompCsideD;
         if (!(aSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} a ${TranslateHelper.must_be} > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} a ${TranslateHelper.must_be} > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1473,20 +1519,19 @@ class RightTriangleController extends GetxController {
         result = aSideD;
         if (!(mCompCsideD < result)) {
           showSnack(
-              '${TranslateHelper.component} m ${TranslateHelper.must_be} < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.component} m ${TranslateHelper.must_be} < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
-    if (isAvailableTwoParams(
-      RightTriangle.mCompCside,
-      RightTriangle.cSide,
-    )) {
+    if (isAvailableTwoParams(RightTriangle.mCompCside, RightTriangle.cSide)) {
       if (iscSide.value) {
         result = mCompCsideD;
         if (!(cSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} с ${TranslateHelper.must_be} > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} с ${TranslateHelper.must_be} > m = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1494,21 +1539,20 @@ class RightTriangleController extends GetxController {
         result = cSideD;
         if (!(mCompCsideD < result)) {
           showSnack(
-              '${TranslateHelper.component} m ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.component} m ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
 
-    if (isAvailableTwoParams(
-      RightTriangle.kCompCside,
-      RightTriangle.cSide,
-    )) {
+    if (isAvailableTwoParams(RightTriangle.kCompCside, RightTriangle.cSide)) {
       if (iscSide.value) {
         result = kCompCsideD;
         if (!(cSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} с ${TranslateHelper.must_be} > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} с ${TranslateHelper.must_be} > k = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1516,21 +1560,20 @@ class RightTriangleController extends GetxController {
         result = cSideD;
         if (!(kCompCsideD < result)) {
           showSnack(
-              '${TranslateHelper.component} k ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.component} k ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
 
-    if (isAvailableTwoParams(
-      RightTriangle.hHeight,
-      RightTriangle.aSide,
-    )) {
+    if (isAvailableTwoParams(RightTriangle.hHeight, RightTriangle.aSide)) {
       if (isaSide.value) {
         result = hHeightD;
         if (!(aSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} a ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} a ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1538,20 +1581,19 @@ class RightTriangleController extends GetxController {
         result = aSideD;
         if (!(hHeightD < result)) {
           showSnack(
-              '${TranslateHelper.height} h ${TranslateHelper.must_be} < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.height} h ${TranslateHelper.must_be} < a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
-    if (isAvailableTwoParams(
-      RightTriangle.hHeight,
-      RightTriangle.bSide,
-    )) {
+    if (isAvailableTwoParams(RightTriangle.hHeight, RightTriangle.bSide)) {
       if (isbSide.value) {
         result = hHeightD;
         if (!(bSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} b ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} b ${TranslateHelper.must_be} > h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1559,20 +1601,19 @@ class RightTriangleController extends GetxController {
         result = bSideD;
         if (!(hHeightD < result)) {
           showSnack(
-              '${TranslateHelper.height} h ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.height} h ${TranslateHelper.must_be} < b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
-    if (isAvailableTwoParams(
-      RightTriangle.hHeight,
-      RightTriangle.cSide,
-    )) {
+    if (isAvailableTwoParams(RightTriangle.hHeight, RightTriangle.cSide)) {
       if (iscSide.value) {
         result = hHeightD * 2;
         if (!(cSideD >= result)) {
           showSnack(
-              '${TranslateHelper.side} c ${TranslateHelper.must_be} ≥ 2h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} c ${TranslateHelper.must_be} ≥ 2h = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1580,21 +1621,20 @@ class RightTriangleController extends GetxController {
         result = cSideD / 2;
         if (!(hHeightD <= result)) {
           showSnack(
-              '${TranslateHelper.height} h ${TranslateHelper.must_be} ≤ с/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.height} h ${TranslateHelper.must_be} ≤ с/2 = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
-//если гипотенуза меньше
-    if (isAvailableTwoParams(
-      RightTriangle.aSide,
-      RightTriangle.cSide,
-    )) {
+    //если гипотенуза меньше
+    if (isAvailableTwoParams(RightTriangle.aSide, RightTriangle.cSide)) {
       if (isaSide.value) {
         result = cSideD;
         if (!(aSideD < result)) {
           showSnack(
-              '${TranslateHelper.side} a ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} a ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1602,22 +1642,21 @@ class RightTriangleController extends GetxController {
         result = aSideD;
         if (!(cSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} c ${TranslateHelper.must_be} > a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} c ${TranslateHelper.must_be} > a = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
 
-//если гипотенуза меньше
-    if (isAvailableTwoParams(
-      RightTriangle.bSide,
-      RightTriangle.cSide,
-    )) {
+    //если гипотенуза меньше
+    if (isAvailableTwoParams(RightTriangle.bSide, RightTriangle.cSide)) {
       if (isbSide.value) {
         result = cSideD;
         if (!(bSideD < result)) {
           showSnack(
-              '${TranslateHelper.side} b ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} b ${TranslateHelper.must_be} < c = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
@@ -1625,13 +1664,14 @@ class RightTriangleController extends GetxController {
         result = bSideD;
         if (!(cSideD > result)) {
           showSnack(
-              '${TranslateHelper.side} c ${TranslateHelper.must_be} > b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}');
+            '${TranslateHelper.side} c ${TranslateHelper.must_be} > b = ${AppUtilsNumber.getFormatNumber(result, precisionResult)}',
+          );
           return;
         }
       }
     }
 
-//если угол больше 90
+    //если угол больше 90
     if (90 <= aAngleD || 90 <= bAngleD) {
       showSnack(TranslateHelper.messageAngleOver90);
 
@@ -1653,11 +1693,13 @@ class RightTriangleController extends GetxController {
     double sum = 0;
     if (isaAngle.value) {
       sum = double.parse(
-          AppUtilsString.removeLastCharacter(aAngle.value) + newInput);
+        AppUtilsString.removeLastCharacter(aAngle.value) + newInput,
+      );
       if (90 <= sum) return true;
     } else if (isbAngle.value) {
       sum = double.parse(
-          AppUtilsString.removeLastCharacter(bAngle.value) + newInput);
+        AppUtilsString.removeLastCharacter(bAngle.value) + newInput,
+      );
       if (90 <= sum) return true;
     }
     return false;
@@ -1701,7 +1743,9 @@ class RightTriangleController extends GetxController {
 
   bool isMaxNumberAfterPoint(String value) {
     return ValidationUtils.isMoreAccuracy(
-        value, ConstNumber.maxNumberAfterPoint);
+      value,
+      ConstNumber.maxNumberAfterPoint,
+    );
   }
 
   bool isMaxNumberInput(String value) {
@@ -1862,7 +1906,7 @@ class RightTriangleController extends GetxController {
   }
 
   void convertDegToDMS() {
-// если мы в минутах то переводим углы
+    // если мы в минутах то переводим углы
     aAngle.value = AppConvert.convertDegToDMS(aAngleD, precisionResult);
     bAngle.value = AppConvert.convertDegToDMS(bAngleD, precisionResult);
   }
@@ -1874,7 +1918,7 @@ class RightTriangleController extends GetxController {
   }
 
   void longBackspace() {
-// взависимости от активного ввода
+    // взависимости от активного ввода
     if (isaSide.value) {
       aSide.value = startLengthValue;
     } else if (isbSide.value) {
@@ -1896,7 +1940,8 @@ class RightTriangleController extends GetxController {
     initValue();
     setActiveParam();
     log.v(
-        '1 ${activeParamMap[1]} 2 ${activeParamMap[2]}  longBackspace active param  ');
+      '1 ${activeParamMap[1]} 2 ${activeParamMap[2]}  longBackspace active param  ',
+    );
 
     calculate();
     showMessage();
@@ -1907,7 +1952,7 @@ class RightTriangleController extends GetxController {
     String oldInput;
     String newInput;
 
-// взависимости от активного ввода
+    // взависимости от активного ввода
     if (isaSide.value) {
       oldInput = aSide.value;
       newInput = AppUtilsString.removeLastCharacter(oldInput);
@@ -2044,15 +2089,17 @@ class RightTriangleController extends GetxController {
     areaD = 0;
     perimeterD = 0;
 
-    aSideD = bSideD =
-        cSideD = hHeightD = kCompCsideD = mCompCsideD = bAngleD = aAngleD = 0;
+    aSideD =
+        bSideD =
+            cSideD =
+                hHeightD = kCompCsideD = mCompCsideD = bAngleD = aAngleD = 0;
 
     ySPointD = 0;
     xSPointD = 0;
 
     mA.value = mB.value = mC.value = startLengthValue;
     mAd = mBd = mCd = 0.0;
-/////////////////////////////
+    /////////////////////////////
     lA.value = lB.value = lC.value = startLengthValue;
     lAd = lBd = lCd = 0.0;
 
@@ -2077,7 +2124,7 @@ class RightTriangleController extends GetxController {
 
     mA.value = mB.value = mC.value = startLengthValue;
     mAd = mBd = mCd = 0.0;
-/////////////////////////////
+    /////////////////////////////
     lA.value = lB.value = lC.value = startLengthValue;
     lAd = lBd = lCd = 0.0;
 
@@ -2180,9 +2227,114 @@ class RightTriangleController extends GetxController {
     }
   }
 
+  void saveValues() {
+    try {
+      Map<String, dynamic> values = <String, dynamic>{
+        'aSide': aSide.value,
+        'bSide': bSide.value,
+        'cSide': cSide.value,
+        'hHeight': hHeight.value,
+        'kCompCside': kCompCside.value,
+        'mCompCside': mCompCside.value,
+        'aAngle': aAngle.value,
+        'bAngle': bAngle.value,
+        'activeASide': isaSide.value,
+        'activeBSide': isbSide.value,
+        'activeCSide': iscSide.value,
+        'activeHHeight': ishHeight.value,
+        'activeKCompCside': iskCompCside.value,
+        'activeMCompCside': ismCompCside.value,
+        'activeAAngle': isaAngle.value,
+        'activeBAngle': isbAngle.value,
+        'isDeg': isDeg.value,
+        'isActiveImageInfo': isActiveImageInfo.value,
+        'activeParamMap': activeParamMap.map(
+          (int key, RightTriangle value) =>
+              MapEntry(key.toString(), value.index),
+        ),
+      };
+      LocalStorage().setItemString(
+        ConstString.keyRightTriangleValues,
+        json.encode(values),
+      );
+      log.i('Saved right triangle values and active parameters');
+    } catch (e) {
+      log.e('Error saving right triangle values: $e');
+    }
+  }
+
+  void restoreValues() async {
+    try {
+      Map<String, dynamic> values = await LocalStorage().getJsonMap(
+        ConstString.keyRightTriangleValues,
+      );
+
+      if (values.isNotEmpty) {
+        // Restore input values
+        aSide.value = values['aSide'] ?? startLengthValue;
+        bSide.value = values['bSide'] ?? startLengthValue;
+        cSide.value = values['cSide'] ?? startLengthValue;
+        hHeight.value = values['hHeight'] ?? startLengthValue;
+        kCompCside.value = values['kCompCside'] ?? startLengthValue;
+        mCompCside.value = values['mCompCside'] ?? startLengthValue;
+        aAngle.value = values['aAngle'] ?? startAngleValue;
+        bAngle.value = values['bAngle'] ?? startAngleValue;
+
+        // Restore active state
+        isaSide.value = values['activeASide'] ?? false;
+        isbSide.value = values['activeBSide'] ?? false;
+        iscSide.value = values['activeCSide'] ?? false;
+        ishHeight.value = values['activeHHeight'] ?? false;
+        iskCompCside.value = values['activeKCompCside'] ?? false;
+        ismCompCside.value = values['activeMCompCside'] ?? false;
+        isaAngle.value = values['activeAAngle'] ?? false;
+        isbAngle.value = values['activeBAngle'] ?? false;
+        isDeg.value = values['isDeg'] ?? true;
+        isActiveImageInfo.value = values['isActiveImageInfo'] ?? false;
+
+        // Restore active parameter map
+        if (values.containsKey('activeParamMap')) {
+          try {
+            Map<String, dynamic> savedMap = Map<String, dynamic>.from(
+              values['activeParamMap'],
+            );
+            activeParamMap.clear();
+            savedMap.forEach((String key, value) {
+              int keyInt = int.parse(key);
+              int valueInt = value is int ? value : int.parse(value.toString());
+              if (valueInt < RightTriangle.values.length) {
+                activeParamMap[keyInt] = RightTriangle.values[valueInt];
+              }
+            });
+          } catch (e) {
+            log.e('Error restoring active parameters: $e');
+            resetActiveParams();
+          }
+        }
+
+        // Initialize values and recalculate
+        initValue();
+        calculate();
+        log.i('Restored right triangle values and active parameters');
+      }
+    } catch (e) {
+      log.e('Error in restoreValues: $e');
+      resetAllValue();
+    }
+  }
+
+  // Modify onInit and onClose methods
+  @override
+  void onInit() {
+    clearAll();
+    restoreValues(); // Add this line
+    showMessage();
+    super.onInit();
+  }
+
   @override
   void onClose() {
-    clearAll();
+    saveValues(); // Add this line
     super.onClose();
   }
 }

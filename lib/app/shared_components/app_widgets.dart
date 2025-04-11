@@ -26,41 +26,43 @@ abstract class AppWidgets {
     );
   }
 
-  static viewDialogExit(BuildContext context) {
+  static Future viewDialogExit(BuildContext context) {
     return showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-            backgroundColor: AppColors.content(context),
-            content: Text(
-              TranslateHelper.exitWarning,
-              style: TextStyle(color: AppColors.text(context)),
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          backgroundColor: AppColors.content(context),
+          content: Text(
+            TranslateHelper.exitWarning,
+            style: TextStyle(color: AppColors.text(context)),
+          ),
+          title: Text(
+            TranslateHelper.warning,
+            style: TextStyle(
+              fontSize: AppSize.fontSizeHeadline6(context),
+              fontWeight: FontWeight.bold,
             ),
-            title: Text(
-              TranslateHelper.warning,
-              style: TextStyle(
-                  fontSize: AppSize.fontSizeHeadline6(context),
-                  fontWeight: FontWeight.bold),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(TranslateHelper.yes),
+              onPressed: () {
+                // SystemNavigator.pop();
+                exit(0);
+                //             Future.delayed(const Duration(milliseconds: 1000), () {
+                //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                // });
+              },
             ),
-            actions: [
-              TextButton(
-                child: Text(TranslateHelper.yes),
-                onPressed: () {
-                  // SystemNavigator.pop();
-                  exit(0);
-                  //             Future.delayed(const Duration(milliseconds: 1000), () {
-                  //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-                  // });
-                },
-              ),
-              TextButton(
-                child: Text(TranslateHelper.no),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
+            TextButton(
+              child: Text(TranslateHelper.no),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:calc_triangle/app/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +15,7 @@ class LocalStorage {
 
   Future<String> getItemString(String key, [String defaultValue = '']) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var val = prefs.getString(key);
+    String? val = prefs.getString(key);
     val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
@@ -29,7 +31,7 @@ class LocalStorage {
 
   Future<double> getItemDouble(String key, [double defaultValue = 0.0]) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var val = prefs.getDouble(key);
+    double? val = prefs.getDouble(key);
     val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
@@ -45,7 +47,7 @@ class LocalStorage {
 
   Future<bool> getItemBool(String key, [bool defaultValue = false]) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var val = prefs.getBool(key);
+    bool? val = prefs.getBool(key);
     val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
@@ -61,7 +63,7 @@ class LocalStorage {
 
   Future<int> getItemInt(String key, [int defaultValue = 0]) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var val = prefs.getInt(key);
+    int? val = prefs.getInt(key);
     val ??= defaultValue;
 
     log.w('GET $_info > $key = $val');
@@ -70,7 +72,7 @@ class LocalStorage {
 
   Future<bool> isNull(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var val = prefs.get(key);
+    Object? val = prefs.get(key);
     bool result;
 
     if (val == null) {
@@ -85,5 +87,30 @@ class LocalStorage {
   Future<void> clearAll() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
+  }
+
+  Future<Map<String, dynamic>> getJsonMap(String key) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? data = prefs.getString(key);
+
+      if (data != null && data.isNotEmpty) {
+        return json.decode(data) as Map<String, dynamic>;
+      }
+    } catch (e) {
+      log.e('Error parsing saved data for key $key: $e');
+      // If there was an error, clear this key to prevent future errors
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.remove(key);
+    }
+
+    // Return empty map if data is missing or invalid
+    return <String, dynamic>{};
+  }
+
+  Future<void> removeItem(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove(key);
+    log.i('Removed data for key: $key');
   }
 }

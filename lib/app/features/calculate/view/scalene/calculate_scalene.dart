@@ -3,7 +3,7 @@ import 'package:calc_triangle/app/features/calculate/view/scalene/2/scalene_main
 import 'package:flutter/material.dart';
 
 class CalculateScalenePage extends StatefulWidget {
-  const CalculateScalenePage({Key? key}) : super(key: key);
+  const CalculateScalenePage({super.key});
 
   @override
   _CalculateScalenePageState createState() => _CalculateScalenePageState();
@@ -12,8 +12,6 @@ class CalculateScalenePage extends StatefulWidget {
 class _CalculateScalenePageState extends State<CalculateScalenePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: ScaleneMain()),
-    );
+    return const Scaffold(body: SafeArea(child: ScaleneMain()));
   }
 }

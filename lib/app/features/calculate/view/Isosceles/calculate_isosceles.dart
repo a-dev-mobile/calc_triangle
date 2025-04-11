@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '2/isosceles__main_w.dart';
 
 class CalculateIsoscelesPage extends StatefulWidget {
-  const CalculateIsoscelesPage({Key? key}) : super(key: key);
+  const CalculateIsoscelesPage({super.key});
 
   @override
   _CalculateIsoscelesPageState createState() => _CalculateIsoscelesPageState();

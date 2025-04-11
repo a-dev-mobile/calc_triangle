@@ -47,21 +47,21 @@ abstract class AppStyleDrawer {
 abstract class AppStyleText {
   static TextStyle titleText(BuildContext context) {
     return TextStyle(
-        color: AppColors.text(context),
-        fontSize: 15.sp,
-        fontWeight: FontWeight.bold);
+      color: AppColors.text(context),
+      fontSize: 15.sp,
+      fontWeight: FontWeight.bold,
+    );
   }
 
   static TextStyle textSettingItem(BuildContext context) {
-    return TextStyle(
-      color: AppColors.text(context),
-      fontSize: 15.sp,
-    );
+    return TextStyle(color: AppColors.text(context), fontSize: 15.sp);
   }
 
   static TextStyle subText(BuildContext context) {
     return TextStyle(
-        color: AppColors.text(context).withOpacity(0.8), fontSize: 15.sp);
+      color: AppColors.text(context).withOpacity(0.8),
+      fontSize: 15.sp,
+    );
   }
 
   static TextStyle convertText(BuildContext context) {
@@ -70,42 +70,47 @@ abstract class AppStyleText {
 
   static TextStyle leadingTextDetail(BuildContext context) {
     return TextStyle(
-        color: AppColors.text(context),
-        fontSize: 20.sp,
-        fontWeight: FontWeight.bold);
+      color: AppColors.text(context),
+      fontSize: 20.sp,
+      fontWeight: FontWeight.bold,
+    );
   }
 }
 
 abstract class AppStyleTextImage {
   static TextStyle text(BuildContext context) {
     return TextStyle(
-        color: AppColors.text(context),
-        height: 1,
-        // backgroundColor: Colors.blue,
-        backgroundColor: AppColors.content(context),
-        fontSize: 24.sp);
+      color: AppColors.text(context),
+      height: 1,
+      // backgroundColor: Colors.blue,
+      backgroundColor: AppColors.content(context),
+      fontSize: 24.sp,
+    );
   }
 
   static TextStyle activeInput(BuildContext context) {
     return TextStyle(
-        color: ConstColor.error,
-        fontWeight: FontWeight.bold,
-        backgroundColor: AppColors.content(context),
-        fontSize: 20.sp);
+      color: ConstColor.error,
+      fontWeight: FontWeight.bold,
+      backgroundColor: AppColors.content(context),
+      fontSize: 20.sp,
+    );
   }
 
   static TextStyle activeParam(BuildContext context) {
     return TextStyle(
-        color: ConstColor.primary,
-        backgroundColor: AppColors.content(context),
-        fontSize: 20.sp);
+      color: ConstColor.primary,
+      backgroundColor: AppColors.content(context),
+      fontSize: 20.sp,
+    );
   }
 
   static TextStyle inActive(BuildContext context) {
     return TextStyle(
-        color: AppColors.text(context),
-        backgroundColor: AppColors.content(context),
-        fontSize: 18.sp);
+      color: AppColors.text(context),
+      backgroundColor: AppColors.content(context),
+      fontSize: 18.sp,
+    );
   }
 }
 

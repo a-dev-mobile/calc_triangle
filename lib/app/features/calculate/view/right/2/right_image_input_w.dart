@@ -17,80 +17,82 @@ import 'package:flutter/material.dart';
 String pathAssestInput = ConstAssetsImageRaster.rightTriangleInput;
 
 class RightTriangleImageInputWidget extends StatelessWidget {
-  const RightTriangleImageInputWidget({Key? key}) : super(key: key);
+  const RightTriangleImageInputWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height * ConstNumber.ratioFigureImage,
       width: size.width,
-      child: LayoutBuilder(builder: (context, constraints) {
-        var minSize = min(constraints.maxWidth, constraints.maxHeight);
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          double minSize = min(constraints.maxWidth, constraints.maxHeight);
 
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            SizedBox.expand(
-              child: Image(
-                fit: BoxFit.contain,
-                color: AppColors.text(context),
-                image: AssetImage(pathAssestInput),
+          return Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              SizedBox.expand(
+                child: Image(
+                  fit: BoxFit.contain,
+                  color: AppColors.text(context),
+                  image: AssetImage(pathAssestInput),
+                ),
               ),
-            ),
-            //all widget text in image
 
-            HheightWidget(
-              angle: -45,
-              posX: -18.225,
-              posY: 18.225,
-              minSizeImage: minSize,
-            ),
-            KcompCside(
-              angle: 45,
-              posX: -12.994,
-              posY: -23.456,
-              minSizeImage: minSize,
-            ),
-            McompCside(
-              angle: 45,
-              posX: 23.456,
-              posY: 12.994,
-              minSizeImage: minSize,
-            ),
-            BangleWidget(
-              posX: -20.573,
-              posY: 0,
-              minSizeImage: minSize,
-              angle: 0,
-            ),
-            AangleWidget(
-              posX: -3.0,
-              posY: 23.943,
-              minSizeImage: minSize,
-              angle: 0,
-            ),
-            BcathetWidget(
-              angle: -90,
-              posX: -43.845,
-              posY: 0,
-              minSizeImage: minSize,
-            ),
-            AcathetWidget(
-              posX: 0,
-              posY: 43.545,
-              minSizeImage: minSize,
-              angle: 0,
-            ),
-            ChypotenuseWidget(
-              angle: 45,
-              posX: 11.093,
-              posY: -11.093,
-              minSizeImage: minSize,
-            ),
-          ],
-        );
-      }),
+              //all widget text in image
+              HheightWidget(
+                angle: -45,
+                posX: -18.225,
+                posY: 18.225,
+                minSizeImage: minSize,
+              ),
+              KcompCside(
+                angle: 45,
+                posX: -12.994,
+                posY: -23.456,
+                minSizeImage: minSize,
+              ),
+              McompCside(
+                angle: 45,
+                posX: 23.456,
+                posY: 12.994,
+                minSizeImage: minSize,
+              ),
+              BangleWidget(
+                posX: -20.573,
+                posY: 0,
+                minSizeImage: minSize,
+                angle: 0,
+              ),
+              AangleWidget(
+                posX: -3.0,
+                posY: 23.943,
+                minSizeImage: minSize,
+                angle: 0,
+              ),
+              BcathetWidget(
+                angle: -90,
+                posX: -43.845,
+                posY: 0,
+                minSizeImage: minSize,
+              ),
+              AcathetWidget(
+                posX: 0,
+                posY: 43.545,
+                minSizeImage: minSize,
+                angle: 0,
+              ),
+              ChypotenuseWidget(
+                angle: 45,
+                posX: 11.093,
+                posY: -11.093,
+                minSizeImage: minSize,
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

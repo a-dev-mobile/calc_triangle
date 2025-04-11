@@ -5,11 +5,9 @@ import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
 import 'package:calc_triangle/app/features/setting/controller/setting_c.dart';
 
-import 'package:calc_triangle/app/features/welcome/welcome_p.dart';
 import 'package:calc_triangle/app/services/global_serv.dart';
 import 'package:calc_triangle/app/shared_components/app_widgets.dart';
 import 'package:calc_triangle/app/shared_components/change_theme_w.dart';
-import 'package:calc_triangle/app/shared_components/setting_launch_screen_w.dart';
 
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
@@ -25,29 +23,20 @@ import 'package:url_launcher/url_launcher.dart';
 // late RightTriangleController c3 = Get.find();
 
 class SettingPage extends StatelessWidget {
-  SettingPage({Key? key}) : super(key: key);
+  SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          TranslateHelper.setting,
-        ),
-      ),
+      appBar: AppBar(title: Text(TranslateHelper.setting)),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(15.0),
         child: Column(
-          children: [
-            // const Divider(
-            //   color: Colors.grey,
-            // ),
-
+          children: <Widget>[
             const ChangeThemeWidget(),
             const SizedBox(height: 10),
-            const SettingLaunchScreenWidget(),
-            const SizedBox(height: 10),
+            // Removed SettingLaunchScreenWidget
             const SliderPrecisionResultWidget(),
 
             buildLanguage(context),
@@ -113,12 +102,12 @@ class SettingPage extends StatelessWidget {
       onTap: () {
         Get.defaultDialog(
           title:
-              '${TranslateHelper.appName}\n${TranslateHelper.version}: v2.0.0',
+              '${TranslateHelper.appName}\n${TranslateHelper.version}: v2.1.0',
           backgroundColor: AppColors.content(context),
           content: Align(
             alignment: Alignment.topLeft,
             child: Column(
-              children: [
+              children: <Widget>[
                 Text(
                   TranslateHelper.thank_you,
                   textAlign: TextAlign.center,
@@ -128,7 +117,7 @@ class SettingPage extends StatelessWidget {
                 Text(
                   '\nAutor: Dmitriy Trofimov\ncontact: ${ConstString.email}',
                   style: AppStyleText.subText(context),
-                )
+                ),
               ],
             ),
           ),
@@ -159,43 +148,43 @@ class SettingPage extends StatelessWidget {
       return ListTile(
         onTap: () {
           Get.defaultDialog(
-              backgroundColor: AppColors.content(context),
-              title: TranslateHelper.language,
-              content: Column(
-                children: [
-                  ListTile(
-                    onTap: () {
-                      logger.i('english');
+            backgroundColor: AppColors.content(context),
+            title: TranslateHelper.language,
+            content: Column(
+              children: <Widget>[
+                ListTile(
+                  onTap: () {
+                    logger.i('english');
 
-                      GlobalServ.to.setStorageLocale(ConstString.localeEn);
-                      TranslateHelper.updateLocale(
-                          const Locale(ConstString.localeEn));
-                      SettingContrl.to.setEnLocation();
-                      // c3.showMessage();
-                      Get.back();
-                    },
-                    title: Text(
-                      TranslateHelper.languageEn,
-                      style: AppStyleText.titleText(context),
-                    ),
+                    GlobalServ.to.setStorageLocale(ConstString.localeEn);
+                    TranslateHelper.updateLocale(
+                      const Locale(ConstString.localeEn),
+                    );
+                    SettingContrl.to.setEnLocation();
+                    Get.back();
+                  },
+                  title: Text(
+                    TranslateHelper.languageEn,
+                    style: AppStyleText.titleText(context),
                   ),
-                  ListTile(
-                    onTap: () {
-                      GlobalServ.to.setStorageLocale(ConstString.localeRu);
-                      TranslateHelper.updateLocale(
-                          const Locale(ConstString.localeRu));
-                      SettingContrl.to.setRusLocation();
-                      // чтобы перевелся
-                      // c3.showMessage();
-                      Navigator.of(context).pop();
-                    },
-                    title: Text(
-                      TranslateHelper.languageRu,
-                      style: AppStyleText.titleText(context),
-                    ),
+                ),
+                ListTile(
+                  onTap: () {
+                    GlobalServ.to.setStorageLocale(ConstString.localeRu);
+                    TranslateHelper.updateLocale(
+                      const Locale(ConstString.localeRu),
+                    );
+                    SettingContrl.to.setRusLocation();
+                    Navigator.of(context).pop();
+                  },
+                  title: Text(
+                    TranslateHelper.languageRu,
+                    style: AppStyleText.titleText(context),
                   ),
-                ],
-              ));
+                ),
+              ],
+            ),
+          );
         },
         title: Text(
           TranslateHelper.language,
@@ -207,19 +196,17 @@ class SettingPage extends StatelessWidget {
               : TranslateHelper.languageEn,
           style: AppStyleText.subText(context),
         ),
-        trailing: Icon(
-          Icons.keyboard_arrow_right,
-          color: Colors.grey.shade400,
-        ),
+        trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey.shade400),
       );
     });
   }
 
   final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: ConstString.email,
-      query:
-          '${Uri.encodeComponent('subject')}=${Uri.encodeComponent('${TranslateHelper.feedback} -> ${TranslateHelper.appName}')}');
+    scheme: 'mailto',
+    path: ConstString.email,
+    query:
+        '${Uri.encodeComponent('subject')}=${Uri.encodeComponent('${TranslateHelper.feedback} -> ${TranslateHelper.appName}')}',
+  );
 
   void launchURL() async {
     String url =
@@ -228,5 +215,65 @@ class SettingPage extends StatelessWidget {
     await canLaunch(url)
         ? await launch(url)
         : throw 'Could not launch ${ConstString.playStoreUrl}';
+  }
+}
+
+// Add the SliderPrecisionResultWidget to this file since we removed the welcome page
+class SliderPrecisionResultWidget extends StatelessWidget {
+  const SliderPrecisionResultWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    String precision = '';
+    String title = TranslateHelper.selectedPrecisionResult;
+    return Obx(() {
+      int precisionResult = GlobalServ.to.precisionResult.value;
+      switch (precisionResult) {
+        case 1:
+          precision = '0.0';
+          break;
+        case 2:
+          precision = '0.00';
+          break;
+        case 3:
+          precision = '0.000';
+          break;
+        case 4:
+          precision = '0.0000';
+          break;
+        case 5:
+          precision = '0.00000';
+          break;
+        case 0:
+        default:
+          precision = '0';
+      }
+      return Column(
+        children: <Widget>[
+          RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: <InlineSpan>[
+                TextSpan(
+                  text: '$title\n',
+                  style: AppStyleText.titleText(context),
+                ),
+                TextSpan(text: precision, style: AppStyleText.subText(context)),
+              ],
+            ),
+          ),
+          Slider(
+            value: GlobalServ.to.precisionResult.value.toDouble(),
+            min: 0,
+            divisions: 5,
+            max: 5,
+            onChanged: (double value) {
+              GlobalServ.to.precisionResult.value = value.toInt();
+              GlobalServ.to.setPrecisionResult(value.toInt());
+            },
+          ),
+        ],
+      );
+    });
   }
 }
