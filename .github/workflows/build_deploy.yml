@@ -18,6 +18,12 @@ jobs:
           gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.ENV_FILE_PASSPHRASE }}" \
           --output $HOME/secrets/.env .env.gpg
 
+      - name: Decrypt keystore file
+        run: |
+          mkdir -p android/app
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.KEYSTORE_PASSPHRASE }}" \
+          --output android/app/keystore.jks android/app/keystore.jks.gpg
+
       - name: Load environment variables
         run: |
           if [ -f "$HOME/secrets/.env" ]; then
