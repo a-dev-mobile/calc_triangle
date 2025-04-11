@@ -63,12 +63,11 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          format: markdown
+          format: html
           message: |
-            🚀 *Новая сборка приложения*
-
-            Repo: ${{ github.repository }}
-            Commit: `${{ steps.commit-info.outputs.sha }}`
-            Дата: ${{ steps.commit-info.outputs.date }}
-            Сообщение: ${{ steps.commit-info.outputs.message }}
+            🚀 <b>Новая сборка приложения</b><br><br>
+            Repo: ${{ github.repository }}<br>
+            Commit: <code>${{ steps.commit-info.outputs.sha }}</code><br>
+            Дата: ${{ steps.commit-info.outputs.date }}<br>
+            Сообщение: <i>${{ steps.commit-info.outputs.message }}</i>
           document: build/app/outputs/flutter-apk/app-release.apk
