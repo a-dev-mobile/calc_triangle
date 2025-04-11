@@ -11,31 +11,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Decrypt .env file
-        run: |
-          mkdir -p $HOME/secrets
-          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
-          --output $HOME/secrets/.env .env.gpg
-
       - name: Decrypt keystore file
         run: |
           mkdir -p android/app
           gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
           --output android/app/keystore.jks android/app/keystore.jks.gpg
 
-      - name: Load environment variables
-        run: |
-          if [ -f "$HOME/secrets/.env" ]; then
-            while IFS= read -r line || [ -n "$line" ]; do
-              if [[ ! -z "$line" && ! "$line" =~ ^[[:space:]]*# ]]; then
-                echo "$line" >> $GITHUB_ENV
-              fi
-            done < "$HOME/secrets/.env"
-          else
-            echo "Ошибка: Файл .env не найден!"
-            exit 1
-          fi
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -49,6 +30,10 @@ jobs:
 
       - name: Build APK
         run: flutter build apk --release
+        env:
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
