@@ -1,0 +1,72 @@
+name: Decrypt and Use ENV File
+
+on:
+  # Можно запускать вручную из интерфейса GitHub
+  workflow_dispatch:
+  # И/или при пуше в main ветку
+  push:
+    branches: [ main ]
+
+jobs:
+  decrypt-and-use-env:
+    runs-on: ubuntu-latest
+    steps:
+      # Шаг 1: Получаем код из репозитория
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Шаг 2: Расшифровываем файл .env
+      - name: Decrypt .env file
+        run: |
+          mkdir -p $HOME/secrets
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.ENV_FILE_PASSPHRASE }}" \
+          --output $HOME/secrets/.env .env.gpg
+          echo "Файл .env успешно расшифрован"
+          
+      # Шаг 3: Загружаем переменные из .env в среду выполнения
+      - name: Load environment variables
+        run: |
+          if [ -f "$HOME/secrets/.env" ]; then
+            echo "Загружаем переменные из .env файла"
+            set -a
+            source $HOME/secrets/.env
+            set +a
+            echo "Переменные окружения успешно загружены"
+          else
+            echo "Ошибка: Файл .env не найден!"
+            exit 1
+          fi
+
+      # Шаг 4: Проверяем, что переменные окружения установлены (без вывода самих значений)
+      - name: Verify environment variables
+        run: |
+          # Проверяем наличие переменных (не выводим значения в целях безопасности)
+          if [ -z "$DB_PASSWORD" ]; then
+            echo "Ошибка: Переменная DB_PASSWORD не установлена"
+            exit 1
+          else
+            echo "Переменная DB_PASSWORD установлена"
+          fi
+          
+          if [ -z "$API_KEY" ]; then
+            echo "Ошибка: Переменная API_KEY не установлена"
+            exit 1
+          else
+            echo "Переменная API_KEY установлена"
+          fi
+          
+          # Здесь проверьте другие переменные, которые должны быть в вашем .env файле
+          
+          echo "Все необходимые переменные окружения установлены"
+
+      # Шаг 5: Пример использования переменных в другой задаче
+      - name: Example task with environment variables
+        run: |
+          # Пример использования переменных (без вывода значений)
+          echo "Выполняем задачу с использованием переменных окружения"
+          echo "Подключаемся к базе данных с использованием DB_PASSWORD"
+          # Здесь ваш код для работы с переменными окружения
+          
+          # Пример безопасного маскирования чувствительных значений
+          # Если вам нужно вывести замаскированное значение для отладки
+          echo "Доступ к API с ключом: ***${API_KEY: -4}"  # Показываем только последние 4 символа
