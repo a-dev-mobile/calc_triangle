@@ -89,8 +89,7 @@ jobs:
           Repo: ${{ github.repository }}
           Commit: ${{ steps.commit-info.outputs.sha }}
           Date: ${{ steps.commit-info.outputs.date }}
-          Message: ${{ steps.commit-info.outputs.message }}
-          
+          Message: ${{ steps.commit-info.outputs.message }}"
           
           # Отправка текста
           curl -G \
@@ -100,6 +99,6 @@ jobs:
           
           # Отправка файла
           curl -X POST \
-            -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -F document=@"build/app/outputs/flutter-apk/app-release.apk" \
+            -F "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -F "document=@build/app/outputs/flutter-apk/app-release.apk" \
             https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument
