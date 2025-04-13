@@ -120,3 +120,12 @@ makefile
 
 **/android/key.properties
 .env
+makefile
+*.jks
+android/app/.cxx/*
+**/android/key.properties
+.env
+google-services.json
+firebase.json
+
+env_dart/*.json

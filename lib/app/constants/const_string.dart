@@ -1,3 +1,5 @@
+import 'package:calc_triangle/app/config/env_config.dart';
+
 abstract class ConstString {
   static const String keyMinSize = 'minSize';
 
@@ -16,10 +18,5 @@ abstract class ConstString {
 
   static const String degConvert = '☺°.☺☺';
   static const String degMinSecConvert = '☺°☺′☺″';
-  static const String email = 'wayofdt@gmail.com';
 
-  static const String appStoreUrl = 'https://apps.apple.com/app/id1598378708';
-
-  static const String playStoreUrl =
-      'http://play.google.com/store/apps/details?id=a.dev.calc_triangle';
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:calc_triangle/app/config/env_config.dart';
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/constants/const_string.dart';
@@ -115,7 +116,7 @@ class SettingPage extends StatelessWidget {
                 ),
                 AppWidgets.dividerWelcome(),
                 Text(
-                  '\nAutor: Dmitriy Trofimov\ncontact: ${ConstString.email}',
+                  '\nAutor: Dmitriy Trofimov\ncontact: ${EnvConfig.email}',
                   style: AppStyleText.subText(context),
                 ),
               ],
@@ -203,18 +204,20 @@ class SettingPage extends StatelessWidget {
 
   final Uri emailLaunchUri = Uri(
     scheme: 'mailto',
-    path: ConstString.email,
+    path: EnvConfig.email,
     query:
         '${Uri.encodeComponent('subject')}=${Uri.encodeComponent('${TranslateHelper.feedback} -> ${TranslateHelper.appName}')}',
   );
 
   void launchURL() async {
     String url =
-        Platform.isIOS ? ConstString.appStoreUrl : ConstString.playStoreUrl;
+        Platform.isIOS
+            ? EnvConfig.iosAppStoreUrl
+            : EnvConfig.androidGooglePlayUrl;
 
     await canLaunch(url)
         ? await launch(url)
-        : throw 'Could not launch ${ConstString.playStoreUrl}';
+        : throw 'Could not launch $url';
   }
 }
 
