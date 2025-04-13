@@ -37,7 +37,7 @@ class SettingPage extends StatelessWidget {
           icon: Platform.isIOS 
               ? Icon(CupertinoIcons.back, color: AppColors.content(context))
               : Icon(Icons.arrow_back, color: AppColors.content(context)),
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: SingleChildScrollView(

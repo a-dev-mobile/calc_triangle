@@ -7,16 +7,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../config/theme/app_color.dart';
 
 class FloatingBackButton extends StatelessWidget {
-  final VoidCallback? onPressed;
+  final Function? customBackAction;
   final Color? backgroundColor;
   final Color? iconColor;
   
   const FloatingBackButton({
     super.key,
-    this.onPressed,
+    this.customBackAction,
     this.backgroundColor,
     this.iconColor,
   });
+
+  void _handleBack(BuildContext context) {
+    if (customBackAction != null) {
+      customBackAction!();
+      return;
+    }
+    
+    // Use Navigator.pop which respects the navigation stack on both platforms
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +37,7 @@ class FloatingBackButton extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: onPressed ?? () => Get.back(),
+          onTap: () => _handleBack(context),
           child: Container(
             padding: EdgeInsets.all(8.r),
             decoration: BoxDecoration(

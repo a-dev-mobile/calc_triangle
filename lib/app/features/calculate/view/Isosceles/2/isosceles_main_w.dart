@@ -77,13 +77,13 @@ class IsoscelesMain extends StatelessWidget {
                     : const IconInputInfoWidget(icon: Icons.calculate_outlined);
               }),
               
-              // Add floating back button
+              // Add floating back button with custom back action
               FloatingBackButton(
-                onPressed: () {
+                customBackAction: () {
                   if (c.isActiveImageInfo.value) {
                     c.isActiveImageInfo.value = false;
                   } else {
-                    Get.back();
+                    Navigator.of(context).pop();
                   }
                 },
               ),
