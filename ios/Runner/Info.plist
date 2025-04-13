@@ -46,8 +46,10 @@
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
 		<key>UIStatusBarHidden</key>
-		<true/>
+		<false/>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>UIStatusBarStyle</key>
+		<string>UIStatusBarStyleDefault</string>
 	</dict>
 </plist>

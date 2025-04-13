@@ -4,7 +4,7 @@ description: Flutter project calculating the sides in a right triangle
 publish_to: "none"
 
 
-version: 2.1.1+17
+version: 2.1.1+18
 
 environment:
   sdk: ^3.7.0
@@ -98,7 +98,7 @@ flutter_native_splash:
   web: false
 
   # Полноэкранный режим
-  fullscreen: true
+  fullscreen: false
   
   # Настройки для Android 12+
   android_12:
