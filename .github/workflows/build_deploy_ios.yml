@@ -209,19 +209,21 @@ jobs:
       # Отправка уведомления в Telegram
       - name: Send Telegram notification
         run: |
-          MESSAGE="🍏 iOS Build Completed
+          cat << EOF > message.txt
+          🍏 iOS Build Completed
 
           Repo: ${{ github.repository }}
           Commit: ${{ steps.commit-info.outputs.sha }}
           Date: ${{ steps.commit-info.outputs.date }}
           Message: ${{ steps.commit-info.outputs.message }}
                     
-          TestFlight: ${{ env.APP_STORE_CONNECT_URL }}"
+          TestFlight: ${{ env.APP_STORE_CONNECT_URL }}
+          EOF
 
           # Отправка текста
           curl -G \
             --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-            --data-urlencode "text=$MESSAGE" \
+            --data-urlencode "text=$(cat message.txt)" \
             https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage
           
           # Отправка файла
