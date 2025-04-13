@@ -1,0 +1,229 @@
+name: iOS Build & Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    
+env:
+  FLUTTER_VERSION: "3.29.2"
+  RUBY_VERSION: "3.2"
+  APP_STORE_CONNECT_URL: "https://appstoreconnect.apple.com/apps/${{ secrets.APP_STORE_ID }}/testflight/ios"
+
+jobs:
+  build-ios:
+    name: Build & Upload iOS
+    runs-on: macos-latest
+    steps:
+      # Подготовка окружения
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "stable"
+          cache: true
+
+      - name: Setup Ruby & Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          gem install fastlane cocoapods
+          flutter pub get
+
+      # Расшифровка файлов
+      - name: Decrypt secrets
+        run: |
+          mkdir -p ios/Runner private_keys env_dart
+          
+          # iOS certificates
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
+          --output ios/Runner/certificate.p12 ios/Runner/certificate.p12.gpg
+          
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
+          --output ios/Runner/profile.mobileprovision ios/Runner/profile.mobileprovision.gpg
+          
+          # App Store Connect API Key
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
+          --output private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8 \
+          private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8.gpg
+          
+          # Environment config
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
+          --output env_dart/prod.json env_dart/prod.json.gpg
+
+      # Генерация кода
+      - name: Generate localization
+        run: |
+          dart pub global activate intl_utils
+          dart pub global run intl_utils:generate
+
+      - name: Generate code with build_runner
+        run: dart run build_runner build --delete-conflicting-outputs --release
+
+      # Подготовка iOS проекта
+      - name: Prepare iOS build
+        run: |
+          flutter precache --ios
+          cd ios && pod install && cd ..
+
+      # Настройка Fastlane
+      - name: Configure Fastlane
+        run: |
+          mkdir -p ios/fastlane
+          
+          # Fastfile для сборки IPA
+          cat > ios/fastlane/Fastfile << 'EOF'
+          default_platform(:ios)
+          
+          platform :ios do
+            desc "Build IPA for TestFlight"
+            lane :release do
+              setup_signing
+              build_app_store_ipa
+              cleanup_keychain
+            end
+            
+            private_lane :setup_signing do
+              # Создание временного keychain
+              keychain_name = "build_keychain"
+              keychain_password = ENV["KEYCHAIN_PASSWORD"]
+              
+              delete_keychain(name: keychain_name) if File.exist? File.expand_path("~/Library/Keychains/#{keychain_name}-db")
+              
+              create_keychain(
+                name: keychain_name,
+                password: keychain_password,
+                default_keychain: true,
+                unlock: true,
+                timeout: 3600,
+                add_to_search_list: true
+              )
+              
+              # Импорт сертификата
+              import_certificate(
+                certificate_path: "Runner/certificate.p12",
+                certificate_password: ENV["P12_PASSWORD"],
+                keychain_name: keychain_name,
+                keychain_password: keychain_password
+              )
+              
+              # Установка профиля
+              install_provisioning_profile(path: "Runner/profile.mobileprovision")
+              
+              # Настройка подписи
+              update_code_signing_settings(
+                use_automatic_signing: false,
+                path: "Runner.xcodeproj",
+                team_id: ENV["DEVELOPMENT_TEAM"],
+                profile_name: ENV["PROVISIONING_PROFILE"],
+                code_sign_identity: ENV["CODE_SIGN_IDENTITY"],
+                bundle_identifier: ENV["BUNDLE_IDENTIFIER"]
+              )
+            end
+            
+            private_lane :build_app_store_ipa do
+              # Сборка IPA
+              build_app(
+                workspace: "Runner.xcworkspace",
+                scheme: "Runner",
+                export_method: "app-store",
+                export_options: {
+                  provisioningProfiles: {
+                    ENV["BUNDLE_IDENTIFIER"] => ENV["PROVISIONING_PROFILE"]
+                  }
+                },
+                include_bitcode: false,
+                include_symbols: true,
+                output_name: "app-release.ipa",
+                output_directory: "../build/ios/ipa"
+              )
+            end
+            
+            private_lane :cleanup_keychain do
+              # Очистка keychain
+              keychain_name = "build_keychain"
+              delete_keychain(name: keychain_name) if File.exist? File.expand_path("~/Library/Keychains/#{keychain_name}-db")
+            end
+          end
+          EOF
+          
+          # Appfile с идентификаторами
+          cat > ios/fastlane/Appfile << EOF
+          app_identifier("${{ secrets.BUNDLE_IDENTIFIER }}")
+          team_id("${{ secrets.DEVELOPMENT_TEAM }}")
+          EOF
+
+      # Сборка и выгрузка IPA
+      - name: Build IPA
+        env:
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          DEVELOPMENT_TEAM: ${{ secrets.DEVELOPMENT_TEAM }}
+          PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
+          CODE_SIGN_IDENTITY: ${{ secrets.CODE_SIGN_IDENTITY }}
+          BUNDLE_IDENTIFIER: ${{ secrets.BUNDLE_IDENTIFIER }}
+        run: |
+          # Подготовка Flutter 
+          flutter build ios --release --no-codesign --dart-define-from-file=env_dart/prod.json
+          
+          # Сборка через Fastlane
+          cd ios && fastlane release
+          
+          # Проверка создания IPA
+          ls -la ../build/ios/ipa
+
+      # Выгрузка в TestFlight
+      - name: Upload to TestFlight
+        run: |
+          xcrun altool --upload-app --type ios -f build/ios/ipa/app-release.ipa \
+            --apiKey ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} \
+            --apiIssuer ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }} \
+            --verbose
+
+      # Подготовка артефактов и уведомлений
+      - name: Get commit info
+        id: commit-info
+        run: |
+          echo "message=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+          echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "date=$(git log -1 --format=%cd --date=format:'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-release
+          path: build/ios/ipa/app-release.ipa
+
+      - name: Save release version
+        run: |
+          mkdir -p releases
+          cp build/ios/ipa/app-release.ipa releases/ios-${{ steps.commit-info.outputs.sha }}.ipa
+
+      # Отправка уведомления в Telegram
+      - name: Send Telegram notification
+        run: |
+          MESSAGE="🍏 iOS Build Completed
+
+          Repo: ${{ github.repository }}
+          Commit: ${{ steps.commit-info.outputs.sha }}
+          Date: ${{ steps.commit-info.outputs.date }}
+          Message: ${{ steps.commit-info.outputs.message }}"
+          
+          # Отправка текста
+          curl -G \
+            --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode "text=$MESSAGE" \
+            https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage
+          
+          # Отправка файла
+          curl -X POST \
+            -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -F document=@"build/ios/ipa/app-release.ipa" \
+            https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument
