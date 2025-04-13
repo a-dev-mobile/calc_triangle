@@ -1,6 +1,6 @@
 Map<String, String> ru = <String, String>{
   'about': 'О приложении',
-  'app_name': 'Треугольник',
+  'app_name': 'Расчет углов',
   'app_name_sub': 'Расчет',
   'right_triangle': 'Прямоугольный',
   'scalene_triangle': 'Разносторонний',
