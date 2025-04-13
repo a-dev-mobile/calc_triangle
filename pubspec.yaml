@@ -4,7 +4,7 @@ description: Flutter project calculating the sides in a right triangle
 publish_to: "none"
 
 
-version: 2.1.1+20
+version: 2.1.1+21
 
 environment:
   sdk: ^3.7.0
