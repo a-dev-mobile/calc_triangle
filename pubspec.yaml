@@ -4,7 +4,7 @@ description: Flutter project calculating the sides in a right triangle
 publish_to: "none"
 
 
-version: 2.1.1+11
+version: 2.1.1+12
 
 environment:
   sdk: ^3.7.0
@@ -33,7 +33,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.14.3"
-  flutter_native_splash: ^2.4.5
+  flutter_native_splash: ^2.4.6
   flutter_lints: ^5.0.0
 
 
@@ -72,21 +72,29 @@ flutter:
 flutter_launcher_icons:
   android: false
   ios: true
+  # image_ios: "assets/icon/icon_ios.png"
   image_path: "assets/icon/icon_ios.png"
+
   adaptive_icon_background: "#E0F2F1" # белый фон для адаптивной иконки
   adaptive_icon_foreground: "assets/icon/icon.png" # используем ту же иконку как передний план
   min_sdk_android: 21
-  adaptive_icon_foreground_inset: 30 # отступ 20% от каждого края
+  # adaptive_icon_foreground_inset: 30 # отступ 20% от каждого края
   remove_alpha_channel_ios: true
 
+
+
+
+
+# dart run flutter_native_splash:create
 flutter_native_splash:
   # Основные настройки
   color: "#102A27"  # Темный фон для splash screen
-  image: "assets/icon/icon_a12.png"  # Иконка для splash
+  image_ios: "assets/icon/icon_ios.png"  # Иконка для splash
+  image: "assets/icon/icon.png"  # Иконка для splash
   
   # Отключаем для платформ, которые не используем
   android: true
-  ios: false
+  ios: true
   web: false
 
   # Полноэкранный режим
