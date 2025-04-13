@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '2/isosceles__main_w.dart';
+import '2/isosceles_main_w.dart';
 
 class CalculateIsoscelesPage extends StatefulWidget {
   const CalculateIsoscelesPage({super.key});

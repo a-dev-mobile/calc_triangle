@@ -13,6 +13,7 @@ import 'package:calc_triangle/app/shared_components/change_theme_w.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 
 import 'package:calc_triangle/app/utils/logger.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +30,16 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(TranslateHelper.setting)),
+      appBar: AppBar(
+        title: Text(TranslateHelper.setting),
+        // We'll keep the AppBar here since it already exists, just add the back button
+        leading: IconButton(
+          icon: Platform.isIOS 
+              ? Icon(CupertinoIcons.back, color: AppColors.content(context))
+              : Icon(Icons.arrow_back, color: AppColors.content(context)),
+          onPressed: () => Get.back(),
+        ),
+      ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(15.0),

@@ -5,6 +5,7 @@ import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
+import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class ScaleneMain extends StatelessWidget {
     c = ScaleneTriangleController.to;
 
     settingBar();
+    // ignore: newline-before-return
     return WillPopScope(
       onWillPop: () async {
         // If we're in the detail view, toggle back to input view instead of navigating back
@@ -76,6 +78,17 @@ class ScaleneMain extends StatelessWidget {
                     )
                     : const IconInputInfoWidget(icon: Icons.calculate_outlined);
               }),
+              
+              // Add floating back button
+              FloatingBackButton(
+                onPressed: () {
+                  if (c.isActiveImageInfo.value) {
+                    c.isActiveImageInfo.value = false;
+                  } else {
+                    Get.back();
+                  }
+                },
+              ),
             ],
           ),
         ),

@@ -6,6 +6,7 @@ import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.dart';
 import 'package:calc_triangle/app/features/calculate/view/equilateral/2/equilateral_numpad_w.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
+import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +76,17 @@ class EquilateralMain extends StatelessWidget {
                     )
                     : const IconInputInfoWidget(icon: Icons.calculate_outlined);
               }),
+              
+              // Add floating back button
+              FloatingBackButton(
+                onPressed: () {
+                  if (c.isActiveImageInfo.value) {
+                    c.isActiveImageInfo.value = false;
+                  } else {
+                    Get.back();
+                  }
+                },
+              ),
             ],
           ),
         ),
