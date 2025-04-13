@@ -70,15 +70,15 @@ flutter:
 
 # flutter pub get && dart run flutter_launcher_icons
 flutter_launcher_icons:
-  android: true
+  android: false
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/icon/icon_ios.png"
   adaptive_icon_background: "#E0F2F1" # белый фон для адаптивной иконки
   adaptive_icon_foreground: "assets/icon/icon.png" # используем ту же иконку как передний план
   min_sdk_android: 21
   adaptive_icon_foreground_inset: 30 # отступ 20% от каждого края
   remove_alpha_channel_ios: true
-  background_color_ios: "#FFFFFF"
+
 flutter_native_splash:
   # Основные настройки
   color: "#102A27"  # Темный фон для splash screen
