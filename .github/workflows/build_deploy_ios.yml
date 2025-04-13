@@ -215,7 +215,9 @@ jobs:
           Commit: ${{ steps.commit-info.outputs.sha }}
           Date: ${{ steps.commit-info.outputs.date }}
           Message: ${{ steps.commit-info.outputs.message }}"
-          
+                    
+          TestFlight: ${{ env.APP_STORE_CONNECT_URL }}
+
           # Отправка текста
           curl -G \
             --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \

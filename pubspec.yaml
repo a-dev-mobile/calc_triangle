@@ -4,7 +4,7 @@ description: Flutter project calculating the sides in a right triangle
 publish_to: "none"
 
 
-version: 2.1.1+12
+version: 2.1.1+13
 
 environment:
   sdk: ^3.7.0
@@ -70,9 +70,9 @@ flutter:
 
 # flutter pub get && dart run flutter_launcher_icons
 flutter_launcher_icons:
-  android: false
+  android: true
   ios: true
-  # image_ios: "assets/icon/icon_ios.png"
+  image_ios: "assets/icon/icon_ios.png"
   image_path: "assets/icon/icon_ios.png"
 
   adaptive_icon_background: "#E0F2F1" # белый фон для адаптивной иконки
@@ -89,7 +89,7 @@ flutter_launcher_icons:
 flutter_native_splash:
   # Основные настройки
   color: "#102A27"  # Темный фон для splash screen
-  image_ios: "assets/icon/icon_ios.png"  # Иконка для splash
+  image_ios: "assets/icon/icon.png"  # Иконка для splash
   image: "assets/icon/icon.png"  # Иконка для splash
   
   # Отключаем для платформ, которые не используем
@@ -104,7 +104,6 @@ flutter_native_splash:
   android_12:
     image: "assets/icon/icon_a12.png"  # Специальная иконка для Android 12
     color: "#102A27"  # Цвет фона для Android 12+
-    icon_background_color: "#E0F2F1"  # Цвет фона иконки (белый)
   
   # Настройка позиционирования изображения
   android_gravity: center
