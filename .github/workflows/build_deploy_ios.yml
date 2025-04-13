@@ -47,7 +47,7 @@ jobs:
           --output ios/Runner/certificate.p12 ios/Runner/certificate.p12.gpg
           
           gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
-          --output ios/Runner/profile.mobileprovision ios/Runner/profile.mobileprovision.gpg
+          --output ios/Runner/${{ secrets.PROVISIONING_PROFILE }}.mobileprovision ios/Runner/${{ secrets.PROVISIONING_PROFILE }}.mobileprovision.gpg
           
           # App Store Connect API Key
           gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FILE_PASSPHRASE }}" \
@@ -115,7 +115,7 @@ jobs:
               )
               
               # Установка профиля
-              install_provisioning_profile(path: "Runner/profile.mobileprovision")
+              install_provisioning_profile(path: "Runner/${{ secrets.PROVISIONING_PROFILE }}.mobileprovision")
               
               # Настройка подписи
               update_code_signing_settings(
