@@ -10,7 +10,7 @@ env:
 
 jobs:
   build-android:
-    name: Build Android APK
+    name: Build Android APK and AAB
     runs-on: ubuntu-latest
     steps:
       # Подготовка окружения
@@ -60,6 +60,14 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
         run: flutter build apk --release --dart-define-from-file=env_dart/prod.json
+        
+      # Сборка AAB
+      - name: Build AAB
+        env:
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        run: flutter build appbundle --release --dart-define-from-file=env_dart/prod.json
 
       # Подготовка артефактов и уведомлений
       - name: Get commit info
@@ -69,27 +77,59 @@ jobs:
           echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           echo "date=$(git log -1 --format=%cd --date=format:'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
 
-      - name: Upload artifact
+      # Загрузка APK артефакта
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-release
+          name: android-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          
+      # Загрузка AAB артефакта
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
 
-      - name: Save release version
+      - name: Save release versions
         run: |
           mkdir -p releases
           cp build/app/outputs/flutter-apk/app-release.apk releases/android-${{ steps.commit-info.outputs.sha }}.apk
+          cp build/app/outputs/bundle/release/app-release.aab releases/android-${{ steps.commit-info.outputs.sha }}.aab
+          
+      # Сохранение артефактов в GitHub Release
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release ${{ github.run_number }}
+          body: |
+            Build from commit: ${{ steps.commit-info.outputs.sha }}
+            Date: ${{ steps.commit-info.outputs.date }}
+            Message: ${{ steps.commit-info.outputs.message }}
+          files: |
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Отправка уведомления в Telegram
+      # Отправка уведомления в Telegram с APK и ссылкой на релиз
       - name: Send Telegram notification
         run: |
-          # Подготовка сообщения с информацией о сборке
+          # Подготовка сообщения с информацией о сборке и ссылкой
+          RELEASE_URL="${{ github.server_url }}/${{ github.repository }}/releases/tag/v${{ github.run_number }}"
+          
           MESSAGE="🤖 Android Build Completed
 
           Repo: ${{ github.repository }}
           Commit: ${{ steps.commit-info.outputs.sha }}
           Date: ${{ steps.commit-info.outputs.date }}
-          Message: ${{ steps.commit-info.outputs.message }}"
+          Message: ${{ steps.commit-info.outputs.message }}
+          
+          📎 Release: $RELEASE_URL"
           
           # Отправка текста
           curl -G \
@@ -97,7 +137,7 @@ jobs:
             --data-urlencode "text=$MESSAGE" \
             https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage
           
-          # Отправка файла
+          # Отправка APK файла
           curl -X POST \
             -F "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
             -F "document=@build/app/outputs/flutter-apk/app-release.apk" \
