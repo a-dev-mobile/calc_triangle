@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/features/calculate/controllers/equilateral_c.d
 import 'package:calc_triangle/app/features/calculate/view/equilateral/2/equilateral_numpad_w.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
+import 'package:calc_triangle/app/shared_components/triangle_visualization_widget.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -168,10 +169,19 @@ class AreaAndPerimeterWidget extends StatelessWidget {
                 top: 0,
                 right: 0,
                 bottom: 0,
-                child: Icon(
-                  Icons.done,
-                  color: ConstColor.secondary,
-                  size: 50.sp,
+                child: Center(
+                  child: TriangleVisualizationWidget(
+                    // Для равностороннего треугольника все стороны равны
+                    sideA: c.aSideD > 0 ? c.aSideD : null,
+                    sideB: c.aSideD > 0 ? c.aSideD : null,
+                    sideC: c.aSideD > 0 ? c.aSideD : null,
+                    // Все углы равны 60 градусов
+                    angleA: 60.0,
+                    angleB: 60.0,
+                    angleC: 60.0,
+                    triangleType: TriangleType.equilateral,
+                    isValid: c.aSideD > 0 && c.areaD > 0 && !c.isActiveSnackBar.value,
+                  ),
                 ),
               ),
               Positioned(

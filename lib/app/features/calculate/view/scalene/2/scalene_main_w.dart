@@ -6,6 +6,7 @@ import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
+import 'package:calc_triangle/app/shared_components/triangle_visualization_widget.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -170,10 +171,17 @@ class AreaAndPerimeterWidget extends StatelessWidget {
                 top: 0,
                 right: 0,
                 bottom: 0,
-                child: Icon(
-                  Icons.done,
-                  color: ConstColor.secondary,
-                  size: 50.sp,
+                child: Center(
+                  child: TriangleVisualizationWidget(
+                    sideA: c.aSideD > 0 ? c.aSideD : null,
+                    sideB: c.bSideD > 0 ? c.bSideD : null,
+                    sideC: c.cSideD > 0 ? c.cSideD : null,
+                    angleA: c.aAngleD > 0 ? c.aAngleD : null,
+                    angleB: c.bAngleD > 0 ? c.bAngleD : null,
+                    angleC: c.yAngleD > 0 ? c.yAngleD : null,
+                    triangleType: TriangleType.scalene,
+                    isValid: c.areaD > 0 && !c.isActiveSnackBar.value,
+                  ),
                 ),
               ),
               Positioned(

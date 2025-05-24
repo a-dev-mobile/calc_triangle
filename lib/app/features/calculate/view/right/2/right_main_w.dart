@@ -7,6 +7,7 @@ import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/features/calculate/view/right/2/right_numpad_w.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
+import 'package:calc_triangle/app/shared_components/triangle_visualization_widget.dart';
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -167,10 +168,17 @@ class AreaAndPerimeterWidget extends StatelessWidget {
                 top: 0,
                 right: 0,
                 bottom: 0,
-                child: Icon(
-                  Icons.done,
-                  color: ConstColor.secondary,
-                  size: 50.sp,
+                child: Center(
+                  child: TriangleVisualizationWidget(
+                    sideA: c.cSideD > 0 ? c.cSideD : null, // гипотенуза
+                    sideB: c.aSideD > 0 ? c.aSideD : null, // катет A
+                    sideC: c.bSideD > 0 ? c.bSideD : null, // катет B
+                    angleA: 90.0, // прямой угол
+                    angleB: c.aAngleD > 0 ? c.aAngleD : null,
+                    angleC: c.bAngleD > 0 ? c.bAngleD : null,
+                    triangleType: TriangleType.right,
+                    isValid: c.areaD > 0 && !c.isActiveSnackBar.value,
+                  ),
                 ),
               ),
               Positioned(
