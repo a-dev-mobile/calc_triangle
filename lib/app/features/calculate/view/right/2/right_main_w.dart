@@ -5,6 +5,7 @@ import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
 import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/features/calculate/view/right/2/right_numpad_w.dart';
+import 'package:calc_triangle/app/shared_components/area_and_perimeter_widget.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
 import 'package:calc_triangle/app/shared_components/triangle_visualization_widget.dart';
@@ -55,7 +56,34 @@ class RightMain extends StatelessWidget {
                         Obx(() {
                           return Visibility(
                             visible: !c.isActiveImageInfo.value,
-                            child: const AreaAndPerimeterWidget(),
+                            child: AreaAndPerimeterWidget(
+                              area: c.area,
+                              perimeter: c.perimeter,
+                              isActiveSnackBar: c.isActiveSnackBar,
+                              triangleConfigBuilder:
+                                  () => TriangleVisualizationConfig(
+                                    sideA:
+                                        c.cSideD > 0
+                                            ? c.cSideD
+                                            : null, // гипотенуза
+                                    sideB:
+                                        c.aSideD > 0
+                                            ? c.aSideD
+                                            : null, // катет A
+                                    sideC:
+                                        c.bSideD > 0
+                                            ? c.bSideD
+                                            : null, // катет B
+                                    angleA: 90.0, // прямой угол
+                                    angleB: c.aAngleD > 0 ? c.aAngleD : null,
+                                    angleC: c.bAngleD > 0 ? c.bAngleD : null,
+                                    triangleType: TriangleType.right,
+                                    isValid:
+                                        (c.aSideD > 0 ||
+                                            c.bSideD > 0 ||
+                                            c.cSideD > 0),
+                                  ),
+                            ),
                           );
                         }),
                         Obx(() {
@@ -130,78 +158,6 @@ class MessageWidget extends StatelessWidget {
       return Visibility(
         visible: c.isActiveSnackBar.value,
         child: CustomMessageView(message: c.messageSnackBar.value),
-      );
-    });
-  }
-}
-
-class AreaAndPerimeterWidget extends StatelessWidget {
-  const AreaAndPerimeterWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() {
-      return Visibility(
-        visible: !c.isActiveSnackBar.value,
-        child: SizedBox(
-          width: 1.sw,
-          height: AppUtils.getHeight(context) * 0.06,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                left: 20.w,
-                top: 0,
-                bottom: 0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      TranslateHelper.area,
-                      style: AppStyleText.titleText(context),
-                    ),
-                    Text(c.area.value, style: AppStyleText.subText(context)),
-                  ],
-                ),
-              ),
-              Positioned(
-                left: 0,
-                top: 0,
-                right: 0,
-                bottom: 0,
-                child: Center(
-                  child: TriangleVisualizationWidget(
-                    sideA: c.cSideD > 0 ? c.cSideD : null, // гипотенуза
-                    sideB: c.aSideD > 0 ? c.aSideD : null, // катет A
-                    sideC: c.bSideD > 0 ? c.bSideD : null, // катет B
-                    angleA: 90.0, // прямой угол
-                    angleB: c.aAngleD > 0 ? c.aAngleD : null,
-                    angleC: c.bAngleD > 0 ? c.bAngleD : null,
-                    triangleType: TriangleType.right,
-                    isValid: c.areaD > 0 && !c.isActiveSnackBar.value,
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 20.w,
-                top: 0,
-                bottom: 0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      TranslateHelper.perimeter,
-                      style: AppStyleText.titleText(context),
-                    ),
-                    Text(
-                      c.perimeter.value,
-                      style: AppStyleText.subText(context),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
       );
     });
   }

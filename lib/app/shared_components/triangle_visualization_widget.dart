@@ -66,28 +66,34 @@ class TriangleVisualizationWidget extends StatelessWidget {
     );
   }
 
-  bool _hasEnoughData() {
-    int sidesCount = [sideA, sideB, sideC].where((s) => s != null && s! > 0).length;
-    int anglesCount = [angleA, angleB, angleC].where((a) => a != null && a! > 0).length;
+ 
+bool _hasEnoughData() {
+  int sidesCount = [sideA, sideB, sideC].where((s) => s != null && s! > 0).length;
+  int anglesCount = [angleA, angleB, angleC].where((a) => a != null && a! > 0).length;
 
-    switch (triangleType) {
-      case TriangleType.right:
-        // Для прямоугольного треугольника нужно минимум 2 стороны
-        return sidesCount >= 2;
+  debugPrint('_hasEnoughData: sides=$sidesCount, angles=$anglesCount');
+  debugPrint('Sides: A=$sideA, B=$sideB, C=$sideC');
+  debugPrint('Angles: A=$angleA, B=$angleB, C=$angleC');
+
+  switch (triangleType) {
+    case TriangleType.right:
+      // Для прямоугольного треугольника достаточно хотя бы одной стороны,
+      // так как всегда известен прямой угол 90°
+      return sidesCount >= 1;
         
-      case TriangleType.equilateral:
-        // Для равностороннего треугольника нужна хотя бы одна сторона
-        return sidesCount >= 1;
+    case TriangleType.equilateral:
+      // Для равностороннего треугольника нужна хотя бы одна сторона
+      return sidesCount >= 1;
         
-      case TriangleType.isosceles:
-        // Для равнобедренного треугольника нужно минимум 2 стороны или 1 сторона + 1 угол
-        return sidesCount >= 2 || (sidesCount >= 1 && anglesCount >= 1);
+    case TriangleType.isosceles:
+      // Для равнобедренного треугольника нужно минимум 2 стороны или 1 сторона + 1 угол
+      return sidesCount >= 2 || (sidesCount >= 1 && anglesCount >= 1);
         
-      case TriangleType.scalene:
-        // Для разностороннего треугольника нужно 3 стороны или комбинация сторон и углов
-        return sidesCount >= 3 || (sidesCount >= 2 && anglesCount >= 1);
-    }
+    case TriangleType.scalene:
+      // Для разностороннего треугольника нужно 3 стороны или комбинация сторон и углов
+      return sidesCount >= 3 || (sidesCount >= 2 && anglesCount >= 1);
   }
+}
 }
 
 class ImprovedTrianglePainter extends CustomPainter {
