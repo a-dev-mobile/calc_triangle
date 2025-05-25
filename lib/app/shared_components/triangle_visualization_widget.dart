@@ -28,15 +28,7 @@ class TriangleVisualizationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Отладочная информация
-    debugPrint('=== Triangle Visualization Debug ===');
-    debugPrint('Type: $triangleType');
-    debugPrint('Valid: $isValid');
-    debugPrint('Sides: A=$sideA, B=$sideB, C=$sideC');
-    debugPrint('Angles: A=$angleA, B=$angleB, C=$angleC');
-    
     if (!isValid || !_hasEnoughData()) {
-      debugPrint('Triangle not valid or insufficient data');
       return Container(
         width: 100.w,
         height: 100.w,
@@ -66,34 +58,21 @@ class TriangleVisualizationWidget extends StatelessWidget {
     );
   }
 
- 
-bool _hasEnoughData() {
-  int sidesCount = [sideA, sideB, sideC].where((s) => s != null && s! > 0).length;
-  int anglesCount = [angleA, angleB, angleC].where((a) => a != null && a! > 0).length;
+  bool _hasEnoughData() {
+    int sidesCount = [sideA, sideB, sideC].where((s) => s != null && s! > 0).length;
+    int anglesCount = [angleA, angleB, angleC].where((a) => a != null && a! > 0).length;
 
-  debugPrint('_hasEnoughData: sides=$sidesCount, angles=$anglesCount');
-  debugPrint('Sides: A=$sideA, B=$sideB, C=$sideC');
-  debugPrint('Angles: A=$angleA, B=$angleB, C=$angleC');
-
-  switch (triangleType) {
-    case TriangleType.right:
-      // Для прямоугольного треугольника достаточно хотя бы одной стороны,
-      // так как всегда известен прямой угол 90°
-      return sidesCount >= 1;
-        
-    case TriangleType.equilateral:
-      // Для равностороннего треугольника нужна хотя бы одна сторона
-      return sidesCount >= 1;
-        
-    case TriangleType.isosceles:
-      // Для равнобедренного треугольника нужно минимум 2 стороны или 1 сторона + 1 угол
-      return sidesCount >= 2 || (sidesCount >= 1 && anglesCount >= 1);
-        
-    case TriangleType.scalene:
-      // Для разностороннего треугольника нужно 3 стороны или комбинация сторон и углов
-      return sidesCount >= 3 || (sidesCount >= 2 && anglesCount >= 1);
+    switch (triangleType) {
+      case TriangleType.right:
+        return sidesCount >= 1;
+      case TriangleType.equilateral:
+        return sidesCount >= 1;
+      case TriangleType.isosceles:
+        return sidesCount >= 2 || (sidesCount >= 1 && anglesCount >= 1);
+      case TriangleType.scalene:
+        return sidesCount >= 3 || (sidesCount >= 2 && anglesCount >= 1);
+    }
   }
-}
 }
 
 class ImprovedTrianglePainter extends CustomPainter {
@@ -132,7 +111,6 @@ class ImprovedTrianglePainter extends CustomPainter {
     List<Offset> vertices = _calculateVertices();
     
     if (vertices.length != 3) {
-      debugPrint('Failed to calculate triangle vertices');
       return;
     }
 
@@ -149,10 +127,7 @@ class ImprovedTrianglePainter extends CustomPainter {
     canvas.drawPath(path, paint);
     canvas.drawPath(path, strokePaint);
 
-    // Рисуем маркер прямого угла для прямоугольного треугольника
-    if (triangleType == TriangleType.right) {
-      _drawRightAngleMarker(canvas, vertices, strokePaint);
-    }
+
   }
 
   List<Offset> _calculateVertices() {
@@ -169,27 +144,27 @@ class ImprovedTrianglePainter extends CustomPainter {
   }
 
   List<Offset> _calculateRightTriangleVertices() {
-    double a = sideA ?? 0; // гипотенуза (противолежит углу A = 90°)
-    double b = sideB ?? 0; // катет B
-    double c = sideC ?? 0; // катет C
+    // В вашем коде: sideA = гипотенуза, sideB = катет A, sideC = катет B
+    double hypotenuse = sideA ?? 0; // гипотенуза
+    double cathetus1 = sideB ?? 0;  // катет 1
+    double cathetus2 = sideC ?? 0;  // катет 2
 
     // Вычисляем недостающие стороны по теореме Пифагора
-    if (a > 0 && b > 0 && c <= 0) {
-      c = math.sqrt(a * a - b * b);
-    } else if (a > 0 && c > 0 && b <= 0) {
-      b = math.sqrt(a * a - c * c);
-    } else if (b > 0 && c > 0 && a <= 0) {
-      a = math.sqrt(b * b + c * c);
+    if (hypotenuse > 0 && cathetus1 > 0 && cathetus2 <= 0) {
+      cathetus2 = math.sqrt(math.max(0, hypotenuse * hypotenuse - cathetus1 * cathetus1));
+    } else if (hypotenuse > 0 && cathetus2 > 0 && cathetus1 <= 0) {
+      cathetus1 = math.sqrt(math.max(0, hypotenuse * hypotenuse - cathetus2 * cathetus2));
+    } else if (cathetus1 > 0 && cathetus2 > 0 && hypotenuse <= 0) {
+      hypotenuse = math.sqrt(cathetus1 * cathetus1 + cathetus2 * cathetus2);
     }
 
-    if (b <= 0 || c <= 0) return [];
+    if (cathetus1 <= 0 || cathetus2 <= 0) return [];
 
-    // Размещаем треугольник: прямой угол внизу справа, основание (гипотенуза) внизу
-    // Зеркально отражаем по горизонтали
+    // Стандартное расположение: прямой угол внизу слева
     return [
-      Offset(c, b),      // Прямой угол внизу справа (угол A = 90°)
-      Offset(0, b),      // Левый нижний угол (конец гипотенузы)
-      Offset(c, 0),      // Верхняя вершина
+      Offset(0, cathetus2),          // Прямой угол (нижний левый)
+      Offset(cathetus1, cathetus2),  // Нижний правый
+      Offset(0, 0),                  // Верхний левый
     ];
   }
 
@@ -200,10 +175,9 @@ class ImprovedTrianglePainter extends CustomPainter {
 
     double height = side * math.sqrt(3) / 2;
 
-    // Основание снизу, вершина сверху, зеркально отражено по горизонтали
     return [
-      Offset(side, height),     // Правая нижняя вершина
-      Offset(0, height),        // Левая нижняя вершина  
+      Offset(0, height),        // Левая нижняя вершина
+      Offset(side, height),     // Правая нижняя вершина  
       Offset(side / 2, 0),      // Верхняя вершина
     ];
   }
@@ -216,13 +190,13 @@ class ImprovedTrianglePainter extends CustomPainter {
     // Определяем, какие стороны равны
     if (b > 0 && c > 0 && (b - c).abs() < 0.001) {
       // b и c равны, a - основание
-      if (a <= 0) a = b; // если основание не задано, делаем равносторонний
+      if (a <= 0) a = b;
     } else if (a > 0 && c > 0 && (a - c).abs() < 0.001) {
       // a и c равны, b - основание
-      double temp = a; a = b; b = temp; // переставляем
+      double temp = a; a = b; b = temp;
     } else if (a > 0 && b > 0 && (a - b).abs() < 0.001) {
       // a и b равны, c - основание
-      double temp = c; c = b; b = a; a = temp; // переставляем
+      double temp = c; c = b; b = a; a = temp;
     } else {
       // Если не удается определить равные стороны, используем имеющиеся данные
       a = a > 0 ? a : 1.0;
@@ -231,18 +205,16 @@ class ImprovedTrianglePainter extends CustomPainter {
 
     if (a <= 0 || b <= 0) return [];
 
-    // Вычисляем высоту равнобедренного треугольника
-    double height = math.sqrt(b * b - (a * a) / 4);
+    double height = math.sqrt(math.max(0, b * b - (a * a) / 4));
     
     if (height.isNaN || height <= 0) {
       // Если не получается вычислить высоту, делаем простой треугольник
       height = b * 0.8;
     }
 
-    // Основание снизу, вершина сверху, зеркально отражено по горизонтали
     return [
-      Offset(a, height),        // Правая нижняя вершина
       Offset(0, height),        // Левая нижняя вершина
+      Offset(a, height),        // Правая нижняя вершина
       Offset(a / 2, 0),         // Верхняя вершина
     ];
   }
@@ -256,7 +228,6 @@ class ImprovedTrianglePainter extends CustomPainter {
 
     // Проверяем неравенство треугольника
     if (a + b <= c || a + c <= b || b + c <= a) {
-      debugPrint('Triangle inequality violation: $a, $b, $c');
       return [];
     }
 
@@ -268,9 +239,9 @@ class ImprovedTrianglePainter extends CustomPainter {
     double xPos = b * math.cos(angleC);
     
     return [
-      Offset(a, height),                              // Правая нижняя вершина
-      Offset(0, height),                              // Левая нижняя вершина (основание)
-      Offset(a - xPos, 0),                           // Верхняя вершина (зеркально отражена)
+      Offset(0, height),        // Левая нижняя вершина (основание)
+      Offset(a, height),        // Правая нижняя вершина
+      Offset(xPos, 0),          // Верхняя вершина
     ];
   }
 
@@ -307,44 +278,7 @@ class ImprovedTrianglePainter extends CustomPainter {
     }).toList();
   }
 
-  void _drawRightAngleMarker(Canvas canvas, List<Offset> vertices, Paint paint) {
-    if (vertices.length != 3) return;
-
-    // Для прямоугольного треугольника прямой угол теперь в первой вершине (внизу справа)
-    Offset rightAngleVertex = vertices[0];
-    Offset vertex2 = vertices[1];
-    Offset vertex3 = vertices[2];
-
-    // Размер маркера прямого угла
-    double markerSize = 12.0;
-
-    // Вычисляем направления от прямого угла к другим вершинам
-    Offset dir1 = Offset(
-      (vertex2.dx - rightAngleVertex.dx),
-      (vertex2.dy - rightAngleVertex.dy),
-    );
-    Offset dir2 = Offset(
-      (vertex3.dx - rightAngleVertex.dx),
-      (vertex3.dy - rightAngleVertex.dy),
-    );
-
-    // Нормализуем направления
-    double len1 = math.sqrt(dir1.dx * dir1.dx + dir1.dy * dir1.dy);
-    double len2 = math.sqrt(dir2.dx * dir2.dx + dir2.dy * dir2.dy);
-
-    if (len1 == 0 || len2 == 0) return;
-
-    dir1 = Offset(dir1.dx / len1 * markerSize, dir1.dy / len1 * markerSize);
-    dir2 = Offset(dir2.dx / len2 * markerSize, dir2.dy / len2 * markerSize);
-
-    // Рисуем квадратик для обозначения прямого угла
-    final markerPath = Path()
-      ..moveTo(rightAngleVertex.dx + dir1.dx, rightAngleVertex.dy + dir1.dy)
-      ..lineTo(rightAngleVertex.dx + dir1.dx + dir2.dx, rightAngleVertex.dy + dir1.dy + dir2.dy)
-      ..lineTo(rightAngleVertex.dx + dir2.dx, rightAngleVertex.dy + dir2.dy);
-
-    canvas.drawPath(markerPath, paint);
-  }
+  
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
