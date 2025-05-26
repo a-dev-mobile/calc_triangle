@@ -34,9 +34,10 @@ class SettingPage extends StatelessWidget {
         title: Text(TranslateHelper.setting),
         // We'll keep the AppBar here since it already exists, just add the back button
         leading: IconButton(
-          icon: Platform.isIOS 
-              ? Icon(CupertinoIcons.back, color: AppColors.content(context))
-              : Icon(Icons.arrow_back, color: AppColors.content(context)),
+          icon:
+              Platform.isIOS
+                  ? Icon(CupertinoIcons.back, color: AppColors.content(context))
+                  : Icon(Icons.arrow_back, color: AppColors.content(context)),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -225,9 +226,7 @@ class SettingPage extends StatelessWidget {
             ? EnvConfig.iosAppStoreUrl
             : EnvConfig.androidGooglePlayUrl;
 
-    await canLaunch(url)
-        ? await launch(url)
-        : throw 'Could not launch $url';
+    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
   }
 }
 

@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:calc_triangle/app/config/theme/app_style.dart';
-import 'package:calc_triangle/app/shared_components/triangle_visualization_widget.dart';
+
 import 'package:calc_triangle/app/translations/translate_helper.dart';
 import 'package:calc_triangle/app/utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +15,17 @@ class AreaAndPerimeterWidget extends StatelessWidget {
   final TriangleVisualizationConfig Function() triangleConfigBuilder;
 
   const AreaAndPerimeterWidget({
-    super.key,
     required this.area,
     required this.perimeter,
     required this.isActiveSnackBar,
     required this.triangleConfigBuilder,
+    super.key,
   });
 
-  void _showTriangleBottomSheet(BuildContext context, TriangleVisualizationConfig config) {
+  void _showTriangleBottomSheet(
+    BuildContext context,
+    TriangleVisualizationConfig config,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -60,7 +63,7 @@ class AreaAndPerimeterWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // Triangle - expanded area in the center with tap gesture
               Positioned(
                 left: 80.w,
@@ -69,11 +72,12 @@ class AreaAndPerimeterWidget extends StatelessWidget {
                 bottom: 0,
                 child: Center(
                   child: Obx(() {
-                    final config = triangleConfigBuilder();
-                    
+                    final TriangleVisualizationConfig config =
+                        triangleConfigBuilder();
+
                     return GestureDetector(
                       onTap: () => _showTriangleBottomSheet(context, config),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: TriangleVisualizationWidget(
@@ -91,7 +95,7 @@ class AreaAndPerimeterWidget extends StatelessWidget {
                   }),
                 ),
               ),
-              
+
               // Perimeter text - positioned more to the right
               Positioned(
                 right: 15.w,
@@ -104,10 +108,7 @@ class AreaAndPerimeterWidget extends StatelessWidget {
                       TranslateHelper.perimeter,
                       style: AppStyleText.titleText(context),
                     ),
-                    Text(
-                      perimeter.value,
-                      style: AppStyleText.subText(context),
-                    ),
+                    Text(perimeter.value, style: AppStyleText.subText(context)),
                   ],
                 ),
               ),
@@ -122,10 +123,7 @@ class AreaAndPerimeterWidget extends StatelessWidget {
 class SimpleTriangleBottomSheet extends StatelessWidget {
   final TriangleVisualizationConfig config;
 
-  const SimpleTriangleBottomSheet({
-    super.key,
-    required this.config,
-  });
+  const SimpleTriangleBottomSheet({required this.config, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -137,16 +135,16 @@ class SimpleTriangleBottomSheet extends StatelessWidget {
           topLeft: Radius.circular(20.r),
           topRight: Radius.circular(20.r),
         ),
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 10,
-            offset: Offset(0, -5),
+            offset: const Offset(0, -5),
           ),
         ],
       ),
       child: Column(
-        children: [
+        children: <Widget>[
           // Handle bar
           Container(
             width: 40.w,
@@ -157,7 +155,7 @@ class SimpleTriangleBottomSheet extends StatelessWidget {
               borderRadius: BorderRadius.circular(2.r),
             ),
           ),
-          
+
           // Large triangle visualization
           Expanded(
             child: Container(
@@ -179,7 +177,9 @@ class SimpleTriangleBottomSheet extends StatelessWidget {
     );
   }
 }
- enum TriangleType { right, scalene, isosceles, equilateral }
+
+enum TriangleType { right, scalene, isosceles, equilateral }
+
 class TriangleVisualizationConfig {
   final double? sideA;
   final double? sideB;
@@ -191,14 +191,14 @@ class TriangleVisualizationConfig {
   final bool isValid;
 
   const TriangleVisualizationConfig({
+    required this.triangleType,
+    required this.isValid,
     this.sideA,
     this.sideB,
     this.sideC,
     this.angleA,
     this.angleB,
     this.angleC,
-    required this.triangleType,
-    required this.isValid,
   });
 }
 
@@ -214,6 +214,8 @@ class TriangleVisualizationWidget extends StatelessWidget {
   final TriangleType triangleType;
 
   const TriangleVisualizationWidget({
+    required this.isValid,
+    required this.triangleType,
     super.key,
     this.sideA,
     this.sideB,
@@ -221,8 +223,6 @@ class TriangleVisualizationWidget extends StatelessWidget {
     this.angleA,
     this.angleB,
     this.angleC,
-    required this.isValid,
-    required this.triangleType,
   });
 
   @override
@@ -255,8 +255,18 @@ class TriangleVisualizationWidget extends StatelessWidget {
   }
 
   bool _hasEnoughData() {
-    int sidesCount = [sideA, sideB, sideC].where((s) => s != null && s! > 0).length;
-    int anglesCount = [angleA, angleB, angleC].where((a) => a != null && a! > 0).length;
+    int sidesCount =
+        <double?>[
+          sideA,
+          sideB,
+          sideC,
+        ].where((double? s) => s != null && s > 0).length;
+    int anglesCount =
+        <double?>[
+          angleA,
+          angleB,
+          angleC,
+        ].where((double? a) => a != null && a > 0).length;
 
     switch (triangleType) {
       case TriangleType.right:
@@ -282,30 +292,32 @@ class ImprovedTrianglePainter extends CustomPainter {
   final Color color;
 
   ImprovedTrianglePainter({
+    required this.triangleType,
+    required this.color,
     this.sideA,
     this.sideB,
     this.sideC,
     this.angleA,
     this.angleB,
     this.angleC,
-    required this.triangleType,
-    required this.color,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color.withOpacity(0.2)
-      ..style = PaintingStyle.fill;
+    final Paint paint =
+        Paint()
+          ..color = color.withOpacity(0.2)
+          ..style = PaintingStyle.fill;
 
-    final strokePaint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
+    final Paint strokePaint =
+        Paint()
+          ..color = color
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2.0;
 
     // Рассчитываем вершины треугольника
     List<Offset> vertices = _calculateVertices();
-    
+
     if (vertices.length != 3) {
       return;
     }
@@ -314,16 +326,15 @@ class ImprovedTrianglePainter extends CustomPainter {
     vertices = _scaleAndCenterVertices(vertices, size);
 
     // Рисуем треугольник
-    final path = Path()
-      ..moveTo(vertices[0].dx, vertices[0].dy)
-      ..lineTo(vertices[1].dx, vertices[1].dy)
-      ..lineTo(vertices[2].dx, vertices[2].dy)
-      ..close();
+    final Path path =
+        Path()
+          ..moveTo(vertices[0].dx, vertices[0].dy)
+          ..lineTo(vertices[1].dx, vertices[1].dy)
+          ..lineTo(vertices[2].dx, vertices[2].dy)
+          ..close();
 
     canvas.drawPath(path, paint);
     canvas.drawPath(path, strokePaint);
-
-
   }
 
   List<Offset> _calculateVertices() {
@@ -342,39 +353,43 @@ class ImprovedTrianglePainter extends CustomPainter {
   List<Offset> _calculateRightTriangleVertices() {
     // В вашем коде: sideA = гипотенуза, sideB = катет A, sideC = катет B
     double hypotenuse = sideA ?? 0; // гипотенуза
-    double cathetus1 = sideB ?? 0;  // катет 1
-    double cathetus2 = sideC ?? 0;  // катет 2
+    double cathetus1 = sideB ?? 0; // катет 1
+    double cathetus2 = sideC ?? 0; // катет 2
 
     // Вычисляем недостающие стороны по теореме Пифагора
     if (hypotenuse > 0 && cathetus1 > 0 && cathetus2 <= 0) {
-      cathetus2 = math.sqrt(math.max(0, hypotenuse * hypotenuse - cathetus1 * cathetus1));
+      cathetus2 = math.sqrt(
+        math.max(0, hypotenuse * hypotenuse - cathetus1 * cathetus1),
+      );
     } else if (hypotenuse > 0 && cathetus2 > 0 && cathetus1 <= 0) {
-      cathetus1 = math.sqrt(math.max(0, hypotenuse * hypotenuse - cathetus2 * cathetus2));
+      cathetus1 = math.sqrt(
+        math.max(0, hypotenuse * hypotenuse - cathetus2 * cathetus2),
+      );
     } else if (cathetus1 > 0 && cathetus2 > 0 && hypotenuse <= 0) {
       hypotenuse = math.sqrt(cathetus1 * cathetus1 + cathetus2 * cathetus2);
     }
 
-    if (cathetus1 <= 0 || cathetus2 <= 0) return [];
+    if (cathetus1 <= 0 || cathetus2 <= 0) return <Offset>[];
 
     // Стандартное расположение: прямой угол внизу слева
-    return [
-      Offset(0, cathetus2),          // Прямой угол (нижний левый)
-      Offset(cathetus1, cathetus2),  // Нижний правый
-      Offset(0, 0),                  // Верхний левый
+    return <Offset>[
+      Offset(0, cathetus2), // Прямой угол (нижний левый)
+      Offset(cathetus1, cathetus2), // Нижний правый
+      const Offset(0, 0), // Верхний левый
     ];
   }
 
   List<Offset> _calculateEquilateralTriangleVertices() {
     double side = sideA ?? sideB ?? sideC ?? 1.0;
-    
-    if (side <= 0) return [];
+
+    if (side <= 0) return <Offset>[];
 
     double height = side * math.sqrt(3) / 2;
 
-    return [
-      Offset(0, height),        // Левая нижняя вершина
-      Offset(side, height),     // Правая нижняя вершина  
-      Offset(side / 2, 0),      // Верхняя вершина
+    return <Offset>[
+      Offset(0, height), // Левая нижняя вершина
+      Offset(side, height), // Правая нижняя вершина
+      Offset(side / 2, 0), // Верхняя вершина
     ];
   }
 
@@ -389,29 +404,34 @@ class ImprovedTrianglePainter extends CustomPainter {
       if (a <= 0) a = b;
     } else if (a > 0 && c > 0 && (a - c).abs() < 0.001) {
       // a и c равны, b - основание
-      double temp = a; a = b; b = temp;
+      double temp = a;
+      a = b;
+      b = temp;
     } else if (a > 0 && b > 0 && (a - b).abs() < 0.001) {
       // a и b равны, c - основание
-      double temp = c; c = b; b = a; a = temp;
+      double temp = c;
+      c = b;
+      b = a;
+      a = temp;
     } else {
       // Если не удается определить равные стороны, используем имеющиеся данные
       a = a > 0 ? a : 1.0;
       b = b > 0 ? b : 1.0;
     }
 
-    if (a <= 0 || b <= 0) return [];
+    if (a <= 0 || b <= 0) return <Offset>[];
 
     double height = math.sqrt(math.max(0, b * b - (a * a) / 4));
-    
+
     if (height.isNaN || height <= 0) {
       // Если не получается вычислить высоту, делаем простой треугольник
       height = b * 0.8;
     }
 
-    return [
-      Offset(0, height),        // Левая нижняя вершина
-      Offset(a, height),        // Правая нижняя вершина
-      Offset(a / 2, 0),         // Верхняя вершина
+    return <Offset>[
+      Offset(0, height), // Левая нижняя вершина
+      Offset(a, height), // Правая нижняя вершина
+      Offset(a / 2, 0), // Верхняя вершина
     ];
   }
 
@@ -420,11 +440,11 @@ class ImprovedTrianglePainter extends CustomPainter {
     double b = sideB ?? 0;
     double c = sideC ?? 0;
 
-    if (a <= 0 || b <= 0 || c <= 0) return [];
+    if (a <= 0 || b <= 0 || c <= 0) return <Offset>[];
 
     // Проверяем неравенство треугольника
     if (a + b <= c || a + c <= b || b + c <= a) {
-      return [];
+      return <Offset>[];
     }
 
     // Используем закон косинусов для вычисления углов
@@ -433,11 +453,11 @@ class ImprovedTrianglePainter extends CustomPainter {
     // Размещаем основание (сторону a) снизу, зеркально отражено по горизонтали
     double height = b * math.sin(angleC);
     double xPos = b * math.cos(angleC);
-    
-    return [
-      Offset(0, height),        // Левая нижняя вершина (основание)
-      Offset(a, height),        // Правая нижняя вершина
-      Offset(a - xPos, 0)          // Верхняя вершина
+
+    return <Offset>[
+      Offset(0, height), // Левая нижняя вершина (основание)
+      Offset(a, height), // Правая нижняя вершина
+      Offset(a - xPos, 0), // Верхняя вершина
     ];
   }
 
@@ -445,10 +465,10 @@ class ImprovedTrianglePainter extends CustomPainter {
     if (vertices.isEmpty) return vertices;
 
     // Находим границы треугольника
-    double minX = vertices.map((v) => v.dx).reduce(math.min);
-    double maxX = vertices.map((v) => v.dx).reduce(math.max);
-    double minY = vertices.map((v) => v.dy).reduce(math.min);
-    double maxY = vertices.map((v) => v.dy).reduce(math.max);
+    double minX = vertices.map((Offset v) => v.dx).reduce(math.min);
+    double maxX = vertices.map((Offset v) => v.dx).reduce(math.max);
+    double minY = vertices.map((Offset v) => v.dy).reduce(math.min);
+    double maxY = vertices.map((Offset v) => v.dy).reduce(math.max);
 
     double width = maxX - minX;
     double height = maxY - minY;
@@ -467,14 +487,12 @@ class ImprovedTrianglePainter extends CustomPainter {
     double triangleCenterX = minX + width / 2;
     double triangleCenterY = minY + height / 2;
 
-    return vertices.map((vertex) {
+    return vertices.map((Offset vertex) {
       double x = (vertex.dx - triangleCenterX) * scale + centerX;
       double y = (vertex.dy - triangleCenterY) * scale + centerY;
       return Offset(x, y);
     }).toList();
   }
-
-  
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;

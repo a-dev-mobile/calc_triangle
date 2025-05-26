@@ -1,16 +1,12 @@
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/config/theme/app_size.dart';
-import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
-import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/right_c.dart';
 import 'package:calc_triangle/app/features/calculate/view/right/2/right_numpad_w.dart';
 import 'package:calc_triangle/app/shared_components/area_and_perimeter_widget.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
-import 'package:calc_triangle/app/shared_components/triangle_visualization_widget.dart';
-import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/utils/app_utils.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

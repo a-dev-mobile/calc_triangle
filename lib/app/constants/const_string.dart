@@ -1,4 +1,3 @@
-import 'package:calc_triangle/app/config/env_config.dart';
 
 abstract class ConstString {
   static const String keyMinSize = 'minSize';
@@ -18,5 +17,4 @@ abstract class ConstString {
 
   static const String degConvert = '☺°.☺☺';
   static const String degMinSecConvert = '☺°☺′☺″';
-
 }

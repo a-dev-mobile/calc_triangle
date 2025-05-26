@@ -1,15 +1,11 @@
 import 'package:calc_triangle/app/config/theme/app_color.dart';
 import 'package:calc_triangle/app/config/theme/app_size.dart';
-import 'package:calc_triangle/app/config/theme/app_style.dart';
 import 'package:calc_triangle/app/config/theme/light_dark_theme.dart';
-import 'package:calc_triangle/app/constants/const_color.dart';
 import 'package:calc_triangle/app/features/calculate/controllers/scalene_c.dart';
 import 'package:calc_triangle/app/shared_components/area_and_perimeter_widget.dart';
 import 'package:calc_triangle/app/shared_components/custom_snakbar_w.dart';
 import 'package:calc_triangle/app/shared_components/floating_back_button.dart';
-import 'package:calc_triangle/app/shared_components/triangle_visualization_widget.dart';
-import 'package:calc_triangle/app/translations/translate_helper.dart';
-import 'package:calc_triangle/app/utils/app_utils.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -54,26 +50,27 @@ class ScaleneMain extends StatelessWidget {
                           child: const ScaleneTriangleImageInputWidget(),
                         ),
                         //показываем если не инфо
-Obx(() {
-  return Visibility(
-    visible: !c.isActiveImageInfo.value,
-    child: AreaAndPerimeterWidget(
-      area: c.area,
-      perimeter: c.perimeter,
-      isActiveSnackBar: c.isActiveSnackBar,
-      triangleConfigBuilder: () => TriangleVisualizationConfig(
-        sideA: c.aSideD > 0 ? c.aSideD : null,
-        sideB: c.bSideD > 0 ? c.bSideD : null,
-        sideC: c.cSideD > 0 ? c.cSideD : null,
-        angleA: c.aAngleD > 0 ? c.aAngleD : null,
-        angleB: c.bAngleD > 0 ? c.bAngleD : null,
-        angleC: c.yAngleD > 0 ? c.yAngleD : null,
-        triangleType: TriangleType.scalene,
-        isValid: c.areaD > 0,
-      ),
-    ),
-  );
-}),
+                        Obx(() {
+                          return Visibility(
+                            visible: !c.isActiveImageInfo.value,
+                            child: AreaAndPerimeterWidget(
+                              area: c.area,
+                              perimeter: c.perimeter,
+                              isActiveSnackBar: c.isActiveSnackBar,
+                              triangleConfigBuilder:
+                                  () => TriangleVisualizationConfig(
+                                    sideA: c.aSideD > 0 ? c.aSideD : null,
+                                    sideB: c.bSideD > 0 ? c.bSideD : null,
+                                    sideC: c.cSideD > 0 ? c.cSideD : null,
+                                    angleA: c.aAngleD > 0 ? c.aAngleD : null,
+                                    angleB: c.bAngleD > 0 ? c.bAngleD : null,
+                                    angleC: c.yAngleD > 0 ? c.yAngleD : null,
+                                    triangleType: TriangleType.scalene,
+                                    isValid: c.areaD > 0,
+                                  ),
+                            ),
+                          );
+                        }),
                         Obx(() {
                           return Visibility(
                             visible: !c.isActiveImageInfo.value,
