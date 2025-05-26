@@ -13,11 +13,17 @@ env:
 jobs:
   build-ios:
     name: Build & Upload iOS
-    runs-on: macos-latest
+    runs-on: macos-15 
     steps:
       # Подготовка окружения
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # Настройка Xcode версии
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.1'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -142,7 +148,8 @@ jobs:
                 include_bitcode: false,
                 include_symbols: true,
                 output_name: "app-release.ipa",
-                output_directory: "../build/ios/ipa"
+                output_directory: "../build/ios/ipa",
+                xcargs: "IPHONEOS_DEPLOYMENT_TARGET=12.0"  # Минимальная версия iOS
               )
             end
             
@@ -159,6 +166,12 @@ jobs:
           app_identifier("${{ secrets.BUNDLE_IDENTIFIER }}")
           team_id("${{ secrets.DEVELOPMENT_TEAM }}")
           EOF
+
+      # Проверка версии Xcode
+      - name: Verify Xcode version
+        run: |
+          xcodebuild -version
+          xcrun --show-sdk-version --sdk iphoneos
 
       # Сборка и выгрузка IPA
       - name: Build IPA
