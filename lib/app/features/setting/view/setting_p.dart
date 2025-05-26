@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // late WelcomeController c2 = Get.find();
@@ -111,10 +112,11 @@ class SettingPage extends StatelessWidget {
         color: AppColors.contentRevers(context),
         size: 25.sp,
       ),
-      onTap: () {
-        Get.defaultDialog(
+      onTap: () async {
+        PackageInfo packageInfo = await PackageInfo.fromPlatform();
+        await Get.defaultDialog(
           title:
-              '${TranslateHelper.appName}\n${TranslateHelper.version}: v2.1.1',
+              '${TranslateHelper.appName}\n${TranslateHelper.version}: v${packageInfo.version}',
           backgroundColor: AppColors.content(context),
           content: Align(
             alignment: Alignment.topLeft,
